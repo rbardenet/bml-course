@@ -1,0 +1,117 @@
+% -----------------------------*- LaTeX -*------------------------------
+%   SCRIBE_NOTES.STY -- Make scribe notes
+%   Rémi Bardenet, January 2020,
+%   Borrowed from Pierre Latouche and Nicolas Chopin, who stole it from Francis Bach,
+%   who shamelessly took it from Laurent El Ghaoui, who got it from Martin Wainwright,
+%   who shamelessly took it from Laurent El Ghaoui, who got it from Martin Wainwrifht,
+%   who modified a file by Jeff Erickson from 1998. That's legacy latex!
+%
+% ----------------------------------------------------------------------
+%   USAGE:
+%
+%   \documentclass[12pt]{report}		NOT article!
+%   \usepackage{scribe_notes}
+%   ...
+%   \begin{document}
+%   \course{EECS 227} 				optional
+%   \coursetitle{Optimization}	optional
+%   \semester{Fall 2004}			optional
+%   \lecturer{Jeff Erickson}			optional
+%   \scribe{Joe. A Student}			required
+%   \lecturenumber{17}				required (must be a number)
+%   \lecturetitle{Gradient descent}			required (omit year)
+%   \maketitle
+% ----------------------------------------------------------------------
+%   The stuff before \maketitle can be in any order, but it has to go
+%   before \maketitle.
+%
+%   The lecture number appears in all page, section, theorem, figure,
+%   table, and equation numbers.  It must be a single positive
+%   integer; ranges like 3--5 are not (yet) properly supported.
+%
+%   Automatically loads the amsmath package, which is a Good Thing,
+%   especially if you're going to use a lot of math.  See ``The LaTeX
+%   Companion'' for details!
+%
+%   To get a proof, use \begin{proof}...\end{proof}.  You can attach
+%   an optional argument, just as with the standard latex theorem
+%   environment.  You can also define new proof-like environments with
+%   \newproof{foo}{bar}, just like \newthe\orem.
+% ----------------------------------------------------------------------
+\RequirePackage{amsmath,amssymb}
+
+\def\course#1{\def\@course{#1}}
+\course{ }
+
+\def\coursetitle#1{\def\@coursetitle{#1}}
+%\coursetitle{Introduction aux mod\`eles graphiques}
+\coursetitle{Bayesian machine learning}
+
+\def\semester#1{\def\@semester{#1}}
+\semester{2019/2020}
+
+\def\lecturer#1{\def\@lecturer{#1}}
+\lecturer{R\'emi Bardenet}
+%\lecturer{Julyan Arbel}
+
+\def\scribe#1{\def\@scribe{#1}}
+% \@scribe intentionally undefined
+
+\def\lecturenumber#1{\def\@lecturenumber{#1}}
+% \@lecturenumber intentionally undefined
+
+\def\lecturetitle#1{\def\@lecturetitle{#1}}
+% \@lecturetitle intentionally undefined
+
+\def\xxx{\vphantom{()}}
+\def\maketitle
+{
+\def\@oddhead{\underline{\hbox to\textwidth{\textbf{%
+	\rlap{\@course\phantom{()}}\hfil
+	Cours~\@lecturenumber~--- \@lecturetitle
+	\hfil\llap{\@semester}}}}}
+\def\@oddfoot{\hfil\@lecturenumber-\thepage\hfil}
+\def\ps@myfirst{\ps@plain\def\@oddfoot{\hfil\@lecturenumber-\thepage\hfil}}
+\thispagestyle{myfirst}
+\noindent
+\framebox[\textwidth]{\vbox to 0.75in{
+\hbox to\textwidth{~\textbf{\rlap{\@course\@coursetitle\xxx}
+	\hfil\llap{\@semester}}~}
+\vss
+\hbox to \textwidth{\Large\hfill Lecture \@lecturenumber~--- \@lecturetitle\hfill}
+\vss
+\hbox to \textwidth{~\textsl{\rlap{Lecturer: \@lecturer\xxx}
+	\hfill\llap{Scribes: \@scribe}}~}
+}}
+\setcounter{chapter}{\@lecturenumber}
+\bigskip
+}
+
+\newcommand{\BlackBox}{\rule{1.5ex}{1.5ex}}  % end of proof
+\newenvironment{proof}{\par\noindent{\bf Proof\ }}{\hfill\BlackBox\\[2mm]}
+
+% ----------------------------------------------------------------------
+%  Standard lemma, theorem, and corollary environments.
+% ----------------------------------------------------------------------
+\newtheorem{lemma}{Lemme}[chapter]
+\newtheorem{theorem}[lemma]{Theorem}
+\newtheorem{corollary}[lemma]{Corollary}
+\newtheorem{proposition}[lemma]{Proposition}
+\newtheorem{definition}[lemma]{Definition}
+
+% ----------------------------------------------------------------------
+%  Make captions smaller than the text, make their titles bold.
+%  Arguments:   #1 == figure name: "Figure 5"
+%               #2 == caption: "Papers by \Erdos, 1900--2000 (projected)"
+%  Put less space after floats, since captions are smaller
+% ----------------------------------------------------------------------
+\long\def\@makecaption#1#2{
+   \vskip 10pt
+   \setbox\@tempboxa\hbox{{\small \textbf{#1.} #2}}
+   \ifdim \wd\@tempboxa >\hsize         % IF longer than one line:
+       {\footnotesize \textbf{#1.} #2\par}% THEN set as ordinary paragraph.
+     \else                              %   ELSE  center.
+       \hbox to\hsize{\hfil\box\@tempboxa\hfil}
+   \fi}
+\dbltextfloatsep 18pt plus 2pt minus 4pt   % was 20pt plus 2pt minus 4pt
+\textfloatsep 18pt plus 2pt minus 4pt      % was 20pt plus 2pt minus 4pt
