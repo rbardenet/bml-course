@@ -3,7 +3,8 @@ Important information for the course will be posted here. Scribes, please use ov
 ## Lecture 1
 ### Course notes
 * Scribes: Pierre Delanoue, Van Nguyen Nguyen.
-* Feel free to make minor edits to their lecture notes at https://www.overleaf.com/7327431551dnysmcchtgtt
+* Their notes are work in progress, the current draft is at https://www.overleaf.com/7327431551dnysmcchtgtt
+* Feel free to make minor edits if you spot a typo.
 
 ### Main references
 * Chapters 7 and 8 of [Parmigiani and Inoue 2009](https://www.webdepot.umontreal.ca/Usagers/perronf/MonDepotPublic/stt2100/Decision_theory.pdf)
