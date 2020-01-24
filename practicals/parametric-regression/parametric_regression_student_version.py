@@ -87,7 +87,6 @@ def get_mcmc_sample_for_laplace_prior(X, y):
         theta = pm.Laplace('theta', mu=prior_location, b=prior_scale, shape=X.shape[1])
         y_noiseless = tt.dot(X, theta)
         likelihood = pm.Normal('likelihood', y_noiseless, observed=y)
-        step = pm.Metropolis(tune_interval=1)
         trace = pm.sample(1000)
 
     return trace
