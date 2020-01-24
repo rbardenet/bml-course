@@ -79,7 +79,18 @@ def get_sklearn_lasso_estimate(X, y):
 
 def get_mcmc_sample_for_laplace_prior(X, y):
     # This should return a pymc3 Trace object
-    return
+
+    lasso = pm.Model()
+    with lasso:
+        prior_location = 0
+        prior_scale = 1
+        theta = pm.Laplace('theta', mu=prior_location, b=prior_scale, shape=X.shape[1])
+        y_noiseless = tt.dot(X, theta)
+        likelihood = pm.Normal('likelihood', y_noiseless, observed=y)
+        step = pm.Metropolis(tune_interval=1)
+        trace = pm.sample(1000)
+
+    return trace
 
 def get_mcmc_sample_for_horseshoe_prior(X, y):
     # This should return a pymc3 Trace object
