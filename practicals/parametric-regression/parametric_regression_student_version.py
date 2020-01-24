@@ -4,6 +4,7 @@ from scipy.stats import bernoulli
 import matplotlib.pyplot as plt
 import pymc3 as pm
 import theano.tensor as tt
+from sklearn.linear_model import Lasso
 
 def generate_data(sample_size, dimension, seed):
     """generate simulated data with controlled theta_true
@@ -72,7 +73,9 @@ def get_sklearn_lasso_estimate(X, y):
     """apply scikit-learn lasso. This should return an estimated theta_hat.
     """
     # here should go your code. Meanwhile, I'll just output a constant zero vector.
-    return np.zeros(X.shape[1])
+    ls = Lasso(fit_intercept=True)
+    ls.fit(X, y)
+    return ls.coef_
 
 def get_mcmc_sample_for_laplace_prior(X, y):
     # This should return a pymc3 Trace object
