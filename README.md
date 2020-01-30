@@ -15,3 +15,4 @@ Scribes are taking notes. This is work in progress, and I haven't proofread the 
 * Savage's axioms are discussed by [Parmigiani and Inoue 2009](https://www.webdepot.umontreal.ca/Usagers/perronf/MonDepotPublic/stt2100/Decision_theory.pdf).
 * On MCMC, you can check [(Robert, 2004)](https://www.springer.com/gp/book/9780387212395) for a thorough reference, or Murphy's book below for a quicker survey.
 * On variational Bayes, Latent Dirichlet Allocation, and other models for ML, I used [ML: a probabilistic perspective (Murphy, 2012)](https://doc.lagout.org/science/Artificial%20Intelligence/Machine%20learning/Machine%20Learning_%20A%20Probabilistic%20Perspective%20%5BMurphy%202012-08-24%5D.pdf). I understand the subtitle *A probabilistic perspective* as *Be as Bayesian as you can afford*.
+* On Gaussian processes for ML, the reference is [(Rasmussen and Williams, 2006)](http://www.gaussianprocess.org/gpml/).
