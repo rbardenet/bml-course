@@ -1,4 +1,8 @@
-Important information for the course will be posted here. Scribes, please use overleaf and the tex template in the notes-by-scribes directory.
+# Bayesian machine Learning
+Rémi Bardenet and Julyan Arbel
+
+## Evaluation
+* Stay tuned, information will be posted here.
 
 ## Course notes
 * Scribes are taking notes. This is work in progress, and I haven't proofread the notes yet, so use with care. Checkout the [overleaf](https://www.overleaf.com/7327431551dnysmcchtgtt), and feel free to make minor edits.
