@@ -5,7 +5,7 @@ Lecturers: Rémi Bardenet and Julyan Arbel
 Stay tuned, information will be posted here.
 
 ## Course notes
-Scribes are taking notes. This is work in progress, and I haven't proofread the notes yet, so use with care. Checkout the [overleaf](https://www.overleaf.com/7327431551dnysmcchtgtt), and feel free to make minor edits.
+Scribes are taking notes. This is work in progress, and I haven't proofread the notes yet, so use with care. Check out the [overleaf here](https://www.overleaf.com/7327431551dnysmcchtgtt), and feel free to make minor edits.
 
 ### Main references, in rough chronologic order of the lectures
 * Chapters 7 and 8 of [Parmigiani and Inoue 2009](https://www.webdepot.umontreal.ca/Usagers/perronf/MonDepotPublic/stt2100/Decision_theory.pdf)
