@@ -28,8 +28,9 @@ class BayesianOptimization:
         self.dimension = X.shape[1]
 
         # Uncomment the following two lines and specify a kernel to specify the GP
-        # kernel = ???
-        # self.gp = sklgp.GaussianProcessRegressor(kernel = kernel, normalize_y=True)
+        kernel = 1.0 * Matern(length_scale=1.0, length_scale_bounds=(1e-1, 10.0),
+            nu=1.5) + 1.0 * WhiteKernel(noise_level=.1)
+        self.gp = sklgp.GaussianProcessRegressor(kernel = kernel, normalize_y=True)
 
     def fit(self):
         # Does sklearn center the data by itself?
