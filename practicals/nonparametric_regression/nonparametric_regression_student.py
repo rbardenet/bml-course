@@ -32,24 +32,15 @@ class BayesianOptimization:
         # self.gp = sklgp.GaussianProcessRegressor(kernel = kernel, normalize_y=True)
 
     def fit(self):
-        """fit the kernel's parameters using the marginal likelihood.
-        sklearn does it for you, look it up. Return nothing.
-        """
-        # Note that when creating the GP, we passed a flag to sklearn
-        # to force centering at each fit
-        return
+        # Does sklearn center the data by itself?
+        self.gp.fit(self.X, self.y)
 
     def predict(self, X_test):
-        """give the mean and standard deviations of the posterior GP
-        at the locations in X_test. Use sklearn. Return two (1,d)-arrays.
-        """
-        return
+        y_mean, y_std = self.gp.predict(X_test, return_std=True)
+        return y_mean, y_std.reshape(y_mean.shape) # make sure both have the same shape
 
     def sample_y(self, X_test, random_state):
-        """sample realizations for the y values at the locations
-        in X_test. Use sklearn. Return a (1,len(X_test))-array.
-        """
-        return
+        return self.gp.sample_y(X_test, 1, random_state=random_state)
 
     def acquisition_criterion(self, X_test):
         """implement your choice of acquisition criterion, say EI.
