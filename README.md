@@ -2,7 +2,7 @@
 Lecturers: Rémi Bardenet and Julyan Arbel
 
 ## Evaluation
-Instructions for the projects can be found [here](projects/papers.pdf). 
+Instructions for the projects can be found [here](projects/papers.pdf). Please pay attention to the deadlines.
 
 ## Course notes
 Scribes are taking notes. This is work in progress, and I haven't proofread the notes yet, so use with care. Check out the [overleaf here](https://www.overleaf.com/7327431551dnysmcchtgtt), and feel free to make minor edits.
