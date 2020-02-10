@@ -7,7 +7,7 @@ import theano.tensor as tt
 from sklearn.linear_model import Lasso
 
 def generate_data(sample_size, dimension, seed):
-    """generate simulated data with controlled theta_true.
+    """generate simulated data with controlled theta_true
     """
     npr.seed(seed)
     # Set up parameters
@@ -39,8 +39,7 @@ def generate_data(sample_size, dimension, seed):
 
 
 def plot_coefficients(axes, theta_true, indices_support, theta_hat, lower_bound=None, upper_bound=None, color='b', label=""):
-    """plot theta_true and estimated theta, with filled in error bars.
-    Then plot residuals.
+    """plot theta_true and estimated theta, with filled in error bars. Then plot residuals.
     """
     indices = range(len(theta_true))
 
@@ -71,16 +70,26 @@ def plot_coefficients(axes, theta_true, indices_support, theta_hat, lower_bound=
     return # axes
 
 def get_sklearn_lasso_estimate(X, y):
-    """apply scikit-learn lasso. This should return an estimated theta_hat,
-    in the form of an np.array of shape ((dimension,)).
+    """apply scikit-learn lasso. This should return an estimated theta_hat.
     """
-    return
+    # here should go your code. Meanwhile, I'll just output a constant zero vector.
+    ls = Lasso(fit_intercept=True)
+    ls.fit(X, y)
+    return ls.coef_
 
 def get_mcmc_sample_for_laplace_prior(X, y):
-    """use pymc3 to obtain an MCMC sample. This should return a
-    pymc3 Trace object.
-    """
-    return
+    # This should return a pymc3 Trace object
+
+    lasso = pm.Model()
+    with lasso:
+        prior_location = 0
+        prior_scale = 1
+        theta = pm.Laplace('theta', mu=prior_location, b=prior_scale, shape=X.shape[1])
+        y_noiseless = tt.dot(X, theta)
+        likelihood = pm.Normal('likelihood', y_noiseless, observed=y)
+        trace = pm.sample(5000, target_accept=.8)
+
+    return trace
 
 def get_mcmc_sample_for_horseshoe_prior(X, y):
     # This should return a pymc3 Trace object
