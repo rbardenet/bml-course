@@ -1,5 +1,5 @@
 # Bayesian machine Learning
-Lecturer: Rémi Bardenet
+Lecturers: Rémi Bardenet and Julyan Arbel
 
 ### Evaluation
 The student seminar will take place on Friday, 13 March, 8:30-12:30, at Amphi Curie.
