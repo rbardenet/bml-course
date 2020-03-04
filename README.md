@@ -4,7 +4,7 @@ Lecturers: Rémi Bardenet and Julyan Arbel
 ### Evaluation
 The student seminar will take place on Friday, 13 March, 8:30-12:30, at Amphi Curie.
 
-There are 15 projets, so we will allow 15 minutes by project: 10 minutes for presentation and 5 minutes for questions. The schedule is given on this [Framacalc sheet](https://lite.framacalc.org/9eu9-mva-bml) for indication only, everyone is expected to attend all presentations. In your 10 minutes, you should
+There are 16 projets, so we will allow 15 minutes by project: 10 minutes for presentation and 5 minutes for questions. The schedule is given on this [Framacalc sheet](https://lite.framacalc.org/9eu9-mva-bml) for indication only, everyone is expected to attend all presentations. In your 10 minutes, you should
 * introduce the problem that the paper solves,
 * describe the solution and how the paper validates it (a proof, an experiment?),
 * explain how you've gone beyond the paper if you managed to do so.
