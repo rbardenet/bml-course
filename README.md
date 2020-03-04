@@ -9,7 +9,7 @@ There are 15 projets, so we will allow 15 minutes by project: 10 minutes for pre
 * describe the solution and how the paper validates it (a proof, an experiment?),
 * explain how you've gone beyond the paper if you managed to do so.
 
-10 minutes is short, and we will cut you at 10 sharp, so prepare well, rehearse, avoid being too technical, and make sure each project member speaks. *Avoid slides and rather use the blackboard* if you need a support. If you really need slides, e.g. to show the results of an experiment, we only allow *two slides max per project*. We ask that you send us the slides in pdf, 24 hours before the exam. We will concatenate the slides beforehand and bring a computer, to keep up with our tight schedule.
+10 minutes is short, and we will cut you at 10 sharp, so prepare well, rehearse, avoid being too technical, and make sure each project member speaks. *Avoid slides and rather use the blackboard* if you need a support. If you really need slides, e.g. to show the results of an experiment, we only allow **two slides max per project**. We ask that you send us the slides in pdf, 24 hours before the exam. We will concatenate the slides beforehand and bring a computer, to keep up with our tight schedule.
 
 ### Main references, in rough chronologic order of the lectures
 * Chapters 7 and 8 of [Parmigiani and Inoue 2009](https://www.webdepot.umontreal.ca/Usagers/perronf/MonDepotPublic/stt2100/Decision_theory.pdf)
