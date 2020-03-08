@@ -87,16 +87,58 @@ def get_mcmc_sample_for_laplace_prior(X, y):
         theta = pm.Laplace('theta', mu=prior_location, b=prior_scale, shape=X.shape[1])
         y_noiseless = tt.dot(X, theta)
         likelihood = pm.Normal('likelihood', y_noiseless, observed=y)
-        trace = pm.sample(5000, target_accept=.8)
+        trace = pm.sample(2000, target_accept=.8)
 
     return trace
 
 def get_mcmc_sample_for_horseshoe_prior(X, y):
-    # This should return a pymc3 Trace object
-    return
+    sample_size, dimension = X.shape
+    prior_support_size = dimension/2
+
+    horseshoe = pm.Model()
+    with horseshoe:
+        tau = pm.HalfNormal('tau', 1)
+        lam = pm.HalfCauchy('lam', 1, shape=dimension)
+
+        theta = pm.Normal('theta', 0, tau * lam, shape=dimension)
+        y_hat = tt.dot(X, theta)
+
+        likelihood = pm.Normal('likelihood', y_hat, observed=y)
+        trace = pm.sample(1000, target_accept=.9)
+
+    return trace
 
 def get_mcmc_sample_for_finnish_horseshoe_prior(X, y):
     # This should return a pymc3 Trace object
+    sample_size, dimension = X.shape
+    prior_support_size = dimension/2
+    ss = 3
+    dof = 25
+
+    finnish_horseshoe = pm.Model()
+    with finnish_horseshoe:
+        sigma = pm.HalfNormal('sigma', 2)
+        tau_0 = prior_support_size / (dimension - prior_support_size) * sigma / tt.sqrt(sample_size) # See Piironen & Vehtari'17
+
+        tau = pm.HalfCauchy('tau', tau_0)
+        c2  = pm.InverseGamma('c2', dof/2, dof/2 * ss**2)
+        lam = pm.HalfCauchy('lam', 1, shape=dimension)
+
+        l1 = lam * tt.sqrt(c2)
+        l2 = tt.sqrt(c2 + tau * tau * lam * lam)
+        lam_d = l1 / l2
+
+        theta = pm.Normal('theta', 0, tau * lam_d, shape=X.shape[1])
+        y_hat = tt.dot(X, theta)
+
+        likelihood = pm.Normal('likelihood', y_hat, observed=y)
+        trace = pm.sample(2000, target_accept=.9)
+
+    return trace
+
+def plot_geweke(trace, chain_index, component_index):
+    """plot the Geweke scores for a given chain and given component.
+    """
     return
 
 if __name__ == '__main__':
