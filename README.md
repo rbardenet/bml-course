@@ -7,7 +7,7 @@ Two grades: one practical and one project around a research paper.
 ## Lectures
 * Lecture 1: Chapter 5 of [Mur12], selected exercises.
 * Lecture 2: Chapter 23 (IS) of [Mur12], practical on linear regression.
-* HW: read the resst of Chapter 3. Do Exercises 23.1 and 23.2 of [Mur12]. Do Exercises 2.6, 2.9, 2.10, 2.13, 2.14, and 2.15 of [MaRo07].
+* HW: read the rest of Chapter 3 (Particle filtering). Do Exercises 23.1 and 23.2 of [Mur12]. Do Exercises 2.6, 2.9, 2.10, 2.13, 2.14, and 2.15 of [MaRo07].
 
 ### Main references
 * Most of the course will be based on Murphy's ``Machine Learning" [[Mur12]](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwiQ6NDzhuXsAhVPLBoKHRQ3AvUQFjAAegQIBxAC&url=https%3A%2F%2Fdoc.lagout.org%2Fscience%2FArtificial%2520Intelligence%2FMachine%2520learning%2FMachine%2520Learning_%2520A%2520Probabilistic%2520Perspective%2520%255BMurphy%25202012-08-24%255D.pdf&usg=AOvVaw3X0sY_qZRP7o5WDlWa5X8V).
