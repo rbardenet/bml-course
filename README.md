@@ -10,7 +10,6 @@ Two grades: one practical and one project around a research paper.
 * HW: finish Exercices of Chapter 5. Read Chapter 23 (IS).
 ### Lecture 2
 * Chapter 23 (IS) of [Mur12], practical on linear regression.
-* HW: read the rest of Chapter 23 (Particle filtering).
 * HW: Do Exercises 23.1 and 23.2 of [Mur12].
 * HW: Do Exercises 2.6, 2.9, 2.10, 2.13, 2.14, and 2.15 of [MaRo07].
 
