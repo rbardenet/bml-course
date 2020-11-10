@@ -5,10 +5,10 @@ Lecturer: Rémi Bardenet
 Two grades: one practical and one project around a research paper.
 
 ## Lectures
-### Lecture 1:
+### Lecture 1
 * Chapter 5 of [Mur12], selected exercises.
 * HW: finish Exercices of Chapter 5. Read Chapter 23 (IS).
-### Lecture 2:
+### Lecture 2
 * Chapter 23 (IS) of [Mur12], practical on linear regression.
 * HW: read the rest of Chapter 23 (Particle filtering).
 * HW: Do Exercises 23.1 and 23.2 of [Mur12].
