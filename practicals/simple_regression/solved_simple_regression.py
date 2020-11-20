@@ -126,4 +126,4 @@ def run_tests():
     return
 
 if __name__ == '__main__':
-    print("hello M1DS students!")
+    print("hello M2DS students!")
