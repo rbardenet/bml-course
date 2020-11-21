@@ -33,11 +33,12 @@ class PracticalMaterial():
         """
         X = self.X
         y = self.y
-        prior_mean = np.array([np.mean(y), -0, 0])
+        N = len(self.y) # Thanks Maun
+        prior_mean = np.array([np.mean(y), 0, 0])
         #log_prior =  -npl.norm(theta-prior_median)**2 # Gaussian
         nu=2.0
         log_prior = -((self.dimension+nu)/2)*np.log(1+npl.norm(theta-prior_mean)**2/nu), # Student
-        log_likelihood = - theta[2] - npl.norm(y - X*theta[1]-theta[0])**2 / (2*np.exp(theta[2])**2 )
+        log_likelihood = - N*theta[2] - npl.norm(y - X*theta[1]-theta[0])**2 / (2*np.exp(theta[2])**2 )
         return log_prior + log_likelihood
 
     def find_map(self):
