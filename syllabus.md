@@ -28,9 +28,7 @@ landscape.
 * Practicals will be in Python and R. A basic knowledge of both languages is required. Nothing fancy, students should simply be able to read and write simple programs and load libraries: going through a basic online tutorial in both languages should be enough.
 
 ## Organization of courses
-* 6x2 hours of lectures
-* 4x2 hours of practicals
-* 4 hours of "student seminars" for the evaluation.
+* 8x3 hours of lectures, out of which 4 practical sessions of 1h30 and 1 student seminar of 3h will be carved.
 * All classes and material will be in English. Students may write their final report either in French or English.
 
 ## Validation
