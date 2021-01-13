@@ -1,7 +1,7 @@
 % TO DO: add citations in thesis work, better research plan
 
-\documentclass{beamer}
-\usetheme{Warsaw}
+\documentclass[10pt]{beamer}
+\usetheme[height=0mm]{Rochester}
 \usecolortheme{}
 \usefonttheme[onlylarge]{structurebold}
 \setbeamerfont*{frametitle}{size=\normalsize,series=\bfseries}
@@ -12,6 +12,8 @@
 
 %  use Darmstadt if commenting the next line
 \usepackage[footheight=1em]{beamerthemeboxes}
+\usepackage[natbib=true,backend=biber,citestyle=authoryear]{biblatex}
+\bibliography{../bib/stats,../bib/learning}
 
 \usepackage{amsmath,amssymb,amsthm,bbm}             % AMS Math
 \usepackage[utf8]{inputenc}
@@ -27,9 +29,6 @@
 \usepackage{tikz}
 \usetikzlibrary{bayesnet}
 \usetikzlibrary{arrows}
-
-\usepackage[natbib=true, style=verbose, maxcitenames=2]{biblatex}
-\bibliography{../bib/stats,../bib/learning}
 
 \def\figdir{Figures}
 
@@ -84,38 +83,39 @@
 
 \end{frame}
 
-\begin{frame}{A quick motivating example before we go (very) formal}
-  \only<1>{
-  \begin{itemize}
-    \item Let $N$ individuals evolve from Susceptible to Infected to Recovered, $x_n(t) \in\{S,I,R\}$, $1\leq n\leq N$, $t\in[0,T]$.
-    \item Each susceptible individual $n$ moves to $R$ according to a Poisson process with intentisty
+\begin{frame}
+  \frametitle{A quick motivating example before we go formal 1/2}
+  \begin{itemize}[<+->]
+    \vfill\item Let $N$ individuals evolve from Susceptible to Infected to Recovered, $x_n(t) \in\{S,I,R\}$, $1\leq n\leq N$, $t\in[0,T]$.
+    \vfill\item Each susceptible individual $n$ moves to $R$ according to a Poisson process with intensity
     $$\sum_{k:x_k(t)=I} \lambda_{nk}(x_{1:n}(t), \unn{\theta_{SI}}).$$
-    \item Each infected person recovers after a Gamma(\unn{$a,b$}) time.
-    \item This allows to express
+    \vfill\item Each infected person recovers after a Gamma(\unn{$a,b$}) time.
+    \vfill\item This allows to express
     $$
     p(x_1(t_{1,1}), \dots, x_1(t_{1,T_1}), \cdots, x_n(t_{n,1}), \dots, x_1(t_{n,T_n})\vert \unn{\theta}).
     $$
     where \unn{$\theta= (\theta_{SI}, a, b)$}.
-    \item Now, consider $p(\theta\vert \text{data}) \propto p(\text{data}\vert \theta) \un{p(\theta)}.$
+    \vfill\item Now, consider $p(\theta\vert \text{data}) \propto p(\text{data}\vert \theta) \un{p(\theta)}.$
   \end{itemize}
-  }
-  \only<2>{
-  \begin{itemize}
-  \item If asked to report an interval on a particular function of $\theta$, say $R_0$, I would output a small interval $I$ such that
-  $$ \int_I p(\theta\vert \text{data}) \,\d\theta \geq 0.95.$$ summarizes what we know about $\theta$ after observing the data.
-  \item If asked whether we should close universities, I would ask for
+\end{frame}
+
+\begin{frame}
+\frametitle{A quick motivating example before we go formal 2/2}
+  \begin{itemize}[<+->]
+  \vfill\item If asked to report an interval on a particular function of $\theta$, say $R_0$, I would output a small interval $I$ such that
+  $$ \int_I p(\theta\vert \text{data}) \,\d\theta \geq 0.95.$$
+  \vfill\item If asked whether we should close universities, I would ask for
   \begin{itemize}
     \item \un{the cost $\alpha$ of closing unis when $R_0<1$},
-    \item \unn{the cost $\beta$ of keeping unis open while $R_0<1$}.
+    \item \unn{the cost $\beta$ of keeping unis open while $R_0>1$}.
   \end{itemize}
-  \item Then I would recommend closing if and only if
+  \vfill\item Then I would recommend closing if and only if
   $$
   p(R_0>1\vert \text{data}) > \frac{\un{\alpha}}{\un{\alpha}+\unn{\beta}}.
   $$
-  \item Additionally, I would check that the decision doesn't change if I change my prior $p(\theta)$ a little.
-  \item If it did, then I would refine my likelihood and/or wait for more data.
+  \vfill\item Additionally, I would check that the decision doesn't change if I change my prior $p(\theta)$ a little.
+  \vfill\item If it did, then I would refine my likelihood and/or wait for more data.
 \end{itemize}
-}
   % \tikz{ %
   %   \node[latent] (S) {$S$};%
   %   \node[latent,right=of S] (I) {$I$}; %
@@ -126,12 +126,12 @@
 \end{frame}
 
 
-\begin{frame}{Quotes from BDA on Bayesian methods}
+\begin{frame}{Quotes from \cite{GCSDVR13} on Bayesian methods}
 % put book picture
-\begin{itemize}
- \item \emph{[...] practical methods for making inferences from data, using probability models for quantities we observe and for quantities about which we wish to learn.}
-\item \emph{The essential characteristic of Bayesian methods is their explicit use of probability for quantifying uncertainty in inferences based on statistical data analysis.}
-\item \emph{Three steps:
+\begin{itemize}[<+->]
+ \vfill\item \emph{[...] practical methods for making inferences from data, using probability models for quantities we observe \un{and for quantities about which we wish to learn}.}
+\vfill\item \emph{The essential characteristic of Bayesian methods is their \un{explicit use of probability for quantifying uncertainty} in inferences based on statistical data analysis.}
+\vfill\item \emph{Three steps:
 \begin{enumerate}
   \item Setting up a full probability model,
   \item Conditioning on observed data, calculating and interpreting the appropriate ``posterior distribution",
@@ -142,24 +142,24 @@
 \end{frame}
 
 \begin{frame}{Notation that I will try to stick to}
-\begin{itemize}
-  \item $y_{1:n} = (y_1,\dots,y_n) \in \cY^n$ denote observable data/labels.
-  \item $x_{1:n} \in \cX^n$ denote covariates/features.
-  \item $z_{1:n} \in \cZ^n$ denote hidden variables.
-  \item $\theta\in\Theta$ denote parameters.
-  \item $X$ denotes an $\cX$-valued random variable. Lowercase $x$ denotes either a point in $\cX$ or an $\cX$-valued random variable.
+\begin{itemize}[<+->]
+  \vfill\item $y_{1:n} = (y_1,\dots,y_n) \in \cY^n$ denote observable data/labels.
+  \vfill\item $x_{1:n} \in \cX^n$ denote covariates/features/hidden states.
+  \vfill\item $z_{1:n} \in \cZ^n$ denote hidden variables.
+  \vfill\item $\theta\in\Theta$ denote parameters.
+  \vfill\item $X$ denotes an $\cX$-valued random variable. Lowercase $x$ denotes either a point in $\cX$ or an $\cX$-valued random variable.
 \end{itemize}
 \end{frame}
 
 \begin{frame}{More notation}
-  \begin{itemize}
-  \item Whenever it can easily be made formal,
+  \begin{itemize}[<+->]
+  \vfill\item Whenever it can easily be made formal,
   %(by choosing an appropriate reference $\sigma$-finite measure, say Lebesgue or the counting measure),
   we write densities for our random variables and let the context indicate what is meant. So if $X\sim \cN(0,\sigma^2)$, we write
   $$ \mathbb E h(X) = \int h(x) \frac{e^{-x^2/2\sigma^2}}{\sigma\sqrt{2\pi}}\d x = \int h(x)p(x)\mathrm{d}x.$$
   Similarly, for $X\sim \mathcal P(\lambda)$, we write
   $$ \mathbb E h(X) = \sum_{k=0}^\infty h(k) e^{-\lambda}\frac{\lambda^k}{k!} = \int h(x) p(x)\mathrm{d} x$$
-  \item All pdfs are denoted by $p$, so that, e. g.
+  \vfill\item All pdfs are denoted by $p$, so that, e. g.
   \begin{align*}
 \mathbb{E} h(Y, \theta) &= \int h(y, \theta)p(y, \theta)\,\d y\d \theta\\
 &= \int h(y, \theta)p(y, x, \theta) \,\d x\d y \d\theta\\
@@ -170,39 +170,35 @@
 \end{frame}
 
 \section{ML as data-driven decision-making}
-\begin{frame}{Describing a decision problem under uncertainty}
+\begin{frame}{Abraham Wald (1902--1950)}
+  \centering
+  \includegraphics[width=\twofig]{\figdir/wald.jpg}
+\end{frame}
 
-\only<1>{
-\begin{figure}
-    \includegraphics[width=\threefig]{\figdir/wald.jpg}
-    \caption{Abraham Wald (1902--1950)}
-  \end{figure}
-}
-\only<2>{
-\begin{itemize}
-  \item A state space $\cS$,\\
+\begin{frame}{Describing a decision problem under uncertainty}
+\begin{itemize}[<+->]
+  \vfill\item A state space $\cS$,\\
   \un{Every quantity you need to consider to make your decision.}
-  \item Actions $\cA \subset \cF(\cS, \cZ)$,\\
+  \vfill\item Actions $\cA \subset \cF(\cS, \cZ)$,\\
   \un{Making a decision means picking one of the available actions.}
-  \item A reward space $\cZ$,\\
+  \vfill\item A reward space $\cZ$,\\
   \un{Encodes how you feel about having picked a particular action.}
-  \item A loss function $L:\cA\times \cS \rightarrow \mathbb{R}_+$.\\
-  \un{How much you would suffer from picking action $a$ in state $s$. It is also customary to first define utility $u:\cZ\rightarrow \mathbb{R}_+$, and then
+  \vfill\item A loss function $L:\cA\times \cS \rightarrow \mathbb{R}_+$.\\
+  \un{How much you would suffer from picking action $a$ in state $s$. It is also customary to first define a utility $u:\cZ\rightarrow \mathbb{R}_+$, and then let
   $$ L(a,s) = \sup_{a'\in\cA} u\big(a'(s)\big) - u\big(a(s)\big) \in\mathbb{R}_+.$$
   }
 \end{itemize}
-}
 \end{frame}
 
 \begin{frame}{Classification as a decision problem}
-\begin{itemize}
+\begin{itemize}[<+->]
 \item $\cS = \un{\cX^n\times\cY^n}\times \cX\times \cY$, i.e. $s = (x_{1:n}, y_{1:n}, x, y)$.
 \item $\cZ = \{0,1\}$.
 \item $\cA = \{a_g: s\mapsto 1_{y\neq g(x; \un{x_{1:n}, y_{1:n}})}, \quad g\in\mathcal{G}\}$.
 \item $L(a_g,s) = 1_{y=g(x; \un{x_{1:n}, y_{1:n}})}$.
 \end{itemize}
 \vfill
-\begin{block}{One common non-Bayesian objective: PAC bounds; \cite{ShBe14}}
+\begin{block}{PAC bounds; see e.g. \citep{ShBe14}}
 Let $(x_{1:n},y_{1:n})\sim \mathbb{P}^{\otimes n}$, and independently $(x,y)\sim \mathbb{P}$, we want an algorithm $g(\cdot; x_{1:n}, y_{1:n})\in\mathcal G$ such that if $n\geq n(\delta,\epsilon)$,
 $$
 \un{\mathbb{P}^{\otimes n}}\left[\mathbb{E}_{(x,y)\sim \mathbb P} L(a_g,s) \leq \epsilon\right] \geq 1-\delta.
@@ -254,7 +250,7 @@ $$
 \item \un{Choose} a distribution $p$ over $\cS$,
 \item Take the the corresponding \un{Bayes action}
 \begin{equation}
-a^\star \in \argmin_{a\in\mathcal{A}} \mathbb{E} L(a,s).
+a^\star \in \argmin_{a\in\mathcal{A}} \mathbb{E}_{s\sim p} L(a,s).
 \label{e:seu}
 \end{equation}
 \end{enumerate}
@@ -263,24 +259,24 @@ a^\star \in \argmin_{a\in\mathcal{A}} \mathbb{E} L(a,s).
 
 \begin{block}{Corollary: minimize the posterior expected loss}
 If we partition $s=(s_{o}, s_{\text{u}})$, then
-$$ a^\star \in \argmin_{a\in\mathcal{A}} \mathbb{E}_{S_{o}} \mathbb{E}_{S_{\text{u}}\vert S_{o}} L(a,s).$$
+$$ a^\star \in \argmin_{a\in\mathcal{A}} \mathbb{E}_{s_{o}} \mathbb{E}_{s_{\text{u}}\vert s_{o}} L(a,S).$$
 Equivalently to \eqref{e:seu}, given $s_o$, we choose
 $$
-a^\star = \delta(s_o) = \argmin_{a\in\mathcal{A}} \un{\mathbb{E}_{S_{\text{u}}\vert S_{o}=s_o} L(a,s)}.$$
+a^\star = \delta(s_o) = \argmin_{a\in\mathcal{A}} \un{\mathbb{E}_{s_{\text{u}}\vert s_{o}} L(a,s)}.$$
 \end{block}
 \end{frame}
 
 \section{Specifying joint models}
 \begin{frame}{A recap on probabilistic graphical models}
   \begin{itemize}
-    \item PGMs (aka ``Bayesian" networks) represent the dependences in a joint distribution $p(y)$ by \un{a directed graph $G=(E,V)$}.
+    \item PGMs (aka ``Bayesian" networks) represent the dependencies in a joint distribution $p(y)$ by \un{a directed graph $G=(E,V)$}.
     \item Two important properties:
     $$
     p(y) = \prod_{v\in V} p(y\vert y_{\text{pa(v)}}) \text{  and  }
     y_v \perp y_{nd(v)} \vert y_{pa(v)}.
     $$
     \blank
-    \item Also good to know how to determine whether $A\perp B\vert C$; see \cite[Section 10.5]{Mur12}.
+    \item Also good to know how to determine whether $A\perp B\vert C$; see \citep[Section 10.5]{Mur12}.
   \end{itemize}
   \blank
 \end{frame}
@@ -310,17 +306,32 @@ a^\star = \delta(s_o) = \argmin_{a\in\mathcal{A}} \un{\mathbb{E}_{S_{\text{u}}\v
 \end{frame}
 
 \begin{frame}{Image denoising as a decision problem}
+\begin{figure}
+\includegraphics[width=\textwidth]{Figures/denoising.png}
+\caption{Taken from \citep[Chapter 21]{Mur12}}
+\end{figure}
+\blank
 \end{frame}
 
-\section{46656 varieties of Bayesians}
+\section{50 shades of Bayes}
 % prior should not depend on the data, then advisable to study the effect of the prior after the analysis is done.
 % prior should be "non-informative", but then depends on data
 % we prefer MAP so prior is only there to regularize -> mainly for computational convenience.
 % Sometimes we can turn the ``Bayesianness knob". Example of sparse regression and the horseshoe prior.
-\begin{frame}{}
+\begin{frame}{50 shades of Bayes}
+  \begin{alertblock}{An issue (or is it?)}
+    Depending on how they interpret and how they implement SEU, you will meet many types of Bayesians (46656, according to Good).
+  \end{alertblock}
+\begin{block}{A few divisive questions}
+\begin{itemize}
+\item Using data or the likelihood to choose your prior; see Lecture \#5.
+\item Using MAP estimators for their computational tractability, like in inverse problems
+$$ \hat x_\lambda \in \argmin \Vert y- Ax\Vert + \lambda\Omega(x).$$
+\item When and how should you revise your model (likelihood or prior)?
+\item MCMC vs variational Bayes (more in Lectures \#2 and \#3)
+\end{itemize}
+\end{block}
 \end{frame}
-
-\section{More exercises}
 
 \section*{References}
 \setbeamertemplate{bibliography item}[text]%,
@@ -332,6 +343,8 @@ a^\star = \delta(s_o) = \argmin_{a\in\mathcal{A}} \un{\mathbb{E}_{S_{\text{u}}\v
 \end{frame}
 
 \end{document}
+
+% trail junk
 
 \section{The what}
 
