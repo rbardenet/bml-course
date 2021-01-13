@@ -29,6 +29,7 @@
 \usepackage{tikz}
 \usetikzlibrary{bayesnet}
 \usetikzlibrary{arrows}
+\usepackage{url}
 
 \def\figdir{Figures}
 
@@ -54,6 +55,7 @@
 
 
 \title[Bayesian ML: Bayesics]{BML lecture \#1: Bayesics}
+\subtitle{\url{http://github.com/rbardenet/bml-course}}
 \author[Rémi Bardenet (CNRS \& Univ. Lille)] % (optional, for multiple authors)
 {Rémi Bardenet}
 \institute[] % (optional)
@@ -85,10 +87,10 @@
 
 \begin{frame}
   \frametitle{A quick motivating example before we go formal 1/2}
-  \begin{itemize}[<+->]
+  \begin{itemize}
     \vfill\item Let $N$ individuals evolve from Susceptible to Infected to Recovered, $x_n(t) \in\{S,I,R\}$, $1\leq n\leq N$, $t\in[0,T]$.
     \vfill\item Each susceptible individual $n$ moves to $R$ according to a Poisson process with intensity
-    $$\sum_{k:x_k(t)=I} \lambda_{nk}(x_{1:n}(t), \unn{\theta_{SI}}).$$
+    $$\sum_{k:x_k(t)=I} \lambda_{nk}(\unn{\theta_{SI}}).$$
     \vfill\item Each infected person recovers after a Gamma(\unn{$a,b$}) time.
     \vfill\item This allows to express
     $$
@@ -101,7 +103,7 @@
 
 \begin{frame}
 \frametitle{A quick motivating example before we go formal 2/2}
-  \begin{itemize}[<+->]
+  \begin{itemize}
   \vfill\item If asked to report an interval on a particular function of $\theta$, say $R_0$, I would output a small interval $I$ such that
   $$ \int_I p(\theta\vert \text{data}) \,\d\theta \geq 0.95.$$
   \vfill\item If asked whether we should close universities, I would ask for
@@ -128,7 +130,7 @@
 
 \begin{frame}{Quotes from \cite{GCSDVR13} on Bayesian methods}
 % put book picture
-\begin{itemize}[<+->]
+\begin{itemize}
  \vfill\item \emph{[...] practical methods for making inferences from data, using probability models for quantities we observe \un{and for quantities about which we wish to learn}.}
 \vfill\item \emph{The essential characteristic of Bayesian methods is their \un{explicit use of probability for quantifying uncertainty} in inferences based on statistical data analysis.}
 \vfill\item \emph{Three steps:
@@ -142,7 +144,7 @@
 \end{frame}
 
 \begin{frame}{Notation that I will try to stick to}
-\begin{itemize}[<+->]
+\begin{itemize}
   \vfill\item $y_{1:n} = (y_1,\dots,y_n) \in \cY^n$ denote observable data/labels.
   \vfill\item $x_{1:n} \in \cX^n$ denote covariates/features/hidden states.
   \vfill\item $z_{1:n} \in \cZ^n$ denote hidden variables.
@@ -152,7 +154,7 @@
 \end{frame}
 
 \begin{frame}{More notation}
-  \begin{itemize}[<+->]
+  \begin{itemize}
   \vfill\item Whenever it can easily be made formal,
   %(by choosing an appropriate reference $\sigma$-finite measure, say Lebesgue or the counting measure),
   we write densities for our random variables and let the context indicate what is meant. So if $X\sim \cN(0,\sigma^2)$, we write
@@ -176,7 +178,7 @@
 \end{frame}
 
 \begin{frame}{Describing a decision problem under uncertainty}
-\begin{itemize}[<+->]
+\begin{itemize}
   \vfill\item A state space $\cS$,\\
   \un{Every quantity you need to consider to make your decision.}
   \vfill\item Actions $\cA \subset \cF(\cS, \cZ)$,\\
@@ -191,7 +193,7 @@
 \end{frame}
 
 \begin{frame}{Classification as a decision problem}
-\begin{itemize}[<+->]
+\begin{itemize}
 \item $\cS = \un{\cX^n\times\cY^n}\times \cX\times \cY$, i.e. $s = (x_{1:n}, y_{1:n}, x, y)$.
 \item $\cZ = \{0,1\}$.
 \item $\cA = \{a_g: s\mapsto 1_{y\neq g(x; \un{x_{1:n}, y_{1:n}})}, \quad g\in\mathcal{G}\}$.
@@ -259,7 +261,7 @@ a^\star \in \argmin_{a\in\mathcal{A}} \mathbb{E}_{s\sim p} L(a,s).
 
 \begin{block}{Corollary: minimize the posterior expected loss}
 If we partition $s=(s_{o}, s_{\text{u}})$, then
-$$ a^\star \in \argmin_{a\in\mathcal{A}} \mathbb{E}_{s_{o}} \mathbb{E}_{s_{\text{u}}\vert s_{o}} L(a,S).$$
+$$ a^\star \in \argmin_{a\in\mathcal{A}} \mathbb{E}_{s_{o}} \mathbb{E}_{s_{\text{u}}\vert s_{o}} L(a,s).$$
 Equivalently to \eqref{e:seu}, given $s_o$, we choose
 $$
 a^\star = \delta(s_o) = \argmin_{a\in\mathcal{A}} \un{\mathbb{E}_{s_{\text{u}}\vert s_{o}} L(a,s)}.$$
@@ -272,7 +274,7 @@ a^\star = \delta(s_o) = \argmin_{a\in\mathcal{A}} \un{\mathbb{E}_{s_{\text{u}}\v
     \item PGMs (aka ``Bayesian" networks) represent the dependencies in a joint distribution $p(y)$ by \un{a directed graph $G=(E,V)$}.
     \item Two important properties:
     $$
-    p(y) = \prod_{v\in V} p(y\vert y_{\text{pa(v)}}) \text{  and  }
+    p(y) = \prod_{v\in V} p(y\vert y_{\text{pa(v)}}) \qquad\text{and}\qquad
     y_v \perp y_{nd(v)} \vert y_{pa(v)}.
     $$
     \blank
@@ -281,19 +283,24 @@ a^\star = \delta(s_o) = \argmin_{a\in\mathcal{A}} \un{\mathbb{E}_{s_{\text{u}}\v
   \blank
 \end{frame}
 
-\begin{frame}{Choosing priors}
-% incorporate prior knowledge
+\begin{frame}{Estimation as a decision problem: point estimates}
+\end{frame}
+
+\begin{frame}{Estimation as a decision problem: credible intervals}
+\end{frame}
+
+\begin{frame}{Choosing priors (see Exercises)}
 \end{frame}
 
 \begin{frame}{Classification as a decision problem}
 \end{frame}
 
-\begin{frame}{Regression as a decision problem}
+\begin{frame}{Regression as a decision problem 1/2}
 % Exercise: Gaussian-Gaussian model, smaller MSE as an example of having good frequentist properties
 \end{frame}
 
-\begin{frame}{Estimation as a decision problem}
-% Empirical Bayes and the Stein effect
+\begin{frame}{Regression as a decision problem 2/2}
+% Exercise: Gaussian-Gaussian model, smaller MSE as an example of having good frequentist properties
 \end{frame}
 
 \begin{frame}{Dimensionality reduction as a decision problem}
@@ -378,7 +385,7 @@ $$ \hat x_\lambda \in \argmin \Vert y- Ax\Vert + \lambda\Omega(x).$$
 
 \begin{frame}
 \frametitle{Statistical decision theory}
-\begin{itemize}[<+->]
+\begin{itemize}
 \item Let $\Theta$ be the ``states of the world", typically the space of parameters of interest.
 \item Decisions are functions $d(x_1,\dots,x_n)\in \mathcal{D}$.
 \item Let $L(d,\theta)$ denote the loss of making decision $d$ when the state of the world is $\theta$.
@@ -655,7 +662,7 @@ $$ \argmin_d \int  L(d(x_{1:n}),\theta) p(\theta\vert x_{1:n}) d\theta. $$
 \subsection{Conjugacy}
 \begin{frame}
 \frametitle{Conjugacy}
-\begin{itemize}[<+->]
+\begin{itemize}
 \item Say we have a linear regression problem
 $$ y_i = f(x_i) + \epsilon_i,$$
 $f(x) = \theta^T x$, $\epsilon_i$ i.i.d. Gaussians $\cN(0,\sigma^2)$.
@@ -687,7 +694,7 @@ $$
 \subsection{Monte Carlo methods}
 \begin{frame}
 \frametitle{Monte Carlo methods}
-\begin{itemize}[<+->]
+\begin{itemize}
   \item Sometimes, you're less lucky. Say we're doing logistic regression.
   $$ y_i = \text{Bernoulli}\left[\sigma(f(x_i))\right],$$
   with $f(x) = \theta^T x$, $\sigma(x) = 1/(1+e^{-x})$.
@@ -871,7 +878,7 @@ $$ f_\star \sim \int p(f_\star\vert \bx, \eta ) p(\eta) d\eta. $$
 
 \begin{frame}
 \frametitle{Beyond regression: classification\footcite{RaWi06}}
-\begin{itemize}[<+->]
+\begin{itemize}
   \item \unn{(Exercise)} Find a simple classification model with GPs.
   \item Take for instance
   $$p(y=+1\vert x, f) = \text{Bernoulli}(\sigma(f(x))), \quad f\sim \text{GP}(0,K).$$
@@ -884,7 +891,7 @@ $$ f_\star \sim \int p(f_\star\vert \bx, \eta ) p(\eta) d\eta. $$
 
 \begin{frame}
 \frametitle{Beyond regression: ranking\footcite{ChGh05}}
-\begin{itemize}[<+->]
+\begin{itemize}
   \item \unn{(Exercise)} Find a simple ranking model with GPs: your data is $(u,v)_{1:n}$ where $\forall i, u_i\prec v_i$. Your user wants to know whether a new $u_\star\prec v_\star$.
   \item Take for instance
   $$p(u\prec v\vert u, v, f) = \phi(f(v)-f(u)),\quad f\sim GP(0,K), \phi \text{ increasing}.$$
