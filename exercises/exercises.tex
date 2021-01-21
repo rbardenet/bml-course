@@ -119,10 +119,13 @@ Consider the DAG from Figure~\ref{f:dag}.
 \end{enumerate}
 In particular, note how Item~\ref{i:markov} is a case of \emph{being independent from your non-descendents given your parents}, while Item~\ref{i:away} illustrates how conditioning on common children can induce dependence between parents. In more complicated DAGs, the so-called \emph{Bayes ball} algorithm determines whether two sets of nodes are independent given a third one; see \cite[Section 10.5]{Mur12}.
 
-\subsection{Systematic scan}
+\subsection{Self-normalized importance sampling ($\star\star$)}
+Show a central limit theorem for the self-normalized importance sampling estimator. Hint: use the delta method.
+
+\subsection{Systematic scan Gibbs sampler ($\star\star$)}
 Show that the systematic scan Gibbs kernel, while not satisfying detailed balance, leaves $\pi$ invariant.
 
-\subsection{LDA}
+\subsection{LDA}($\star$)
 Rederive all conditionals in the LDA and collapsed LDA model. Hint: use \eqref{e:joint}.
 %\subsection{Hierarchical linear regression}
 
