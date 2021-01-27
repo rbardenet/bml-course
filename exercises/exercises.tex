@@ -57,13 +57,13 @@ where
  $$ R(\hat\mu) = \mathbb{E}_{y\vert\mu}  \Vert \mu - \hat\mu\Vert^2.$$
  show that $R(\hat\mu_{\text{MLE}}) = N$.
 \item Suppose we have prior belief that $\mu$ lies near $0$, and we choose to represent it by $\mu\sim \cN(0,aI_N),$ $a>0$. What is the Bayes estimator $\hat\mu_{\text{Bayes}}$? What is its (frequentist) risk $R(\hat\mu_{\text{Bayes}})$? What is its Bayes risk $\mathbb{E}_\mu R(\hat\mu_{\text{Bayes}})$?
-\item Since we actually have no idea what $a$ should be, we propose to estimate it from data\footnote{This procedure of using data to tune the prior is called \emph{empirical Bayes} (EB). The expected utility principle allows it, but statisticians who like to interpret their prior as encoding their belief before the data is collected are uncomfortable with EB. At the other extreme, Bayesians who insist on having estimators with good frequentist properties are happy using the data or the likelihood to design their prior.} Show that the marginal of $y$ is
+\item Since we actually have no idea what $a$ should be, we propose to estimate it from data\footnote{This procedure of using data to tune the prior is called \emph{empirical Bayes} (EB). The expected utility principle allows it, but statisticians who like to interpret their prior as encoding their belief before the data is collected are uncomfortable with EB. At the other extreme, Bayesians who insist on using estimators with good frequentist properties are happy using the data or the likelihood to design their prior.} Show that the marginal of $y$ is
 $$
 \int p(y,\mu)\d \mu = \cN (y\vert 0,(a+1)I_N).
 $$
 In particular, what is the law of $S= \Vert y\Vert^2$? Deduce from it that $(N-2)/S$ is an unbiased estimator of $a+1$, and consider the empirical Bayes estimator $$\hat\mu_\text{EB} = \left(1- \frac{N-2}{S}\right)y.$$
 What is its Bayes risk?
-\item (harder, but elementary; do this only if you have solved all the preceding exercises; see \cite[Section 1.2]{Efr10} for a solution) Show that for $N\geq 3$, for every $\mu\in\mathbb{R}^N$,
+\item \emph{Note: This particular item is $(\star\star\star)$ because it is longer to solve, but all individual arguments are elementary; do this only if you have solved all the preceding exercises, though. Also, see \cite[Section 1.2]{Efr10} for a solution)} Show that for $N\geq 3$, for every $\mu\in\mathbb{R}^N$,
 \begin{equation}
 R(\hat\mu_\text{EB}) < R(\hat\mu_\text{MLE}).
 \label{e:stein}
@@ -82,14 +82,14 @@ for some $\alpha,\beta>0$.
 Show that the Bayes decision rule is
 $$ g^\star(x; x_{1:n}, y_{1:n}) = 1_{p(y\vert x, x_{1:n}, y_{1:n}) \geq \frac{\alpha}{\alpha+\beta}}.$$
 In particular, if $\alpha\ll\beta$, one will often decide for predicting $1$, because the cost for misclassifying a 0 is low.
-\subsection{Linear regression with a Gaussian prior}
+\subsection{Linear regression with a Gaussian prior $(\star)$}
 It is all in the title: show that the posterior is Gaussian, with mean the ridge regression estimator.
 
  \subsection{For more exercises on Bayesian derivations}
  \begin{itemize}
    \item Exercises 5.1 to 5.4 of \citep{Mur12}.
    \item Go through Sections 4.4 to 4.6 of \citep{Mur12} with pen and paper. Linear Gaussian models appear all the time.
-   \item Exercises 2.6, 2.9, 2.10, 2.13, 2.14, and 2.15 of \citep{MaRo07}. Solutions are here.
+   \item Exercises 2.6, 2.9, 2.10, 2.13, 2.14, and 2.15 of \citep{MaRo07}. Solutions are \href{https://arxiv.org/abs/0910.4696}{here}.
  \end{itemize}
 
 \section{Lecture \#2: MCMC}
@@ -125,11 +125,26 @@ Show a central limit theorem for the self-normalized importance sampling estimat
 \subsection{Systematic scan Gibbs sampler ($\star\star$)}
 Show that the systematic scan Gibbs kernel, while not satisfying detailed balance, leaves $\pi$ invariant.
 
-\subsection{LDA($\star$)}
-Rederive all conditionals in the LDA and collapsed LDA model. Hint: use \eqref{e:joint}.
+\subsection{Gibbs ($\star$) and collapsed ($\star\star$) Gibbs for LDA}
+Rederive all conditionals in the LDA and collapsed LDA model. Hint: use \eqref{e:joint}. \emph{Hint: Check \citep[Section 27.3.4]{Mur12}}.
 %\subsection{Hierarchical linear regression}
 
 \section{Lecture \#3}
+
+\subsection{A useful lemma for variational LDA ($\star$)}
+Let $\Psi(\cdot) := \Gamma'(\cdot)/\Gamma(\cdot)$ be the digamma function. Show that
+$$
+\mathbb{E}_{\text{Dir}(\theta\vert\alpha)} \log \theta_i = \Psi(\theta_i) - \Psi(\Vert \theta\Vert_1).
+$$
+We used that lemma when deriving the coordinatewise updates for VB with mean field approximation.
+
+\subsection{VB for LDA with counts ($\star\star$)}
+Derive the coordinatewise updates for VB on the count version of LDA. The variational approximation should read
+$$
+q(\pi_i, c_i, B) = \text{Dir}(\pi_i\vert\tilde\pi_i) \prod_v \text{Multinomial}(c_{iv\cdot}\vert n_{iv}, \tilde{c}_{iv\cdot}) \prod_k \text{Dir}(b_{\cdot k}\vert\tilde b_{\cdot k}).
+$$
+\emph{Hint: See \cite[Section 27.3.6]{Mur12}.}
+
 \section{Lecture \#4}
 
 \printbibliography
