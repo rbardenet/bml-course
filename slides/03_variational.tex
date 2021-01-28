@@ -1,0 +1,191 @@
+% TO DO: add citations in thesis work, better research plan
+
+\documentclass[10pt]{beamer}
+\usetheme[height=0mm]{Rochester}
+\usecolortheme{}
+\usefonttheme[onlylarge]{structurebold}
+\setbeamerfont*{frametitle}{size=\normalsize,series=\bfseries}
+\setbeamertemplate{navigation symbols}{}
+\setbeamercovered{dynamic}
+\setbeamertemplate{itemize item}[triangle]
+\setbeamertemplate{itemize subitem}[triangle]
+
+%  use Darmstadt if commenting the next line
+\usepackage[footheight=1em]{beamerthemeboxes}
+\usepackage[natbib=true,backend=biber,citestyle=authoryear]{biblatex}
+\bibliography{../bib/stats,../bib/learning}
+
+\usepackage{amsmath,amssymb,amsthm,bbm}             % AMS Math
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{myAlgorithm}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{hyperref}
+\usepackage{mathtools}
+\usepackage{mathrsfs}
+\input{notations}
+\usepackage{tikz}
+\usetikzlibrary{bayesnet}
+\usetikzlibrary{arrows}
+\usepackage{url}
+
+\def\figdir{Figures}
+
+\setbeamertemplate{footline}[frame number]
+
+\AtBeginSection[] % Do nothing for \section*
+{
+\begin{frame}
+\frametitle{Outline}
+\tableofcontents[currentsection]
+\end{frame}
+}
+
+\newcommand{\backupbegin}{
+   \newcounter{framenumberappendix}
+   \setcounter{framenumberappendix}{\value{framenumber}}
+}
+\newcommand{\backupend}{
+   \addtocounter{framenumberappendix}{-\value{framenumber}}
+   \addtocounter{framenumber}{\value{framenumberappendix}}
+}
+\makeatletter
+
+\title[Bayesian ML: Bayesics]{BML lecture \#3: variational Bayes}
+\subtitle{\url{http://github.com/rbardenet/bml-course}}
+\author[Rémi Bardenet (CNRS \& Univ. Lille)] % (optional, for multiple authors)
+{Rémi Bardenet}
+\institute[] % (optional)
+{
+  CNRS \& CRIStAL, Univ. Lille, France\\
+\vspace{1cm}
+\includegraphics[width=0.15\textwidth]{/Users/rbardenet/Work/Tex/PosterImages/logoCNRS.pdf}
+\qquad \includegraphics[width=0.4\textwidth]{/Users/rbardenet/Work/Tex/PosterImages/cristalLogo.pdf}
+}
+\date{}
+
+\begin{document}
+\begin{frame}
+\maketitle
+\end{frame}
+
+\begin{frame}
+\frametitle{Outline}
+\tableofcontents
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%
+\section{Introduction}
+%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{What comes to $your$ mind when you hear "variational inference"?}
+\end{frame}
+
+\section{Variational inference}
+\begin{frame}{When MCMC is intractable, variational inference comes to help}
+\begin{block}{Turning integration into optimization over measures}
+Variational Bayesian inference (VB) consists in approximating
+$$ \int f(\theta)\pi(\theta)\d\theta \approx \int f(\theta)q(\theta)\d\theta$$
+with \un{$ q \in \argmin_{\tilde q\in \mathcal Q} \text{distance}(\pi, \tilde q)$}. Often we take
+$$
+\text{distance}(\pi, \tilde q) = \text{KL}(\tilde q, \pi) := \int q(\theta) \log \frac{q(\theta)}{\pi(\theta)}\d\theta.
+$$
+for computational convenience.
+\end{block}
+\blank
+\end{frame}
+
+\begin{frame}{But remember we can only evaluate $\pi_u = Z\pi$...}
+\begin{itemize}
+\item Show that $J(q) := \int q(\theta) \log \frac{q(\theta)}{\pi_u(\theta)}\d\theta = \text{KL}(q, \pi) - \log Z.$
+\blank
+\item In particular, $L(q) = -J(q) \leq \log Z$. For
+$$
+\pi_u(\theta) = p(\text{data}\vert\theta) p(\theta),
+$$
+$L(q)$ is thus \un{a lower bound for the evidence} $p(\text{data})$ (ELBO).
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Choosing the approximating family $\mathcal Q$}
+\begin{itemize}
+  \item The most common approach is the mean-field approximation
+  $$ \mathcal Q = \{\theta\mapsto \prod_{d=1}^D q_d(\theta_d)\}.$$
+  \item Include all variables over which you integrate, e.g.
+  \vfill
+  \vfill
+  $$
+  q(\theta, z_{1:n}) = \prod_{d=1}^D q_d(\theta_d) \prod_{i=1}^N q_i(z_i).
+  $$
+\end{itemize}
+\begin{itemize}
+  \item Try to keep some dependence if it is key in your application.
+  \item If your original model has NEF conditionals, \un{coordinate-wise maximization of $q\mapsto L(q)$ is easy}.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Mean-field yields closed-form updates}
+\end{frame}
+
+\section{Back to LDA}
+\begin{frame}{Back to LDA 1/2}
+  \footnotesize
+\begin{align*}
+  \log &p(y, z, \pi, B)\\
+  &=\sum_{i=1}^N \left[\log p(\pi_i\vert \alpha) + \sum_{\ell=1}^{L_i} \Big(\un{\log p(z_{i\ell}\vert\pi_i)} + \unn{\log p(y_{i\ell}\vert z_{i\ell}, B)\Big)}\right] + \unnnn{p(B\vert \gamma)}\\
+  &\propto \sum_{i=1}^N \left[\sum_{k=1}^K \alpha_k \log \pi_{ik} + \sum_{\ell=1}^{L_i} \left(\un{\sum_{k=1}^K 1_{z_{i\ell}=k}\log\pi_{_{ik}}} + \unn{\sum_{v=1}^V \sum_{k=1}^K 1_{y_{i\ell}=v}1_{z_{i\ell}=k} \log b_{kv}}\right)\right] \\
+  &~~~~~+ \unnnn{\sum_{k=1}^K \sum_{v=1}^V \gamma_k\log b_{kv}}.
+\end{align*}
+\vfill
+\begin{block}{Lemma (exercise)}
+Let $\Psi(\cdot) := \Gamma'(\cdot)/\Gamma(\cdot)$ be the digamma function. Then
+$$
+\mathbb{E}_{\text{Dir}(\theta\vert\alpha)} \log \theta_i = \Psi(\theta_i) - \Psi(\Vert \theta\Vert_1).
+$$
+\end{block}
+\vfill
+\end{frame}
+
+\begin{frame}{Back to LDA 2/2}
+
+\end{frame}
+
+
+\begin{frame}{Using counts keeps space and time complexity low}
+\begin{itemize}
+  \item Storing $\tilde z_{i\ell k}$ requires $\cO (N K\sum_i L_i )$ space. \un{In practice, one works with (sparse) count data}
+  $$
+  n_{iv} = \text{number of times word $v$ appears in document $i$},
+  $$
+  and variables $c_{ivk}$, thus reducing storage costs (and the dimension of the underlying integral!) to $\cO(NVK)$.
+\blank
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Automatic differentiation variational inference  \citep{KTRGB17}}
+\vfill
+\blank
+\end{frame}
+
+\begin{frame}{Lots of variants of VB exist \citep{Mur12}}
+  \begin{itemize}
+    \item For hidden variable models, \un{EM} is VB with $$q(z,\theta) = \pi(z\vert \theta)\delta_{\tilde\theta}(\theta).$$
+    \item \un{Variational EM} is VB with $$q(z,\theta) = q(z)\delta_{\tilde\theta}(\theta).$$
+    \item VB for any PGMs with NEF arrows is \un{variational message passing}.
+    \item Rather approximating $$\pi(\theta) \approx \prod_{f=1}^F q_f(\theta)$$ leads to \un{expectation propagation}.
+    \item These days, \un{ADVI with stochastic gradients} is the default VI choice in probabilistic programming software like PyMC3, Stan, or PyRo.
+  \end{itemize}
+\end{frame}
+
+\section*{References}
+\setbeamertemplate{bibliography item}[text]%,
+\begin{frame}[allowframebreaks]
+\frametitle{References}
+\small
+\printbibliography
+\normalsize
+\end{frame}
+
+\end{document}
