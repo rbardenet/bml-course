@@ -122,6 +122,13 @@ In particular, note how Item~\ref{i:markov} is a case of \emph{being independent
 \subsection{Self-normalized importance sampling ($\star\star$)}
 Show a central limit theorem for the self-normalized importance sampling estimator. Hint: use the delta method.
 
+\subsection{The random scan Gibbs sampler always accepts}
+Consider the MH kernel with proposal
+$$
+\un{q(\theta'\vert\theta) = \frac1d \sum_{k=1}^d \pi(\theta_k\vert \theta_{\setminus k})}, \quad \theta_{\setminus k}:= (\theta_1,\dots,\theta_{k-1},\theta_{k+1},\dots,\theta_d).
+$$
+Show that the MH acceptance probability $\alpha(\theta,\theta')$ is $1$. When implementing a Gibbs sampler, it is thus enough to repeatedly draw from a conditional chosen uniformly at random.
+
 \subsection{Systematic scan Gibbs sampler ($\star\star$)}
 Show that the systematic scan Gibbs kernel, while not satisfying detailed balance, leaves $\pi$ invariant.
 
@@ -130,6 +137,9 @@ Rederive all conditionals in the LDA and collapsed LDA model.  \emph{Hint: use \
 %\subsection{Hierarchical linear regression}
 
 \section{Lecture \#3}
+
+\subsection{VB 101 $(\star)$}
+Derive the coordinatewise updates for mean field VB to fit the mean and variance of a univariate Gaussian. \emph{The solution is in \citep[Section 21.5.1]{Mu12}}.
 
 \subsection{A useful lemma for variational LDA ($\star$)}
 Let $\Psi(\cdot) := \Gamma'(\cdot)/\Gamma(\cdot)$ be the digamma function. Show that
