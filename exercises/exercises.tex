@@ -139,7 +139,18 @@ Rederive all conditionals in the LDA and collapsed LDA model.  \emph{Hint: use \
 \section{Lecture \#3}
 
 \subsection{VB 101 $(\star)$}
-Derive the coordinatewise updates for mean field VB to fit the mean and variance of a univariate Gaussian. \emph{The solution is in \citep[Section 21.5.1]{Mu12}}.
+Consider a univariate Gaussian model $y\vert \mu,\lambda \sim \cN(\mu, \lambda^{-1})$, where $\lambda=1/\sigma^2$ is called the precision parameter.
+\begin{enumerate}
+\item Take as prior
+$$
+p(\mu, \lambda) = \cN(\mu\vert \mu_0, (\kappa_0\lambda)^{-1}) \text{Gamma}(\lambda\vert \alpha_0, \beta_0).
+$$
+What is the posterior? \emph{Hint: the prior is conjugate.}
+\item Derive the updates for mean field VB in this model, i.e., with approximation
+$$ q(\mu, \lambda) = q(\mu) q(\lambda).$$
+\item Since we know the actual posterior, what can you say of the mean field solution in that case? Could you extend VB to nonconjugate priors?
+\end{enumerate}
+\emph{The solution is in \citep[Section 21.5.1]{Mur12}}.
 
 \subsection{A useful lemma for variational LDA ($\star$)}
 Let $\Psi(\cdot) := \Gamma'(\cdot)/\Gamma(\cdot)$ be the digamma function. Show that
@@ -147,6 +158,7 @@ $$
 \mathbb{E}_{\text{Dir}(\theta\vert\alpha)} \log \theta_i = \Psi(\theta_i) - \Psi(\Vert \theta\Vert_1).
 $$
 We used that lemma when deriving the coordinatewise updates for VB with mean field approximation.
+
 
 \subsection{VB for LDA with counts ($\star\star$)}
 Derive the coordinatewise updates for VB on the count version of LDA. The variational approximation should read
