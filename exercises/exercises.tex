@@ -7,6 +7,9 @@
 \usepackage[natbib=true,backend=biber,citestyle=authoryear]{biblatex}
 \bibliography{../bib/stats,../bib/learning}
 
+\newif\ifsolutions
+\solutionstrue
+
 \usepackage{tikz}
 \usetikzlibrary{bayesnet}
 \usetikzlibrary{arrows}
@@ -30,6 +33,18 @@ Let $y\vert\mu \sim \cN(\mu,I_N)$ and $\mu\sim \cN(0,a I_N)$, for some $a>0$. Sh
   \label{e:gaussianConjugacy}
 \end{equation}
 
+\ifsolutions
+\textcolor{bleu}{
+\textbf{Solution}: We apply Bayes' theorem and keep track of only the terms that will not end up in the normalization constant of the posterior. This gives
+\begin{align*}
+  \log p(\mu\vert y) &\propto \log p(y\vert\mu) + \log p(\mu)\\
+  &\propto - \frac{\Vert y-\mu\Vert^2}{2} - \frac{\Vert \mu\Vert^2}{2a}\\
+  & \propto -\frac12 \Vert\mu\Vert^2\left(1+\frac1a \right) + y^T\mu\\
+  & \propto - \frac{\Vert \mu - by\Vert^2}{2b}.
+\end{align*}
+}
+\fi
+
 \subsection{A conjugate prior on probability vectors $(\star)$}
 Let
 $$
@@ -44,10 +59,23 @@ where
 
  Now put a prior $\text{Dir}(\theta\vert \alpha)$ on $\theta$, and consider drawing $y_{1:N}$ from the multinomial distribution with parameter $\theta\in\Delta_d$. Show that
  \begin{equation}
-   p(\theta, y_{1:N}) = \frac{B(\alpha+c)}{B(\alpha)} \text{Dir}(\theta\vert \alpha),
+   p(\theta, y_{1:N}) = \frac{B(\alpha+c)}{B(\alpha)} \text{Dir}(\theta\vert \alpha + c),
 \label{e:joint}
  \end{equation}
  where $c=(\sum_{i=1}^N 1_{y_i=k})_{1\leq k \leq d}$ is the vector of counts. Note that \eqref{e:joint} implies that $\theta\vert y_{1:N} \sim \text{Dir}(\theta\vert \alpha)$ and that the marginal likelihood $p(y_{1:n}) = B(\alpha)/B(\alpha+c)$.
+
+
+ \ifsolutions
+ \textcolor{bleu}{
+ \textbf{Solution}: Once you express the multinomial pdf, the Dirichlet distribution becomes the obvious conjugate prior. This time, we keep track of the normalizing constant, because the script requires it. This gives
+ \begin{align*}
+   p(\theta, y_{1:N}) &= p(y_{1:N}\vert\theta)p(\theta)\\
+   &= \prod_{i=1}^N \prod_{k=1}^d \theta_k^{1_{\{y_i=k\}}} \times \frac{1}{B(\alpha)} \prod_{k=1}^d \theta_k^{\alpha_k -1} 1_{\theta\in \Delta_d}\\
+   &= \frac{1}{B(\alpha)} \prod_{k=1}^d \theta_k^{\alpha_k +c_k -1} 1_{\theta\in \Delta_d}\\
+   &=  \frac{B(\alpha+c)}{B(\alpha)} \text{Dir}(\theta\vert \alpha+c).
+ \end{align*}
+ }
+ \fi
 
  \subsection{Estimating the mean of a Gaussian $(\star\star)$}
  Let $\mu =(\mu_1,\dots,\mu_N)\in \mathbb{R}^N$, and consider $N$ i.i.d. real variables $y_i\vert \mu \sim \cN(\mu_i, 1)$. We wish to infer $\mu$.
@@ -73,6 +101,13 @@ Frequentists say that $\hat\mu_\text{EB}$ dominates $\mu_\text{MLE}$, in the sen
 Equation~\ref{e:stein} is called the James-Stein effect, and is a standard example of why following Bayesian guidelines can end up giving good frequentist estimators. Shrinkage, like $\hat\mu_\text{EB}$ shrinks $\hat\mu_\text{MLE}$ towards zero, is now commonplace in large-dimensional regression. For more on frequentist guarantees for Bayesian estimators and shrinkage, see \citep[Sections 7, 8, 9]{PaIn09}.
 \end{enumerate}
 
+\ifsolutions
+\textcolor{bleu}{
+\textbf{Solution}:
+The solution is basically \cite[Section 1.2]{Efr10}. The book is also highly recommended, especially if you are into large-scale hypothesis tests. At least, read the prologue for statistical culture.
+}
+\fi
+
 \subsection{Classification with asymmetric loss ($\star$)}
 Consider the classification problem, but with loss
 $$
@@ -82,8 +117,50 @@ for some $\alpha,\beta>0$.
 Show that the Bayes decision rule is
 $$ g^\star(x; x_{1:n}, y_{1:n}) = 1_{p(y\vert x, x_{1:n}, y_{1:n}) \geq \frac{\alpha}{\alpha+\beta}}.$$
 In particular, if $\alpha\ll\beta$, one will often decide for predicting $1$, because the cost for misclassifying a 0 is low.
+
+\ifsolutions
+\textcolor{bleu}{
+\textbf{Solution}:
+For brevity, we drop the dependence of $g$ in the training set and write $g(x)$ for $g(x; x_{1:n}, y_{1:n})$. Following the posterior expected loss rationale, we pick action
+\begin{align*}
+  a^\star = a_{g^\star} &\in \argmin \int L(a_g,s) p(s_u\vert s_o) \d s_u\\
+  &= \argmin \int \left[\alpha 1_{y\neq g(x)} 1_{y=0} + \beta 1_{y\neq g(x)} 1_{y=1} \right] p(y\vert x_{1:N}, y_{1:N}, x) \d y\\
+  &= \argmin \alpha 1_{0\neq g(x)} p(y=0\vert x_{1:N}, y_{1:N}, x) + \beta 1_{1\neq g(x)} p(y=1\vert x_{1:N}, y_{1:N}, x),
+\end{align*}
+so that we set $g^\star(x) = 1$ if and only if
+$$ \alpha p(y=0\vert x_{1:N}, y_{1:N}, x) \leq \beta p(y=1\vert x_{1:N}, y_{1:N}, x).$$
+Letting $q=p(y=1\vert x_{1:N}, y_{1:N}, x)$, this becomes
+$$ \alpha(1-q)\leq \beta q,$$
+or, equivalently,
+$$ q\geq \alpha/(\alpha+\beta).$$
+}
+\fi
+
+
 \subsection{Linear regression with a Gaussian prior $(\star)$}
 It is all in the title: show that the posterior is Gaussian, with mean the ridge regression estimator.
+
+\ifsolutions
+\textcolor{bleu}{
+\textbf{Solution}:
+We write Bayes' theorem and keep track only of the terms that won't end up in the normalization constant. This gives
+\begin{align*}
+\log p(\theta\vert y_{1:N}, x_{1:N}) &\propto \log p(y_{1:N}\vert x_{1:N},\theta) + \log p(\theta)\\
+& \propto -\sum_{i=1}^N \frac{(y_i-x_i^T\theta)^2}{2\sigma^2} + \frac{1}{2\sigma_0^2}\Vert \theta\Vert^2\\
+&= - \frac{1}{2\sigma^2}\Vert y-X\theta\Vert^2 + \frac{1}{2\sigma_0^2}\Vert \theta\Vert^2\\
+&\propto - \frac{1}{2\sigma^2} \left[\theta^T \left(X^TX + \frac{\sigma^2}{\sigma_0^2}I_d\right) \theta - 2y^T X\theta\right]\\
+&= -\frac12 \left[\theta^T \Lambda \theta - \frac{2}{\sigma^2}y^T X\theta\right],
+\end{align*}
+where $\Lambda:=\frac{1}{\sigma^2} X^TX + \frac{1}{\sigma_0^2}I_d$ is symmetric and positive definite. This leads to
+$$
+\log p(\theta\vert y_{1:N}, x_{1:N}) \propto -\frac12 \left(\theta-\frac{1}{\sigma^2}\Lambda^{-1} X^Ty\right)^T \Lambda \left(\theta-\frac{1}{\sigma^2}\Lambda^{-1}X^Ty\right),
+$$
+so that $\theta\vert y_{1:N}, x_{1:N}$ is indeed Gaussian, with mean the ridge regression estimator
+$$ \frac{1}{\sigma^2}\Lambda^{-1}X^Ty = \left( X^TX + \frac{\sigma^2}{\sigma_0^2}I_d\right)^{-1} X^Ty
+$$
+and variance $\Lambda^{-1}$. Not how the ratio $\sigma/\sigma_0$ is playing the role of the regularization parameter in ridge regression.
+}
+\fi
 
  \subsection{For more exercises on Bayesian derivations}
  \begin{itemize}
