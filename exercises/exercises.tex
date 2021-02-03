@@ -25,6 +25,8 @@
 
 Stars indicate the difficulty level, from 1 to 3. One star means that everyone should be able to do it without too much effort.
 
+\tableofcontents
+
 \section{Lecture \#1: Bayesics}
 
 \subsection{Conjugate priors 101: Gaussians $(\star)$}
@@ -160,7 +162,7 @@ $$
 so that $\theta\vert y_{1:N}, x_{1:N}$ is indeed Gaussian, with mean the ridge regression estimator
 $$ \frac{1}{\sigma^2}\Lambda^{-1}X^Ty = \left( X^TX + \frac{\sigma^2}{\sigma_0^2}I_d\right)^{-1} X^Ty
 $$
-and variance $\Lambda^{-1}$. Not how the ratio $\sigma/\sigma_0$ is playing the role of the regularization parameter in ridge regression.
+and variance $\Lambda^{-1}$. Note how the ratio $\sigma/\sigma_0$ is playing the role of the regularization parameter in ridge regression.
 }
 \fi
 
@@ -253,7 +255,7 @@ $$
 Let $K_n$ be the number of clusters observed when drawing $n$ observations from a Dirichlet process with concentration parameter $\alpha\in\mathbb{R}_+$.
 
 \begin{enumerate}
-	\item Show that 
+	\item Show that
 \begin{equation*}
     \mathbb{E}[K_{n}] = \sum_{i=0}^{n-1} \frac{\alpha}{\alpha + i} \quad \text{and} \quad \mbox{Var}(K_n) = \sum_{i=0}^{n-1} \frac{\alpha i}{(\alpha + i)^2}.
 \end{equation*}
@@ -268,11 +270,11 @@ Let $K_n$ be the number of clusters observed when drawing $n$ observations from 
 Let $K_n$ be the number of clusters observed when drawing $n$ observations from a Pitman--Yor process with discount parameter $\sigma\in(0,1)$ and concentration parameter $\alpha\in\mathbb{R}_+$.
 
 \begin{enumerate}
-	\item Show that 
+	\item Show that
 \begin{align*}
     \mathbb{E}[K_{n+1}]= \frac{\alpha}{n+\alpha} + \frac{\sigma + \alpha +n}{n+ \alpha}\mathbb{E}\left[K_n\right].
 \end{align*}
-\textit{Hint:} use the PY predictive distribution and a conditional expectation to get this iterative formula from $n$ to $n+1$.  
+\textit{Hint:} use the PY predictive distribution and a conditional expectation to get this iterative formula from $n$ to $n+1$.
 	\item Deduce that
 \begin{equation*}
         \mathbb{E}[K_n] = \sum_{i=0}^{n-1} \frac{(\alpha +\sigma)_{i}}{(\alpha + 1)_{i}},
@@ -285,7 +287,7 @@ where $(x)_n = x(x+1)\ldots(x+n-1)$.
 \item Show that the following recursive formula holds for the variance of $K_n$:
 \begin{align}
 \mbox{Var}(K_{n+1}) = \mbox{Var}(K_n)\frac{n + \alpha + 2\sigma}{n+\alpha} + \frac{(\sigma\mathbb{E}[K_n]+ \alpha)(n - \sigma\mathbb{E}[K_n])}{(n+\alpha)^2}.
-\end{align} 
+\end{align}
 \textit{Hint:} use the law of total variance.
 \item Derive again the simpler expression of expectation and variance of $K_n$ in the Dirichlet process case (by setting $\sigma = 0$ in the above formulas).
 \end{enumerate}
@@ -293,7 +295,7 @@ where $(x)_n = x(x+1)\ldots(x+n-1)$.
 \subsection*{More exercises on Bayesian nonparametrics}
 
 \begin{itemize}
-	\item Exercises 4.4, 4.8, 4.9, 4.10, 4.12, 4.13, 4.18, 4.24, 4.25, 4.26, 4.32, 4.39 
+	\item Exercises 4.4, 4.8, 4.9, 4.10, 4.12, 4.13, 4.18, 4.24, 4.25, 4.26, 4.32, 4.39
 of \cite{ghosal2017fundamentals}.
 \end{itemize}
 
