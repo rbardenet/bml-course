@@ -7,6 +7,8 @@
 \usepackage[natbib=true,backend=biber,citestyle=authoryear]{biblatex}
 \bibliography{../bib/stats,../bib/learning}
 
+
+
 \newif\ifsolutions
 \solutionstrue
 
@@ -213,7 +215,7 @@ Show that the systematic scan Gibbs kernel, while not satisfying detailed balanc
 Rederive all conditionals in the LDA and collapsed LDA model.  \emph{Hint: use \eqref{e:joint}; Check \citep[Section 27.3.4]{Mur12} for the solution}.
 %\subsection{Hierarchical linear regression}
 
-\section{Lecture \#3}
+\section{Lecture \#3: variational inference}
 
 \subsection{VB 101 $(\star)$}
 Consider a univariate Gaussian model $y\vert \mu,\lambda \sim \cN(\mu, \lambda^{-1})$, where $\lambda=1/\sigma^2$ is called the precision parameter.
@@ -244,7 +246,56 @@ q(\pi_i, c_i, B) = \text{Dir}(\pi_i\vert\tilde\pi_i) \prod_v \text{Multinomial}(
 $$
 \emph{Hint: See \cite[Section 27.3.6]{Mur12}.}
 
-\section{Lecture \#4}
+\section{Lecture \#4: Bayesian nonparametrics}
+
+\subsection{Combinatorial properties of $K_n$ for Dirichlet process $(\star)$}
+\label{ex:K_n-DP}
+Let $K_n$ be the number of clusters observed when drawing $n$ observations from a Dirichlet process with concentration parameter $\alpha\in\mathbb{R}_+$.
+
+\begin{enumerate}
+	\item Show that 
+\begin{equation*}
+    \mathbb{E}[K_{n}] = \sum_{i=0}^{n-1} \frac{\alpha}{\alpha + i} \quad \text{and} \quad \mbox{Var}(K_n) = \sum_{i=0}^{n-1} \frac{\alpha i}{(\alpha + i)^2}.
+\end{equation*}
+	\item Show the following large $n$ asymptotics for the expectation and variance of $K_n$:
+\begin{equation*}
+        \mathbb{E}[K_n] \sim \alpha\log n  \quad \text{and} \quad \mbox{Var}(K_n)\sim \alpha\log n.
+\end{equation*}
+\end{enumerate}
+
+\subsection{Combinatorial properties of $K_n$ for Pitman--Yor process $(\star\star)$}
+\label{ex:K_n-PY}
+Let $K_n$ be the number of clusters observed when drawing $n$ observations from a Pitman--Yor process with discount parameter $\sigma\in(0,1)$ and concentration parameter $\alpha\in\mathbb{R}_+$.
+
+\begin{enumerate}
+	\item Show that 
+\begin{align*}
+    \mathbb{E}[K_{n+1}]= \frac{\alpha}{n+\alpha} + \frac{\sigma + \alpha +n}{n+ \alpha}\mathbb{E}\left[K_n\right].
+\end{align*}
+\textit{Hint:} use the PY predictive distribution and a conditional expectation to get this iterative formula from $n$ to $n+1$.  
+	\item Deduce that
+\begin{equation*}
+        \mathbb{E}[K_n] = \sum_{i=0}^{n-1} \frac{(\alpha +\sigma)_{i}}{(\alpha + 1)_{i}},
+\end{equation*}
+where $(x)_n = x(x+1)\ldots(x+n-1)$.
+	\item Show the following large $n$ asymptotics for the expectation of $K_n$:
+\begin{equation*}
+        \mathbb{E}[K_n] \sim \frac{\Gamma(\alpha+1)}{\sigma \Gamma(\alpha+\sigma)}n^\sigma.
+\end{equation*}
+\item Show that the following recursive formula holds for the variance of $K_n$:
+\begin{align}
+\mbox{Var}(K_{n+1}) = \mbox{Var}(K_n)\frac{n + \alpha + 2\sigma}{n+\alpha} + \frac{(\sigma\mathbb{E}[K_n]+ \alpha)(n - \sigma\mathbb{E}[K_n])}{(n+\alpha)^2}.
+\end{align} 
+\textit{Hint:} use the law of total variance.
+\item Derive again the simpler expression of expectation and variance of $K_n$ in the Dirichlet process case (by setting $\sigma = 0$ in the above formulas).
+\end{enumerate}
+
+\subsection*{More exercises on Bayesian nonparametrics}
+
+\begin{itemize}
+	\item Exercises 4.4, 4.8, 4.9, 4.10, 4.12, 4.13, 4.18, 4.24, 4.25, 4.26, 4.32, 4.39 
+of \cite{ghosal2017fundamentals}.
+\end{itemize}
 
 \printbibliography
 
