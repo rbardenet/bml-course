@@ -15,3 +15,7 @@ https://nextcloud.univ-lille.fr/index.php/s/DbCZT5o58CeCgDw).
 
 ## Lecture 3
 * Annotated slides are [here for Part 1](https://nextcloud.univ-lille.fr/index.php/s/yGC7FXmJ8qabKjX).
+
+## Lecture 4
+* Annotated slides.
+
