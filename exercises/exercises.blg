@@ -1,5 +1,0 @@
-[0] Config.pm:302> INFO - This is Biber 2.11
-[0] Config.pm:305> INFO - Logfile is '/Users/jarbel/Dropbox/Julyan/Teaching/cours MVA/bml-course/exercises/exercises.blg'
-[38] biber-darwin:313> INFO - === Wed Feb  3, 2021, 18:10:57
-[174] Utils.pm:209> ERROR - Cannot find control file '/Users/jarbel/Dropbox/Julyan/Teaching/cours MVA/bml-course/exercises/exercises.bcf'! - Did latex run successfully on your .tex file before you ran biber?
-[174] Biber.pm:114> INFO - ERRORS: 1
