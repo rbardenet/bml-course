@@ -17,5 +17,16 @@ https://nextcloud.univ-lille.fr/index.php/s/DbCZT5o58CeCgDw).
 * Annotated slides are [here for Part 1](https://nextcloud.univ-lille.fr/index.php/s/yGC7FXmJ8qabKjX).
 
 ## Lecture 4
-* Annotated slides.
+TBC
 
+## Lecture 5
+The list of available papers for projects will be given.
+
+## Lecture 6
+TBC
+
+## Lecture 7
+Students must have chosen their paper for the project.
+
+## Lecture 8
+Students present their projects.
