@@ -330,6 +330,26 @@ where $(x)_n = x(x+1)\ldots(x+n-1)$.
 of \cite{ghosal2017fundamentals}.
 \end{itemize}
 
+\section{Lecture \#5: Foundations}
+
+\subsection{A simple application of the likelihood principle $(\star)$}
+Consider experiments $E_1$: tossing a coin $10$ times, vs. $E_2$: tossing the same coin until obtaining $4$ heads. Say we ran $E_1$ and $E_2$, and we obtained two samples of the same size $n=10$.
+\begin{enumerate}
+\item Write down the binomial and negative binomial likelihoods corresponding to $E_1$ and $E_2$, respectively.
+\item Build two credible intervals for the bias $\theta$ of the coin, one for each experiment. Are the two intervals the same?
+\item Build two (frequentist) confidence intervals for the bias $\theta$ of the coin, one for each experiment. Are the two intervals the same?
+\item Which answer bothers you the most?
+\end{enumerate}
+
+\subsection{The Blackwell-McQueen urn scheme and exchangeability $(\star\star)$}
+\begin{enumerate}
+\item Show that the colors $X_1,\dots$ drawn in the BMC urn scheme are exchangeable.
+\item Prove that the corresponding measure on $\mathcal P(\cX)$ given by de Finetti's theorem is a Dirichlet process.
+\end{enumerate}
+
+\subsection{McAllester's PAC bound $(\star\star\star)$}
+Prove McAllester's PAC bound. Hint: Check out Chapter 31 of \citep{ShBe14}.
+
 \printbibliography
 
 \end{document}
