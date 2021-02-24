@@ -296,6 +296,13 @@ Let $K_n$ be the number of clusters observed when drawing $n$ observations from 
 \end{equation*}
 \end{enumerate}
 
+\solution{
+\begin{enumerate}
+	\item The expressions are obtained by writing $K_n$ as a sum of independent Bernoulli random variables of parameter $\frac{\alpha}{\alpha+i}$, for $i=0,\ldots, n-1$, due to the DP predictive distribution.
+	\item This is obtained by factorizing by $\alpha$ and by Riemann sums of the intergal of $x\mapsto 1/x$ over interval $[1,n]$.
+\end{enumerate}
+}
+
 \subsection{Combinatorial properties of $K_n$ for Pitman--Yor process $(\star\star)$}
 \label{ex:K_n-PY}
 Let $K_n$ be the number of clusters observed when drawing $n$ observations from a Pitman--Yor process with discount parameter $\sigma\in(0,1)$ and concentration parameter $\alpha\in\mathbb{R}_+$.
@@ -316,18 +323,66 @@ where $(x)_n = x(x+1)\ldots(x+n-1)$.
         \mathbb{E}[K_n] \sim \frac{\Gamma(\alpha+1)}{\sigma \Gamma(\alpha+\sigma)}n^\sigma.
 \end{equation*}
 \item Show that the following recursive formula holds for the variance of $K_n$:
-\begin{align}
+\begin{align*}
 \mbox{Var}(K_{n+1}) = \mbox{Var}(K_n)\frac{n + \alpha + 2\sigma}{n+\alpha} + \frac{(\sigma\mathbb{E}[K_n]+ \alpha)(n - \sigma\mathbb{E}[K_n])}{(n+\alpha)^2}.
-\end{align}
+\end{align*}
 \textit{Hint:} use the law of total variance.
-\item Derive again the simpler expression of expectation and variance of $K_n$ in the Dirichlet process case (by setting $\sigma = 0$ in the above formulas).
+\item Derive again the simpler expression of expectation and variance of $K_n$ in the Dirichlet process case.
 \end{enumerate}
+
+\solution{
+\begin{enumerate}
+	\item By the P\'olya urn representation of PY (or, equivalently, its predictive distribution), we have
+\begin{align*}
+    \mathbb{P}(K_{n+1}=K+1 \mid K_1,\ldots,K_n=K)&= \frac{K \sigma + \alpha}{n + \alpha},\\
+    \mathbb{P}(K_{n+1}=K \mid K_1,\ldots,K_n=K)&= \frac{n - K\sigma }{n + \alpha}
+\end{align*}
+hence 
+\begin{align}\label{eq: exp_PY_rec}
+    \mathbb{E}[K_{n+1}]= \mathbb{E}[\mathbb{E}[K_{n+1} \mid K_1,\ldots,K_n=K]] = \frac{\alpha}{n+\alpha} + \frac{\sigma + \alpha +n}{n+ \alpha}\mathbb{E}\left[K\right].
+\end{align}
+\item
+Iterating yields
+\begin{equation*}
+        \mathbb{E}[K_n] = \sum_{i=0}^{n-1} \frac{(\alpha +\sigma)_{i}}{(\alpha + 1)_{i}}.
+\end{equation*}
+\item This is obtained by properties of the gamma function.
+\item
+Using the law of total variance we have, 
+ \begin{align}\label{eq:var}
+\mbox{Var}(K_{n+1})&= \mathbb{E}[\mbox{Var}(K_{n+1}\mid K_1,\ldots,K_n=K)]\\ &+ \mbox{Var}(\mathbb{E}[K_{n+1}\mid K_1,\ldots,K_{n}=K]).\nonumber
+\end{align}
+%Then using \eqref{eq: exp_PY_rec}, the first term could be written as,
+Using the fact that the variance of a two-point distribution with outcomes $a$ and $b$ and probabilities $p$ and $1-p$ is $p(1-p)(a-b)^2$, we can write the first term of the right-hand side of \eqref{eq:var} as
+\begin{align}\nonumber
+%\begin{aligned}
+\mathbb{E}[\mbox{Var}(K_{n+1}&\mid K_1,\ldots,K_n=K)] = \mathbb{E}\left[\frac{(K\sigma+\alpha)(n-K\sigma)}{(n+\alpha)^2}\right]\\
+%=&\mathbb{E}\Bigg[(K + 1 - \mathbb{E}[K_{n+1}
+% \mid K_1,\ldots,K_n=K]))^2  \frac{K \sigma + \alpha}{n + \alpha} +\\
+% +& (K  - \mathbb{E}[K_{n+1}]\mid K_1,\ldots,K_n=K])^2 \frac{n - K\sigma }{n + \alpha} \Bigg] =\\
+&= \frac{\mathbb{E}[K_n]\sigma (n- \alpha ) + n \alpha - \sigma^2 (\mathbb{E}[K_n]^2 +  \mbox{Var}(K_n))}{(n+\alpha)^2},\label{eq: var 1st}
+%\end{aligned}
+\end{align}
+while \eqref{eq: exp_PY_rec} provides for second term of the right-hand side of \eqref{eq:var} 
+ \begin{equation}\label{eq: var 2nd}
+\mbox{Var}(\mathbb{E}[K_{n+1}\mid K_1,\ldots,K_{n}=K])=\left( \frac{\sigma + n + \alpha}{n+\alpha}\right)^2 \mbox{Var}(K_n).
+\end{equation}
+ %
+Then combining \eqref{eq: var 1st} and \eqref{eq: var 2nd},  the following recursive formula holds
+\begin{align}\label{eq:s2-recursive}
+ \mbox{Var}(K_{n+1}) &= \mbox{Var}(K_n)\frac{n + \alpha + 2\sigma}{n+\alpha} + \frac{\sigma\mathbb{E}[K_n](n - \alpha - \sigma\mathbb{E}[K_n]) + n \alpha}{(n+\alpha)^2}\nonumber\\
+ &= \mbox{Var}(K_n)\frac{n + \alpha + 2\sigma}{n+\alpha} + \frac{(\sigma\mathbb{E}[K_n]+ \alpha)(n - \sigma\mathbb{E}[K_n])}{(n+\alpha)^2}.
+\end{align} 
+\item This simply comes from setting $\sigma = 0$ in the above formulas.
+\end{enumerate}
+}
 
 \subsection{For more exercises on Bayesian nonparametrics}
 
 \begin{itemize}
 	\item Exercises 4.4, 4.8, 4.9, 4.10, 4.12, 4.13, 4.18, 4.24, 4.25, 4.26, 4.32, 4.39
-of \cite{ghosal2017fundamentals}.
+of \cite{ghosal2017fundamentals}.\\
+Note: Since I'm not going to provide solutions to those exercises here, ``Auditeurs libres'' might use them for their project.
 \end{itemize}
 
 \section{Lecture \#5: Foundations}
@@ -349,6 +404,16 @@ Consider experiments $E_1$: tossing a coin $10$ times, vs. $E_2$: tossing the sa
 
 \subsection{McAllester's PAC bound $(\star\star\star)$}
 Prove McAllester's PAC bound. Hint: Check out Chapter 31 of \citep{ShBe14}.
+
+\section{Lectures \#6 \& \#7: Bayesian deep learning}
+
+\subsection{Laplace approximation for Bayesian neural networks $(\star\star)$}
+\begin{enumerate}
+\item Exercises 5.38, 5.39, 5.40, 5.41 
+of \cite{Bis06}.\\
+Note: Since I'm not going to provide solutions to those exercises here, ``Auditeurs libres'' might use them for their project.
+\end{enumerate}
+
 
 \printbibliography
 
