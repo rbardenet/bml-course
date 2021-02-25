@@ -1,0 +1,244 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 2.9 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{nty/global//global/global}
+    \entry{Bis06}{book}{}
+      \name{author}{1}{}{%
+        {{uniquename=0,uniquepart=base,hash=545cc87091f952cad8808213622b3fe8}{%
+           family={Bishop},
+           familyi={B\bibinitperiod},
+           given={C.\bibnamedelimi M.},
+           giveni={C\bibinitperiod\bibinitdelim M\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {Springer}%
+      }
+      \strng{namehash}{545cc87091f952cad8808213622b3fe8}
+      \strng{fullhash}{545cc87091f952cad8808213622b3fe8}
+      \strng{bibnamehash}{545cc87091f952cad8808213622b3fe8}
+      \strng{authorbibnamehash}{545cc87091f952cad8808213622b3fe8}
+      \strng{authornamehash}{545cc87091f952cad8808213622b3fe8}
+      \strng{authorfullhash}{545cc87091f952cad8808213622b3fe8}
+      \field{sortinit}{B}
+      \field{sortinithash}{276475738cc058478c1677046f857703}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Pattern Recognition and Machine Learning}
+      \field{year}{2006}
+    \endentry
+    \entry{Efr10}{book}{}
+      \name{author}{1}{}{%
+        {{uniquename=0,uniquepart=base,hash=e0260340f14be8eca6732082ab8cbaf4}{%
+           family={Efron},
+           familyi={E\bibinitperiod},
+           given={B.},
+           giveni={B\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {Cambridge University Press}%
+      }
+      \strng{namehash}{e0260340f14be8eca6732082ab8cbaf4}
+      \strng{fullhash}{e0260340f14be8eca6732082ab8cbaf4}
+      \strng{bibnamehash}{e0260340f14be8eca6732082ab8cbaf4}
+      \strng{authorbibnamehash}{e0260340f14be8eca6732082ab8cbaf4}
+      \strng{authornamehash}{e0260340f14be8eca6732082ab8cbaf4}
+      \strng{authorfullhash}{e0260340f14be8eca6732082ab8cbaf4}
+      \field{sortinit}{E}
+      \field{sortinithash}{f615fb9c6fba11c6f962fb3fd599810e}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Large-scale inference: empirical {B}ayes methods for estimation, testing, and prediction}
+      \field{volume}{1}
+      \field{year}{2012}
+    \endentry
+    \entry{ghosal2017fundamentals}{book}{}
+      \name{author}{2}{}{%
+        {{uniquename=0,uniquepart=base,hash=812108e097d99a555e5eb0e553806e2e}{%
+           family={Ghosal},
+           familyi={G\bibinitperiod},
+           given={Subhashis},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+        {{uniquename=0,uniquepart=base,hash=3de9c8ff2156501ef54ef4156bc9d5a1}{%
+           family={Van\bibnamedelimb der\bibnamedelima Vaart},
+           familyi={V\bibinitperiod\bibinitdelim d\bibinitperiod\bibinitdelim V\bibinitperiod},
+           given={Aad},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {Cambridge University Press}%
+      }
+      \strng{namehash}{005435e3783d2766e37c203081f272ec}
+      \strng{fullhash}{005435e3783d2766e37c203081f272ec}
+      \strng{bibnamehash}{005435e3783d2766e37c203081f272ec}
+      \strng{authorbibnamehash}{005435e3783d2766e37c203081f272ec}
+      \strng{authornamehash}{005435e3783d2766e37c203081f272ec}
+      \strng{authorfullhash}{005435e3783d2766e37c203081f272ec}
+      \field{sortinit}{G}
+      \field{sortinithash}{5e8d2bf9d38de41b1528bd307546008f}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Fundamentals of nonparametric Bayesian inference}
+      \field{volume}{44}
+      \field{year}{2017}
+    \endentry
+    \entry{MaRo07}{book}{}
+      \name{author}{2}{}{%
+        {{uniquename=0,uniquepart=base,hash=de95815a58455eafd295101dc77cf520}{%
+           family={Marin},
+           familyi={M\bibinitperiod},
+           given={J.-M.},
+           giveni={J\bibinithyphendelim M\bibinitperiod},
+           givenun=0}}%
+        {{uniquename=0,uniquepart=base,hash=17109b23dad4e21a26159b18d12dbd27}{%
+           family={Robert},
+           familyi={R\bibinitperiod},
+           given={C.P.},
+           giveni={C\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{location}{1}{%
+        {New York}%
+      }
+      \list{publisher}{1}{%
+        {Springer-Verlag}%
+      }
+      \strng{namehash}{b43208e03760ddfd0f892e6e23caa242}
+      \strng{fullhash}{b43208e03760ddfd0f892e6e23caa242}
+      \strng{bibnamehash}{b43208e03760ddfd0f892e6e23caa242}
+      \strng{authorbibnamehash}{b43208e03760ddfd0f892e6e23caa242}
+      \strng{authornamehash}{b43208e03760ddfd0f892e6e23caa242}
+      \strng{authorfullhash}{b43208e03760ddfd0f892e6e23caa242}
+      \field{sortinit}{M}
+      \field{sortinithash}{cfd219b90152c06204fab207bc6c7cab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{{B}ayesian Core: A Practical Approach to Computational {B}ayesian Statistics}
+      \field{year}{2007}
+    \endentry
+    \entry{Mur12}{book}{}
+      \name{author}{1}{}{%
+        {{uniquename=0,uniquepart=base,hash=a8bc493930a027a04bbac3d8d11551ce}{%
+           family={Murphy},
+           familyi={M\bibinitperiod},
+           given={K.},
+           giveni={K\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {MIT Press}%
+      }
+      \strng{namehash}{a8bc493930a027a04bbac3d8d11551ce}
+      \strng{fullhash}{a8bc493930a027a04bbac3d8d11551ce}
+      \strng{bibnamehash}{a8bc493930a027a04bbac3d8d11551ce}
+      \strng{authorbibnamehash}{a8bc493930a027a04bbac3d8d11551ce}
+      \strng{authornamehash}{a8bc493930a027a04bbac3d8d11551ce}
+      \strng{authorfullhash}{a8bc493930a027a04bbac3d8d11551ce}
+      \field{sortinit}{M}
+      \field{sortinithash}{cfd219b90152c06204fab207bc6c7cab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Machine learning: a probabilistic perspective}
+      \field{year}{2012}
+    \endentry
+    \entry{PaIn09}{book}{}
+      \name{author}{2}{}{%
+        {{uniquename=0,uniquepart=base,hash=b93e22f936a537af01e8d18d6ae65f85}{%
+           family={Parmigiani},
+           familyi={P\bibinitperiod},
+           given={G.},
+           giveni={G\bibinitperiod},
+           givenun=0}}%
+        {{uniquename=0,uniquepart=base,hash=6263740670667feb46d3efab9d89c51c}{%
+           family={Inoue},
+           familyi={I\bibinitperiod},
+           given={L.},
+           giveni={L\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {John Wiley \& Sons}%
+      }
+      \strng{namehash}{a03bd407383c8784c942491b790bba74}
+      \strng{fullhash}{a03bd407383c8784c942491b790bba74}
+      \strng{bibnamehash}{a03bd407383c8784c942491b790bba74}
+      \strng{authorbibnamehash}{a03bd407383c8784c942491b790bba74}
+      \strng{authornamehash}{a03bd407383c8784c942491b790bba74}
+      \strng{authorfullhash}{a03bd407383c8784c942491b790bba74}
+      \field{sortinit}{P}
+      \field{sortinithash}{8d51b3d5b78d75b54308d706b9bbe285}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Decision theory: principles and approaches}
+      \field{volume}{812}
+      \field{year}{2009}
+    \endentry
+    \entry{ShBe14}{book}{}
+      \name{author}{2}{}{%
+        {{uniquename=0,uniquepart=base,hash=a5769503407e090536a43cee6920ed28}{%
+           family={Shalev-Shwartz},
+           familyi={S\bibinithyphendelim S\bibinitperiod},
+           given={S.},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+        {{uniquename=0,uniquepart=base,hash=2951ce698048a499a6cb5ad178f7d23a}{%
+           family={Ben-David},
+           familyi={B\bibinithyphendelim D\bibinitperiod},
+           given={S.},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {Cambridge university press}%
+      }
+      \strng{namehash}{fc17ab421986eb6759f9ef89c385928e}
+      \strng{fullhash}{fc17ab421986eb6759f9ef89c385928e}
+      \strng{bibnamehash}{fc17ab421986eb6759f9ef89c385928e}
+      \strng{authorbibnamehash}{fc17ab421986eb6759f9ef89c385928e}
+      \strng{authornamehash}{fc17ab421986eb6759f9ef89c385928e}
+      \strng{authorfullhash}{fc17ab421986eb6759f9ef89c385928e}
+      \field{sortinit}{S}
+      \field{sortinithash}{322b1d5276f2f6c1bccdcd15920dbee6}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Understanding machine learning: From theory to algorithms}
+      \field{year}{2014}
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

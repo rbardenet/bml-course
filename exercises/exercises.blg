@@ -1,0 +1,21 @@
+[0] Config.pm:302> INFO - This is Biber 2.11
+[0] Config.pm:305> INFO - Logfile is '/Users/jarbel/Dropbox/Julyan/Teaching/cours MVA/bml-course/exercises/exercises.blg'
+[48] biber-darwin:313> INFO - === Wed Feb 24, 2021, 15:33:44
+[78] Biber.pm:371> INFO - Reading '/Users/jarbel/Dropbox/Julyan/Teaching/cours MVA/bml-course/exercises/exercises.bcf'
+[189] Biber.pm:857> INFO - Found 7 citekeys in bib section 0
+[204] Biber.pm:3976> INFO - Processing section 0
+[218] Biber.pm:4136> INFO - Looking for bibtex format file '../bib/stats.bib' for section 0
+[226] bibtex.pm:1500> INFO - LaTeX decoding ...
+[556] bibtex.pm:1316> INFO - Found BibTeX data source '../bib/stats.bib'
+[596] Biber.pm:4136> INFO - Looking for bibtex format file '../bib/learning.bib' for section 0
+[609] bibtex.pm:1500> INFO - LaTeX decoding ...
+[1162] bibtex.pm:1316> INFO - Found BibTeX data source '../bib/learning.bib'
+[1165] Utils.pm:193> WARN - Duplicate entry key: 'AnDoHo10' in file '../bib/learning.bib', skipping ...
+[1193] Utils.pm:193> WARN - Duplicate entry key: 'RoCa04' in file '../bib/learning.bib', skipping ...
+[1224] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[1224] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[1225] Biber.pm:3804> INFO - Sorting list 'nty/global//global/global' of type 'entry' with template 'nty' and locale 'en-US'
+[1225] Biber.pm:3810> INFO - No sort tailoring available for locale 'en-US'
+[1232] bbl.pm:617> INFO - Writing '/Users/jarbel/Dropbox/Julyan/Teaching/cours MVA/bml-course/exercises/exercises.bbl' with encoding 'UTF-8'
+[1236] bbl.pm:720> INFO - Output to /Users/jarbel/Dropbox/Julyan/Teaching/cours MVA/bml-course/exercises/exercises.bbl
+[1236] Biber.pm:110> INFO - WARNINGS: 2

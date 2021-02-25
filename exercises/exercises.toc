@@ -1,0 +1,55 @@
+\boolfalse {citerequest}\boolfalse {citetracker}\boolfalse {pagetracker}\boolfalse {backtracker}\relax 
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {1}Lecture \#1: Bayesics}{2}{section.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {1.1}Conjugate priors 101: Gaussians $(\star )$}{2}{subsection.1.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {1.2}A conjugate prior on probability vectors $(\star )$}{2}{subsection.1.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {1.3}Empirical Bayes and the James-Stein effect $(\star \star )$}{3}{subsection.1.3}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {1.4}Classification with asymmetric loss ($\star $)}{4}{subsection.1.4}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {1.5}Linear regression with a Gaussian prior $(\star )$}{5}{subsection.1.5}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {1.6}For more exercises on Bayesian derivations}{6}{subsection.1.6}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {2}Lecture \#2: MCMC}{6}{section.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {2.1}DAGs and dependence ($\star $)}{6}{subsection.2.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {2.2}Self-normalized importance sampling ($\star \star $)}{7}{subsection.2.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {2.3}The random scan Gibbs sampler always accepts $(\star )$}{8}{subsection.2.3}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {2.4}Systematic scan Gibbs sampler ($\star \star $)}{8}{subsection.2.4}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {2.5}Gibbs ($\star $) and collapsed ($\star \star $) Gibbs for LDA}{8}{subsection.2.5}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {3}Lecture \#3: Variational inference}{8}{section.3}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.1}VB 101: fitting a univariate Gaussian $(\star )$}{8}{subsection.3.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.2}A useful lemma for variational LDA ($\star $)}{8}{subsection.3.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.3}VB for LDA with counts ($\star \star $)}{9}{subsection.3.3}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {4}Lecture \#4: Bayesian nonparametrics}{9}{section.4}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {4.1}Combinatorial properties of $K_n$ for Dirichlet process $(\star )$}{9}{subsection.4.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {4.2}Combinatorial properties of $K_n$ for Pitman--Yor process $(\star \star )$}{9}{subsection.4.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {4.3}For more exercises on Bayesian nonparametrics}{11}{subsection.4.3}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {5}Lecture \#5: Foundations}{11}{section.5}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {5.1}A simple application of the likelihood principle $(\star )$}{11}{subsection.5.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {5.2}The Blackwell-McQueen urn scheme and exchangeability $(\star \star )$}{12}{subsection.5.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {5.3}McAllester's PAC bound $(\star \star \star )$}{12}{subsection.5.3}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {6}Lectures \#6 \& \#7: Bayesian deep learning}{12}{section.6}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {6.1}Laplace approximation for Bayesian neural networks $(\star \star )$}{12}{subsection.6.1}
