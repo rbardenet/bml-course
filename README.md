@@ -23,7 +23,7 @@ https://nextcloud.univ-lille.fr/index.php/s/DbCZT5o58CeCgDw).
 The list of available papers for projects will be given.
 
 ## Lecture 6
-TBC
+* Lecture notes are in the slide folder.
 
 ## Lecture 7
 Students must have chosen their paper for the project.
