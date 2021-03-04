@@ -315,7 +315,7 @@ Let $K_n$ be the number of clusters observed when drawing $n$ observations from 
 \textit{Hint:} use the PY predictive distribution and a conditional expectation to get this iterative formula from $n$ to $n+1$.
 	\item Deduce that
 \begin{equation*}
-        \mathbb{E}[K_n] = \sum_{i=0}^{n-1} \frac{(\alpha +\sigma)_{i}}{(\alpha + 1)_{i}},
+        \mathbb{E}[K_n] = \frac{\alpha}{\sigma}\left(\frac{(\alpha +\sigma)_{n}}{(\alpha)_{n}}-1\right),
 \end{equation*}
 where $(x)_n = x(x+1)\ldots(x+n-1)$.
 	\item Show the following large $n$ asymptotics for the expectation of $K_n$:
@@ -324,10 +324,11 @@ where $(x)_n = x(x+1)\ldots(x+n-1)$.
 \end{equation*}
 \item Show that the following recursive formula holds for the variance of $K_n$:
 \begin{align*}
-\mbox{Var}(K_{n+1}) = \mbox{Var}(K_n)\frac{n + \alpha + 2\sigma}{n+\alpha} + \frac{(\sigma\mathbb{E}[K_n]+ \alpha)(n - \sigma\mathbb{E}[K_n])}{(n+\alpha)^2}.
+\mbox{Var}(K_{n+1}) = \mbox{Var}(K_n)\frac{n + \alpha + 2\sigma}{n+\alpha} + \frac{(\alpha +\sigma)_{n}}{(\alpha+1)_{n}}\left(1-\frac{(\alpha +\sigma)_{n}}{(\alpha+1)_{n}}\right).
 \end{align*}
 \textit{Hint:} use the law of total variance.
 \item Derive again the simpler expression of expectation and variance of $K_n$ in the Dirichlet process case.
+\item \textit{Open question (to the best of my knowledge)}: Characterise the asymptotic behaviour of $\mbox{Var}(K_n)$ using the above recursive formula.
 \end{enumerate}
 
 \solution{
@@ -342,11 +343,14 @@ hence
     \mathbb{E}[K_{n+1}]= \mathbb{E}[\mathbb{E}[K_{n+1} \mid K_1,\ldots,K_n=K]] = \frac{\alpha}{n+\alpha} + \frac{\sigma + \alpha +n}{n+ \alpha}\mathbb{E}\left[K\right].
 \end{align}
 \item
-Iterating yields
-\begin{equation*}
-        \mathbb{E}[K_n] = \sum_{i=0}^{n-1} \frac{(\alpha +\sigma)_{i}}{(\alpha + 1)_{i}}.
-\end{equation*}
-\item This is obtained by properties of the gamma function.
+This is obtained by induction and by noting that the proposed formula is verified for $n=1$, leading to $\mathbb{E}\left[K_1\right]=1$.
+\item By properties of the gamma function:
+\begin{align*}
+        \mathbb{E}[K_n] &\sim \frac{\alpha}{\sigma}\frac{(\alpha +\sigma)_{n}}{(\alpha)_{n}}
+        = \frac{\alpha}{\sigma}\frac{\Gamma(\alpha +\sigma+n)\Gamma(\alpha)}{\Gamma(\alpha+n)\Gamma(\alpha +\sigma)}\\
+        &\sim
+        \frac{\alpha\Gamma(\alpha)}{\sigma \Gamma(\alpha+\sigma)}n^\sigma=\frac{\Gamma(\alpha+1)}{\sigma \Gamma(\alpha+\sigma)}n^\sigma.
+\end{align*}
 \item
 Using the law of total variance we have, 
  \begin{align}\label{eq:var}
@@ -371,9 +375,12 @@ while \eqref{eq: exp_PY_rec} provides for second term of the right-hand side of 
 Then combining \eqref{eq: var 1st} and \eqref{eq: var 2nd},  the following recursive formula holds
 \begin{align}\label{eq:s2-recursive}
  \mbox{Var}(K_{n+1}) &= \mbox{Var}(K_n)\frac{n + \alpha + 2\sigma}{n+\alpha} + \frac{\sigma\mathbb{E}[K_n](n - \alpha - \sigma\mathbb{E}[K_n]) + n \alpha}{(n+\alpha)^2}\nonumber\\
- &= \mbox{Var}(K_n)\frac{n + \alpha + 2\sigma}{n+\alpha} + \frac{(\sigma\mathbb{E}[K_n]+ \alpha)(n - \sigma\mathbb{E}[K_n])}{(n+\alpha)^2}.
+ &= \mbox{Var}(K_n)\frac{n + \alpha + 2\sigma}{n+\alpha} + \frac{(\sigma\mathbb{E}[K_n]+ \alpha)(n - \sigma\mathbb{E}[K_n])}{(n+\alpha)^2},
 \end{align} 
+which simplifies to the desired expression by using 
+$\mathbb{E}[K_n] = \frac{\alpha}{\sigma}\left(\frac{(\alpha +\sigma)_{n}}{(\alpha)_{n}}-1\right)$.
 \item This simply comes from setting $\sigma = 0$ in the above formulas.
+\item The variance sequence is defined as a `dynamic' arithmetico-geometric series. This is an open question, bonus to any discovery here!
 \end{enumerate}
 }
 
@@ -413,6 +420,9 @@ Prove McAllester's PAC bound. Hint: Check out Chapter 31 of \citep{ShBe14}.
 of \cite{Bis06}.\\
 Note: Since I'm not going to provide solutions to those exercises here, ``Auditeurs libres'' might use them for their project.
 \end{enumerate}
+
+\subsection{Gaussian process limit of wide regime Bayesian neural networks $(\star)$}
+Derive the Gaussian process limit of wide regime Bayesian neural networks with isotropic (iid) Gaussian priors on the weights, in the case of 1-hidden-layer neural networks (Neal's result). In particular, show that variances of the Gaussian priors need to be scaled in $1/H$, with $H$ the hidden layer width. For the more general case of non shallow neural networks, refer to the proof by \cite{matthews2018gaussian}.
 
 
 \printbibliography
