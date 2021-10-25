@@ -110,12 +110,25 @@
       model information Bayesian human visual task probability sensory prior concept\\
     \hline
     \end{tabular}
-    \caption{Topics extracted by stochastic variational latent Dirichlet allocation, using {scikit-learn} \citep{}.
+    \caption{Topics extracted by stochastic variational latent Dirichlet allocation, using {scikit-learn} \citep{sklearn11}.
     \label{f:bayesianTopics}}
     \end{figure}
 \end{frame}
 
-\section{Getting into shape with inference in regression models}
+\section{A warmup: Estimation in regression models}
+
+\begin{frame}{A recap on probabilistic graphical models \citep[Section 10.5]{Mur12}}
+  \begin{itemize}
+    \item PGMs (aka ``Bayesian" networks) represent the dependencies in a joint distribution $p(s)$ by \un{a directed graph $G=(E,V)$}.
+    \item Two important properties:
+    $$
+    p(s) = \prod_{v\in V} p(s\vert s_{\text{pa(v)}}) \qquad\text{and}\qquad
+    s_v \perp s_{nd(v)\setminus pa(v)} \vert s_{pa(v)}.
+    $$
+  \end{itemize}
+  \blank
+\end{frame}
+
 
 \begin{frame}{Inference in regression models}
 \vspace{-1.5cm}
@@ -253,21 +266,22 @@
   \vfill\item A reward space $\cZ$,\\
   \un{Encodes how you feel about having picked a particular action.}
   \vfill\item A loss function $L:\cA\times \cS \rightarrow \mathbb{R}_+$.\\
-  \un{How much you would suffer from picking action $a$ in state $s$. It is also customary to first define a utility $u:\cZ\rightarrow \mathbb{R}_+$, and then let
-  $$ L(a,s) = \sup_{a'\in\cA} u\big(a'(s)\big) - u\big(a(s)\big) \in\mathbb{R}_+.$$
+  \un{How much you would suffer from picking action $a$ in state $s$. 
+  %It is also customary to first define a utility $u:\cZ\rightarrow \mathbb{R}_+$, and then let
+  %$$ L(a,s) = \sup_{a'\in\cA} u\big(a'(s)\big) - u\big(a(s)\big) \in\mathbb{R}_+.$$
   }
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Estimation as a decision problem}
-  \begin{itemize}
-  \item $\cS = $
-  \item $\cZ = $
-  \item $\cA = $
-  \item
-  \end{itemize}
-  \blank
-\end{frame}
+% \begin{frame}{Estimation as a decision problem}
+%   \begin{itemize}
+%   \item $\cS = $
+%   \item $\cZ = $
+%   \item $\cA = $
+%   \item
+%   \end{itemize}
+%   \blank
+% \end{frame}
 
 \begin{frame}{Classification as a decision problem}
 \begin{itemize}
@@ -284,42 +298,35 @@ $$
 $$
 \end{block}\end{frame}
 
-\begin{frame}{Regression as a decision problem}
-  \begin{itemize}
-  \item $\cS = $
-  \item $\cZ = $
-  \item $\cA = $
-  \item
-  \end{itemize}
-  \blank
-\end{frame}
+% \begin{frame}{Regression as a decision problem}
+%   \begin{itemize}
+%   \item $\cS = $
+%   \item $\cZ = $
+%   \item $\cA = $
+%   \item
+%   \end{itemize}
+%   \blank
+% \end{frame}
 
-\begin{frame}{Model choice as a decision problem}
-    \begin{itemize}
-      \item $\cS = $
-      \item $\cZ = $
-      \item $\cA = $
-      \item
-      \end{itemize}
-      \blank
-    \end{frame}
+% \begin{frame}{Model choice as a decision problem}
+%     \begin{itemize}
+%       \item $\cS = $
+%       \item $\cZ = $
+%       \item $\cA = $
+%       \item
+%       \end{itemize}
+%       \blank
+%     \end{frame}
 
-\begin{frame}{Topic modeling}
-  \begin{figure}
-    \includegraphics[width=\onefig]{Figures/lda.jpg}
-  \caption{Topic modeling. \emph{Credits to D. Blei?}}
-  \end{figure}
-\end{frame}
-
-\begin{frame}{Topic modeling as a decision problem}
-    \begin{itemize}
-       \item $\cS = $
-       \item $\cZ = $
-       \item $\cA = $
-       \item
-    \end{itemize}
-    \blank
-\end{frame}
+% \begin{frame}{Topic modeling as a decision problem}
+%     \begin{itemize}
+%        \item $\cS = $
+%        \item $\cZ = $
+%        \item $\cA = $
+%        \item
+%     \end{itemize}
+%     \blank
+% \end{frame}
         
 % Regression, classification, estimation, dimensionality reduction, clustering, topic modelling as a more complex hidden variable model: gives states and losses, maybe state the main non-Bayesian solution.
 
@@ -334,7 +341,7 @@ $$
 \begin{enumerate}
 \item \un{Choose} $\cS, \cZ, \cA$ and a loss function $L(a,s)$,
 \item \un{Choose} a distribution $p$ over $\cS$,
-\item Take the the corresponding \un{Bayes action}
+\item Take the corresponding \un{Bayes action}
 \begin{equation}
 a^\star \in \argmin_{a\in\mathcal{A}} \mathbb{E}_{s\sim p} L(a,s).
 \label{e:seu}
@@ -352,20 +359,7 @@ a^\star = \delta(s_o) = \argmin_{a\in\mathcal{A}} \un{\mathbb{E}_{s_{\text{u}}\v
 \end{block}
 \end{frame}
 
-\section{Specifying joint models}
-\begin{frame}{A recap on probabilistic graphical models}
-  \begin{itemize}
-    \item PGMs (aka ``Bayesian" networks) represent the dependencies in a joint distribution $p(y)$ by \un{a directed graph $G=(E,V)$}.
-    \item Two important properties:
-    $$
-    p(y) = \prod_{v\in V} p(y\vert y_{\text{pa(v)}}) \qquad\text{and}\qquad
-    y_v \perp y_{nd(v)} \vert y_{pa(v)}.
-    $$
-    \blank
-    \item Also good to know how to determine whether $A\perp B\vert C$; see \citep[Section 10.5]{Mur12}.
-  \end{itemize}
-  \blank
-\end{frame}
+\section{Revisiting examples}
 
 \begin{frame}{Estimation as a decision problem: point estimates}
   \begin{itemize}
@@ -389,22 +383,27 @@ a^\star = \delta(s_o) = \argmin_{a\in\mathcal{A}} \un{\mathbb{E}_{s_{\text{u}}\v
     \vfill
 \end{frame}
 
-\begin{frame}{Topic modelling as a decision problem}
-  \begin{itemize}
-    \item $\cS = $.
-    \item $\cZ = $.
-    \item $\cA = $.
-    \item $L(a_g,s) = $.
-    \end{itemize}
-    \blank
-    \vfill
-  \end{frame}
+% \begin{frame}{Topic modeling}
+%   \begin{figure}
+%     \includegraphics[width=\onefig]{Figures/lda.jpg}
+%   \caption{Topic modeling. \emph{Credits to D. Blei?}}
+%   \end{figure}
+% \end{frame}
 
-\section{Specifying losses}
+% \begin{frame}{Topic modelling as a decision problem}
+%   \begin{itemize}
+%     \item $\cS = $
+%     \item $\cZ = $
+%     \item $\cA = $
+%     \item $L(a_g,s) = $
+%     \end{itemize}
+%     \blank
+%     \vfill
+%   \end{frame}
 
-  \begin{frame}{Classification as a decision problem}
+\begin{frame}{Classification as a decision problem}
   \begin{itemize}
-    \item $\cS = \un{\cX^n\times\cY^n}\times \cX\times \cY$, i.e. $s = (x_{1:n}, y_{1:n}, x, y)$.
+    \item $\cS = \un{\cX^n\times\cY^n}\times \cX\times \cY \times \Theta$, i.e. $s = (x_{1:n}, y_{1:n}, x, y)$.
     \item $\cZ = \{0,1\}$.
     \item $\cA = \{a_g: s\mapsto 1_{y\neq g(x; \un{x_{1:n}, y_{1:n}})}\}$.
     \item $L(a_g,s) = 1_{y\neq g(x; \un{x_{1:n}, y_{1:n}})}$.
@@ -424,17 +423,17 @@ a^\star = \delta(s_o) = \argmin_{a\in\mathcal{A}} \un{\mathbb{E}_{s_{\text{u}}\v
     \vfill
 \end{frame}
 
-\begin{frame}{Prediction in regression as a decision problem}
-% Exercise: Gaussian-Gaussian model, smaller MSE as an example of having good frequentist properties
-\begin{itemize}
-  \item $\cS = \un{\cX^n\times\mathbb{R}^n}\times \cX\times \mathbb{R}$, i.e. $s = (x_{1:n}, y_{1:n}, x, y)$.
-  \item $\cZ = \mathbb{R}$.
-  \item $\cA = \{a_g: s\mapsto y - g(x; \un{x_{1:n}, y_{1:n}})\}$.
-  \item $L(a_g,s) = \Vert y - g(x; \un{x_{1:n}, y_{1:n}}) \Vert^2$.
-  \end{itemize}
-  \blank
-  \vfill
-\end{frame}
+% \begin{frame}{Prediction in regression as a decision problem}
+% % Exercise: Gaussian-Gaussian model, smaller MSE as an example of having good frequentist properties
+% \begin{itemize}
+%   \item $\cS = \un{\cX^n\times\mathbb{R}^n}\times \cX\times \mathbb{R}$, i.e. $s = (x_{1:n}, y_{1:n}, x, y)$.
+%   \item $\cZ = \mathbb{R}$.
+%   \item $\cA = \{a_g: s\mapsto y - g(x; \un{x_{1:n}, y_{1:n}})\}$.
+%   \item $L(a_g,s) = \Vert y - g(x; \un{x_{1:n}, y_{1:n}}) \Vert^2$.
+%   \end{itemize}
+%   \blank
+%   \vfill
+% \end{frame}
 
 % \begin{frame}{Dimensionality reduction as a decision problem}
 % \end{frame}
@@ -461,7 +460,8 @@ a^\star = \delta(s_o) = \argmin_{a\in\mathcal{A}} \un{\mathbb{E}_{s_{\text{u}}\v
   \vfill
   \begin{itemize}
     \item SEU allows to formalize most ML questions.
-    \item Choosing $L$ and $\pi$ is often relatively natural.
+    \item Choosing $L$ and (the dependencies in) $\pi$ is often relatively natural.
+    \item Everything boils down to integrals.
   \end{itemize}
   \vfill
   \begin{alertblock}{Good's {\it 46656 varieties of Bayesians}}

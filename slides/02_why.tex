@@ -69,7 +69,7 @@
 \section{Because you abide by the likelihood principle}
 \begin{frame}
 \frametitle{The likelihood principle \citep{BeWo88}}
-\begin{block}{The ``formal" LP}
+\begin{block}{The ``formal" LP of \cite{BeWo88}}
   Consider two statistical experiments
   $$
   E_i=(X_i,\un{\theta}, \{p_i(\cdot\vert\vartheta), \vartheta\in\Theta\}), \quad i=1,2.
@@ -243,6 +243,29 @@ But finding the ``right" prior can be difficult. Frequentists typically use Baye
 \end{frame}
 
 \begin{frame}{Sparse Bayesian regression}
+\begin{block}{The Lasso}
+$$ 
+\hat\beta_{\text{Lasso}} \in \argmin_\beta \frac12 \Vert y -X\beta\Vert^2 + \lambda \Vert \beta\Vert_1.
+$$
+\end{block}
+\begin{itemize}
+\item If $X\vert\beta \sim \cN(X\beta, I)$ and $p(\beta) \propto e^{-\lambda\Vert \beta\Vert_1}$, the MAP is $\hat\beta_{\text{Lasso}}$.
+\item But the posterior is not sparse.
+\end{itemize}
+\begin{block}{Spike-and-slab priors}
+  \vspace{-5pt}
+  $$
+    p(\beta\vert w) = (1-w)\delta_0 + w q(\beta).
+  $$
+\end{block}
+
+\begin{block}{The horseshoe prior}
+  \vspace{-15pt}
+  \begin{align*}
+    \tau& \sim C^+(0,1)\\
+    \beta_j\vert \lambda_j, \tau &\sim \cN(0, \tau^2 \lambda_j^2), \quad j=1,\dots, d.
+  \end{align*}
+\end{block}
 \end{frame}
 
 \subsection{PAC-Bayesian learning}
