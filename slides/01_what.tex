@@ -350,13 +350,13 @@ a^\star \in \argmin_{a\in\mathcal{A}} \mathbb{E}_{s\sim p} L(a,s).
 \end{block}
 \vfill
 
-\begin{block}{Corollary: minimize the posterior expected loss}
-If we partition $s=(s_{o}, s_{\text{u}})$, then
-$$ a^\star \in \argmin_{a\in\mathcal{A}} \mathbb{E}_{s_{o}} \mathbb{E}_{s_{\text{u}}\vert s_{o}} L(a,s).$$
-Equivalently to \eqref{e:seu}, given $s_o$, we choose
+\begin{exampleblock}{Corollary: minimize the posterior expected loss}
+If we partition $s=(s_{\text{obs}}, s_{\text{u}})$, then
+$$ a^\star \in \argmin_{a\in\mathcal{A}} \mathbb{E}_{s_{\text{obs}}} \mathbb{E}_{s_{\text{u}}\vert s_{\text{obs}}} L(a,s).$$
+Assume $\cA = \{a_g\}$, where $g$ maps $s_{\text{obs}}$ to some desired output. Then \eqref{e:seu} is equivalent to, given $s_{\text{obs}}$, choosing
 $$
-a^\star = \delta(s_o) = \argmin_{a\in\mathcal{A}} \un{\mathbb{E}_{s_{\text{u}}\vert s_{o}} L(a,s)}.$$
-\end{block}
+a^\star = \delta(s_{\text{obs}}) = \argmin_{a\in\mathcal{A}} \un{\mathbb{E}_{s_{\text{u}}\vert s_{\text{obs}}} L(a,s)}.$$
+\end{exampleblock}
 \end{frame}
 
 \section{Revisiting examples}
@@ -454,7 +454,7 @@ a^\star = \delta(s_o) = \argmin_{a\in\mathcal{A}} \un{\mathbb{E}_{s_{\text{u}}\v
 \begin{frame}{Wrapping up}
   \begin{block}{A Bayesian minimizes a posterior expected loss}
   $$
-    a^\star = \delta(s_o) = \argmin_{a\in\mathcal{A}} \un{\mathbb{E}_{s_{\text{u}}\vert s_{o}} L(a,s)}.
+    a^\star = \delta(s_{\text{obs}}) = \argmin_{a\in\{a_g\}} \un{\mathbb{E}_{s_{\text{u}}\vert s_{\text{obs}}} L(a,s)}.
   $$
   \end{block}
   \vfill
