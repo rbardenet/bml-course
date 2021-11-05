@@ -169,186 +169,188 @@ and variance $\Lambda^{-1}$. Note how the ratio $\sigma/\sigma_0$ is playing the
    \item Exercises 2.6, 2.9, 2.10, 2.13, 2.14, and 2.15 of \citep{MaRo07}. Solutions are \href{https://arxiv.org/abs/0910.4696}{here}.
  \end{itemize}
 
-\section{Lecture \#2: MCMC}
 
-\subsection{DAGs and dependence ($\star$)}
-\begin{figure}
-  \centering
-  \begin{tikzpicture}
-  \node[latent] (y) {$y$};
-  \node[latent,right= of y] (z) {$z$}; %
-  \node[latent,left= of y] (x) {$x$}; %
-  \node[latent,above= of x] (t) {$\theta$}; %
-  \edge x y;
-  \edge z y;
-  \edge t x;
-\end{tikzpicture}
-\caption{A DAG}
-\label{f:dag}
-\end{figure}
 
-Consider the DAG from Figure~\ref{f:dag}.
-\begin{enumerate}
-\item Write the corresponding factorization of $p(x,y,z,\theta)$.
-\item Deduce from the factorization that $x\perp z$.
-\item\label{i:markov} Deduce from the factorization that $x\perp z\vert\theta$.
-\item\label{i:away} Deduce from the factorization that $x\not\perp z\vert \theta, y$.
-\end{enumerate}
-In particular, note how Item~\ref{i:markov} is a case of \emph{being independent from your non-descendents given your parents}, while Item~\ref{i:away} illustrates how conditioning on common children can induce dependence between parents. In more complicated DAGs, the so-called \emph{Bayes ball} algorithm determines whether two sets of nodes are independent given a third one; see \cite[Section 10.5]{Mur12}.
+% \section{Lecture \#2: MCMC}
 
-\solution{
-\begin{enumerate}
-\item By definition, we write the product of the conditionals of each node given its parents, that is,
-\begin{equation}
-  p(x,y,z,\theta) = p(y\vert z,x)p(x\vert\theta)p(\theta)p(z).
-\label{e:factorization}
-\end{equation}
-\item By \eqref{e:factorization},
-$$ p(x,z) = \int p(x,y,z,\theta) \d y\d \theta = p(z) \int p(x\vert\theta)p(\theta)\d\theta.$$
-In particular,
-$$p(x) = \int p(x,z)\d z = \int p(x\vert\theta)p(\theta)\d\theta,$$ so that $p(x,z) = p(x)p(z)$.
-\item We use Bayes' theorem and \eqref{e:factorization},
-\begin{align*}
-p(x,z\vert\theta) &= \int p(x,y,z\vert\theta)\d y\\
-&= \int \frac{p(x,y,z,\theta)}{p(\theta)}\d y\\
-&= \int p(y\vert z,x)p(x\vert\theta)p(z) \d y\\
-&= p(x\vert\theta)p(z).
-\end{align*}
-In particular,
-$$
-p(z\vert\theta) = \int p(x,z\vert\theta) \d x = p(z),
-$$
-so that $p(x,z\vert\theta) = p(x\vert\theta)p(z\vert\theta)$.
-% \item We need to prove that $p(x,z\vert\theta,y) \neq p(x\vert\theta,y)p(z\vert\theta,y)$. On the one hand,
+% \subsection{DAGs and dependence ($\star$)}
+% \begin{figure}
+%   \centering
+%   \begin{tikzpicture}
+%   \node[latent] (y) {$y$};
+%   \node[latent,right= of y] (z) {$z$}; %
+%   \node[latent,left= of y] (x) {$x$}; %
+%   \node[latent,above= of x] (t) {$\theta$}; %
+%   \edge x y;
+%   \edge z y;
+%   \edge t x;
+% \end{tikzpicture}
+% \caption{A DAG}
+% \label{f:dag}
+% \end{figure}
+
+% Consider the DAG from Figure~\ref{f:dag}.
+% \begin{enumerate}
+% \item Write the corresponding factorization of $p(x,y,z,\theta)$.
+% \item Deduce from the factorization that $x\perp z$.
+% \item\label{i:markov} Deduce from the factorization that $x\perp z\vert\theta$.
+% \item\label{i:away} Deduce from the factorization that $x\not\perp z\vert \theta, y$.
+% \end{enumerate}
+% In particular, note how Item~\ref{i:markov} is a case of \emph{being independent from your non-descendents given your parents}, while Item~\ref{i:away} illustrates how conditioning on common children can induce dependence between parents. In more complicated DAGs, the so-called \emph{Bayes ball} algorithm determines whether two sets of nodes are independent given a third one; see \cite[Section 10.5]{Mur12}.
+
+% \solution{
+% \begin{enumerate}
+% \item By definition, we write the product of the conditionals of each node given its parents, that is,
+% \begin{equation}
+%   p(x,y,z,\theta) = p(y\vert z,x)p(x\vert\theta)p(\theta)p(z).
+% \label{e:factorization}
+% \end{equation}
+% \item By \eqref{e:factorization},
+% $$ p(x,z) = \int p(x,y,z,\theta) \d y\d \theta = p(z) \int p(x\vert\theta)p(\theta)\d\theta.$$
+% In particular,
+% $$p(x) = \int p(x,z)\d z = \int p(x\vert\theta)p(\theta)\d\theta,$$ so that $p(x,z) = p(x)p(z)$.
+% \item We use Bayes' theorem and \eqref{e:factorization},
+% \begin{align*}
+% p(x,z\vert\theta) &= \int p(x,y,z\vert\theta)\d y\\
+% &= \int \frac{p(x,y,z,\theta)}{p(\theta)}\d y\\
+% &= \int p(y\vert z,x)p(x\vert\theta)p(z) \d y\\
+% &= p(x\vert\theta)p(z).
+% \end{align*}
+% In particular,
 % $$
-% p(x,z\vert\theta,y) = \frac{p(x,y,z,\theta)}{p(\theta,y)}
+% p(z\vert\theta) = \int p(x,z\vert\theta) \d x = p(z),
 % $$
-% On the other hand,
-% $$ p(x\vert\theta,y) = \frac{\int p(x,\theta,y,z)\d z}{p(\theta,y)} = {p(x\vert\theta)p(\theta)\int p(y\vert x, z)p(z)\d z}{p(\theta,y)}$$
-% and
+% so that $p(x,z\vert\theta) = p(x\vert\theta)p(z\vert\theta)$.
+% % \item We need to prove that $p(x,z\vert\theta,y) \neq p(x\vert\theta,y)p(z\vert\theta,y)$. On the one hand,
+% % $$
+% % p(x,z\vert\theta,y) = \frac{p(x,y,z,\theta)}{p(\theta,y)}
+% % $$
+% % On the other hand,
+% % $$ p(x\vert\theta,y) = \frac{\int p(x,\theta,y,z)\d z}{p(\theta,y)} = {p(x\vert\theta)p(\theta)\int p(y\vert x, z)p(z)\d z}{p(\theta,y)}$$
+% % and
+% % $$
+% % p(z\vert\theta,y) = \frac{\int p(x,\theta,y,z)\d x}{p(\theta,y)} = {p(\theta)p(z)\int p(y\vert x, z)p(x\vert\theta)\d x}{p(\theta,y)}
+% \end{enumerate}
+% }
+
+% \subsection{Self-normalized importance sampling ($\star\star$)}
+% Show a central limit theorem for the self-normalized importance sampling estimator. Hint: use the delta method.
+
+% \subsection{The random scan Gibbs sampler always accepts $(\star)$}
+% Consider the MH kernel with proposal
 % $$
-% p(z\vert\theta,y) = \frac{\int p(x,\theta,y,z)\d x}{p(\theta,y)} = {p(\theta)p(z)\int p(y\vert x, z)p(x\vert\theta)\d x}{p(\theta,y)}
-\end{enumerate}
-}
+% q(\theta'\vert\theta) = \frac1d \sum_{k=1}^d \pi(\theta_k\vert \theta_{\setminus k}), \quad \theta_{\setminus k}:= (\theta_1,\dots,\theta_{k-1},\theta_{k+1},\dots,\theta_d).
+% $$
+% Show that the MH acceptance probability $\alpha(\theta,\theta')$ is $1$. When implementing a Gibbs sampler, it is thus enough to repeatedly draw from a conditional chosen uniformly at random.
 
-\subsection{Self-normalized importance sampling ($\star\star$)}
-Show a central limit theorem for the self-normalized importance sampling estimator. Hint: use the delta method.
+% \subsection{Systematic scan Gibbs sampler ($\star\star$)}
+% Show that the systematic scan Gibbs kernel, while not satisfying detailed balance, leaves $\pi$ invariant.
 
-\subsection{The random scan Gibbs sampler always accepts $(\star)$}
-Consider the MH kernel with proposal
-$$
-q(\theta'\vert\theta) = \frac1d \sum_{k=1}^d \pi(\theta_k\vert \theta_{\setminus k}), \quad \theta_{\setminus k}:= (\theta_1,\dots,\theta_{k-1},\theta_{k+1},\dots,\theta_d).
-$$
-Show that the MH acceptance probability $\alpha(\theta,\theta')$ is $1$. When implementing a Gibbs sampler, it is thus enough to repeatedly draw from a conditional chosen uniformly at random.
+% \subsection{Gibbs ($\star$) and collapsed ($\star\star$) Gibbs for LDA}
+% Rederive all conditionals in the LDA and collapsed LDA model.  \emph{Hint: use \eqref{e:joint}; Check \citep[Section 27.3.4]{Mur12} for the solution}.
+% %\subsection{Hierarchical linear regression}
 
-\subsection{Systematic scan Gibbs sampler ($\star\star$)}
-Show that the systematic scan Gibbs kernel, while not satisfying detailed balance, leaves $\pi$ invariant.
+% \section{Lecture \#3: Variational inference}
 
-\subsection{Gibbs ($\star$) and collapsed ($\star\star$) Gibbs for LDA}
-Rederive all conditionals in the LDA and collapsed LDA model.  \emph{Hint: use \eqref{e:joint}; Check \citep[Section 27.3.4]{Mur12} for the solution}.
-%\subsection{Hierarchical linear regression}
+% \subsection{VB 101: fitting a univariate Gaussian $(\star)$}
+% Consider a univariate Gaussian model $y\vert \mu,\lambda \sim \cN(\mu, \lambda^{-1})$, where $\lambda=1/\sigma^2$ is called the precision parameter.
+% \begin{enumerate}
+% \item Take as prior
+% $$
+% p(\mu, \lambda) = \cN(\mu\vert \mu_0, (\kappa_0\lambda)^{-1}) \text{Gamma}(\lambda\vert \alpha_0, \beta_0).
+% $$
+% What is the posterior? \emph{Hint: the prior is conjugate.}
+% \item Derive the updates for mean field VB in this model, i.e., with approximation
+% $$ q(\mu, \lambda) = q(\mu) q(\lambda).$$
+% \item Since we know the actual posterior, what can you say of the mean field solution in that case? Could you extend VB to nonconjugate priors?
+% \end{enumerate}
+% \emph{The solution is in \citep[Section 21.5.1]{Mur12}}.
 
-\section{Lecture \#3: Variational inference}
-
-\subsection{VB 101: fitting a univariate Gaussian $(\star)$}
-Consider a univariate Gaussian model $y\vert \mu,\lambda \sim \cN(\mu, \lambda^{-1})$, where $\lambda=1/\sigma^2$ is called the precision parameter.
-\begin{enumerate}
-\item Take as prior
-$$
-p(\mu, \lambda) = \cN(\mu\vert \mu_0, (\kappa_0\lambda)^{-1}) \text{Gamma}(\lambda\vert \alpha_0, \beta_0).
-$$
-What is the posterior? \emph{Hint: the prior is conjugate.}
-\item Derive the updates for mean field VB in this model, i.e., with approximation
-$$ q(\mu, \lambda) = q(\mu) q(\lambda).$$
-\item Since we know the actual posterior, what can you say of the mean field solution in that case? Could you extend VB to nonconjugate priors?
-\end{enumerate}
-\emph{The solution is in \citep[Section 21.5.1]{Mur12}}.
-
-\subsection{A useful lemma for variational LDA ($\star$)}
-Let $\Psi(\cdot) := \Gamma'(\cdot)/\Gamma(\cdot)$ be the digamma function. Show that
-$$
-\mathbb{E}_{\text{Dir}(\theta\vert\alpha)} \log \theta_i = \Psi(\theta_i) - \Psi(\Vert \theta\Vert_1).
-$$
-We used that lemma when deriving the coordinatewise updates for VB with mean field approximation.
+% \subsection{A useful lemma for variational LDA ($\star$)}
+% Let $\Psi(\cdot) := \Gamma'(\cdot)/\Gamma(\cdot)$ be the digamma function. Show that
+% $$
+% \mathbb{E}_{\text{Dir}(\theta\vert\alpha)} \log \theta_i = \Psi(\theta_i) - \Psi(\Vert \theta\Vert_1).
+% $$
+% We used that lemma when deriving the coordinatewise updates for VB with mean field approximation.
 
 
-\subsection{VB for LDA with counts ($\star\star$)}
-Derive the coordinatewise updates for VB on the count version of LDA. The variational approximation should read
-$$
-q(\pi_i, c_i, B) = \text{Dir}(\pi_i\vert\tilde\pi_i) \prod_v \text{Multinomial}(c_{iv\cdot}\vert n_{iv}, \tilde{c}_{iv\cdot}) \prod_k \text{Dir}(b_{\cdot k}\vert\tilde b_{\cdot k}).
-$$
-\emph{Hint: See \cite[Section 27.3.6]{Mur12}.}
+% \subsection{VB for LDA with counts ($\star\star$)}
+% Derive the coordinatewise updates for VB on the count version of LDA. The variational approximation should read
+% $$
+% q(\pi_i, c_i, B) = \text{Dir}(\pi_i\vert\tilde\pi_i) \prod_v \text{Multinomial}(c_{iv\cdot}\vert n_{iv}, \tilde{c}_{iv\cdot}) \prod_k \text{Dir}(b_{\cdot k}\vert\tilde b_{\cdot k}).
+% $$
+% \emph{Hint: See \cite[Section 27.3.6]{Mur12}.}
 
-\section{Lecture \#4: Bayesian nonparametrics}
+% \section{Lecture \#4: Bayesian nonparametrics}
 
-\subsection{Combinatorial properties of $K_n$ for Dirichlet process $(\star)$}
-\label{ex:K_n-DP}
-Let $K_n$ be the number of clusters observed when drawing $n$ observations from a Dirichlet process with concentration parameter $\alpha\in\mathbb{R}_+$.
+% \subsection{Combinatorial properties of $K_n$ for Dirichlet process $(\star)$}
+% \label{ex:K_n-DP}
+% Let $K_n$ be the number of clusters observed when drawing $n$ observations from a Dirichlet process with concentration parameter $\alpha\in\mathbb{R}_+$.
 
-\begin{enumerate}
-	\item Show that
-\begin{equation*}
-    \mathbb{E}[K_{n}] = \sum_{i=0}^{n-1} \frac{\alpha}{\alpha + i} \quad \text{and} \quad \mbox{Var}(K_n) = \sum_{i=0}^{n-1} \frac{\alpha i}{(\alpha + i)^2}.
-\end{equation*}
-	\item Show the following large $n$ asymptotics for the expectation and variance of $K_n$:
-\begin{equation*}
-        \mathbb{E}[K_n] \sim \alpha\log n  \quad \text{and} \quad \mbox{Var}(K_n)\sim \alpha\log n.
-\end{equation*}
-\end{enumerate}
+% \begin{enumerate}
+% 	\item Show that
+% \begin{equation*}
+%     \mathbb{E}[K_{n}] = \sum_{i=0}^{n-1} \frac{\alpha}{\alpha + i} \quad \text{and} \quad \mbox{Var}(K_n) = \sum_{i=0}^{n-1} \frac{\alpha i}{(\alpha + i)^2}.
+% \end{equation*}
+% 	\item Show the following large $n$ asymptotics for the expectation and variance of $K_n$:
+% \begin{equation*}
+%         \mathbb{E}[K_n] \sim \alpha\log n  \quad \text{and} \quad \mbox{Var}(K_n)\sim \alpha\log n.
+% \end{equation*}
+% \end{enumerate}
 
-\subsection{Combinatorial properties of $K_n$ for Pitman--Yor process $(\star\star)$}
-\label{ex:K_n-PY}
-Let $K_n$ be the number of clusters observed when drawing $n$ observations from a Pitman--Yor process with discount parameter $\sigma\in(0,1)$ and concentration parameter $\alpha\in\mathbb{R}_+$.
+% \subsection{Combinatorial properties of $K_n$ for Pitman--Yor process $(\star\star)$}
+% \label{ex:K_n-PY}
+% Let $K_n$ be the number of clusters observed when drawing $n$ observations from a Pitman--Yor process with discount parameter $\sigma\in(0,1)$ and concentration parameter $\alpha\in\mathbb{R}_+$.
 
-\begin{enumerate}
-	\item Show that
-\begin{align*}
-    \mathbb{E}[K_{n+1}]= \frac{\alpha}{n+\alpha} + \frac{\sigma + \alpha +n}{n+ \alpha}\mathbb{E}\left[K_n\right].
-\end{align*}
-\textit{Hint:} use the PY predictive distribution and a conditional expectation to get this iterative formula from $n$ to $n+1$.
-	\item Deduce that
-\begin{equation*}
-        \mathbb{E}[K_n] = \sum_{i=0}^{n-1} \frac{(\alpha +\sigma)_{i}}{(\alpha + 1)_{i}},
-\end{equation*}
-where $(x)_n = x(x+1)\ldots(x+n-1)$.
-	\item Show the following large $n$ asymptotics for the expectation of $K_n$:
-\begin{equation*}
-        \mathbb{E}[K_n] \sim \frac{\Gamma(\alpha+1)}{\sigma \Gamma(\alpha+\sigma)}n^\sigma.
-\end{equation*}
-\item Show that the following recursive formula holds for the variance of $K_n$:
-\begin{align}
-\mbox{Var}(K_{n+1}) = \mbox{Var}(K_n)\frac{n + \alpha + 2\sigma}{n+\alpha} + \frac{(\sigma\mathbb{E}[K_n]+ \alpha)(n - \sigma\mathbb{E}[K_n])}{(n+\alpha)^2}.
-\end{align}
-\textit{Hint:} use the law of total variance.
-\item Derive again the simpler expression of expectation and variance of $K_n$ in the Dirichlet process case (by setting $\sigma = 0$ in the above formulas).
-\end{enumerate}
+% \begin{enumerate}
+% 	\item Show that
+% \begin{align*}
+%     \mathbb{E}[K_{n+1}]= \frac{\alpha}{n+\alpha} + \frac{\sigma + \alpha +n}{n+ \alpha}\mathbb{E}\left[K_n\right].
+% \end{align*}
+% \textit{Hint:} use the PY predictive distribution and a conditional expectation to get this iterative formula from $n$ to $n+1$.
+% 	\item Deduce that
+% \begin{equation*}
+%         \mathbb{E}[K_n] = \sum_{i=0}^{n-1} \frac{(\alpha +\sigma)_{i}}{(\alpha + 1)_{i}},
+% \end{equation*}
+% where $(x)_n = x(x+1)\ldots(x+n-1)$.
+% 	\item Show the following large $n$ asymptotics for the expectation of $K_n$:
+% \begin{equation*}
+%         \mathbb{E}[K_n] \sim \frac{\Gamma(\alpha+1)}{\sigma \Gamma(\alpha+\sigma)}n^\sigma.
+% \end{equation*}
+% \item Show that the following recursive formula holds for the variance of $K_n$:
+% \begin{align}
+% \mbox{Var}(K_{n+1}) = \mbox{Var}(K_n)\frac{n + \alpha + 2\sigma}{n+\alpha} + \frac{(\sigma\mathbb{E}[K_n]+ \alpha)(n - \sigma\mathbb{E}[K_n])}{(n+\alpha)^2}.
+% \end{align}
+% \textit{Hint:} use the law of total variance.
+% \item Derive again the simpler expression of expectation and variance of $K_n$ in the Dirichlet process case (by setting $\sigma = 0$ in the above formulas).
+% \end{enumerate}
 
-\subsection{For more exercises on Bayesian nonparametrics}
+% \subsection{For more exercises on Bayesian nonparametrics}
 
-\begin{itemize}
-	\item Exercises 4.4, 4.8, 4.9, 4.10, 4.12, 4.13, 4.18, 4.24, 4.25, 4.26, 4.32, 4.39
-of \cite{ghosal2017fundamentals}.
-\end{itemize}
+% \begin{itemize}
+% 	\item Exercises 4.4, 4.8, 4.9, 4.10, 4.12, 4.13, 4.18, 4.24, 4.25, 4.26, 4.32, 4.39
+% of \cite{ghosal2017fundamentals}.
+% \end{itemize}
 
-\section{Lecture \#5: Foundations}
+% \section{Lecture \#5: Foundations}
 
-\subsection{A simple application of the likelihood principle $(\star)$}
-Consider experiments $E_1$: tossing a coin $10$ times, vs. $E_2$: tossing the same coin until obtaining $4$ heads. Say we ran $E_1$ and $E_2$, and we obtained two samples of the same size $n=10$.
-\begin{enumerate}
-\item Write down the binomial and negative binomial likelihoods corresponding to $E_1$ and $E_2$, respectively.
-\item Build two credible intervals for the bias $\theta$ of the coin, one for each experiment. Are the two intervals the same?
-\item Build two (frequentist) confidence intervals for the bias $\theta$ of the coin, one for each experiment. Are the two intervals the same?
-\item Which answer bothers you the most?
-\end{enumerate}
+% \subsection{A simple application of the likelihood principle $(\star)$}
+% Consider experiments $E_1$: tossing a coin $10$ times, vs. $E_2$: tossing the same coin until obtaining $4$ heads. Say we ran $E_1$ and $E_2$, and we obtained two samples of the same size $n=10$.
+% \begin{enumerate}
+% \item Write down the binomial and negative binomial likelihoods corresponding to $E_1$ and $E_2$, respectively.
+% \item Build two credible intervals for the bias $\theta$ of the coin, one for each experiment. Are the two intervals the same?
+% \item Build two (frequentist) confidence intervals for the bias $\theta$ of the coin, one for each experiment. Are the two intervals the same?
+% \item Which answer bothers you the most?
+% \end{enumerate}
 
-\subsection{The Blackwell-McQueen urn scheme and exchangeability $(\star\star)$}
-\begin{enumerate}
-\item Show that the colors $X_1,\dots$ drawn in the BMC urn scheme are exchangeable.
-\item Prove that the corresponding measure on $\mathcal P(\cX)$ given by de Finetti's theorem is a Dirichlet process.
-\end{enumerate}
+% \subsection{The Blackwell-McQueen urn scheme and exchangeability $(\star\star)$}
+% \begin{enumerate}
+% \item Show that the colors $X_1,\dots$ drawn in the BMC urn scheme are exchangeable.
+% \item Prove that the corresponding measure on $\mathcal P(\cX)$ given by de Finetti's theorem is a Dirichlet process.
+% \end{enumerate}
 
-\subsection{McAllester's PAC bound $(\star\star\star)$}
-Prove McAllester's PAC bound. Hint: Check out Chapter 31 of \citep{ShBe14}.
+% \subsection{McAllester's PAC bound $(\star\star\star)$}
+% Prove McAllester's PAC bound. Hint: Check out Chapter 31 of \citep{ShBe14}.
 
 \printbibliography
 
