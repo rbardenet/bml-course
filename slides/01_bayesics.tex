@@ -168,14 +168,143 @@
 &= \int h(y, \theta) p(y, \theta\vert x)p(x) \,\d x\d y \d\theta
   \end{align*}
 \end{itemize}
-
 \end{frame}
+
+% \begin{frame}{Make sure you're in the right class}
+%   \begin{center}
+%     \includegraphics[width=\onefig]{Figures/bodybuilding}
+%   \end{center}
+%   \end{frame}
+   
+%   \begin{frame}
+%     \frametitle{These are more the applications we have in mind}
+%     \only<1>{
+%     \fbox{
+%       \includegraphics[trim={0 15cm 0 0},clip,width=\textwidth]{Papers/virgo.pdf}
+%     }
+%     }
+%     \only<2>{
+%     \fbox{
+%       \includegraphics[trim={0 3cm 0 12cm},clip,width=\textwidth]{Figures/virgop4.pdf}
+%     }
+%     }
+%   \end{frame}
+  
+%   \begin{frame}{or that one}
+%   \only<1>{
+%     \fbox{
+%       \includegraphics[trim={0cm 15cm 0 0},clip,width=\textwidth]{Papers/svi.pdf}
+%     }
+%   }
+%   \only<2>{
+%     \frametitle{or that one}
+%     \fbox{
+%       \includegraphics[trim={0cm 0 0 15cm},clip,width=\textwidth]{Papers/svi.pdf}
+%     }
+%   }
+%   \end{frame}
+  
+  \begin{frame}
+  \frametitle{Outline}
+  \tableofcontents
+  \end{frame}
+  
+  \section{A data-driven definition}
+  \begin{frame}
+    \frametitle{Bayesian keywords in NeurIPS abstracts, up to 2016}
+    \begin{figure}
+      \subfigure[``Bayesian" at NeurIPS]{
+      \includegraphics[width=\twofig]{Figures/bayesianPapersNIPS.pdf}
+      \label{f:papers:BayesianNeurIPS}
+      }
+      \subfigure[``Neural net" at NeurIPS]{
+      \includegraphics[width=\twofig]{Figures/neuralPapersNIPS.pdf}
+      \label{f:papers:NNNeurIPS}
+      }
+      \label{f:papers}
+      %\caption{Trends for papers appearing in JMLR and at NeurIPS, up to 2016.}
+  \end{figure}
+  \end{frame}
+  
+  \begin{frame}
+    \frametitle{Topics automatically extracted from 1000+ ``Bayesian" abstracts}
+    \begin{figure}
+      \footnotesize
+      \begin{tabular}{|l|}
+      \hline
+        \textcolor{vert}{model models data process latent Bayesian Dirichlet hierarchical nonparametric inference}\\
+        features learn problem different knowledge learning image object example examples\\
+        method neural Bayesian using linear state based kernel approach model\\
+        belief propagation nodes local tree posterior node nbsp given algorithm\\
+        learning data Bayesian model training classification performance selection prediction sets\\
+        \textcolor{bleu}{inference Monte Carlo Markov sampling variational time algorithm MCMC approximate}\\
+        function optimization algorithm optimal learning problem gradient methods bounds state\\
+        learning networks variables structure network Bayesian EM paper distribution algorithm\\
+        \textcolor{magenta}{Bayesian gaussian prior regression non estimation likelihood sparse parameters matrix}\\
+        model information Bayesian human visual task probability sensory prior concept\\
+      \hline
+      \end{tabular}
+      \caption{Topics extracted by stochastic variational latent Dirichlet allocation, using {scikit-learn} \citep{sklearn11}.
+      \label{f:bayesianTopics}}
+      \end{figure}
+  \end{frame}
+  
+  \section{A warmup: Estimation in regression models}
+  
+  % \begin{frame}{A recap on probabilistic graphical models \citep[Section 10.5]{Mur12}}
+  %   \begin{itemize}
+  %     \item PGMs (aka ``Bayesian" networks) represent the dependencies in a joint distribution $p(s)$ by \un{a directed graph $G=(E,V)$}.
+  %     \item Two important properties:
+  %     $$
+  %     p(s) = \prod_{v\in V} p(s\vert s_{\text{pa(v)}}) \qquad\text{and}\qquad
+  %     s_v \perp s_{nd(v)\setminus pa(v)} \vert s_{pa(v)}.
+  %     $$
+  %   \end{itemize}
+  %   \blank
+  % \end{frame}
+  
+  
+  \begin{frame}{Inference in regression models}
+  \vspace{-1.5cm}
+  \begin{flushright}
+    \includegraphics[width=\threefig]{Figures/fisher.jpg}
+  \end{flushright}
+  \vfill 
+  \end{frame}
+  
+  \begin{frame}{Inference in regression models}
+    \vspace{-1.5cm}
+    \begin{flushright}
+      \includegraphics[width=\threefig]{Figures/wald2}
+    \end{flushright}
+    \vfill 
+  \end{frame}
+  
+  \begin{frame}{Inference in regression models}
+    \vspace{-1.5cm}
+    \begin{flushright}
+      \includegraphics[width=\threefig]{Figures/tykhonov.jpg}
+    \end{flushright}
+    \vfill 
+  \end{frame}
+  
+  \begin{frame}{Inference in regression models}
+    \vspace{-1.5cm}
+    \begin{flushright}
+      \includegraphics[width=\threefig]{Figures/bayes}
+    \end{flushright}
+    \vfill 
+  \end{frame}
+  
+  \begin{frame}{Inference in regression models}
+  \end{frame}
+  
 
 \section{ML as data-driven decision-making}
-\begin{frame}{Abraham Wald (1902--1950)}
-  \centering
-  \includegraphics[width=\twofig]{\figdir/wald.jpg}
-\end{frame}
+% \begin{frame}{Abraham Wald (1902--1950)}
+%   \centering
+%   \includegraphics[width=\twofig]{\figdir/wald.jpg}
+% \end{frame}
 
 \begin{frame}{Describing a decision problem under uncertainty}
 \begin{itemize}
@@ -186,8 +315,9 @@
   \vfill\item A reward space $\cZ$,\\
   \un{Encodes how you feel about having picked a particular action.}
   \vfill\item A loss function $L:\cA\times \cS \rightarrow \mathbb{R}_+$.\\
-  \un{How much you would suffer from picking action $a$ in state $s$. It is also customary to first define a utility $u:\cZ\rightarrow \mathbb{R}_+$, and then let
-  $$ L(a,s) = \sup_{a'\in\cA} u\big(a'(s)\big) - u\big(a(s)\big) \in\mathbb{R}_+.$$
+  \un{How much you would suffer from picking action $a$ in state $s$. 
+  % It is also customary to first define a utility $u:\cZ\rightarrow \mathbb{R}_+$, and then let
+  % $$ L(a,s) = \sup_{a'\in\cA} u\big(a'(s)\big) - u\big(a(s)\big) \in\mathbb{R}_+.$$
   }
 \end{itemize}
 \end{frame}
@@ -260,11 +390,12 @@ a^\star \in \argmin_{a\in\mathcal{A}} \mathbb{E}_{s\sim p} L(a,s).
 \vfill
 
 \begin{block}{Corollary: minimize the posterior expected loss}
-If we partition $s=(s_{o}, s_{\text{u}})$, then
-$$ a^\star \in \argmin_{a\in\mathcal{A}} \mathbb{E}_{s_{o}} \mathbb{E}_{s_{\text{u}}\vert s_{o}} L(a,s).$$
-Equivalently to \eqref{e:seu}, given $s_o$, we choose
+Now partition $s=(s_{\text{obs}}, s_{\text{u}})$, then 
+$$ a^\star \in \argmin_{a\in\mathcal{A}} \mathbb{E}_{s_{\text{obs}}} \mathbb{E}_{s_{\text{u}}\vert s_{\text{obs}}} L(a,s).$$
+In ML, $\cA = \{a_g\}$, with $g = g(s_\text{obs})$, so that
+\eqref{e:seu} is equivalent to
 $$
-a^\star = \delta(s_o) = \argmin_{a\in\mathcal{A}} \un{\mathbb{E}_{s_{\text{u}}\vert s_{o}} L(a,s)}.$$
+a^\star = \delta(s_\text{obs}) = \argmin_{a\in\mathcal{A}} \un{\mathbb{E}_{s_{\text{u}}\vert s_{\text{obs}}} L(a,s)}.$$
 \end{block}
 \end{frame}
 
