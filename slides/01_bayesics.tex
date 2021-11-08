@@ -89,7 +89,7 @@
   \frametitle{A quick motivating example before we go formal 1/2}
   \begin{itemize}
     \vfill\item Let $N$ individuals evolve from Susceptible to Infected to Recovered, $x_n(t) \in\{S,I,R\}$, $1\leq n\leq N$, $t\in[0,T]$.
-    \vfill\item Each susceptible individual $n$ moves to $R$ according to a Poisson process with intensity
+    \vfill\item Each susceptible individual $n$ moves to $I$ according to a Poisson process with intensity
     $$\sum_{k:x_k(t)=I} \lambda_{nk}(\unn{\theta_{SI}}).$$
     \vfill\item Each infected person recovers after a Gamma(\unn{$a,b$}) time.
     \vfill\item This allows to express
@@ -104,8 +104,8 @@
 \begin{frame}
 \frametitle{A quick motivating example before we go formal 2/2}
   \begin{itemize}
-  \vfill\item If asked to report an interval on a particular function of $\theta$, say $R_0$, I would output a small interval $I$ such that
-  $$ \int_I p(\theta\vert \text{data}) \,\d\theta \geq 0.95.$$
+  \vfill\item If asked to report an interval $A$ on a particular function of $\theta$, say $R_0 = h(\theta)$, I would a small interval $A$ such that
+  $$ \int 1_{h(\theta)\in A} \, p(\theta\vert \text{data}) \,\d\theta \geq 0.95.$$
   \vfill\item If asked whether we should close universities, I would ask for
   \begin{itemize}
     \item \un{the cost $\alpha$ of closing unis when $R_0<1$},
