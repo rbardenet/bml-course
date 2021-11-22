@@ -169,86 +169,88 @@ and variance $\Lambda^{-1}$. Note how the ratio $\sigma/\sigma_0$ is playing the
    \item Exercises 2.6, 2.9, 2.10, 2.13, 2.14, and 2.15 of \citep{MaRo07}. Solutions are \href{https://arxiv.org/abs/0910.4696}{here}.
  \end{itemize}
 
+\section{Lecture \#2: MCMC}
 
+\subsection{DAGs and dependence ($\star$)}
+\begin{figure}
+  \centering
+  \begin{tikzpicture}
+  \node[latent] (y) {$y$};
+  \node[latent,right= of y] (z) {$z$}; %
+  \node[latent,left= of y] (x) {$x$}; %
+  \node[latent,above= of x] (t) {$\theta$}; %
+  \edge x y;
+  \edge z y;
+  \edge t x;
+\end{tikzpicture}
+\caption{A DAG}
+\label{f:dag}
+\end{figure}
 
-% \section{Lecture \#2: MCMC}
+Consider the DAG from Figure~\ref{f:dag}.
+\begin{enumerate}
+\item Write the corresponding factorization of $p(x,y,z,\theta)$.
+\item Deduce from the factorization that $x\perp z$.
+\item\label{i:markov} Deduce from the factorization that $x\perp z\vert\theta$.
+\item\label{i:away} Deduce from the factorization that $x\not\perp z\vert \theta, y$.
+\end{enumerate}
+In particular, note how Item~\ref{i:markov} is a case of \emph{being independent from your non-descendents given your parents}, while Item~\ref{i:away} illustrates how conditioning on common children can induce dependence between parents. In more complicated DAGs, the so-called \emph{Bayes ball} algorithm determines whether two sets of nodes are independent given a third one; see \cite[Section 10.5]{Mur12}.
 
-% \subsection{DAGs and dependence ($\star$)}
-% \begin{figure}
-%   \centering
-%   \begin{tikzpicture}
-%   \node[latent] (y) {$y$};
-%   \node[latent,right= of y] (z) {$z$}; %
-%   \node[latent,left= of y] (x) {$x$}; %
-%   \node[latent,above= of x] (t) {$\theta$}; %
-%   \edge x y;
-%   \edge z y;
-%   \edge t x;
-% \end{tikzpicture}
-% \caption{A DAG}
-% \label{f:dag}
-% \end{figure}
-
-% Consider the DAG from Figure~\ref{f:dag}.
-% \begin{enumerate}
-% \item Write the corresponding factorization of $p(x,y,z,\theta)$.
-% \item Deduce from the factorization that $x\perp z$.
-% \item\label{i:markov} Deduce from the factorization that $x\perp z\vert\theta$.
-% \item\label{i:away} Deduce from the factorization that $x\not\perp z\vert \theta, y$.
-% \end{enumerate}
-% In particular, note how Item~\ref{i:markov} is a case of \emph{being independent from your non-descendents given your parents}, while Item~\ref{i:away} illustrates how conditioning on common children can induce dependence between parents. In more complicated DAGs, the so-called \emph{Bayes ball} algorithm determines whether two sets of nodes are independent given a third one; see \cite[Section 10.5]{Mur12}.
-
-% \solution{
-% \begin{enumerate}
-% \item By definition, we write the product of the conditionals of each node given its parents, that is,
-% \begin{equation}
-%   p(x,y,z,\theta) = p(y\vert z,x)p(x\vert\theta)p(\theta)p(z).
-% \label{e:factorization}
-% \end{equation}
-% \item By \eqref{e:factorization},
-% $$ p(x,z) = \int p(x,y,z,\theta) \d y\d \theta = p(z) \int p(x\vert\theta)p(\theta)\d\theta.$$
-% In particular,
-% $$p(x) = \int p(x,z)\d z = \int p(x\vert\theta)p(\theta)\d\theta,$$ so that $p(x,z) = p(x)p(z)$.
-% \item We use Bayes' theorem and \eqref{e:factorization},
-% \begin{align*}
-% p(x,z\vert\theta) &= \int p(x,y,z\vert\theta)\d y\\
-% &= \int \frac{p(x,y,z,\theta)}{p(\theta)}\d y\\
-% &= \int p(y\vert z,x)p(x\vert\theta)p(z) \d y\\
-% &= p(x\vert\theta)p(z).
-% \end{align*}
-% In particular,
+\solution{
+\begin{enumerate}
+\item By definition, we write the product of the conditionals of each node given its parents, that is,
+\begin{equation}
+  p(x,y,z,\theta) = p(y\vert z,x)p(x\vert\theta)p(\theta)p(z).
+\label{e:factorization}
+\end{equation}
+\item By \eqref{e:factorization},
+$$ p(x,z) = \int p(x,y,z,\theta) \d y\d \theta = p(z) \int p(x\vert\theta)p(\theta)\d\theta.$$
+In particular,
+$$p(x) = \int p(x,z)\d z = \int p(x\vert\theta)p(\theta)\d\theta,$$ so that $p(x,z) = p(x)p(z)$.
+\item We use Bayes' theorem and \eqref{e:factorization},
+\begin{align*}
+p(x,z\vert\theta) &= \int p(x,y,z\vert\theta)\d y\\
+&= \int \frac{p(x,y,z,\theta)}{p(\theta)}\d y\\
+&= \int p(y\vert z,x)p(x\vert\theta)p(z) \d y\\
+&= p(x\vert\theta)p(z).
+\end{align*}
+In particular,
+$$
+p(z\vert\theta) = \int p(x,z\vert\theta) \d x = p(z),
+$$
+so that $p(x,z\vert\theta) = p(x\vert\theta)p(z\vert\theta)$.
+% \item We need to prove that $p(x,z\vert\theta,y) \neq p(x\vert\theta,y)p(z\vert\theta,y)$. On the one hand,
 % $$
-% p(z\vert\theta) = \int p(x,z\vert\theta) \d x = p(z),
+% p(x,z\vert\theta,y) = \frac{p(x,y,z,\theta)}{p(\theta,y)}
 % $$
-% so that $p(x,z\vert\theta) = p(x\vert\theta)p(z\vert\theta)$.
-% % \item We need to prove that $p(x,z\vert\theta,y) \neq p(x\vert\theta,y)p(z\vert\theta,y)$. On the one hand,
-% % $$
-% % p(x,z\vert\theta,y) = \frac{p(x,y,z,\theta)}{p(\theta,y)}
-% % $$
-% % On the other hand,
-% % $$ p(x\vert\theta,y) = \frac{\int p(x,\theta,y,z)\d z}{p(\theta,y)} = {p(x\vert\theta)p(\theta)\int p(y\vert x, z)p(z)\d z}{p(\theta,y)}$$
-% % and
-% % $$
-% % p(z\vert\theta,y) = \frac{\int p(x,\theta,y,z)\d x}{p(\theta,y)} = {p(\theta)p(z)\int p(y\vert x, z)p(x\vert\theta)\d x}{p(\theta,y)}
-% \end{enumerate}
-% }
-
-% \subsection{Self-normalized importance sampling ($\star\star$)}
-% Show a central limit theorem for the self-normalized importance sampling estimator. Hint: use the delta method.
-
-% \subsection{The random scan Gibbs sampler always accepts $(\star)$}
-% Consider the MH kernel with proposal
+% On the other hand,
+% $$ p(x\vert\theta,y) = \frac{\int p(x,\theta,y,z)\d z}{p(\theta,y)} = {p(x\vert\theta)p(\theta)\int p(y\vert x, z)p(z)\d z}{p(\theta,y)}$$
+% and
 % $$
-% q(\theta'\vert\theta) = \frac1d \sum_{k=1}^d \pi(\theta_k\vert \theta_{\setminus k}), \quad \theta_{\setminus k}:= (\theta_1,\dots,\theta_{k-1},\theta_{k+1},\dots,\theta_d).
-% $$
-% Show that the MH acceptance probability $\alpha(\theta,\theta')$ is $1$. When implementing a Gibbs sampler, it is thus enough to repeatedly draw from a conditional chosen uniformly at random.
+% p(z\vert\theta,y) = \frac{\int p(x,\theta,y,z)\d x}{p(\theta,y)} = {p(\theta)p(z)\int p(y\vert x, z)p(x\vert\theta)\d x}{p(\theta,y)}
+\end{enumerate}
+}
 
-% \subsection{Systematic scan Gibbs sampler ($\star\star$)}
-% Show that the systematic scan Gibbs kernel, while not satisfying detailed balance, leaves $\pi$ invariant.
+\subsection{Self-normalized importance sampling ($\star\star$)}
+Show a central limit theorem for the self-normalized importance sampling estimator. Hint: use the delta method.
 
-% \subsection{Gibbs ($\star$) and collapsed ($\star\star$) Gibbs for LDA}
-% Rederive all conditionals in the LDA and collapsed LDA model.  \emph{Hint: use \eqref{e:joint}; Check \citep[Section 27.3.4]{Mur12} for the solution}.
-% %\subsection{Hierarchical linear regression}
+\subsection{The random scan Gibbs sampler always accepts $(\star)$}
+Consider the MH kernel with proposal
+$$
+q(\theta'\vert\theta) = \frac1d \sum_{k=1}^d \pi(\theta_k\vert \theta_{\setminus k}), \quad \theta_{\setminus k}:= (\theta_1,\dots,\theta_{k-1},\theta_{k+1},\dots,\theta_d).
+$$
+Show that the MH acceptance probability $\alpha(\theta,\theta')$ is $1$. When implementing a Gibbs sampler, it is thus enough to repeatedly draw from a conditional chosen uniformly at random.
+
+\subsection{Systematic scan Gibbs sampler ($\star\star$)}
+Show that the systematic scan Gibbs kernel, while not satisfying detailed balance, leaves $\pi$ invariant.
+
+\subsection{Gibbs ($\star$) and collapsed ($\star\star$) Gibbs for LDA}
+Rederive all conditionals in the LDA and collapsed LDA model.  \emph{Hint: use \eqref{e:joint}; Check \citep[Section 27.3.4]{Mur12} for the solution}.
+
+\subsection{The invariant distribution of the HMC kernel}
+Go through Sections 5.3 to 5.5 of \cite{BoSa18} with pen and paper.
+
+%\subsection{Hierarchical linear regression}
 
 % \section{Lecture \#3: Variational inference}
 
