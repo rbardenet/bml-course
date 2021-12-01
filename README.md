@@ -1,32 +1,42 @@
-# Bayesian machine Learning
+# Bayesian machine learning
+
+## Lecturers
 * Rémi Bardenet (CNRS, Univ. Lille), https://rbardenet.github.io
 * Julyan Arbel (Inria, Univ. Grenoble-Alpes), https://www.julyanarbel.com
 
-The course will be held via visioconference until further notice. A zoom link will be sent to the email addresses provided by the MVA administration. Make sure to register to the course through the MVA admin (even if you are not an MVA student and want to follow the course).
+## Objective of the course
+By the end of the course, the students should
+* have a high-level view of the main approaches to making decisions under uncertainty.
+* be able to detect when being Bayesian helps and why.
+* be able to design and run a Bayesian ML pipeline for standard supervised or unsupervised
+learning.
+* have a global view of the current limitations of Bayesian approaches and the research
+landscape.
+* be able to understand the abstract of most Bayesian ML papers.
 
-## Lecture 1
-* Annotated slides are [here for Part 1](https://nextcloud.univ-lille.fr/index.php/s/QN8tRdR9jAYQZTX) and [here for Part 2](
-https://nextcloud.univ-lille.fr/index.php/s/DbCZT5o58CeCgDw).
-* Make sure you do as many of the exercises in the exercise sheet as possible.
-* Solutions for Robert and Marin's book are [here](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwiOmKuP9KPuAhUMaBoKHYyTDv8QFjAAegQIARAC&url=https%3A%2F%2Farxiv.org%2Fabs%2F0910.4696&usg=AOvVaw1neu-hEDziABwlIOHcw4YZ).
+## Topics
+* Decision theory
+* 50 shades of Bayes: Subjective and objective interpretations
+* Bayesian supervised and unsupervised learning
+* Bayesian computation for ML: Advanced Monte Carlo and variational methods
+* Bayesian nonparametrics
+* Bayesian methods for deep learning
 
-## Lecture 2
-* Annotated slides are [here for Part 1](https://nextcloud.univ-lille.fr/index.php/s/axqKm6MATyjpgy8) and [here for Part 2](https://nextcloud.univ-lille.fr/index.php/s/6Me2HZkkdHtx29Q).
+## Prerequisites
+* An undergraduate course in probability.
+* It is recommended to have followed either the course of P. Latouche and N. Chopin on "Probabilistic graphical models" or the course of S. Allassonière on "Computational statistics" during the first semester.
+* Practicals will be in Python and R. A basic knowledge of both languages is required. Nothing fancy, students should simply be able to read and write simple programs and load libraries: going through a basic online tutorial in both languages should be enough.
 
-## Lecture 3
-* Annotated slides are [here for Part 1](https://nextcloud.univ-lille.fr/index.php/s/yGC7FXmJ8qabKjX).
+## Organization of courses
+* 8x3 hours of lectures, out of which 4 practical sessions of 1h30 and 1 student seminar of 3h will be carved.
+* All classes and material will be in English. Students may write their final report either in French or English.
 
-## Lecture 4
-* Lecture notes are in the slide folder.
+## Validation
+* Students form groups. Each group reads and reports on a research paper from a list. We strongly encourage a dash of creativity: students should identify a weak point, shortcoming or limitation of the paper, and try to push in that direction. This can mean extending a proof, implementing another feature, investigating different experiments, etc.
+* Deliverables are a small report and a short oral presentation in front of the class, in the form of a student seminar, which will take place during the last lecture.
 
-## Lecture 5
-The list of available papers for projects will be given.
-
-## Lecture 6
-* Lecture notes are in the slide folder.
-
-## Lecture 7
-Students must have chosen their paper for the project.
-
-## Lecture 8
-Students present their projects.
+## References
+* Parmigiani, G. and Inoue, L. 2009. Decision theory: principles and approaches. Wiley.
+* Robert, C. 2007. The Bayesian choice. Springer.
+* Murphy, K. 2012. Machine learning: a probabilistic perspective. MIT Press.
+* Ghosal, S., & Van der Vaart, A. W. 2017. Fundamentals of nonparametric Bayesian inference. Cambridge University Press.
