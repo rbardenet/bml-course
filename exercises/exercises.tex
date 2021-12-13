@@ -234,21 +234,21 @@ so that $p(x,z\vert\theta) = p(x\vert\theta)p(z\vert\theta)$.
 \subsection{Self-normalized importance sampling ($\star\star$)}
 Show a central limit theorem for the self-normalized importance sampling estimator. Hint: use the delta method.
 
-% \subsection{The random scan Gibbs sampler always accepts $(\star)$}
-% Consider the MH kernel with proposal
-% $$
-% q(\theta'\vert\theta) = \frac1d \sum_{k=1}^d \pi(\theta_k\vert \theta_{\setminus k}), \quad \theta_{\setminus k}:= (\theta_1,\dots,\theta_{k-1},\theta_{k+1},\dots,\theta_d).
-% $$
-% Show that the MH acceptance probability $\alpha(\theta,\theta')$ is $1$. When implementing a Gibbs sampler, it is thus enough to repeatedly draw from a conditional chosen uniformly at random.
+\subsection{The random scan Gibbs sampler always accepts $(\star)$}
+Consider the MH kernel with proposal
+$$
+q(\theta'\vert\theta) = \frac1d \sum_{k=1}^d \pi(\theta_k\vert \theta_{\setminus k}), \quad \theta_{\setminus k}:= (\theta_1,\dots,\theta_{k-1},\theta_{k+1},\dots,\theta_d).
+$$
+Show that the MH acceptance probability $\alpha(\theta,\theta')$ is $1$. When implementing a Gibbs sampler, it is thus enough to repeatedly draw from a conditional chosen uniformly at random.
 
-% \subsection{Systematic scan Gibbs sampler ($\star\star$)}
-% Show that the systematic scan Gibbs kernel, while not satisfying detailed balance, leaves $\pi$ invariant.
+\subsection{Systematic scan Gibbs sampler ($\star\star$)}
+Show that the systematic scan Gibbs kernel, while not satisfying detailed balance, leaves $\pi$ invariant.
 
-% \subsection{Gibbs ($\star$) and collapsed ($\star\star$) Gibbs for LDA}
-% Rederive all conditionals in the LDA and collapsed LDA model.  \emph{Hint: use \eqref{e:joint}; Check \citep[Section 27.3.4]{Mur12} for the solution}.
+\subsection{Gibbs ($\star$) and collapsed ($\star\star$) Gibbs for LDA}
+Rederive all conditionals in the LDA and collapsed LDA model.  \emph{Hint: use \eqref{e:joint}; Check \citep[Section 27.3.4]{Mur12} for the solution}.
 
-% \subsection{The invariant distribution of the HMC kernel}
-% Go through Sections 5.3 to 5.5 of \cite{BoSa18} with pen and paper.
+\subsection{The invariant distribution of the HMC kernel}
+Go through Sections 5.3 to 5.5 of \cite{BoSa18} with pen and paper.
 
 %\subsection{Hierarchical linear regression}
 
