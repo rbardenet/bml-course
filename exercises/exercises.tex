@@ -94,7 +94,7 @@ Once you express the multinomial pdf, the Dirichlet distribution becomes the obv
  $$ R(\hat\mu) = \mathbb{E}_{y\vert\mu}  \Vert \mu - \hat\mu\Vert^2.$$
  show that $R(\hat\mu_{\text{MLE}}) = N$.
 \item Suppose we have prior belief that $\mu$ lies near $0$, and we choose to represent it by $\mu\sim \cN(0,aI_N),$ $a>0$. What is the Bayes estimator $\hat\mu_{\text{Bayes}}$? What is its (frequentist) risk $R(\hat\mu_{\text{Bayes}})$? What is its Bayes risk $\mathbb{E}_\mu R(\hat\mu_{\text{Bayes}})$?
-\item Since we actually have no idea what $a$ should be, we propose to estimate it from data\footnote{This procedure of using data to tune the prior is called \emph{empirical Bayes} (EB). The expected utility principle allows it, but statisticians who like to interpret their prior as encoding their belief before the data is collected are uncomfortable with EB. At the other extreme, Bayesians who insist on using estimators with good frequentist properties are happy using the data or the likelihood to design their prior.} Show that the marginal of $y$ is
+\item Since we actually have no idea what $a$ should be, we propose to estimate it from data.\footnote{This procedure of using data to tune the prior is called \emph{empirical Bayes} (EB). The expected utility principle allows it, but statisticians who like to interpret their prior as encoding their belief before the data is collected are uncomfortable with EB. At the other extreme, Bayesians who insist on using estimators with good frequentist properties are happy using the data or the likelihood to design their prior.} Show that the marginal of $y$ is
 $$
 \int p(y,\mu)\d \mu = \cN (y\vert 0,(a+1)I_N).
 $$
@@ -111,7 +111,51 @@ Equation~\ref{e:stein} is called the James-Stein effect, and is a standard examp
 \end{enumerate}
 
 \solution{
-The solution is basically \cite[Section 1.2]{Efr10}. The book is also highly recommended, especially if you are into large-scale hypothesis tests. At least, read the prologue for statistical culture.
+The solution is basically \cite[Section 1.2]{Efr10}, and we give some details below. The book is also highly recommended, especially if you are into large-scale hypothesis tests. At least, read the prologue for statistical culture.
+\begin{enumerate}
+  \item By definition, 
+  $$ 
+  \hat\mu_{\text{MLE}} \in \argmax_\mu \cN(y\vert \mu, I_N) = \argmin_\mu \Vert y-\mu\Vert^2 = y.
+  $$
+  \item Since $y\vert\mu \sim \cN(\mu, I_N)$, the risk of $\hat\mu_{\text{MLE}}$ is
+  $$
+  R(\hat\mu_{\text{MLE}}) = \mathbb E_{y\vert \mu} \Vert y-\mu\Vert^2 = \sum_{i=1}^N \mathbb E_{y_i\vert \mu_i} (y_i-\mu_i)^2 = N.
+  $$
+  \item Because the loss is the squared loss, the Bayes estimator is the posterior mean. 
+  By Exercise~\ref{s:gaussianConjugacy}, this is $\hat\mu_{\text{Bayes}} = \frac{a}{a+1} y$. 
+  Its frequentist risk is 
+  \begin{align*} 
+  R(\hat\mu_{\text{Bayes}}) &= \mathbb E_{y\vert\mu} \left\Vert \mu - \frac{a}{a+1}y \right\Vert^2\\
+    &=  \Vert\mu\Vert^2 - \frac{2a}{a+1} \mu^T E_{y\vert\mu}y + \left(\frac{a}{a+1}\right )^2 E_{y\vert\mu}\Vert y\Vert^2\\
+    &= \frac{1-a}{a+1} \Vert\mu\Vert^2 + \left(\frac{a}{a+1}\right )^2 (N+\Vert\mu\Vert^2).\\
+    &= \frac{1}{(a+1)^2}\Vert\mu\Vert^2 +  \left(\frac{a}{a+1}\right )^2 N.
+  \end{align*}
+  Denoting by $b=a/(a+1)$, it comes
+  \begin{equation}
+    \label{e:riskOfMEP}
+  R(\hat\mu_{\text{Bayes}}) = (1-b)^2 \Vert\mu\Vert^2 + b^2N.
+  \end{equation}
+  Finally, upon noting that $a = \frac{b}{1-b}$, the Bayes risk is 
+  $$
+  \mathbb E_\mu R(\hat\mu_{\text{Bayes}}) = (1-b)^2 aN + b^2N = ((1-b)b+b^2)N = bN.
+  $$
+  Note that, as expected, this is smaller than the constant Bayes risk $\mathbb{E}_\mu R(\hat{\mu}_{\text{MLE}}) = N$ of the MLE. 
+  \item This is the same computation as for Exercise~\ref{s:gaussianConjugacy}, but this time we keep the terms in $y$. More precisely, 
+  \begin{align*}
+    \log p(\mu, y) &= \log p(y\vert\mu) + \log p(\mu)\\
+    &\propto - \frac{\Vert y-\mu\Vert^2}{2} - \frac{\Vert \mu\Vert^2}{2a}\\
+    & \propto -\frac12 \Vert\mu\Vert^2\left(1+\frac1a \right) + y^T\mu - \frac12 \Vert y\Vert^2\\
+    & \propto -\frac12 \begin{pmatrix} \mu & y \end{pmatrix}  \begin{pmatrix} (1+\frac1a)I_N & I_N\\ I_N & I_N \end{pmatrix} \begin{pmatrix} \mu \\ y\end{pmatrix}.\\
+  \end{align*}  
+  We recognize a Gaussian in $(\mu,y)$, with mean zero and covariance matrix 
+  $$
+  \begin{pmatrix} (1+\frac1a)I_N & I_N\\ I_N & I_N \end{pmatrix}^{-1} = a \begin{pmatrix} I_N & -I_N\\ -I_N & (1+\frac1a)I_N \end{pmatrix}.
+  $$.
+  The marginal of $y$ is thus a Gaussian with mean zero and variance 
+  $$
+  a\left(1+\frac1a\right )I_N = (1+a)I_N.
+  $$
+\end{enumerate}
 }
 
 \subsection{Classification with asymmetric loss ($\star$)}
