@@ -98,9 +98,10 @@ Once you express the multinomial pdf, the Dirichlet distribution becomes the obv
 $$
 \int p(y,\mu)\d \mu = \cN (y\vert 0,(a+1)I_N).
 $$
-In particular, what is the law of $S= \Vert y\Vert^2$? Deduce from it that $(N-2)/S$ is an unbiased estimator of $a+1$, and consider the empirical Bayes estimator $$\hat\mu_\text{EB} = \left(1- \frac{N-2}{S}\right)y.$$
-What is its Bayes risk?
-\item \emph{Note: This particular item is $(\star\star\star)$ because it is longer to solve, but all individual arguments are elementary; do this only if you have solved all the preceding exercises, though. Also, see \cite[Section 1.2]{Efr10} for a solution)} Show that for $N\geq 3$, for every $\mu\in\mathbb{R}^N$,
+In particular, what is the law of $S= \Vert y\Vert^2$? Deduce from it that $(N-2)/S$ is an unbiased estimator of $1/(a+1)$, and consider the empirical Bayes estimator $$\hat\mu_\text{EB} = \left(1- \frac{N-2}{S}\right)y.$$
+Note that this is just $\hat\mu_\text{Bayes}$, but with $1/(a+1)$ replaced by an unbiased estimator.
+What is the Bayes risk of $\hat\mu_\text{EB}$?
+\item \emph{Note: This particular item is $(\star\star\star)$ because it is longer to solve, but all individual arguments are elementary; do this only if you have solved all the preceding exercises, though.} Show that for $N\geq 3$, for every $\mu\in\mathbb{R}^N$,
 \begin{equation}
 R(\hat\mu_\text{EB}) < R(\hat\mu_\text{MLE}).
 \label{e:stein}
@@ -150,10 +151,17 @@ The solution is basically \cite[Section 1.2]{Efr10}, and we give some details be
   We recognize a Gaussian in $(\mu,y)$, with mean zero and covariance matrix 
   $$
   \begin{pmatrix} (1+\frac1a)I_N & I_N\\ I_N & I_N \end{pmatrix}^{-1} = a \begin{pmatrix} I_N & -I_N\\ -I_N & (1+\frac1a)I_N \end{pmatrix}.
-  $$.
+  $$
   The marginal of $y$ is thus a Gaussian with mean zero and variance 
   $$
   a\left(1+\frac1a\right )I_N = (1+a)I_N.
+  $$
+  In particular, $S=\Vert y\Vert^2 = \sum_{i=1}^N y_i^2$ has the same distribution as  $(1+a)X$, where $X\sim\chi^2_N$.
+  Letting $N>2$, $(N-2)/S$ thus has the same law as $(N-2)/(1+a)$ times an inverse chi-squared variable with $N$ degrees of freedom. 
+  The latter has mean $1/(N-2)$, so that $(N-2)/S$ is an unbiased estimator of $1/(1+a)$.
+  Finally, the Bayes risk of $\hat\mu_\text{EB}$ is
+  $$
+  \mathbb{E}_\mu R(\hat\mu_{\text{EB}}) = \mathbb{E}_\mu\mathbb{E}_{y\vert\mu} \left( 1-\frac{N-2}{S} y\right ) =  \mathbb{E}_\mu( \mu ())
   $$
 \end{enumerate}
 }
