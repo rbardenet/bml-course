@@ -304,36 +304,36 @@ Go through Sections 5.3 to 5.5 of \cite{BoSa18} with pen and paper.
 
 %\subsection{Hierarchical linear regression}
 
-% \section{Lecture \#3: Variational inference}
+\section{Lecture \#3: Variational inference}
 
-% \subsection{VB 101: fitting a univariate Gaussian $(\star)$}
-% Consider a univariate Gaussian model $y\vert \mu,\lambda \sim \cN(\mu, \lambda^{-1})$, where $\lambda=1/\sigma^2$ is called the precision parameter.
-% \begin{enumerate}
-% \item Take as prior
-% $$
-% p(\mu, \lambda) = \cN(\mu\vert \mu_0, (\kappa_0\lambda)^{-1}) \text{Gamma}(\lambda\vert \alpha_0, \beta_0).
-% $$
-% What is the posterior? \emph{Hint: the prior is conjugate.}
-% \item Derive the updates for mean field VB in this model, i.e., with approximation
-% $$ q(\mu, \lambda) = q(\mu) q(\lambda).$$
-% \item Since we know the actual posterior, what can you say of the mean field solution in that case? Could you extend VB to nonconjugate priors?
-% \end{enumerate}
-% \emph{The solution is in \citep[Section 21.5.1]{Mur12}}.
+\subsection{VB 101: fitting a univariate Gaussian $(\star)$}
+Consider a univariate Gaussian model $y\vert \mu,\lambda \sim \cN(\mu, \lambda^{-1})$, where $\lambda=1/\sigma^2$ is called the precision parameter.
+\begin{enumerate}
+\item Take as prior
+$$
+p(\mu, \lambda) = \cN(\mu\vert \mu_0, (\kappa_0\lambda)^{-1}) \text{Gamma}(\lambda\vert \alpha_0, \beta_0).
+$$
+What is the posterior? \emph{Hint: the prior is conjugate.}
+\item Derive the updates for mean field VB in this model, i.e., with approximation
+$$ q(\mu, \lambda) = q(\mu) q(\lambda).$$
+\item Since we know the actual posterior, what can you say of the mean field solution in that case? Could you extend VB to nonconjugate priors?
+\end{enumerate}
+\emph{The solution is in \citep[Section 21.5.1]{Mur12}}.
 
-% \subsection{A useful lemma for variational LDA ($\star$)}
-% Let $\Psi(\cdot) := \Gamma'(\cdot)/\Gamma(\cdot)$ be the digamma function. Show that
-% $$
-% \mathbb{E}_{\text{Dir}(\theta\vert\alpha)} \log \theta_i = \Psi(\theta_i) - \Psi(\Vert \theta\Vert_1).
-% $$
-% We used that lemma when deriving the coordinatewise updates for VB with mean field approximation.
+\subsection{A useful lemma for variational LDA ($\star$)}
+Let $\Psi(\cdot) := \Gamma'(\cdot)/\Gamma(\cdot)$ be the digamma function. Show that
+$$
+\mathbb{E}_{\text{Dir}(\theta\vert\alpha)} \log \theta_i = \Psi(\alpha_i) - \Psi(\Vert \alpha\Vert_1).
+$$
+We used that lemma when deriving the coordinatewise updates for VB with mean field approximation.
 
 
-% \subsection{VB for LDA with counts ($\star\star$)}
-% Derive the coordinatewise updates for VB on the count version of LDA. The variational approximation should read
-% $$
-% q(\pi_i, c_i, B) = \text{Dir}(\pi_i\vert\tilde\pi_i) \prod_v \text{Multinomial}(c_{iv\cdot}\vert n_{iv}, \tilde{c}_{iv\cdot}) \prod_k \text{Dir}(b_{\cdot k}\vert\tilde b_{\cdot k}).
-% $$
-% \emph{Hint: See \cite[Section 27.3.6]{Mur12}.}
+\subsection{VB for LDA with counts ($\star\star$)}
+Derive the coordinatewise updates for VB on the count version of LDA. The variational approximation should read
+$$
+q(\pi_i, c_i, B) = \text{Dir}(\pi_i\vert\tilde\pi_i) \prod_v \text{Multinomial}(c_{iv\cdot}\vert n_{iv}, \tilde{c}_{iv\cdot}) \prod_k \text{Dir}(b_{\cdot k}\vert\tilde b_{\cdot k}).
+$$
+\emph{Hint: See \cite[Section 27.3.6]{Mur12}.}
 
 % \section{Lecture \#4: Bayesian nonparametrics}
 
