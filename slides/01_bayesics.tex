@@ -406,7 +406,7 @@ a^\star = \delta(s_\text{obs}) = \argmin_{a\in\mathcal{A}} \un{\mathbb{E}_{s_{\t
 \end{frame}
 
 \section{Specifying joint models}
-\begin{frame}{A recap on probabilistic graphical models}
+\begin{frame}{A recap on probabilistic graphical models 1/2}
   \begin{itemize}
     \item PGMs (aka ``Bayesian" networks) represent the dependencies in a joint distribution $p(y)$ by \un{a directed graph $G=(E,V)$}.
     \item Two important properties:
@@ -415,10 +415,18 @@ a^\star = \delta(s_\text{obs}) = \argmin_{a\in\mathcal{A}} \un{\mathbb{E}_{s_{\t
     y_v \perp y_{nd(v)} \vert y_{pa(v)}.
     $$
     \blank
-    \item Also good to know how to determine whether $A\perp B\vert C$; see \citep[Section 10.5]{Mur12}.
   \end{itemize}
   \blank
 \end{frame}
+
+\begin{frame}{A recap on probabilistic graphical models 2/2}
+  \begin{itemize}
+    \item Also good to know how to determine whether $A\perp B\vert C$; see \citep[Section 10.5]{Mur12}.
+    \blank
+  \end{itemize}
+  \blank
+\end{frame}
+
 
 \begin{frame}{Estimation as a decision problem: point estimates}
 \end{frame}
