@@ -100,7 +100,7 @@
     \vfill\item Each infected person recovers after a Gamma(\unn{$a,b$}) time.
     \vfill\item This allows to express
     $$
-    p(x_1(t_{1,1}), \dots, x_1(t_{1,T_1}), \cdots, x_n(t_{n,1}), \dots, x_1(t_{n,T_n})\vert \unn{\theta}).
+    p(x_1(t_{1,1}), \dots, x_1(t_{1,T_1}), \cdots, x_N(t_{N,1}), \dots, x_1(t_{N,T_N})\vert \unn{\theta}).
     $$
     where \unn{$\theta= (\theta_{SI}, a, b)$}.
     \vfill\item Now, consider $p(\theta\vert \text{data}) \propto p(\text{data}\vert \theta) \un{p(\theta)}.$
@@ -111,7 +111,7 @@
 \frametitle{A quick motivating example before we go formal 2/2}
   \begin{itemize}
   \vfill\item If asked to report an interval $A$ on a particular function of $\theta$, say $R_0 = h(\theta)$, I would report a small interval $A$ such that
-  $$ \int 1_{h(\theta)\in A} \, p(\theta\vert \text{data}) \,\d\theta \geq 0.95.$$
+  $$ \int 1_{h(\theta)\in A} \, p(\theta\vert \text{data}) \,\d\theta = p (h(\theta)\in A \vert \text{data}) \geq 0.95.$$
   \vfill\item If asked whether we should close universities, I would ask for
   \begin{itemize}
     \item \un{the cost $\alpha$ of closing unis when $R_0<1$},
