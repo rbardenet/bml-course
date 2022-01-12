@@ -422,9 +422,21 @@ a^\star = \delta(s_\text{obs}) = \argmin_{a\in\mathcal{A}} \un{\mathbb{E}_{s_{\t
 \begin{frame}{A recap on probabilistic graphical models 2/2}
   \begin{itemize}
     \item Also good to know how to determine whether $A\perp B\vert C$; see \citep[Section 10.5]{Mur12}.
-    \blank
   \end{itemize}
-  \blank
+  \centering
+  \only<1>{
+    \includegraphics[width=.7\textwidth]{Figures/bayes_ball_1}
+  }
+  \only<2>{
+    \includegraphics[width=.8\textwidth]{Figures/bayes_ball_2}
+  }
+  \only<3>{
+    \includegraphics[width=.8\textwidth]{Figures/bayes_ball_3}
+    \begin{itemize}
+      \item Check that $x_2\perp x_6\vert x_5,x_1$, but that $x_2\not\perp x_6\vert x_5,x_1,x_7$.
+    \end{itemize}
+    }
+
 \end{frame}
 
 
