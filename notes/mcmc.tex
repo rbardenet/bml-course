@@ -68,7 +68,7 @@ One can formulate the intuition that, since the second step just follows a level
 
 In practice, one has to approximate the Hamiltonian flow $\phi_t$, and there is a large literature in numerical analysis on the subject, with integrators showcasing many interesting properties.
 In terms of notation, denote by $h$ a stepsize parameter, and $n=\lfloor T/h\rfloor$, so that we think of the numerical integrator $\psi_h^n(x,p)$ as an approximation to $\phi_T(x,p)$.
-There exists numerical integrators $\phi_h^n$ that are $(i)$ $C^1$ diffeomorphisms, $(ii)$ are reversible w.r.t. to momentum flip, and are volume-preserving, i.e. $\vert \det (\phi_h^n)'(q,p)\vert = 1$.
+There exists numerical integrators $\phi_h^n$ that are $(i)$ $C^1$ diffeomorphisms, $(ii)$ are reversible w.r.t. to momentum flip, and are volume-preserving, i.e. $\vert \det (\psi_h^n)'(q,p)\vert = 1$.
 Since the momentum flip preserves $\tpi$, we can replace the second step of the ideal HMC algorithm by the abstract HMC algorithm of Section~\ref{s:abstract_HMC}, with $\eta=\tpi$, $\Phi=\phi_h^n$ and $S$ the momentum flip. 
 Because the numerical integrator is volume-preserving, the acceptance probability becomes suprisingly simple, as 
 $$ 
