@@ -3,6 +3,8 @@
 ## Lecturers
 * Rémi Bardenet (CNRS, Univ. Lille), https://rbardenet.github.io
 * Julyan Arbel (Inria, Univ. Grenoble-Alpes), https://www.julyanarbel.com
+## Material
+* The annotated slides for lecture 1 are [here](https://nextcloud.univ-lille.fr/index.php/s/tzbHA5c3b8Tpwny).
 
 ## Objective of the course
 By the end of the course, the students should
