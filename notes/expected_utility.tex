@@ -1,0 +1,17 @@
+After formally defining decision problems, we show that basic machine learning problems such as classification, regression, model choice, etc. are decision problems. 
+Then we introduce subjective expected utility, the single unique guideline of all Bayesians, and go over its consequences for ML decisions.
+Justifying subjective expected utility shall wait until Chapter~\ref{ch:foundations}.
+
+For this chapter, I mostly used two references.
+\citep{PaIn09} focuses on ideas and is a formidable entry point to (Bayesian) decision theory, while \citep{Sch11} is a great textbook-level reference for mathematical details.
+
+\section{Decision problem}
+
+Formally, a decision problem is defined as 
+\begin{enumerate}
+    \item a set $\cS$ of \emph{states}. For technical reasons, we also require a $\sigma$-algebra $\Sigma_\cS$ that makes $(\cS, \Sigma_\cS)$ a Borel space \citep{Sch11}.
+    \item a set of \emph{rewards} $\cR$. We also require a $\sigma$-algebra $\Sigma_R$, which should contain all singletons. 
+    \item a set $\cA$ of measurable functions from $\cS$ to $\cR$, called \emph{actions}.
+\end{enumerate}
+We think of states as encoding all information about the situation at hand. Actions are what we are tasked to choose, and picking action $a$ while the situation is described by a given state $s$ leads to reward $a(s)$.
+Note\footnote{In future versions of the course, we might make the framework more general, to include, e.g. Markov decision processes.} that we assume here that the same set of actions $\cA$ remains available in every state $s$.
