@@ -1,0 +1,241 @@
+%!TEX root=./main.tex
+
+While Monte Carlo methods are randomized numerical quadratures, \emph{variational Bayes} (VB) stands for finding an approximation to the target distribution within some prespecified set $\mathcal Q$ of distributions.
+This is done by minimizing some notion of distance between the target $\pi$ and the so-called variational approximation $q\in\mathcal Q$.
+For instance, a common choice is to solve
+\begin{equation}
+q^\star \in \arg\min_{q\in\mathcal Q} \text{KL}(q, \pi) := \mathbb E_q \log \frac{q(\theta)}{\pi(\theta)} = \int q(\theta) \log \frac{q(\theta)}{\pi(\theta)} \d\theta,
+\label{e:VB}
+\end{equation}
+where $\pi$ and $q$ are PDFs w.r.t. some common measure $\d\theta$.
+Once \eqref{e:VB} has been solved, one can either use the resulting $q^\star$ as a plug-in replacement for the target $\pi$, or, say, use $q^\star(\theta)\d\theta$ as a proposal distribution in importance sampling.
+
+Compared to MCMC, the big plus of VB is that some modification of the optimization problem \eqref{e:VB} can often be implemented in large-scale settings where either the number of data items or the dimension of the problem are large, e.g. in deep learning.
+The major downside of VB is the difficulty to provide theoretical guarantees on its results.
+One reason for this is that the distance to minimize, such as the reverse KL divergence in \eqref{e:VB}, is often chosen for computational convenience rather than for its guarantees on integrating functions of interest.
+Another reason is that approximating complex target distributions requires a large set $\mathcal Q$ of variational approximations, which usually makes \eqref{e:VB} a difficult optimization problem that has to be further modified before an efficient implementation is possible.
+
+\section{The evidence lower bound (ELBO)}
+Remember that the density $\pi$ is often known only though the evaluation of an unnormalized version $\pi_u$, i.e., $\pi_u(\theta) = Z\pi(\theta), \forall \theta$.
+If we are to carry out \eqref{e:VB}, we thus need to know how to express $\text{KL}(q,\pi)$ using only $\pi_u$.
+
+\begin{lemma}
+Let $J(q) := \int q(\theta) \log \frac{q(\theta)}{\pi_u(\theta)}\d\theta$.
+Then
+\begin{equation}
+J(q) = \text{KL}(q, \pi) - \log Z.
+\label{e:preELBO}
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+  Left as an exercise.
+\end{proof}
+
+Two remarks are in order.
+First, since $Z$ does not depend on $q$, the optimization problem in \eqref{e:VB} is equivalent to $\min J(q)$.
+Letting $ L(q) = -J(q)$, \eqref{e:VB} is further equivalent to $\max L(q)$.
+Second and the nonnegativity of the KL divergence implies that
+\begin{equation}
+L(q) \leq \log Z.
+\label{e:ELBO}
+\end{equation}
+In Bayesian inference,
+$$
+\pi_u(\theta) = p(y_{1:N}\vert\theta) p(\theta),
+$$
+so that $Z=p(y_{1:N})$.
+Furthermore, \eqref{e:ELBO} says that $L(q)$ is \emph{a lower bound for the (logarithm of the) evidence}, shortened in ELBO.
+Most VB algorithms in the literature are cast as maximizing the ELBO.
+
+\section{Mean-field inference}
+The most common variational family is the so-called \emph{mean-field approximation}.
+If you need to approximate a posterior over parameters $\theta\in\mathbb{R}^d$ and latent variables $z_1,\dots,z_N$, this means taking
+\begin{equation}
+  \label{e:mean_field}
+  \mathcal Q = \left\{\theta\mapsto \prod_{d=1}^D q_d(\theta_d) \prod_{i=1}^N q_i(z_i)\right\}.
+\end{equation}
+In other words, we approximate $\pi$ with a separable PDF.
+Note that \eqref{e:mean_field} only specifies the structure of the variational approximations.
+This is enough to derive the abstract form of the VB updates, which we do in the remainder of this section.
+In practice, though we further make explicit parametric choices for the individual factors, as we shall see in Section~\ref{s:VB_for_LDA}.
+
+The whole motivation of the mean-field variational family is that if your target has simple conditionals, coordinate-wise optimization of the ELBO is easy.
+Indeed, write $x=(\theta,z) \in \mathbb{R}^p$ and let $1\leq i\leq p$. Writing $q(x) = q_i(x_i)q_{\setminus i}(x_{\setminus i})$, and keeping track only of the additive terms that depend on $q_i$, it comes
+\begin{align*}
+L(q)
+&= \iint  q_i(x_i)q_{\setminus i}(x_{\setminus i}) \left[\log \pi_u(x) - \left( \log q_i(x_i) + \log q_{\setminus i}(x_{\setminus i}) \right)\right] \d x_i \d x_{\setminus i}\\
+&\propto \int q_i(x_i) \left[ \int q_{\setminus i}(x_{\setminus i}) \log \pi_u(x) \d x_{\setminus i}\right] d x_i- \int q_i(x_i)\log q_i(x_i) \d x_i\\
+&= - KL(q_i,\phi_i),
+\end{align*}
+where
+\begin{equation}
+  \label{e:intermediate_distribution}
+  \phi_i(x_i) = \exp \left[\int q_{\setminus i}(x_{\setminus i}) \log \pi_u(x) \d x_{\setminus i}\right]
+\end{equation}
+is an unnormalized PDF. By a fundamental property of the KL, the ELBO $L$ is thus maximized by setting $q_i\propto \phi_i$.
+The bottleneck is thus to be able to compute $\phi_i$ in \eqref{e:intermediate_distribution}.
+Like in deriving conditionals in Gibbs sampling, this is the part where conjugate distributions play a role.
+In practice, the choice of $\mathcal Q$ is often made so that this step is easy, as we shall see in Section~\ref{s:VB_for_LDA}.
+
+Finally, note that taking the variational family to be \eqref{e:mean_field} is akin to assuming independence of all variables under the posterior.
+Combined with the fact that the log term in the reverse KL \eqref{e:VB} favours a $q^\star$ with a support that includes that of $\pi$, this often implies a gross overestimation of the support of the target, along with the expected ignorance of correlations; see Figure~\ref{}.
+While separability makes algorithmic derivations easier, we thus usually rather aim for ``as separable as required by computation".
+In other words, if, for modeling reasons, you believe that there is correlation under $\pi$ of some subset of the variables, say $x_i, i\in I$, you should try to keep these variables correlated in your variational approximation, by rather defining
+$$
+\mathcal Q = \left\{\theta\mapsto q_I(x_I) \prod_{i \notin I} q_i(x_i) \right\},
+$$
+for some nonseparable $q_I$.
+\cite[Chapter 23]{Mur12} calls this \emph{structured mean-field}.
+
+\subsection{Mean-field VB for LDA}
+\label{s:VB_for_LDA}
+Recall the latent Dirichlet allocation model from Section~\ref{s:Gibbs_for_LDA}, for which
+\begin{align}
+\log &p(y, z, \pi, B)\\
+&=\sum_{i=1}^N \left[\log p(\pi_i\vert \alpha) + \sum_{\ell=1}^{L_i} \Big(\un{\log p(z_{i\ell}\vert\pi_i)} + \unn{\log p(y_{i\ell}\vert z_{i\ell}, B)\Big)}\right] + \unnnn{p(B\vert \gamma)}\nonumber\\
+&\propto \sum_{i=1}^N \left[\sum_{k=1}^K \alpha_k \log \pi_{ik} + \sum_{\ell=1}^{L_i} \left(\un{\sum_{k=1}^K 1_{z_{i\ell}=k}\log\pi_{_{ik}}} + \unn{\sum_{v=1}^V \sum_{k=1}^K 1_{y_{i\ell}=v}1_{z_{i\ell}=k} \log b_{kv}}\right)\right] \nonumber\\
+&~~~~~+ \unnnn{\sum_{k=1}^K \sum_{v=1}^V \gamma_v\log b_{kv}}. \label{e:LDA_joint}
+\end{align}
+We want to fit a mean-field approximation
+$$
+\mathcal Q = \left\{ \prod_{i=1}^N \left[\text{Dir}(\pi_i\vert\widetilde{\pi_i}) \prod_{\ell=1}^{L_i} \text{Cat}(q_{i\ell}\vert\widetilde{q_{i\ell}}) \right] \prod_{k=1}^K \text{Dir}(B_{k:}\vert \widetilde{B_{k:}}) \right\}.
+$$
+Tilded variables parametrize the variational approximation $q$, and optimizing over $q$ will thus be implemented as an optimization over these parameters.
+As we shall see, the Dirichlet distributions are chosen to make the following computations easy thanks to conjugacy.
+
+To implement VB, we need to compute \eqref{e:intermediate_distribution} for every coordinate, that is, we need to integrate the log joint distribution \eqref{e:LDA_joint} with respect to all variables but one, for every choice of that singled out variable.
+
+\paragraph{Singling out $\pi_i$.}
+We start by singling out $\pi_i\in \Delta_K$ for some $1\leq i \leq N$, denoting the corresponding expectation by $\mathbb E_{\setminus \pi_i}$.
+We are confident that we shall be able to identify the functional form (and thus the normalization constant) of the resulting distribution, and thus we do not keep track of additive variable that do not imply $\pi_i$.
+This yields
+\begin{align*}
+\mathbb{E}_{\setminus \pi_i} \log p(y,z,\pi, B) &\propto \sum_{k=1}^K \alpha_k \log \pi_{ik} + \sum_{\ell=1}^{L_i} \mathbb{E}_{z_i}\un{\sum_{k=1}^K  1_{z_{i\ell}=k}\log\pi_{_{ik}}}\\
+&= \sum_{k=1}^K \alpha_k \log \pi_{ik} + \sum_{\ell=1}^{L_i} \un{\sum_{k=1}^K \widetilde{z_{i\ell}}\log\pi_{_{ik}}}
+\end{align*}
+and we recognize the log PDF of a Dirichlet distribution in $\pi_i$, with parameters
+$$
+\widetilde\pi_i \triangleq \left( \alpha_k + \sum_{\ell=1}^{L_i} \widetilde{z_{i\ell}}  \right)_{1\leq k\leq K}.
+$$
+
+\paragraph{Singling out $z_{i\ell}$.}
+To compute $\mathbb{E}_{\setminus z_{i\ell}} \log p(y,z,\pi, B)$, we need to be able to compute expectation of log weights w.r.t. a Dirichlet distribution.
+\begin{lemma}
+Let $\Psi(\cdot) := \Gamma'(\cdot)/\Gamma(\cdot)$ be the digamma function.
+Let $\widetilde\eta\in \Delta_M$ be a probability distribution over $\{1,\dots, M\}$.
+Then, for $m\in \{1,\dots, M\}$,
+$$
+  \mathbb{E}_{\text{Dir}(\eta\vert\widetilde\eta)} \log \eta_m = \Psi(\widetilde\eta_m) - \Psi(\Vert \widetilde\eta\Vert_1) \triangleq \Psi_m(\widetilde{\eta}).
+$$
+\end{lemma}
+\begin{proof}
+  Left as an exercise.
+\end{proof}
+
+Now we derive
+\begin{align*}
+  \mathbb{E}_{\setminus z_{i\ell}} \log p(y,z,\pi, B)
+    &\propto  \un{\sum_{k=1}^K  1_{z_{i\ell}=k} \mathbb{E}_{\pi_i}\log\pi_{_{ik}}}
+    + \unn{\sum_{v=1}^V \sum_{k=1}^K 1_{y_{i\ell}=v} 1_{z_{i\ell}=k} \mathbb{E}_{B_{k:}}\log b_{kv} }\\
+    &=  \un{\sum_{k=1}^K  1_{z_{i\ell}=k} \Psi_k(\widetilde\pi_{i})}
+    + \unn{\sum_{v=1}^V \sum_{k=1}^K 1_{y_{i\ell}=v} 1_{z_{i\ell}=k} \Psi_v(\widetilde{B}_{k:}) }
+\end{align*}
+We recognize a categorical distribution with parameters
+$$
+\widetilde{z_{i\ell}} \propto \left( \exp\left[\Psi_k(\widetilde\pi_{i}) +  \Psi_{y_{i\ell}}(\widetilde{B}_{k:})\right]\right)_{1\leq k \leq K}.
+$$
+Once again, the normalization constant can be guessed after doing the computation, since necessarily
+$$
+  \widetilde{z_{i\ell}} =
+    \left(
+      \frac{\exp\left[\Psi_k(\widetilde\pi_{i}) +  \Psi_{y_{i\ell}}(\widetilde{B}_{k:})\right]}
+      {\sum_{k=1}^K \exp\left[\Psi_k(\widetilde\pi_{i}) +  \Psi_{y_{i\ell}}(\widetilde{B}_{k:})\right]}
+    \right)_{1\leq k \leq K}.
+$$
+
+\paragraph{Singling out $B_{k:}$}
+In the same vein,
+\begin{align*}
+  \mathbb{E}_{\setminus B_{k:}} \log p(y,z,\pi, B)
+    &\propto \unn{\sum_{i=1}^N\sum_{\ell=1}^{L_i}\sum_{v=1}^V 1_{y_{i\ell}=v} \mathbb{E}_{z_{i\ell}} 1_{z_{i\ell}=k} \log b_{kv} } + \unnnn{\sum_{v=1}^V \gamma_v\log b_{kv}}
+\end{align*}
+and we recognize a Dirichlet with parameters
+$$
+\widetilde{B}_{k:} \triangleq \left (\gamma_v + \sum_{i=1}^N\sum_{\ell=1}^{L_i} 1_{y_{i\ell}=v}\widetilde{z_{i\ell k}} \right)_{1\leq v \leq V}.
+$$
+This concludes the derivation of VB for LDA.
+
+\subsection{Mean-field VB for marginal LDA}
+As an exercise, derive the updates for the marginalized LDA model of Section~\ref{s:marginal_LDA}; see \cite[Chapter 27.3]{Mur12} for the solution.
+
+\subsection{VB generalizes the EM algorithm}
+TBC
+
+\section{Gradient-based algorithms}
+An alternate approach to finding a simple $\mathcal Q$ leading to closed-form updates is to directly run a gradient algorithm on the ELBO \eqref{e:ELBO}.
+Take $\mathcal{Q} = \{q(\cdot\vert\phi), \phi \in\Phi\}$, where for all $x$, $\phi\mapsto q(x\vert\phi)$ is differentiable.
+Then, assuming the necessary regularity conditions, \cite{PaBlJo12} note that gradient of the ELBO can be rewritten using the so-called \emph{score function trick} as
+\begin{align*}
+\nabla_\phi L(q) 
+&= \nabla_\phi \mathbb{E}_{x\sim q(\cdot\vert\phi)} \log \frac{\pi_u(x)}{q(x\vert\phi)}\\
+&= \int \log \pi_u(x) \nabla_\phi q(x\vert\phi) \d x + \nabla_\phi H[q(\cdot\vert\phi)].\\
+&= \mathbb E_{{x\sim q(\cdot\vert\phi)}} \left [\log \pi_u(x) \nabla_\phi \log q(x\vert\phi) \right ] + \nabla_\phi H[q(\cdot\vert\phi)].
+\end{align*}
+The first term can be estimated by vanilla Monte Carlo. 
+The entropy term can usually be differentiated in closed form; if not, it can be estimated by vanilla Monte Carlo as well. 
+Overall, we can plug an unbiased estimator of the gradient of the ELBO in any stochastic gradient algorithm. 
+More often than not, the ELBO as a function of $\phi$ is not convex, though, and one has to be happy with searching for local optima. 
+Moreover, vanilla Monte Carlo estimators of \eqref{e:gradient_of_the_ELBO} have been reported to have high variance even in simple models \cite{PaBlJo12}. 
+
+Variance reduction for ELBO gradients has been a field of active research.
+\cite{PaBlJo12} propose to use control variates, while \cite{KiWe14} and a large body of follow-up work propose \emph{reparametrization tricks} that work as follows. 
+Assume that there exists a (deterministic) smooth and invertible function $f$ such that $f(\epsilon,\phi)\sim q(\cdot\vert\phi)$ whenever $\epsilon\sim p(\epsilon)$, with $\epsilon$ easy to sample.
+Now rewrite 
+\begin{align*}
+  \nabla_\phi L(q) 
+  &= \nabla_\phi \mathbb{E}_{\epsilon\sim p} \log \frac{\pi_u(f(\epsilon,\phi))}{q(f(\epsilon,\phi)\vert\phi)}+ \nabla_\phi H[q(\cdot\vert\phi)].
+\end{align*}
+This time the gradient can be passed under the integral in the first term, without relying on the score function trick, and we obtain
+\begin{align*}
+  \nabla_\phi L(q) 
+  &= \mathbb{E}_{\epsilon\sim p} \nabla_\phi \log \pi_u(f(\epsilon,\phi)) + \nabla_\phi H[q(\cdot\vert\phi)].
+\end{align*}
+As long as we can compute gradients of $\log\pi_u$, we can compute the gradient in the expectation using the chain rule. 
+This suggests a second vanilla Monte Carlo estimator, drawing $\epsilon_i\sim p$ i.i.d. 
+In practice, the resulting estimator has been found to have much lower variance \citep{ReMoWi14}, like in variational auto-encoders \citep{KiWe14}. 
+I haven't seen a completely convincing explanation why and when variance reduction happens with the reparametrization trick in general, though.  
+Finally, note that we again assumed that the entropy of $q$ could be differentiated in closed form, but the entropy term can also be treatead using the reparametrization trick if needed. 
+
+\subsection{VB for deep networks}
+% Include IS with VAEs as in Jordan et al.
+One of the hot applications of gradient-based VB is for Bayesian deep learning, which has generated a huge literature in a short amount of time; see e.g. recent NeurIPS tutorials and workshops for pointers.  
+For instance, \cite{BCKW15} proceed as follows.
+We consider networks as generative models, so consider the softmax (classification) or squared (regression) loss.
+A network thus corresponds to a likelihood $p(\mathbf{y}\vert w)$.
+We take a prior $p(w)$ for the weights, and want to fit $q(w\vert\phi)$ to the posterior $\pi(w) \propto p(\mathbf{y}\vert w)p(w) = \pi_u(w)$.
+The gradient of the reparametrized ELBO writes
+\begin{align*}
+\nabla_\phi L(q(\cdot\vert\phi)) &= \mathbb E_\epsilon \nabla_\phi \log \frac{\pi_u(f(\epsilon,\phi))}{q(f(\epsilon,\phi)\vert\phi)}\\
+&\approx \frac{1}{N_\epsilon} \sum_{i=1}^{N_\epsilon} \nabla_\phi \log \frac{\pi_u(f(\epsilon_i,\phi))}{q(f(\epsilon_i,\phi)\vert\phi)}.
+\end{align*}
+Now notice that $\log\pi_u(w) = \log p(w) + \sum_{i=1}^{N_y} \log p(y_i\vert w)$, so that one can further uniformly draw (with or without replacement) a minibatch of data points $B$, and further obtain an unbiased estimator 
+\begin{align*}
+\nabla_\phi L(q(\cdot\vert\phi)) &\approx \frac{N_y}{N_\epsilon \vert B\vert} \sum_{i=1}^{N_\epsilon} \sum_{y\in B} \nabla_\phi \left [ \frac{1}{N_y}\log p(f(\epsilon_i,\phi)) + \log p(y\vert f(\epsilon_i,\phi)) - \log q(f(\epsilon_i,\phi)\vert\phi) \right ].\\
+\end{align*}
+Note that following \cite{BCKW15}, we do not assume that the entropy can be differentiated in closed form, but the method applies \emph{mutatis mutandis}. 
+Note also that it is not obvious that replacing the entropy by its closed-form would reduce the variance of the estimator.
+
+Now the key argument is that the gradient inside the sum can be computed using the chain rule, backprogagation, and the (assumed known) gradient of $q$.
+As an example, assume $w\in\mathbb{R}^d$, $\phi=(\mu,\sigma)\in\mathbb{R}^{d+1}$, so that $f(\phi,\epsilon) = \mu + \sigma \epsilon \sim \mathcal{N}(\mu, \sigma I_d)$. 
+For $y\in B$, Let $F(w) = \log p(y\vert w) + \log p(w)$. 
+The gradient of $F$ is provided by backpropagation. 
+Now the chain rule yields
+\begin{align*}
+  \nabla_\phi (F(f(\epsilon, \cdot))(\phi_0) &= J_{f(\epsilon,\cdot)}(\phi_0)^T \nabla F (f(\epsilon, \phi_0))\\
+  &= \begin{pmatrix} I_d & \epsilon \\\end{pmatrix}^T \nabla F (f(\epsilon, \phi_0)).
+\end{align*}
+
+\section{Theoretical guarantees}
+
+\section{Alternatives to the KL divergence}

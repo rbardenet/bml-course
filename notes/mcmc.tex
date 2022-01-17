@@ -1,0 +1,94 @@
+\section{Monte Carlo methods}
+Importance sampling, self-normalized importance sampling, SMC, SMC samplers, MCMC (discuss ergodicity and CLT).
+
+\section{The Metropolis-Hastings algorithm}
+Basic algorithm, detailed balance. Adaptive MH.
+
+\section{Gibbs sampling}
+
+\section{Hamiltonian Monte Carlo}
+We closely follow \cite{BoSa17}, who give a clear introduction to the ingredients of HMC.
+To facilitate going back and forth between the notes and \citep{BoSa17}, we temporarily adopt their notational conventions: the variable over which we wish to integrate is $q\in\mathbb{R}^d$, while $x\in\cX$ denotes a generic variable, later taken to be $x=(p,q)$.
+Note that vanilla HMC is limited to continuous variables.
+
+\subsection{An abstract variant of Metropolis-Hastings}
+\label{s:abstract_HMC}
+Let $S$ be a linear involution of $\cX$, such that $\eta\circ S = \eta$ for some (possibly unnormalized) PDF $\eta$.
+Let further $\Phi:\mathbb{R}^d\rightarrow \mathbb{R}^d$ be a $C^1$-diffeomorphism that is reversible w.r.t. to $S$, that is, $S\circ \Phi = \Phi^{-1}\circ S$.
+Now let 
+\begin{equation}
+    \label{e:acceptance_probability_abstract_HMC}
+    \alpha(x) \triangleq 1\wedge \frac{\eta(\Phi(x))}{\eta(x)} \vert\Phi'(x)\vert,
+\end{equation}
+$$
+and consider the Markov kernel
+$$
+P_{aHMC}(x,A) = \alpha(x) 1_{\Phi(x)\in A} + (1-\alpha(x))1_{S(x)\in A}.
+$$
+Algorithmically, this ``abstract" HMC kernel corresponds to accepting $\Phi(x)$ with probability $\alpha(x)$, and otherwise setting the new Markov state to $S(x)$.
+\begin{proposition}
+\label{p:invariance_abstract_HMC}
+$P_{aHMC}$ leaves $\eta$ invariant.
+\end{proposition}
+\begin{proof}
+    Left as an exercise.
+\end{proof}
+
+\subsection{An augmented target}
+Consider the PDF on $\mathbb{R}^{2d}$ defined by $\tpi(q,p) = \frac12 \cN(p\vert 0, M) \times \pi(x)$. 
+Clearly, the $p$-marginal is Gaussian, while the $x$-marginal is $\pi$. 
+If we manage to obtain an MCMC chain for $\tpi$, i.e. a chain with a Markov kernel that leaves $\tpi$ invariant, then simply discarding the $p$-component of every realization will yield a chain that is invariant w.r.t. $\pi$. 
+This is an example of \emph{augmentation} of the state space: unlike for the collapsed Gibbs sampling of Section~\ref{s:collapsed_gibbs}, we augment the dimensionality of the problem in the hope to make it easier. 
+Our hope is justified here by the fact that we know how to efficiently move in $\mathbb{R}^{2d}$ along the level lines of the augmented density $\tpi$: this is were Hamiltonian dynamics come into play.
+
+\subsection{Hamiltonian dynamics}
+\label{s:hamiltonian_dynamics}
+Let $H(q,p) = \log\tpi(q,p)$, and consider the differential equation 
+\begin{equation}
+    \label{e:differential_equation}
+    \frac{\d}{\d t} \begin{pmatrix} x\\p \end{pmatrix} = J \nabla H(q,p), \quad\text{ where } J=\begin{pmatrix} 0_d & -I_d \\ I_d & 0_d \end{pmatrix}.
+\end{equation} 
+In particular, if $\nabla H$ is Lipschitz, which we shall always assume in this section, the Cauchy-Lipschitz theorem yields a unique solution to \eqref{e:differential_equation} passing through $(q_0,p_0)$ at $t=0$, which we denote by $t\mapsto \phi_t(q_0,p_0)$.
+We shall further assume that $\phi_t$ is well defined for all $t$, and call $\phi_t$ the \emph{Hamiltonian flow}. 
+By definition, the Hamiltonian flow preserves the Hamiltonian, since
+$$
+\frac{\d}{\d t} H(\phi_t(q_0,p_0)) = \nabla H(\phi_t(q_0,p_0))^T J \nabla H(\phi_t(q_0,p_0)) = 0,
+$$
+$J$ being skew-symmetric.
+
+\subsection{Ideal HMC and numerical HMC}
+The ideal HMC is the concatenation of two kernels. 
+Given $(q_n,p_n)$, first resample $p$ from its conditional under $\tpi$; i.e. $\p'\sim \cN(0,M)$. 
+This obviously leaves $\tpi$ invariant, as in Gibbs sampling. 
+Then set $(q_{n+1}, p_{n+1}) = \phi_T(q_n,p')$.
+In words, one step of the corresponding Markov chain consists of sampling a random momentum variable from the corresponding conditional, and then following the Hamiltonian flow $\phi_t$ up to time $T>0$.
+Note that, unlike Gibbs sampling, this second step changes both variables.
+
+One can formulate the intuition that, since the second step just follows a level line of $H$, the ideal HMC kernel leaves $\tpi$ invariant. This is indeed the case \citep{BoSa17}, but since $\phi_t$ is usually not available in closed form, the ideal HMC kernel cannot be implemented, and we will skip the proof of its invariance. 
+
+In practice, one has to approximate the Hamiltonian flow $\phi_t$, and there is a large literature in numerical analysis on the subject, with integrators showcasing many interesting properties.
+In terms of notation, denote by $h$ a stepsize parameter, and $n=\lfloor T/h\rfloor$, so that we think of the numerical integrator $\psi_h^n(x,p)$ as an approximation to \approx \phi_T(x,p)$.
+There exists numerical integrators $\phi_h^n$ that are $(i)$ $C^1$ diffeomorphisms, $(ii)$ are reversible w.r.t. to momentum flip, and are volume-preserving, i.e. $\vert \det \phi_h^n'(q,p)\vert = 1$.
+Since the momentum flip preserves $\tpi$, we can replace the second step of the ideal HMC algorithm by the abstract HMC algorithm of Section~\ref{s:abstract_HMC}, with $\eta=\tpi$, $\Phi=\phi_h^n$ and $S$ the momentum flip. 
+Because the numerical integrator is volume-preserving, the acceptance probability becomes suprisingly simple, as 
+$$ 
+\alpha_{HMC}((q,p),(q',p')) = 1\wedge \e^{-H(q,p)-H(q',p')}.
+$$
+Intuitively, the acceptance step compensates for the fact that we did not exactly follow the level lines of $H$. 
+
+One common numerical integrator satisfying all the required properties is the leapfrog (aka velocity Verlet in \citep{BoSa17}) integrator defined as $\psi_h^n = \psi_h \circ \dots \psi_h$, where $(p',q') = \psi_h(p,q)$ is defined by
+\begin{align*}
+    p_{1/2} &= p + \frac{h}{2}\nabla \log \pi(q)\\
+    q' &= a+hM^{-1}p_{1/2}\\
+    p' &= p_{1/2} + \frac{h}{2} \nabla \log\pi (q');
+\end{align*}
+see \citep[Section 3]{BoSa17} for more information, and \cfdemo for an interactive demo.
+
+\subsection{On the ergodicity of HMC}
+
+\subsection{An ubiquitous variant: NUTS}
+NUTS for auto-tuning, etc.
+
+\section{MCMC practice: convergence diagnostics}
+Convergence diagnostics. Discuss the output of pymc.
+

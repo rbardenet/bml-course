@@ -1,0 +1,94 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 
+% This template is adapted from Mathias Legrand's and Vel's
+% "Orange Book" template v2.4, licensed under CC BY-NC-SA 3.0
+% (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+
+% Compiling requires to run:
+%
+% 1) pdflatex main
+% 2) makeindex main.idx -s StyleInd.ist
+% 3) biber main
+% 4) pdflatex main x 2
+%
+% Important note:
+% Chapter heading images should have a 2:1 width:height ratio,
+% e.g. 920px width and 460px height.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[11pt,fleqn]{book} % Default font size and left-justified equations
+
+\input{structure.tex}
+\input{commands.tex}
+
+%\hypersetup{pdftitle={Title},pdfauthor={Author}} % Uncomment and fill out to include PDF metadata for the author and title of the book
+
+\begin{document}
+\input{title_page.tex}
+
+%----------------------------------------------------------------------------------------
+%	COPYRIGHT PAGE
+%----------------------------------------------------------------------------------------
+
+\newpage
+~\vfill
+\thispagestyle{empty}
+
+\noindent Copyright \copyright\ 2021 Rémi Bardenet\\ % Copyright notice
+
+%\noindent \textsc{Published by Publisher}\\ % Publisher
+% \noindent \textsc{book-website.com}\\ % URL
+
+\noindent This template is adapted from Mathias Legrand's and Vel's
+ \emph{Orange Book} template v2.4, licensed under CC BY-NC-SA 3.0
+ (\url{http://creativecommons.org/licenses/by-nc-sa/3.0/}).
+
+%----------------------------------------------------------------------------------------
+%	TABLE OF CONTENTS
+%----------------------------------------------------------------------------------------
+
+%\usechapterimagefalse % If you don't want to include a chapter image, use this to toggle images off - it can be enabled later with \usechapterimagetrue
+
+\chapterimage{chapter_head_1.pdf} % Table of contents heading image
+\pagestyle{empty} % Disable headers and footers for the following pages
+\tableofcontents % Print the table of contents itself
+\cleardoublepage % Forces the first chapter to start on an odd page so it's on the right side of the book
+\pagestyle{fancy} % Enable headers and footers again
+
+\part{What is Bayesian machine learning?}
+    \chapterimage{chapter_head_2.pdf} % Chapter heading image
+    \chapter{The example of penalized linear regression}
+    \chapter{A Bayesian is someone who minimizes an expected loss}
+    %\section{Lists}\index{Lists}
+    %\subsection{Numbered List}\index{Lists!Numbered List}
+
+\part{Why should you be Bayesian?}
+    \chapterimage{chapter_head_1.pdf} % Chapter heading image
+    \chapter{40000 types of Bayesians}
+    \input{why}
+
+\part{Implementing Bayesian machine learning}
+    \chapterimage{chapter_head_1.pdf} % Chapter heading image
+    \chapter{Markov chain Monte Carlo}
+    \input{mcmc}
+    \chapter{Variational Bayes}
+    \input{vb}
+
+\part{Nonparametric Bayes}
+\part{Bayesian deep learning}
+
+\chapter*{Bibliography}
+
+% Bibliography
+\addcontentsline{toc}{chapter}{\textcolor{ocre}{Bibliography}}
+\printbibliography[heading=bibempty]
+
+% Index
+\cleardoublepage % Make sure the index starts on an odd (right side) page
+\phantomsection
+\setlength{\columnsep}{0.75cm} % Space between the 2 columns of the index
+\addcontentsline{toc}{chapter}{\textcolor{ocre}{Index}} % Add an Index heading to the table of contents
+\printindex % Output the index
+
+\end{document}
