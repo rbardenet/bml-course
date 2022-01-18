@@ -40,15 +40,22 @@ Then for $a:\cS\rightarrow\cZ$,
     &\neq \int L(a,s_2) p_2(x_2\vert\theta)p(\theta) \unn{\d x_2}\d\theta.
   \end{align*}
 
-\subsection{The stopping rule principle follows from the LP}
-Assume you decide to collect data one item at a time, until the first $n\in\mathbb{N}$ such that $y_1,\dots,y_n \in A_n$, and then you want to estimate $\theta$. 
-You model this by $\cS = \Theta \times \cup_{n\geq 1} \cY^n$, and decide to take $p$ such that its conditional given $\{N=n\}$ is $p(\theta)p(y_{1:n}\vert \theta)$. 
+\subsection{The stopping rule principle}
+The same kind of computations shows that SEU with likelihoods in the joint  is immune to data-dependent stopping rules. 
+This can also be seen as a consequence of the LP \citep{BeWo88}, but we stick to SEU with likelihoods for simplicity.
+
+\un{En chantier. What do we assume exactly?} 
+Assume that we still want to estimate $\theta$, but that we collect data one item at a time, independently from some distribution $y_i\vert\theta$, until the first $n\in\mathbb{N}$ such that $y_1,\dots,y_n \in A_n$, and then you want to estimate $\theta$. 
+We model this by $\cS = \Theta \times \cup_{n\geq 1} \cY^n$, and decide to take $p$ such that $y_1,y_2,\dots$ are independent given $\theta$, just like we believe the data generating mechanism works. 
 Then
 \begin{align*}
-   \mathbb E L(a,s) &= \mathbb E \left [ L(a,s) \sum_{n} \IND{N=N} \right ]\\
-    &= \int L(a,s) 1_{N=n} p(y_{1:n},\theta)  
+   \mathbb E L(a,s) &= \mathbb E \left [ L(a,s) \sum_{n} \IND{N=n} \right ]\\
+    &= \sum_{n} \mathbb E \left [ L(a,s) \sum_{n} \IND{N=N} \right ]\\
+    &= \sum_{n} \int L(a,(\theta,y_{1:n})) \IND{y_{1:n}\in A_n}\prod_{k<n}\IND{y_{1:k}\notin A_k} p(y_{1:n}\vert\theta) p(\theta) \d y_{1:n}\d \theta.\\
+    &= \sum_n \int\d y_{1:n} \IND{y_{1:n}\in A_n}\prod_{k<n}\IND{y_{1:k} \notin A_k} \int \d\theta L(a,(\theta,y_{1:n}))  p(y_{1:n}\vert\theta) p(\theta) \d\theta.
 \end{align*}
-
+So it is enough, for each $n$, to define $g^\star(y_{1:n})$ as the usual Bayes rule for fixed $n$, and we shall have minimized the overall expected loss.
+In other words, as long as the prior does not depend on data, the Bayes decision is immune to data-dependent stopping rules.
 
 \subsection{Pros and cons of the LP}
 \begin{itemize}
