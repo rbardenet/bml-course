@@ -1,3 +1,4 @@
+%!TEX root = ./main.tex
 So far, the main appeal of subjective expected utility (SEU) has been its conceptual simplicity, and the fact that it answers all decision problems in the same manner. 
 In this chapter, we review some attempts at justifying SEU more formally, i.e. show that SEU logically follows from some simple, consensual principle.
 When you hear someone say that ``Non-Bayesians are incoherent'', that ``a prior encapsulates the information available \emph{before} an experiment is made, so that the prior cannot depend on data", or that ``the posterior is the experimenter's updated belief after the experiment", or that ``Non-Bayesians violate the likelihood principle", they are all referring to one or the other of the formal justifications below. 
@@ -16,9 +17,12 @@ Assume that for some realizations $\by_1$ and $\by_2$,
 $$
 p_1(\by_1\vert\cdot) \propto p_2(\by_2\vert \cdot).
 $$
-Assuming that there exists a quantity $\text{Ev}(E,x)$ that encapsulates the ``evidence on $\theta$ arising from $E$ and $x$", then the formal LP principle is the requirement that
+Note that we are using bold characters to insist on $\by_1$ and $\by_2$ being vectors concatenating (possibly many, of arbitrary dimension) observations, the label $i=1,2$ is only there to indicate which experiment we consider.
+In particular, $\by_1$ and $\by_2$ may differ in dimension.
+
+Now, assuming that there exists a quantity $\text{Ev}(E,x)$ that encapsulates the ``evidence on $\theta$ arising from $E$ and $x$", the formal LP principle is the requirement that
 $$
-\text{Ev}(E_1,x_1) = \text{Ev}(E_2,x_2).
+\text{Ev}(E_1,\by_1) = \text{Ev}(E_2,\by_2).
 $$
 As a corollary, $\text{Ev}(E,\by)$ can depend on $x$ solely through $p(\by\vert\cdot)$.
 
@@ -26,36 +30,37 @@ As a corollary, $\text{Ev}(E,\by)$ can depend on $x$ solely through $p(\by\vert\
 Letting $\cS = \cY^n\times\theta$, SEU satisfies the LP as long as the joint distribution over states has either $p_1$ or $p_2$ as its conditional of $\by$ given $\theta$.
 Indeed, let
 $$
-p_i(s_i) = p_i(\by_i,\theta) = p_i(\by_i\vert\theta)\un{p(\theta)} = \un{Z} p_i(\theta\vert x_i), \quad i=1,2.
+p_i(s_i) = p_i(\by_i,\theta) = p_i(\by_i\vert\theta)\un{p(\theta)} = \un{Z} p_i(\theta\vert \by_i), \quad i=1,2.
 $$
 Note how we use a common prior. 
 Then for $a:\cS\rightarrow\cZ$,
   $$ 
-  \int L(a,s_1) \frac{p_1(x_1\vert\theta)p(\theta)}{\un{Z}} \d\theta \propto \int L(a,s_2) \frac{p_2(x_2\vert\theta)p(\theta)}{\un{Z}} \d\theta, 
+  \int L(a,s_1) \frac{p_1(\by_1\vert\theta)p(\theta)}{\un{Z}} \d\theta \propto \int L(a,s_2) \frac{p_2(\by_2\vert\theta)p(\theta)}{\un{Z}} \d\theta, 
   $$
   so that the posterior expected losses are the same in both experiments, and Bayes actions coincide.
   However, note that full expected utilities are different in general, 
   \begin{align*}
-    \int L(a,s_1) p_1(x_1\vert\theta)p(\theta) \unn{\d x_1}\d\theta
-    &\neq \int L(a,s_2) p_2(x_2\vert\theta)p(\theta) \unn{\d x_2}\d\theta.
+    \int L(a,s_1) p_1(\by_1\vert\theta)p(\theta) \unn{\d \by_1}\d\theta
+    &\neq \int L(a,s_2) p_2(\by_2\vert\theta)p(\theta) \unn{\d \by_2}\d\theta.
   \end{align*}
 
 \subsection{The stopping rule principle}
-The same kind of computations shows that SEU with likelihoods in the joint  is immune to data-dependent stopping rules. 
-This can also be seen as a consequence of the LP \citep{BeWo88}, but we stick to SEU with likelihoods for simplicity.
+The same kind of computations shows that SEU with a particular choice of joint distribution is immune to data-dependent stopping rules. 
+This can also be seen as a consequence of the LP \citep{BeWo88}, but we stick to SEU with some conditions on its joint distribution of states for simplicity.
 
-\un{En chantier. What do we assume exactly?} 
-Assume that we still want to estimate $\theta$, but that we collect data one item at a time, independently from some distribution $y_i\vert\theta$, until the first $n\in\mathbb{N}$ such that $y_1,\dots,y_n \in A_n$, and then you want to estimate $\theta$. 
-We model this by $\cS = \Theta \times \cup_{n\geq 1} \cY^n$, and decide to take $p$ such that $y_1,y_2,\dots$ are independent given $\theta$, just like we believe the data generating mechanism works. 
-Then
+Assume that we want to model the following inference problem.
+We collect data one item at a time, independently from some distribution $y_i\vert\theta$, until the first $n\in\mathbb{N}$ such that $y_1,\dots,y_n \in A_n$, and then you want to estimate $\theta$. 
+We model this by $\cS = \Theta \times \cup_{n\geq 1} \cY^n$, and decide to take a joint distribution $p$  such that $y_1,y_2,\dots$ are independent given $\theta$, just like we assume the data generating mechanism works. 
+Then the Bayes action $a^\star = a_{g^\star}$ minimizes
 \begin{align*}
-   \mathbb E L(a,s) &= \mathbb E \left [ L(a,s) \sum_{n} \IND{N=n} \right ]\\
-    &= \sum_{n} \mathbb E \left [ L(a,s) \sum_{n} \IND{N=N} \right ]\\
-    &= \sum_{n} \int L(a,(\theta,y_{1:n})) \IND{y_{1:n}\in A_n}\prod_{k<n}\IND{y_{1:k}\notin A_k} p(y_{1:n}\vert\theta) p(\theta) \d y_{1:n}\d \theta.\\
-    &= \sum_n \int\d y_{1:n} \IND{y_{1:n}\in A_n}\prod_{k<n}\IND{y_{1:k} \notin A_k} \int \d\theta L(a,(\theta,y_{1:n}))  p(y_{1:n}\vert\theta) p(\theta) \d\theta.
+   \mathbb E L(a,s) &= \mathbb E \left [ L(a,s) \sum_{n} \un{\IND{N=n}} \right ]\\
+    &= \sum_{n} \mathbb E \left [ L(a,s) \un{\IND{N=N}} \right ]\\
+    &= \sum_{n} \int L(a,(\theta,y_{1:n})) \un{\IND{y_{1:n}\in A_n}\prod_{k<n}\IND{y_{1:k}\notin A_k}} p(y_{1:n}\vert\theta) p(\theta) \d y_{1:n}\d \theta.\\
+    &= \sum_n \int\d y_{1:n} \un{\IND{y_{1:n}\in A_n}\prod_{k<n}\IND{y_{1:k} \notin A_k}} \int  L(a,(\theta,y_{1:n}))  p(y_{1:n}\vert\theta) p(\theta),
 \end{align*}
-So it is enough, for each $n$, to define $g^\star(y_{1:n})$ as the usual Bayes rule for fixed $n$, and we shall have minimized the overall expected loss.
-In other words, as long as the prior does not depend on data, the Bayes decision is immune to data-dependent stopping rules.
+where we used the monotone convergence theorem and Fubini's theorem (assuming, e.g., that the loss is bounded).
+So, to find the minimizer $g^\star$ defined on $\cup_n \cY^n$ of the overall expected loss, it is enough, for each $n$, to define $g^\star(y_{1:n})$ as the usual Bayes rule for fixed $n$, i.e. as the minimizer of the inner integral.
+In other words, as long as the prior $p(\theta)$ does not depend on data, the Bayes decision is immune to data-dependent stopping rules: just act as if there were no stopping rule.
 
 \subsection{Pros and cons of the LP}
 \begin{itemize}
@@ -68,8 +73,24 @@ In other words, as long as the prior does not depend on data, the Bayes decision
 \end{itemize}
 
 % % ###############################################
-% \section{Because you place coherence above all things: subjective Bayes}
+\section{Because you place coherence above all things: subjective Bayes}
 % % ###############################################
+
+% % ###############################################
+\section{Because you like coherence and consensus: objective Bayes}
+% % ###############################################
+
+% % ###############################################
+\section{Because you are a Waldian frequentist in disguise}
+% % ###############################################
+
+\subsection{On the consistency of Bayesian estimators}
+
+\subsection{Complete class theorems}
+
+\subsection{PAC-Bayes statistical learning}
+
+
 % \begin{frame}
 %   \frametitle{The subjectivistic viewpoint}
 %   \begin{itemize}
