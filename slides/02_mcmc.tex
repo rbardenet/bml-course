@@ -15,6 +15,14 @@
 \usepackage[natbib=true,backend=biber,citestyle=authoryear]{biblatex}
 \bibliography{../bib/stats}
 
+\definecolor{bleu}{rgb}{0.2,0.4,0.65}
+\setbeamercolor{palette primary}{bg=bleu,fg=white}
+\setbeamercolor{palette secondary}{bg=bleu,fg=white}
+\setbeamercolor{palette tertiary}{bg=bleu,fg=white}
+\setbeamercolor{palette quaternary}{bg=bleu,fg=white}
+\setbeamercolor{structure}{fg=bleu} % itemize, enumerate, etc
+\setbeamercolor{section in toc}{fg=bleu} % TOC sections
+
 \let\oldcite=\cite
 \renewcommand\cite[1]{\hyperlink{#1}{\textcolor{vert}{\oldcite{#1}}}}
 \let\oldcitep=\citep
@@ -173,11 +181,11 @@ is small (with large probability, in quadratic mean, converges in law at some ra
   $$
   so that $\sum w_t = 1$.
   \item Then
-  $$$$
-  \vfill
+  \vspace{2cm}
   \item One can show that $ \sqrt{T}\un{\mathcal{E}_T(f)} \rightarrow \cN(0, \sigma^2_{\text{NIS}}(f))$.
   \item Problem is that for reasonable choices of $f,q,\pi$, \un{$\log \sigma_{\text{NIS}}(f) \propto d$}.
 \end{itemize}
+\vfill
 \end{frame}
 
 \section{The Metropolis-Hastings algorithm}
@@ -210,7 +218,7 @@ is small (with large probability, in quadratic mean, converges in law at some ra
 \end{frame}
 
 \begin{frame}{A law of large numbers for Markov chains}
-  Let $(\theta_t)_{t\in\mathbb N}$ be a Markov chain on $\mathcal \Theta$, with Markov kernel $P$. If
+  Let $(\theta_t)_{t\in\mathbb N}$ be a Markov chain on $\Theta$, with Markov kernel $P$. If
   \begin{itemize}
     \item There exists $\pi$ s.t. 
     $$
@@ -293,7 +301,7 @@ $$
 q(\theta'\vert\theta) = \frac1d \sum_{k=1}^d \un{\pi(\theta'_k\vert \theta_{\setminus k})} 1_{\theta'_{\setminus k} = \theta_{\setminus k}}, \quad \theta_{\setminus k}:= (\theta_1,\dots,\theta_{k-1},\theta_{k+1},\dots,\theta_d).
 $$
 \item Then the probability of acceptance $\alpha(\theta,\theta')$ is always $1$.
-$$$$
+\vspace{2cm}
 \vfill
 \item In practice, the systematic scan Gibbs sampler is more common, which consists in repeatedly: drawing $\theta_1\vert\theta_{\setminus 1}$, then $\theta_2\vert\theta_{\setminus 2}$, etc. always conditioning on the newest values available of each $\theta_k$.
 \item You can also partition $\theta$ in arbitrary blocks.
@@ -301,7 +309,9 @@ $$$$
 \end{frame}
 
 \begin{frame}{An example: Latent Dirichlet allocation}
-
+\centering
+\includegraphics[width=.9\textwidth]{\figdir/lda.jpg}
+\vfill
 \end{frame}
 
 \begin{frame}{A Gibbs sampler for LDA}
@@ -317,6 +327,7 @@ $$$$
 \begin{frame}{An abstract variant of MH}
 \begin{itemize}
   \item Let $S$ be a linear involution of $\cX\subset\mathbb{R}^{2d}$, such that $\eta\circ S = \eta$ for some (possibly unnormalized) PDF $\eta$.
+  \vspace{2.5cm}
   \item Let further $\Phi:\mathbb{R}^{2d}\rightarrow \mathbb{R}^{2d}$ be a $C^1$-diffeomorphism such that $S\circ \Phi = \Phi^{-1}\circ S$.
   \item Now let 
 \begin{equation}
