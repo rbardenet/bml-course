@@ -1,5 +1,48 @@
-\section{Monte Carlo methods}
-Importance sampling, self-normalized importance sampling, SMC, SMC samplers, MCMC (discuss ergodicity and CLT).
+Maximizing expected utility requires computing integrals. 
+Numerical integration consists in finding $T$ nodes $x_t$ and weights $w_t$, such
+that
+$$
+\un{\mathcal{E}_t(f)} \triangleq  \int f(x)\d\mu(x)  - \quad \sum_{t=1}^N w_t f(\theta_t) = o_{T\rightarrow \infty}(1), \quad \forall
+f:\mathbb{R}^d\rightarrow\mathbb{R}\in\mathcal C,
+$$
+where $\mathcal C$ is a large class of functions.
+Riemann-like (i.e., grid-based) integration leads to $\mathcal{E}_t(f) \sim \frac{\sqrt{d}}{T^{1/d}}$, so that grids become essentially useless beyond $d=3$.
+Monte Carlo methods are randomized constructions of nodes and weights. 
+Since $\mathcal{E}_T(f)$ is then random, statements on the error shall be with high probability, in expectation, about the asymtotic fluctuations, etc.
+
+We shall see that Monte Carlo methods $(i)$ can accomodate settings where the target $\mu$ in \eqref{e:numerical_integration} is only available through the evaluation of a unnormalized density $\d\mu(x) = \pi(x)\d x = \pi_u(x)/Z\d x$, as is almost always the case in Bayesian learning; and that $(ii)$ some Monte Carlo methods have an error that scales only polynomially with the dimension of the support of the integrand.
+The reference book for basic Monte Carlo methods is \citep{RoCa04}. 
+For theoretical results on MCMC, we refer to \citep[Chapters 5 to 7]{DoMoSt14}. 
+For more recent methods, we shall refer to papers.
+Finally, we shall not cover deterministic alternatives to Monte Carlo methods in large dimension, see quasi-Monte Carlo methods \citep{DiPi10}.
+
+\section{Basic Monte Carlo}
+
+If we knew how to sample from $\pi$, we could take $x_t\sim\pi$ i.i.d., $w_t=1/T$.
+Chebyshev's inequality would lead to
+  $$ \mathbb{P}\left( \un{\mathcal{E}_T(f)} \geq \alpha\frac{\sigma(f)}{\sqrt{T}} \right) \leq \frac{1}{\alpha^2}, \quad \forall \alpha>0,$$
+  as soon as $\sigma(f)^2 := \mathbb{E}_{X\sim\pi} [f(X) - \int f(x)\pi(x)\d x]<+\infty$.
+
+In practice, we never have access to a sampler of $\pi$, so we choose an instrumental distribution $q(x)\d x$, sample $x_t$ i.i.d. from $q$.
+If we can evaluate $\pi$, then $w_t=\pi(x_t)/q(x_t)$ leads to an unbiased estimator called the \emph{importance sampling}. 
+Its error can also be controlled by the Chebyshev inequality. 
+But more often than not, we can only evaluate an unnormalized density $\pi_u$. 
+An alternative is to then set $w_t\propto \pi_u(x_t)/q(x_t)$ and normalize the weights so that $\sum_t w_t=1$. 
+This leads to the \emph{self-normalized importance sampling estimator}
+$$
+\widehat I_T^\text{NIS} = \frac{\sum_{t=1}^T \frac{\pi_u(\theta_t)}{q(\theta_t)} f(x_t)}{\sum_{t=1}^T \frac{\pi_u(\theta_t)}{q(\theta_t)}} \rightarrow \frac{\int f(x)\pi_u(x)\d x}{\int \pi_u(x)\d x} = \int f(x)\d x,
+$$
+where the convergence is almost sure (apply the strong law of large numbers to both the numerator and the denominator).
+\begin{proposition}[CLT for NIS] The NIS estimator satisfies
+   $$
+   \sqrt{T} \left (\widehat I_T^\text{NIS} - \int f(x)\pi(x)\d x\right ) \rightarrow_d \cN(0,\sigma^2(f))
+   $$
+   where $f$ is such that
+   $\sigma^2(f) \triangleq TBC <\infty.$
+\end{proposition}
+\begin{proof}
+    See exercise sheet.
+\end{proof}
 
 \section{The Metropolis-Hastings algorithm}
 Basic algorithm, detailed balance. Adaptive MH.
