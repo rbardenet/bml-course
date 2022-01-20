@@ -2,7 +2,7 @@ Maximizing expected utility requires computing integrals.
 Numerical integration consists in finding $T$ nodes $x_t$ and weights $w_t$, such
 that
 $$
-\un{\mathcal{E}_t(f)} \triangleq  \int f(x)\d\mu(x)  - \quad \sum_{t=1}^N w_t f(\theta_t) = o_{T\rightarrow \infty}(1), \quad \forall
+{\mathcal{E}_t(f)} \triangleq  \int f(x)\d\mu(x)  - \quad \sum_{t=1}^N w_t f(\theta_t) = o_{T\rightarrow \infty}(1), \quad \forall
 f:\mathbb{R}^d\rightarrow\mathbb{R}\in\mathcal C,
 $$
 where $\mathcal C$ is a large class of functions.
@@ -11,16 +11,19 @@ Monte Carlo methods are randomized constructions of nodes and weights.
 Since $\mathcal{E}_T(f)$ is then random, statements on the error shall be with high probability, in expectation, about the asymtotic fluctuations, etc.
 
 We shall see that Monte Carlo methods $(i)$ can accomodate settings where the target $\mu$ in \eqref{e:numerical_integration} is only available through the evaluation of a unnormalized density $\d\mu(x) = \pi(x)\d x = \pi_u(x)/Z\d x$, as is almost always the case in Bayesian learning; and that $(ii)$ some Monte Carlo methods have an error that scales only polynomially with the dimension of the support of the integrand.
+
+\paragraph{References.} 
 The reference book for basic Monte Carlo methods is \citep{RoCa04}. 
 For theoretical results on MCMC, we refer to \citep[Chapters 5 to 7]{DoMoSt14}. 
 For more recent methods, we shall refer to papers.
+For demos of MCMC samplers, see \cfdemo.
 Finally, we shall not cover deterministic alternatives to Monte Carlo methods in large dimension, see quasi-Monte Carlo methods \citep{DiPi10}.
 
 \section{Basic Monte Carlo}
 
 If we knew how to sample from $\pi$, we could take $x_t\sim\pi$ i.i.d., $w_t=1/T$.
 Chebyshev's inequality would lead to
-  $$ \mathbb{P}\left( \un{\mathcal{E}_T(f)} \geq \alpha\frac{\sigma(f)}{\sqrt{T}} \right) \leq \frac{1}{\alpha^2}, \quad \forall \alpha>0,$$
+  $$ \mathbb{P}\left({\mathcal{E}_T(f)} \geq \alpha\frac{\sigma(f)}{\sqrt{T}} \right) \leq \frac{1}{\alpha^2}, \quad \forall \alpha>0,$$
   as soon as $\sigma(f)^2 := \mathbb{E}_{X\sim\pi} [f(X) - \int f(x)\pi(x)\d x]<+\infty$.
 
 In practice, we never have access to a sampler of $\pi$, so we choose an instrumental distribution $q(x)\d x$, sample $x_t$ i.i.d. from $q$.
@@ -35,17 +38,48 @@ $$
 where the convergence is almost sure (apply the strong law of large numbers to both the numerator and the denominator).
 \begin{proposition}[CLT for NIS] The NIS estimator satisfies
    $$
-   \sqrt{T} \left (\widehat I_T^\text{NIS} - \int f(x)\pi(x)\d x\right ) \rightarrow_d \cN(0,\sigma^2(f))
+   \sqrt{T} \left (\widehat I_T^\text{NIS} - \int f(x)\pi(x)\d x\right ) \rightarrow_d \cN(0,\sigma_{\text{NIS}}^2(f))
    $$
    where $f$ is such that
-   $\sigma^2(f) \triangleq TBC <\infty.$
+   $$
+   \sigma_{\text{NIS}}^2(f) \triangleq TBC <\infty.
+   $$
 \end{proposition}
 \begin{proof}
     See exercise sheet.
 \end{proof}
+Unfortunately, while NIS does accomodate unnormalized targets, it does not solve the curse of dimensionality: even when $\pi$ and $q$ are both Gaussian, only with different covariance matrices, one can show that 
+$$
+\log \sigma_{\text{NIS}}^2(f) = \Theta(d).
+$$
 
 \section{The Metropolis-Hastings algorithm}
-Basic algorithm, detailed balance. Adaptive MH.
+Metropolis-Hastings (MH) is the achetypal MCMC algorithm, and is still the main building block of modern MCMC algorithms. 
+The idea is to take the nodes as the truncated history of a Markov chain $(X_t)$, which we build so as to guarantee that $\mathcal{E}_T(f)\rightarrow 0$.
+To see how to build $(X_t)$, remember first the law of large numbers for Markov chains. 
+
+\begin{proposition}[LLN for Markov chains; see e.g. \cite{DoMoSt14}]
+    Let $(X_t)_{t\in\mathbb N}$ be a Markov chain with Markov kernel $P$.
+    If
+    \begin{enumerate}
+      \item There exists $\pi$ s.t. 
+      $$
+      \int \d\pi(x) P(x, B) = \pi(B).
+      $$
+      \item For any $A$ with $\pi(A)>0$, for any $\theta\in \Theta$,
+      $$ 
+      \mathbb{P}_{x} \left(\sum_{t=0}^\infty 1_{\theta_t\in A} = +\infty\right) = 1,
+      $$
+    \end{enumerate}
+    then for any initial distribution $\mu_0$ of $X_0$, almost surely
+    $$
+    \frac{1}{T} \sum_{t=1}^T f(\theta_t) \rightarrow \int f\mathrm{d}\pi,
+    $$
+    where $f\in L^1(\pi)$. 
+\end{proposition}
+The first condition states that $\pi$ is an \emph{invariant distribution} of the chain: if $X_t\sim\pi$, then $X_{t+1}\sim\pi$. 
+The second condition is called \emph{Harris recurrence}: starting from any $x$, i.e. $X_0\sim\delta_{x}$, then the chain returns an infinite number of times to $A$ almost surely, as soon as $A$ is charged by $\pi$. 
+Intuitively, this makes sure that there is an infinity of nodes on $A$, so that the integral of $f$ on $A$ is accurately estimated.
 
 \section{Gibbs sampling}
 
