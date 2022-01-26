@@ -138,17 +138,50 @@ $L(q)$ is thus \un{a lower bound for the evidence} $p(\text{data})$ (ELBO).
   &~~~~~+ \unnnn{\sum_{k=1}^K \sum_{v=1}^V \gamma_k\log b_{kv}}.
 \end{align*}
 \vfill
+\vspace{1cm}
 \begin{block}{Lemma (exercise)}
 Let $\Psi(\cdot) := \Gamma'(\cdot)/\Gamma(\cdot)$ be the digamma function. Then
 $$
-\mathbb{E}_{\text{Dir}(\theta\vert\alpha)} \log \theta_i = \Psi(\theta_i) - \Psi(\Vert \theta\Vert_1).
+\mathbb{E}_{\text{Dir}(\theta\vert\eta)} \log \theta_i = \Psi(\eta_i) - \Psi(\Vert \eta\Vert_1).
 $$
 \end{block}
 \vfill
 \end{frame}
 
-\begin{frame}{Back to LDA 2/2}
+\begin{frame}{VB for LDA: singling out $\pi_i$}
+  \fontsize{6pt}{7pt}\selectfont
+\begin{align*}
+\log &p(y, z, \pi, B)\\
+     & \propto \sum_{i=1}^N \left[\sum_{k=1}^K \alpha_k \log \pi_{ik} + \sum_{\ell=1}^{L_i} \left(\un{\sum_{k=1}^K 1_{z_{i\ell}=k}\log\pi_{_{ik}}} + \unn{\sum_{v=1}^V \sum_{k=1}^K 1_{y_{i\ell}=v}1_{z_{i\ell}=k} \log b_{kv}}\right)\right] 
+    + \unnnn{\sum_{k=1}^K \sum_{v=1}^V \gamma_k\log b_{kv}}.
+  \end{align*}
+  $$    
+  \vfill
+  \blank
+\end{frame}
 
+\begin{frame}{VB for LDA: singling out $z_{i\ell}$}
+  \fontsize{6pt}{7pt}\selectfont
+\begin{align*}
+\log &p(y, z, \pi, B)\\
+     & \propto \sum_{i=1}^N \left[\sum_{k=1}^K \alpha_k \log \pi_{ik} + \sum_{\ell=1}^{L_i} \left(\un{\sum_{k=1}^K 1_{z_{i\ell}=k}\log\pi_{_{ik}}} + \unn{\sum_{v=1}^V \sum_{k=1}^K 1_{y_{i\ell}=v}1_{z_{i\ell}=k} \log b_{kv}}\right)\right] 
+    + \unnnn{\sum_{k=1}^K \sum_{v=1}^V \gamma_k\log b_{kv}}.
+  \end{align*}
+  $$    
+  \vfill
+  \blank
+\end{frame}
+
+\begin{frame}{VB for LDA: singling out $B_{k:}$}
+  \fontsize{6pt}{7pt}\selectfont
+\begin{align*}
+\log &p(y, z, \pi, B)\\
+     & \propto \sum_{i=1}^N \left[\sum_{k=1}^K \alpha_k \log \pi_{ik} + \sum_{\ell=1}^{L_i} \left(\un{\sum_{k=1}^K 1_{z_{i\ell}=k}\log\pi_{_{ik}}} + \unn{\sum_{v=1}^V \sum_{k=1}^K 1_{y_{i\ell}=v}1_{z_{i\ell}=k} \log b_{kv}}\right)\right] 
+    + \unnnn{\sum_{k=1}^K \sum_{v=1}^V \gamma_k\log b_{kv}}.
+  \end{align*}
+  $$    
+  \vfill
+  \blank
 \end{frame}
 
 
