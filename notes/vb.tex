@@ -79,7 +79,7 @@ Like in deriving conditionals in Gibbs sampling, this is the part where conjugat
 In practice, the choice of $\mathcal Q$ is often made so that this step is easy, as we shall see in Section~\ref{s:VB_for_LDA}.
 
 Finally, note that taking the variational family to be \eqref{e:mean_field} is akin to assuming independence of all variables under the posterior.
-Combined with the fact that the log term in the reverse KL \eqref{e:VB} favours a $q^\star$ with a support that includes that of $\pi$, this often implies a gross overestimation of the support of the target, along with the expected ignorance of correlations; see Figure~\ref{}.
+Combined with the fact that reverse KL \eqref{e:VB} penalizes $q^\star$ putting a lot of mass where $\pi$ does not, this often implies a gross underestimation of the support of the target (and thus of posterior uncertainty), along with the built-in ignorance of posterior correlations; see Figure~\ref{}.
 While separability makes algorithmic derivations easier, we thus usually rather aim for ``as separable as required by computation".
 In other words, if, for modeling reasons, you believe that there is correlation under $\pi$ of some subset of the variables, say $x_i, i\in I$, you should try to keep these variables correlated in your variational approximation, by rather defining
 $$
