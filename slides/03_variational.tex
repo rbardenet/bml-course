@@ -86,8 +86,8 @@
 \begin{frame}{When MCMC is intractable, variational inference comes to help}
 \begin{block}{Turning integration into optimization over measures}
 Variational Bayesian inference (VB) consists in approximating
-$$ \int f(\theta)\pi(\theta)\d\theta \approx \int f(\theta)q(\theta)\d\theta$$
-with \un{$ q \in \argmin_{\tilde q\in \mathcal Q} \text{distance}(\pi, \tilde q)$}. Often we take
+$$ \int f(\theta)\pi(\theta)\d\theta \approx \int f(\theta)q^\star(\theta)\d\theta$$
+with \un{$ q^\star \in \argmin_{q\in \mathcal Q} \text{distance}(\pi, q)$}. Often we take
 $$
 \text{distance}(\pi, \tilde q) = \text{KL}(\tilde q, \pi) := \int q(\theta) \log \frac{q(\theta)}{\pi(\theta)}\d\theta.
 $$
