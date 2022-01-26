@@ -367,7 +367,7 @@ Consider a physical system described by Hamiltonian $H(x,\xi)$ in phase space $(
   \item We know approximations of the Hamiltonian flow, such as the leapfrog (aka velocity Verlet) integrator. It is defined as $\psi_h^n = \psi_h \circ \dots \psi_h$, where $(p',q') = \psi_h(p,q)$ is 
 \begin{align*}
     p_{1/2} &= p + \frac{h}{2}\nabla \log \pi(q)\\
-    q' &= a+hM^{-1}p_{1/2}\\
+    q' &= q+hM^{-1}p_{1/2}\\
     p' &= p_{1/2} + \frac{h}{2} \nabla \log\pi (q');
 \end{align*}
 \end{itemize}
@@ -430,7 +430,7 @@ We need to monitor both cross-chain and within-chain behavior.
 \begin{block}{Single-chain diagnostics}
   \begin{itemize}
   \item The idea is to compare different chunks of a single chain.
-  \item At stationarity, large chunks should be statistically hard to distinguish.
+  \item At stationarity, large chunks should be statistically indistinguishable.
   \item The \un{Geweke diagnostic} tests this similarity \citep{Gew92}
   \end{itemize}
 \end{block}
@@ -438,9 +438,9 @@ We need to monitor both cross-chain and within-chain behavior.
 \begin{block}{Effective sample size}
   \begin{itemize}
   \item Autocorrelation in each chain is what increases the variance of scalar estimands, compared to i.i.d. draws from $\pi$.
-  \item We can estimate this autocorrelation, and build an estimator for the ratio of the two variances $\widehat{ESS}\in [1,PT]$, called the \un{\emph{effective sample size}}; see Section 11.5 of \citep{GCSDVR13}.
-  \item Note that 
-  $$\hat R \approx \sqrt{1+P/\widehat{ESS}},$$ so $\hat R=1.1$ \un{only} corresponds to $\widehat{ESS}=5P$ \citep{VaKn21}.
+  \item We can estimate this autocorrelation, and build an estimator for $PT$ times the ratio of the two variances $\widehat{ESS}\in [1,PT]$, called, the \un{\emph{effective sample size}}; see Section 11.5 of \citep{GCSDVR13}.
+  \item \cite{VaKn21} note that
+  $$\hat R \approx \sqrt{1+P/\widehat{ESS}},$$ so $\hat R=1.1$ \un{only} corresponds to $\widehat{ESS}=5P$ .
   \end{itemize}
 \end{block}
 \end{frame}
