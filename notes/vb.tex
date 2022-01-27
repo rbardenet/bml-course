@@ -99,7 +99,7 @@ Recall the latent Dirichlet allocation model from Section~\ref{s:Gibbs_for_LDA},
 \end{align}
 We want to fit a mean-field approximation
 $$
-\mathcal Q = \left\{ \prod_{i=1}^N \left[\text{Dir}(\pi_i\vert\widetilde{\pi_i}) \prod_{\ell=1}^{L_i} \text{Cat}(q_{i\ell}\vert\widetilde{q_{i\ell}}) \right] \prod_{k=1}^K \text{Dir}(B_{k:}\vert \widetilde{B_{k:}}) \right\}.
+\mathcal Q = \left\{ \prod_{i=1}^N \left[\text{Dir}(\pi_i\vert\widetilde{\pi_i}) \prod_{\ell=1}^{L_i} \text{Cat}(z_{i\ell}\vert\widetilde{z}_{i\ell}) \right] \prod_{k=1}^K \text{Dir}(B_{k:}\vert \widetilde{B}_{k:}) \right\}.
 $$
 Tilded variables parametrize the variational approximation $q$, and optimizing over $q$ will thus be implemented as an optimization over these parameters.
 As we shall see, the Dirichlet distributions are chosen to make the following computations easy thanks to conjugacy.
@@ -111,12 +111,12 @@ We start by singling out $\pi_i\in \Delta_K$ for some $1\leq i \leq N$, denoting
 We are confident that we shall be able to identify the functional form (and thus the normalization constant) of the resulting distribution, and thus we do not keep track of additive variable that do not imply $\pi_i$.
 This yields
 \begin{align*}
-\mathbb{E}_{\setminus \pi_i} \log p(y,z,\pi, B) &\propto \sum_{k=1}^K \alpha_k \log \pi_{ik} + \sum_{\ell=1}^{L_i} \mathbb{E}_{z_i}\un{\sum_{k=1}^K  1_{z_{i\ell}=k}\log\pi_{_{ik}}}\\
-&= \sum_{k=1}^K \alpha_k \log \pi_{ik} + \sum_{\ell=1}^{L_i} \un{\sum_{k=1}^K \widetilde{z_{i\ell}}\log\pi_{_{ik}}}
+\mathbb{E}_{\setminus \pi_i} \log p(y,z,\pi, B) &\propto \sum_{k=1}^K \alpha_k \log \pi_{ik} + \sum_{\ell=1}^{L_i} \mathbb{E}_{z_{i\ell}}\un{\sum_{k=1}^K  1_{z_{i\ell}=k}\log\pi_{_{ik}}}\\
+&= \sum_{k=1}^K \alpha_k \log \pi_{ik} + \sum_{\ell=1}^{L_i} \un{\sum_{k=1}^K \widetilde{z}_{i\ell k}\log\pi_{_{ik}}}
 \end{align*}
 and we recognize the log PDF of a Dirichlet distribution in $\pi_i$, with parameters
 $$
-\widetilde\pi_i \triangleq \left( \alpha_k + \sum_{\ell=1}^{L_i} \widetilde{z_{i\ell}}  \right)_{1\leq k\leq K}.
+\widetilde\pi_i \triangleq \left( \alpha_k + \sum_{\ell=1}^{L_i} \widetilde{z}_{i\ell k}  \right)_{1\leq k\leq K}.
 $$
 
 \paragraph{Singling out $z_{i\ell}$.}
@@ -143,11 +143,11 @@ Now we derive
 \end{align*}
 We recognize a categorical distribution with parameters
 $$
-\widetilde{z_{i\ell}} \propto \left( \exp\left[\Psi_k(\widetilde\pi_{i}) +  \Psi_{y_{i\ell}}(\widetilde{B}_{k:})\right]\right)_{1\leq k \leq K}.
+\widetilde{z}_{i\ell} \propto \left( \exp\left[\Psi_k(\widetilde\pi_{i}) +  \Psi_{y_{i\ell}}(\widetilde{B}_{k:})\right]\right)_{1\leq k \leq K}.
 $$
 Once again, the normalization constant can be guessed after doing the computation, since necessarily
 $$
-  \widetilde{z_{i\ell}} =
+  \widetilde{z}_{i\ell} =
     \left(
       \frac{\exp\left[\Psi_k(\widetilde\pi_{i}) +  \Psi_{y_{i\ell}}(\widetilde{B}_{k:})\right]}
       {\sum_{k=1}^K \exp\left[\Psi_k(\widetilde\pi_{i}) +  \Psi_{y_{i\ell}}(\widetilde{B}_{k:})\right]}
