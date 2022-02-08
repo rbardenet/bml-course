@@ -7,6 +7,7 @@
 * The annotated slides for lecture 1 are [here](https://nextcloud.univ-lille.fr/index.php/s/tzbHA5c3b8Tpwny).
 * The annotated slides for lecture 2 are [here](https://nextcloud.univ-lille.fr/index.php/s/q35iJeSBd8YmYGE).
 * The annotated slides for lecture 3 are TBC.
+* The annotated slides for lecture 4 are in the  `slides` folder.
 
 ## Objective of the course
 By the end of the course, the students should
