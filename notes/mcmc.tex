@@ -4,11 +4,11 @@ Maximizing expected utility requires computing integrals.
 Numerical integration consists in finding $T$ nodes $x_t$ and weights $w_t$, such
 that
 $$
-{\mathcal{E}_t(f)} \triangleq  \int f(x)\d\mu(x)  - \quad \sum_{t=1}^N w_t f(\theta_t) = o_{T\rightarrow \infty}(1), \quad \forall
+{\mathcal{E}_T(f)} \triangleq  \int f(x)\d\mu(x)  - \quad \sum_{t=1}^T w_t f(\theta_t) = o_{T\rightarrow \infty}(1), \quad \forall
 f:\mathbb{R}^d\rightarrow\mathbb{R}\in\mathcal C,
 $$
 where $\mathcal C$ is a large class of functions.
-Riemann-like (i.e., grid-based) integration leads to $\mathcal{E}_t(f) \sim \frac{\sqrt{d}}{T^{1/d}}$, so that grids become essentially useless beyond $d=3$.
+For any smooth $f$, Riemann-like (i.e., grid-based) integration leads to $\mathcal{E}_T(f) \sim \frac{\sqrt{d}}{T^{1/d}}$, so that grids become essentially useless beyond $d=3$.
 Monte Carlo methods are randomized constructions of nodes and weights. 
 Since $\mathcal{E}_T(f)$ is then random, statements on the error shall be with high probability, in expectation, about the asymtotic fluctuations, etc.
 

@@ -194,7 +194,7 @@ Assume that there exists a (deterministic) smooth and invertible function $f$ su
 Now rewrite 
 \begin{align*}
   \nabla_\phi L(q) 
-  &= \nabla_\phi \mathbb{E}_{\epsilon\sim p} \log \frac{\pi_u(f(\epsilon,\phi))}{q(f(\epsilon,\phi)\vert\phi)}+ \nabla_\phi H[q(\cdot\vert\phi)].
+  &= \nabla_\phi \mathbb{E}_{\epsilon\sim p} \log \pi_u(f(\epsilon,\phi)) + \nabla_\phi H[q(\cdot\vert\phi)].
 \end{align*}
 This time the gradient can be passed under the integral in the first term, without relying on the score function trick, and we obtain
 \begin{align*}
@@ -206,6 +206,7 @@ This suggests a second vanilla Monte Carlo estimator, drawing $\epsilon_i\sim p$
 In practice, the resulting estimator has been found to have much lower variance \citep{ReMoWi14}, like in variational auto-encoders \citep{KiWe14}. 
 I haven't seen a completely convincing explanation why and when variance reduction happens with the reparametrization trick in general, though.  
 Finally, note that we again assumed that the entropy of $q$ could be differentiated in closed form, but the entropy term can also be treatead using the reparametrization trick if needed. 
+We shall do so in the next section, for the sake of illustration.
 
 \subsection{VB for deep networks}
 % Include IS with VAEs as in Jordan et al.
@@ -221,7 +222,7 @@ The gradient of the reparametrized ELBO writes
 \end{align*}
 Now notice that $\log\pi_u(w) = \log p(w) + \sum_{i=1}^{N_y} \log p(y_i\vert w)$, so that one can further uniformly draw (with or without replacement) a minibatch of data points $B$, and further obtain an unbiased estimator 
 \begin{align*}
-\nabla_\phi L(q(\cdot\vert\phi)) &\approx \frac{N_y}{N_\epsilon \vert B\vert} \sum_{i=1}^{N_\epsilon} \sum_{y\in B} \nabla_\phi \left [ \frac{1}{N_y}\log p(f(\epsilon_i,\phi)) + \log p(y\vert f(\epsilon_i,\phi)) - \log q(f(\epsilon_i,\phi)\vert\phi) \right ].\\
+\nabla_\phi L(q(\cdot\vert\phi)) &\approx \frac{N_y}{N_\epsilon \vert B\vert} \sum_{i=1}^{N_\epsilon} \sum_{y\in B} \nabla_\phi \left [ \frac{1}{N_y}\log p(f(\epsilon_i,\phi)) + \log p(y\vert f(\epsilon_i,\phi)) - \frac{1}{N_y}\log q(f(\epsilon_i,\phi)\vert\phi) \right ].\\
 \end{align*}
 Note that following \cite{BCKW15}, we do not assume that the entropy can be differentiated in closed form, but the method applies \emph{mutatis mutandis}. 
 Note also that it is not obvious that replacing the entropy by its closed-form would reduce the variance of the estimator.
