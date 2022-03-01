@@ -1,0 +1,97 @@
+In this chapter, we introduce different historical approaches to learning and inference on a running example, penalized linear regression. 
+We shall exagerate the stances of some famous scientists, for the sake of illustration. 
+
+\section{Fisher does linear regression}
+
+Say we have a data set $(x_i,y_i)$, $1\leq i\leq N$, where $x_i\in\mathbb{R}^d$ are the \emph{features} and $y_i\in\mathbb{R}$ the \emph{response}. 
+We want to study the influence of features on the response, and we ask British statistician Ronald Fisher (1890--1962) for help. 
+He recommends positing a simple statistical model, i.e. a parametrized collection of PDFs for $y\vert x$. 
+Calling the parameter $\theta$ and abusively denoting the parametrized distributions by $y\vert x,\theta$, we posit 
+$$ p(y_i\vert x_i, \theta) = \cN(y_i \vert x_i^T \theta, \sigma^2), 1\leq i \leq N,$$
+i.i.d., with known $\sigma$ for simplicity.
+To characterize the influence of features on the response, Fisher recommends that we estimate $\theta$, along with a confidence interval to communicate our uncertainty. 
+Fisher was the one to introduce the maximum likelihood estimator 
+$$
+\tMLE \triangleq \arg\max_{\theta} p(\by\vert X, \theta) = \arg\max_\theta \prod_{i=1}^N \cN(y_i \vert x_i^T \theta, \sigma^2).
+$$
+Now 
+$$
+\log \prod_{i=1}^N \cN(y_i \vert x_i^T \theta, \sigma^2) = \log \cN(\by \vert X\theta, \sigma^2 I) \propto - \Vert \by - X\theta\Vert^2,
+$$
+where the proportionality sign allows us to drop additive terms that do not depend on $\theta$. 
+This entails that $\tMLE$ is nothing but the least squares estimator 
+$$
+\tMLE = (X^TX)^{-1} X^T\by,
+$$
+where we assumed that $X$ has full rank.
+There is nothing inherently good in using the MLE rather than another estimator, but it often has good \emph{frequentist} properties, i.e., properties established by integrating over the posited data generation model.
+For instance, it is easy to prove the following.
+\begin{proposition}
+Under $\by \sim \cN(X\theta, \sigma^2 I)$, and assuming $X$ has full rank,
+\begin{equation}
+    \label{e:fisher}
+    \tMLE \sim \cN(\theta, \sigma^2(X^TX)^{-1}).
+\end{equation}
+\end{proposition}
+\proofLeftAsExercise
+
+Fisher then argues that \eqref{e:fisher} gives you a wealth of properties that make $\tMLE$ an interesting estimator.
+For starters, $\tMLE$ is unbiased ($\mathbb E \tMLE = \theta$)
+and $\tMLE \rightarrow \theta$ in probability. 
+Moreover, the (random) ellipsoid 
+$$
+\mathcal{E}_\alpha = \{\theta\in\mathbb{R}^d \text{ such that }\sigma^{-2}(\theta-\tMLE)^TX^T X(\theta-\tMLE) \leq \alpha\} 
+$$
+contains $\theta$ with known probability $1-\delta(\alpha)$.
+It thus makes sense, to Fisher, to find the smallest value $\alpha_{0.99}$ such that $1-\delta(\alpha)\geq 0.99$, and report the \emph{confidence region} $\mathcal{E}_{\alpha_0.99}$ to quantify his uncertainty about $\theta$. 
+The fact that, under repetition of the data generation, the (random) ellipsoid $\mathcal{E}_{\alpha_0.99}$ contains $\theta$ about $99\%$ of the time, is called \emph{coverage}.
+
+\section{Wald does linear regression}
+Imagine that you had asked Abraham Wald (1902--1950) for help instead of Fisher.
+He would have argued that estimating $\theta$, or outputing a region of $\mathbb{R}^d$ that encodes your uncertainty, are two different actions to be taken under uncertainty. 
+
+Consider estimation. 
+Wald would ask you to specify the loss $L(\theta,\widehat{\theta})$ that you incur by estimating $\theta$ by $\widehat{\theta}\in\mathbb{R}^d$. 
+You might answer $L_\alpha(\theta,\widehat{\theta}) = \Vert\theta-\widehat{\theta}\Vert^\alpha$ for some $\alpha>0$.
+Wald would then say that the accuracy of an estimator $\widehat{\theta}= \widehat{\theta}(\by)$ is characterized by its risk function
+\begin{equation}
+    R(\cdot,\widehat{\theta}):\theta\mapsto \mathbb{E}_{\by\vert X, \theta} L(\theta,\widehat{\theta}(\by)).
+    \label{e:risk}
+\end{equation}
+If the risk function of an estimator is smaller than that of another estimator, we say that the former dominates the latter.
+Wald's minimum requirement for an estimator is that the estimator is \emph{admissible}, i.e., that it is not dominated. 
+Maybe surprisingly, the MLE for regression with the squared loss $L_2$ is \emph{not} admissible! 
+This is an extension by \cite{TBC} of an important theorem known as the James-Stein theorem \citep{TBC}.
+We leave the original James-Stein theorem as \exo{ex:james-stein}. 
+We shall see an even simpler estimator that dominates the MLE in Section~\ref{s:ridge_regression}.
+
+So what should we do, according to Wald, if the MLE is no option? 
+It would be natural to find an estimator with as small as possible a risk function.
+Unfortunately, the risk function being a function, many pairs of estimators are incomparable. 
+Wald might recommend to sum up a risk function by a single number, and look, for instance, for an estimator minimizing the worst-case risk, a so-called \emph{minimax} estimator
+\begin{equation}
+    \widehat\theta_{\text{minimax}} \in \arg\inf_{\widehat{\theta}} \sup_\theta R(\theta,\widehat{\theta}).
+    \label{e:minimax_estimator_for_regression}
+\end{equation}
+Another solution to sum up the risk function is to integrate it against a measure for which the risk is integrable. 
+This leads to an estimator that we call the \emph{Bayes} estimator, anticipating over Section~\ref{ch:expected_utility},
+\begin{equation}
+    \tBayes \in \arg\min_{\widehat{\theta}} \mathbb{E}_\theta R(\theta,\widehat{\theta}) = \mathbb{E}_\theta \mathbb{E}_{\by\vert X,\theta} R(\theta,\widehat{\theta}).
+    \label{e:bayes_estimator_for_regression}
+\end{equation}
+We now have a joint distribution over $\theta,\by$. 
+As long as the loss $L(\theta,\widehat{\theta}(\by))$ is integratble w.r.t. this joint, the towering property of the expectation yields
+\begin{align}
+    \mathbb{E}_\theta \mathbb{E}_{\by\vert X,\theta} L(\theta,\widehat{\theta}) 
+    &= \mathbb{E}_\by \mathbb{E}_{\theta\vert X,\by} L(\theta,\widehat{\theta}).
+\label{e:reversed_expectation}
+\end{align}
+Since $\widehat{\theta}$ is only a function $\by$, minimizing \eqref{e:reversed_expectation} boils down to setting 
+$$
+\tBayes = \mathbb{E}_{\theta\vert X,\by} L(\theta,\widehat{\theta}).
+$$
+For the squared loss $L=L_2$, the Bayes estimator is thus the mean of the \emph{posterior} distribution, i.e. 
+$
+\mathbb{E}_{\theta\vert X,\by} \theta. 
+$
+For the one-loss $L=L_1$, the Bayes estimator is a generalized median of the same posterior distribution.
