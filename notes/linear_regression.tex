@@ -47,7 +47,7 @@ It thus makes sense, to Fisher, to find the smallest value $\alpha_{0.99}$ such 
 The fact that, under repetition of the data generation, the (random) ellipsoid $\mathcal{E}_{\alpha_0.99}$ contains $\theta$ about $99\%$ of the time, is called \emph{coverage}.
 
 \section{Wald does linear regression}
-Imagine that you had asked Abraham Wald (1902--1950) for help instead of Fisher.
+Imagine that you had asked Hungarian-American Abraham Wald (1902--1950) for help instead of Fisher.
 He would have argued that estimating $\theta$, or outputing a region of $\mathbb{R}^d$ that encodes your uncertainty, are two different actions to be taken under uncertainty. 
 
 Consider estimation. 
@@ -74,7 +74,7 @@ Wald might recommend to sum up a risk function by a single number, and look, for
     \label{e:minimax_estimator_for_regression}
 \end{equation}
 Another solution to sum up the risk function is to integrate it against a measure for which the risk is integrable. 
-This leads to an estimator that we call the \emph{Bayes} estimator, anticipating over Section~\ref{ch:expected_utility},
+This leads to an estimator that we call the \emph{Bayes} estimator, anticipating over Chapter~\ref{ch:expected_utility},
 \begin{equation}
     \tBayes \in \arg\min_{\widehat{\theta}} \mathbb{E}_\theta R(\theta,\widehat{\theta}) = \mathbb{E}_\theta \mathbb{E}_{\by\vert X,\theta} R(\theta,\widehat{\theta}).
     \label{e:bayes_estimator_for_regression}
@@ -88,10 +88,18 @@ As long as the loss $L(\theta,\widehat{\theta}(\by))$ is integratble w.r.t. this
 \end{align}
 Since $\widehat{\theta}$ is only a function $\by$, minimizing \eqref{e:reversed_expectation} boils down to setting 
 $$
-\tBayes = \mathbb{E}_{\theta\vert X,\by} L(\theta,\widehat{\theta}).
+\tBayes = \tBayes(\by) = \arg\inf_{\widehat{\theta}} \mathbb{E}_{\theta\vert X,\by} L(\theta,\widehat{\theta}).
 $$
 For the squared loss $L=L_2$, the Bayes estimator is thus the mean of the \emph{posterior} distribution, i.e. 
 $
 \mathbb{E}_{\theta\vert X,\by} \theta. 
 $
 For the one-loss $L=L_1$, the Bayes estimator is a generalized median of the same posterior distribution.
+
+\section{Savage does linear regression}
+\label{ch:bayesian_regression}
+% introduce subjective Bayes
+
+\section{Hoerl and Kennard do linear regression}
+\label{ch:penalized_regression}
+% introduce empirical Bayes
