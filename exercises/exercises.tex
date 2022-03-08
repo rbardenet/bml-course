@@ -1,8 +1,13 @@
 \documentclass{article}
+
 \usepackage[citecolor=bleu]{hyperref}
 \usepackage{amsmath,amsthm,amssymb}
 \newtheorem{lemma}{Lemma}
 \usepackage{xcolor}
+
+% Rémi j'ai ajouté cette définition de couleur bleu, j'avais une erreur sinon; tu la définis où ?
+\definecolor{bleu}{rgb}{0.2078, 0.1333, 0.6471}
+
 \input{../slides/notations}
 \usepackage[natbib=true,backend=biber,citestyle=authoryear]{biblatex}
 \bibliography{../bib/stats,../bib/learning}
@@ -28,7 +33,7 @@
 
 \title{BML: exercise sheet}
 \date{}
-\author{R\'emi Bardenet}
+\author{R\'emi Bardenet, Julyan Arbel}
 \begin{document}
 \maketitle
 
@@ -334,56 +339,118 @@ q(\pi_i, c_i, B) = \text{Dir}(\pi_i\vert\tilde\pi_i) \prod_v \text{Multinomial}(
 $$
 \emph{Hint: See \cite[Section 27.3.6]{Mur12}.}
 
-% \section{Lecture \#4: Bayesian nonparametrics}
+ \section{Bayesian nonparametrics}
+ \subsection{Combinatorial properties of $K_n$ for Dirichlet process}
+ \label{ex:K_n-DP}
+ Let $K_n$ be the number of clusters observed when drawing $n$ observations from a Dirichlet process with concentration parameter $\alpha\in\mathbb{R}_+$.
+ \begin{enumerate}
+ 	\item Show that
+ \begin{equation*}
+     \mathbb{E}[K_{n}] = \sum_{i=0}^{n-1} \frac{\alpha}{\alpha + i} \quad \text{and} \quad \mbox{Var}(K_n) = \sum_{i=0}^{n-1} \frac{\alpha i}{(\alpha + i)^2}.
+ \end{equation*}
+ 	\item Show the following large $n$ asymptotics for the expectation and variance of $K_n$:
+ \begin{equation*}
+         \mathbb{E}[K_n] \sim \alpha\log n  \quad \text{and} \quad \mbox{Var}(K_n)\sim \alpha\log n.
+ \end{equation*}
+ \end{enumerate}
+ 
+ \solution{
+\begin{enumerate}
+	\item The expressions are obtained by writing $K_n$ as a sum of independent Bernoulli random variables of parameter $\frac{\alpha}{\alpha+i}$, for $i=0,\ldots, n-1$, due to the DP predictive distribution.
+	\item This is obtained by factorizing by $\alpha$ and by Riemann sums of the intergal of $x\mapsto 1/x$ over interval $[1,n]$.
+\end{enumerate}
+}
+ 
+ \subsection{Combinatorial properties of $K_n$ for Pitman--Yor process $(\star)$}
+\label{ex:K_n-PY}
+Let $K_n$ be the number of clusters observed when drawing $n$ observations from a Pitman--Yor process with discount parameter $\sigma\in(0,1)$ and concentration parameter $\alpha\in\mathbb{R}_+$.
 
-% \subsection{Combinatorial properties of $K_n$ for Dirichlet process $(\star)$}
-% \label{ex:K_n-DP}
-% Let $K_n$ be the number of clusters observed when drawing $n$ observations from a Dirichlet process with concentration parameter $\alpha\in\mathbb{R}_+$.
+\begin{enumerate}
+	\item Show that
+\begin{align*}
+    \mathbb{E}[K_{n+1}]= \frac{\alpha}{n+\alpha} + \frac{\sigma + \alpha +n}{n+ \alpha}\mathbb{E}\left[K_n\right].
+\end{align*}
+\textit{Hint:} use the PY predictive distribution and a conditional expectation to get this iterative formula from $n$ to $n+1$.
+	\item Deduce that
+\begin{equation*}
+        \mathbb{E}[K_n] = \frac{\alpha}{\sigma}\left(\frac{(\alpha +\sigma)_{n}}{(\alpha)_{n}}-1\right),
+\end{equation*}
+where $(x)_n = x(x+1)\ldots(x+n-1)$.
+	\item Show the following large $n$ asymptotics for the expectation of $K_n$:
+\begin{equation*}
+        \mathbb{E}[K_n] \sim \frac{\Gamma(\alpha+1)}{\sigma \Gamma(\alpha+\sigma)}n^\sigma.
+\end{equation*}
+\item Show that the following recursive formula holds for the variance of $K_n$:
+\begin{align*}
+\mbox{Var}(K_{n+1}) = \mbox{Var}(K_n)\frac{n + \alpha + 2\sigma}{n+\alpha} + \frac{(\alpha +\sigma)_{n}}{(\alpha+1)_{n}}\left(1-\frac{(\alpha +\sigma)_{n}}{(\alpha+1)_{n}}\right).
+\end{align*}
+\textit{Hint:} use the law of total variance.
+\item Derive again the simpler expression of expectation and variance of $K_n$ in the Dirichlet process case.
+\item \cite{pitman2002combinatorial} (Exercise 3.3.4) obtains the following limiting behaviour of moments of $K_n$ of any positive order $p>0$:
+\begin{equation*}
+        \mathbb{E}[K_n^p] \sim n^{\sigma p} \frac{\Gamma(\alpha/\sigma+p+1)\Gamma(\alpha+1)}{\Gamma(\alpha/\sigma+1)\Gamma(\alpha+p\sigma+1)}.
+\end{equation*}
+Use this to characterise the asymptotic behaviour of $\mbox{Var}(K_n)$.
+\end{enumerate}
 
-% \begin{enumerate}
-% 	\item Show that
-% \begin{equation*}
-%     \mathbb{E}[K_{n}] = \sum_{i=0}^{n-1} \frac{\alpha}{\alpha + i} \quad \text{and} \quad \mbox{Var}(K_n) = \sum_{i=0}^{n-1} \frac{\alpha i}{(\alpha + i)^2}.
-% \end{equation*}
-% 	\item Show the following large $n$ asymptotics for the expectation and variance of $K_n$:
-% \begin{equation*}
-%         \mathbb{E}[K_n] \sim \alpha\log n  \quad \text{and} \quad \mbox{Var}(K_n)\sim \alpha\log n.
-% \end{equation*}
-% \end{enumerate}
+\solution{
+\begin{enumerate}
+	\item By the P\'olya urn representation of PY (or, equivalently, its predictive distribution), we have
+\begin{align*}
+    \mathbb{P}(K_{n+1}=K+1 \mid K_1,\ldots,K_n=K)&= \frac{K \sigma + \alpha}{n + \alpha},\\
+    \mathbb{P}(K_{n+1}=K \mid K_1,\ldots,K_n=K)&= \frac{n - K\sigma }{n + \alpha}
+\end{align*}
+hence 
+\begin{align}\label{eq: exp_PY_rec}
+    \mathbb{E}[K_{n+1}]= \mathbb{E}[\mathbb{E}[K_{n+1} \mid K_1,\ldots,K_n=K]] = \frac{\alpha}{n+\alpha} + \frac{\sigma + \alpha +n}{n+ \alpha}\mathbb{E}\left[K\right].
+\end{align}
+\item
+This is obtained by induction and by noting that the proposed formula is verified for $n=1$, leading to $\mathbb{E}\left[K_1\right]=1$.
+\item By properties of the gamma function:
+\begin{align*}
+        \mathbb{E}[K_n] &\sim \frac{\alpha}{\sigma}\frac{(\alpha +\sigma)_{n}}{(\alpha)_{n}}
+        = \frac{\alpha}{\sigma}\frac{\Gamma(\alpha +\sigma+n)\Gamma(\alpha)}{\Gamma(\alpha+n)\Gamma(\alpha +\sigma)}\\
+        &\sim
+        \frac{\alpha\Gamma(\alpha)}{\sigma \Gamma(\alpha+\sigma)}n^\sigma=\frac{\Gamma(\alpha+1)}{\sigma \Gamma(\alpha+\sigma)}n^\sigma.
+\end{align*}
+\item
+Using the law of total variance we have, 
+ \begin{align}\label{eq:var}
+\mbox{Var}(K_{n+1})&= \mathbb{E}[\mbox{Var}(K_{n+1}\mid K_1,\ldots,K_n=K)]\\ &+ \mbox{Var}(\mathbb{E}[K_{n+1}\mid K_1,\ldots,K_{n}=K]).\nonumber
+\end{align}
+%Then using \eqref{eq: exp_PY_rec}, the first term could be written as,
+Using the fact that the variance of a two-point distribution with outcomes $a$ and $b$ and probabilities $p$ and $1-p$ is $p(1-p)(a-b)^2$, we can write the first term of the right-hand side of \eqref{eq:var} as
+\begin{align}\nonumber
+%\begin{aligned}
+\mathbb{E}[\mbox{Var}(K_{n+1}&\mid K_1,\ldots,K_n=K)] = \mathbb{E}\left[\frac{(K\sigma+\alpha)(n-K\sigma)}{(n+\alpha)^2}\right]\\
+%=&\mathbb{E}\Bigg[(K + 1 - \mathbb{E}[K_{n+1}
+% \mid K_1,\ldots,K_n=K]))^2  \frac{K \sigma + \alpha}{n + \alpha} +\\
+% +& (K  - \mathbb{E}[K_{n+1}]\mid K_1,\ldots,K_n=K])^2 \frac{n - K\sigma }{n + \alpha} \Bigg] =\\
+&= \frac{\mathbb{E}[K_n]\sigma (n- \alpha ) + n \alpha - \sigma^2 (\mathbb{E}[K_n]^2 +  \mbox{Var}(K_n))}{(n+\alpha)^2},\label{eq: var 1st}
+%\end{aligned}
+\end{align}
+while \eqref{eq: exp_PY_rec} provides for second term of the right-hand side of \eqref{eq:var} 
+ \begin{equation}\label{eq: var 2nd}
+\mbox{Var}(\mathbb{E}[K_{n+1}\mid K_1,\ldots,K_{n}=K])=\left( \frac{\sigma + n + \alpha}{n+\alpha}\right)^2 \mbox{Var}(K_n).
+\end{equation}
+ %
+Then combining \eqref{eq: var 1st} and \eqref{eq: var 2nd},  the following recursive formula holds
+\begin{align}\label{eq:s2-recursive}
+ \mbox{Var}(K_{n+1}) &= \mbox{Var}(K_n)\frac{n + \alpha + 2\sigma}{n+\alpha} + \frac{\sigma\mathbb{E}[K_n](n - \alpha - \sigma\mathbb{E}[K_n]) + n \alpha}{(n+\alpha)^2}\nonumber\\
+ &= \mbox{Var}(K_n)\frac{n + \alpha + 2\sigma}{n+\alpha} + \frac{(\sigma\mathbb{E}[K_n]+ \alpha)(n - \sigma\mathbb{E}[K_n])}{(n+\alpha)^2},
+\end{align} 
+which simplifies to the desired expression by using 
+$$\mathbb{E}[K_n] = \frac{\alpha}{\sigma}\left(\frac{(\alpha +\sigma)_{n}}{(\alpha)_{n}}-1\right).$$
+\item This simply comes from setting $\sigma = 0$ in the above formulas.
+\end{enumerate}
+}
 
-% \subsection{Combinatorial properties of $K_n$ for Pitman--Yor process $(\star\star)$}
-% \label{ex:K_n-PY}
-% Let $K_n$ be the number of clusters observed when drawing $n$ observations from a Pitman--Yor process with discount parameter $\sigma\in(0,1)$ and concentration parameter $\alpha\in\mathbb{R}_+$.
+ \subsection{For more exercises on Bayesian nonparametrics $(\star\star)$}
 
-% \begin{enumerate}
-% 	\item Show that
-% \begin{align*}
-%     \mathbb{E}[K_{n+1}]= \frac{\alpha}{n+\alpha} + \frac{\sigma + \alpha +n}{n+ \alpha}\mathbb{E}\left[K_n\right].
-% \end{align*}
-% \textit{Hint:} use the PY predictive distribution and a conditional expectation to get this iterative formula from $n$ to $n+1$.
-% 	\item Deduce that
-% \begin{equation*}
-%         \mathbb{E}[K_n] = \sum_{i=0}^{n-1} \frac{(\alpha +\sigma)_{i}}{(\alpha + 1)_{i}},
-% \end{equation*}
-% where $(x)_n = x(x+1)\ldots(x+n-1)$.
-% 	\item Show the following large $n$ asymptotics for the expectation of $K_n$:
-% \begin{equation*}
-%         \mathbb{E}[K_n] \sim \frac{\Gamma(\alpha+1)}{\sigma \Gamma(\alpha+\sigma)}n^\sigma.
-% \end{equation*}
-% \item Show that the following recursive formula holds for the variance of $K_n$:
-% \begin{align}
-% \mbox{Var}(K_{n+1}) = \mbox{Var}(K_n)\frac{n + \alpha + 2\sigma}{n+\alpha} + \frac{(\sigma\mathbb{E}[K_n]+ \alpha)(n - \sigma\mathbb{E}[K_n])}{(n+\alpha)^2}.
-% \end{align}
-% \textit{Hint:} use the law of total variance.
-% \item Derive again the simpler expression of expectation and variance of $K_n$ in the Dirichlet process case (by setting $\sigma = 0$ in the above formulas).
-% \end{enumerate}
-
-% \subsection{For more exercises on Bayesian nonparametrics}
-
-% \begin{itemize}
-% 	\item Exercises 4.4, 4.8, 4.9, 4.10, 4.12, 4.13, 4.18, 4.24, 4.25, 4.26, 4.32, 4.39
-% of \cite{ghosal2017fundamentals}.
-% \end{itemize}
+ \begin{itemize}
+ 	\item Exercises 4.4, 4.8, 4.9, 4.10, 4.12, 4.13, 4.18, 4.24, 4.25, 4.26, 4.32, 4.39
+ of \cite{ghosal2017fundamentals}.
+ \end{itemize}
 
 % \section{Lecture \#5: Foundations}
 
@@ -404,6 +471,22 @@ $$
 
 % \subsection{McAllester's PAC bound $(\star\star\star)$}
 % Prove McAllester's PAC bound. Hint: Check out Chapter 31 of \citep{ShBe14}.
+
+\section{Bayesian deep learning}
+
+\subsection{Laplace approximation for Bayesian neural networks $(\star)$}
+\begin{enumerate}
+\item Exercises 5.38, 5.39, 5.40, 5.41 
+of \cite{Bis06}.\\
+Note: Solutions to those exercises will not be provided; ``Auditeurs libres'' can work on them for their project.
+\end{enumerate}
+
+\subsection{Gaussian process limit of wide-regime Bayesian neural networks $(\star\star)$}
+\begin{enumerate}
+\item 
+Derive the Gaussian process limit of wide-regime Bayesian neural networks with isotropic (iid) Gaussian priors on the weights, in the case of 1-hidden-layer neural networks (Neal's result). In particular, show that variances of the Gaussian priors need to be scaled in $1/H$, with $H$ the hidden layer width. 
+\item Derive the Gaussian process limit for the more general case of non shallow neural networks (refer to the proof by \cite{matthews2018gaussian}).
+\end{enumerate}
 
 \printbibliography
 
