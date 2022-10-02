@@ -44,10 +44,10 @@ $$
 $$
 contains $\theta$ with known probability $1-\delta(\alpha)$.
 It thus makes sense, to Fisher, to find the smallest value $\alpha_{0.99}$ such that $1-\delta(\alpha)\geq 0.99$, and report the \emph{confidence region} $\mathcal{E}_{\alpha_0.99}$ to quantify his uncertainty about $\theta$. 
-The fact that, under repetition of the data generation, the (random) ellipsoid $\mathcal{E}_{\alpha_0.99}$ contains $\theta$ about $99\%$ of the time, is called \emph{coverage}.
+The property that, under repetition of the data generation, the (random) ellipsoid $\mathcal{E}_{\alpha_{0.99}}$ contains $\theta$ about $99\%$ of the time, is called \emph{coverage}.
 
 \section{Wald does linear regression}
-Imagine that you had asked Hungarian-American Abraham Wald (1902--1950) for help instead of Fisher.
+Imagine that you had asked Hungarian-American statistician Abraham Wald (1902--1950) for help instead of Fisher.
 He would have argued that estimating $\theta$, or outputing a region of $\mathbb{R}^d$ that encodes your uncertainty, are two different actions to be taken under uncertainty. 
 
 Consider estimation. 
@@ -95,6 +95,7 @@ $
 \mathbb{E}_{\theta\vert X,\by} \theta. 
 $
 For the one-loss $L=L_1$, the Bayes estimator is a generalized median of the same posterior distribution.
+In particular, note that the Bayes estimator depends on the loss function, and is not necessarily the posterior expectation.
 
 \section{Savage does linear regression}
 \label{ch:bayesian_regression}

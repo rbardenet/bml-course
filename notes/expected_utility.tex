@@ -27,12 +27,12 @@ The distinction will come later in Chapter~\ref{ch:foundations}, when we discuss
     \centering
     \begin{tabular}{| c | c | c | c | c |}
         \hline
-        & $\cS$ & $\cZ$  & $\cA$ & $u(r)$ \\
+        & $\cS$ & $\cR$  & $\cA$ & $u(r)$ \\
         \hline
         \hline
-        Regression & $(\cX\times \cY)^n \times \cX\times \cY$ & $\cY=\mathbb{R}$ &   
+        Regression & $(\cX\times \cY)^{n+1}$& $\cY=\mathbb{R}$ &   
         $\{a_g:s\mapsto y-g(x;x_{1:n},y_{1:n})\}$ & $-\Vert r\Vert^2$ \\
-        Classification & $(\cX\times \cY)^n \times \cX\times \cY$  &$\cY=\{0,1\}$ &   
+        Classification & $(\cX\times \cY)^{n+1}$  &$\cY=\{0,1\}$ &   
         $\{a_g:s\mapsto y-g(x;x_{1:n},y_{1:n})\}$ & $\IND{r = 0}$ \\
         Point estimation & $\cY^n\times\Theta$ & $\Theta$& $\{a_g:s\mapsto \theta-g(y_{1:n})\}$ & $- \Vert r\Vert^2$\\
         Interval estimation & $\cY^n\times\Theta$ & $\{0,1\}\times \mathbb{R}_+$ & $\{a_g:s\mapsto (\IND{\theta\in g(y_{1:n})}, \vert g(y_{1:n})\vert)\}$ &  $r_1+\gamma r_2$ \\
