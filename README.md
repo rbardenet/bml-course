@@ -10,6 +10,6 @@ Two grades: one homework and one project on a research paper.
 * Exercises to be emailed to me before October 10: 5.1, 5.2, 5.3 in Murphy's ML book. Please put [M2DS] as a prefix to your email's object, and your full name in the object. 
 
 ### Lecture 2
-* Annotated slides are [here]() and [here]().
+* Annotated slides are [here](https://nextcloud.univ-lille.fr/index.php/s/gqkAoGN52bngmDY) and [here](https://nextcloud.univ-lille.fr/index.php/s/LcApZoQ6J4EgBbP).
 * References are the same as last lecture.
 * Exercises to be emailed before next lecture: 4.12, 5.9, and 10.2 in Murphy's book. Please put [M2DS] as a prefix to your email's object, and your full name in the object. I also recommend typing your solutions in LaTeX, and sending me a pdf instead of handwritten notes; LaTeX skills are useful skills.
