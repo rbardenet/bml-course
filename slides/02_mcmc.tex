@@ -251,10 +251,14 @@ is small (with large probability, in quadratic mean, converges in law at some ra
 \Aitem
 \Return $(\theta_{t})_{t=1,\dots,N_{\text{iter}}}$
 \end{algorithm}
+\vfill
+\vfill
+\vfill
 \end{frame}
 
 \begin{frame}{The MH Markov kernel...}
-... is given by
+\begin{itemize}
+  \item ... is given by
   $$
 P_{\text{MH}}(\theta,\theta') = \unnnn{\alpha(\theta,\theta')} \un{q(\theta'\vert\theta)} + \delta_\theta(\theta')\left[1-\int \unnnn{\alpha(\theta,\vartheta)}\un{q(\vartheta\vert\theta)}\right]\d\vartheta,
 $$
@@ -262,23 +266,15 @@ where
 $$
 \unnnn{\alpha(\theta,\theta')} = 1\wedge \frac{\pi(\theta')}{\pi(\theta)} \un{\frac{q(\theta\vert\theta')}{q(\theta'\vert\theta)}}.
 $$
-\blank
+\item We first show detailed balance, i.e., $\pi(\theta)P(\theta,\theta') = \pi(\theta')P(\theta',\theta).$
+\vfill
+\vfill
+\item We deduce that $P$ leaves $\pi$ invariant.
+\vfill
+\end{itemize}
 \end{frame}
 
-\begin{frame}{MH leaves $\pi$ invariant and satisfies the LLN}
-\begin{itemize}
-  \item We first show detailed balance, i.e., $\pi(\theta)P(\theta,\theta') = \pi(\theta')P(\theta',\theta).$
-  \vfill
-  \vfill
-  \vfill
-  \vfill
-  \item We deduce that $P$ leaves $\pi$ invariant.
-  \vfill
-  \vfill
-  \vfill
-  \vfill
-\end{itemize}
-\vfill
+\begin{frame}{On the Harris-recurrence of the MH chain}
 \begin{block}{Theorem \citep{RoCa04}}
   If $\pi(A)>0\Rightarrow (\forall x) q(A\vert x)>0$, then $P_{\text{MH}}$ satisfies the LLN.
 \end{block}
@@ -346,16 +342,16 @@ $P_{aHMC}$ leaves $\eta$ invariant.
 
 \begin{frame}{Hamiltonian dynamics is the source of inspiration}
 \begin{block}{Hamilton's equations of motion}
-Consider a physical system described by Hamiltonian $H(x,\xi)$ in phase space $(x,\xi)\in \mathbb{R}^{2d}$. Then the trajectories are prescribed by
+Consider a physical system described by Hamiltonian $H(x,\xi)$ in phase space $(q,p)\in \mathbb{R}^{2d}$. Then the trajectories are prescribed by
 \begin{equation}
   \label{e:hamilton}
-  \dot{x_i} = \frac{\partial H}{\partial \xi_i} \qquad \dot{\xi_i} = -\frac{\partial H}{\partial x_i}.
+  \dot{q_i} = \frac{\partial H}{\partial p_i} \qquad \dot{p_i} = -\frac{\partial H}{\partial q_i}.
 \end{equation}
 \end{block}
 \begin{itemize}
-  \item Given an initial point $(x,\xi)$, solve \eqref{e:hamilton} and denote the corresponding position in $\mathbb{R}^{2d}$ at time $t>0$ by $\Phi_t(x,\xi)$.
-  \item \eqref{e:hamilton} implies that $t\mapsto H(\Phi_t(x,\xi))$ is constant.
-  \item As an example, consider $H(x,\xi) = \frac12 x^2 + \frac12 \xi^2.$
+  \item Given an initial point $(q,p)$, solve \eqref{e:hamilton} and denote the corresponding position in $\mathbb{R}^{2d}$ at time $t>0$ by $\Phi_t(q,p)$.
+  \item \eqref{e:hamilton} implies that $t\mapsto H(\Phi_t(q,p))$ is constant.
+  \item As an example, consider $H(q,p) = \frac12 q^2 + \frac12 p^2.$
 \end{itemize}
 \blank
 % Describe, show Jacobian, show scaling with dimension, % discuss automatic differentiation and pymc3
