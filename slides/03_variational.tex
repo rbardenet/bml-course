@@ -152,18 +152,23 @@ $$
 \end{frame}
 
 
-\begin{frame}{Using counts keeps space and time complexity low}
-\begin{itemize}
-  \item Storing $\tilde z_{i\ell k}$ requires $\cO (N K\sum_i L_i )$ space. \un{In practice, one works with (sparse) count data}
-  $$
-  n_{iv} = \text{number of times word $v$ appears in document $i$},
-  $$
-  and variables $c_{ivk}$, thus reducing storage costs (and the dimension of the underlying integral!) to $\cO(NVK)$.
-\blank
-\end{itemize}
+% \begin{frame}{Using counts keeps space and time complexity low}
+% \begin{itemize}
+%   \item Storing $\tilde z_{i\ell k}$ requires $\cO (N K\sum_i L_i )$ space. \un{In practice, one works with (sparse) count data}
+%   $$
+%   n_{iv} = \text{number of times word $v$ appears in document $i$},
+%   $$
+%   and variables $c_{ivk}$, thus reducing storage costs (and the dimension of the underlying integral!) to $\cO(NVK)$.
+% \blank
+% \end{itemize}
+% \end{frame}
+
+\begin{frame}{score trick+SGD vs mean-field+closed updates}
+  \vfill
+  \blank
 \end{frame}
 
-\begin{frame}{Reparametrization+SGD vs mean-field+closed updates}
+\begin{frame}{reparametrization+SGD}
   \vfill
   \blank
 \end{frame}
@@ -173,10 +178,10 @@ $$
   \blank
 \end{frame}
 
-\begin{frame}{Automatic differentiation variational inference  \citep{KTRGB17}}
-  \vfill
-  \blank
-  \end{frame}
+% \begin{frame}{Automatic differentiation variational inference  \citep{KTRGB17}}
+%   \vfill
+%   \blank
+% \end{frame}
 
 \begin{frame}{Lots of variants of VB exist \citep{Mur12}}
   \begin{itemize}
