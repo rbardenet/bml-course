@@ -208,6 +208,9 @@
 \newcommand{\intff}[2]{\mathopen{[}#1\,;#2\mathclose{]}}
 \renewcommand{\qedsymbol}{$\blacksquare$}
 \newtheorem{notation}{Notation}[chapter]
+\newtheorem{inneraxiom}{Axiom}
+\newenvironment{axiom}[1]{\renewcommand\theinneraxiom{#1}\inneraxiom}{\endinneraxiom}
+
 
 % Boxed/framed environments
 \newtheoremstyle{ocrenumbox}% Theorem style name

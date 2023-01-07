@@ -54,7 +54,7 @@ The principle of decision-making encoded by \eqref{e:expected_utility} is called
 At this stage, we have not discussed how Bayesians choose $p$, and there are many ways to do so; see Section~\ref{s:choosing_the_joint}.
 Finally, to give an example of Bayesian decision, the ridge regression estimator is the Bayes action for a particular decision problem and joint distribution over states; see Section~\ref{s:linear_regression}.
 
-In ML, it is customary to split the state variable into $(s_O,s_U)$, where $O,U\subset \{1,\dots,\text{dim} \cS\}$ respectively index observed states (``data") and  unknown states. 
+In ML, it is customary to split the state variable into $(s_O,s_U)$, where $O, U\subset \{1,\dots,\text{dim} \cS\}$ are disjoint subsets that respectively index observed states (``data") and unknown states. 
 In particular, we can rewrite \eqref{e:expected_utility} as
 \begin{equation}
     a^\star \in \arg\max_{a\in\cA} \mathbb{E}_{s_O} \mathbb{E}_{s_U\vert s_O} u(a(s)).

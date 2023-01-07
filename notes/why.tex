@@ -11,7 +11,7 @@ It is only half-formal because it deals with notions that are hard to rigorously
 \subsection{The formal LP}
 Consider two statistical experiments
 $$
-E_i=(\cY_i,\un{\theta}, \{p_i(\cdot\vert\vartheta), \vartheta\in\Theta\}), \quad i=1,2.
+E_i=(\cY_i,\un{s}, \{p_i(\cdot\vert\vartheta), \vartheta\in\Theta\}), \quad i=1,2.
 $$
 Assume that for some realizations $\by_1$ and $\by_2$,
 $$
@@ -74,6 +74,146 @@ In other words, as long as the prior $p(\theta)$ does not depend on data, the Ba
 
 % % ###############################################
 \section{Because you place coherence above all things: subjective Bayes}
+The literature on the foundations of subjective Bayes is rich, and we refer to \citep{PaIn09} for entry points. 
+A major milestone was obtained by \cite{Sav53}, building on work of \cite{VoMo} and \cite{Ram}. 
+Savage gave a list of properties (the so-called \emph{Savage axioms} of coherence) that a binary relation $\succ$ on the action space $\cA$ should satisfy in order for it to have an essentially unique expected utility representation.
+More precisely, $\preccurlyeq$ satisfies the Savage axioms if and only if there is a bounded utility function $u:\mathcal{S}\rightarrow\mathcal{R}_+$ and a (finitely additive) probability measure $p$ on $\mathcal{S}$ such that for $a, b\in \mathcal{A}$, 
+$$
+a \succ b \Leftrightarrow \int u(a(s))\d p(s) > \int u(b(s))\d p(s);
+$$
+$u$ is unique up to affine transformations. 
+The pair $(u,p)$ thus characterizes the behaviour of a Savage-abiding decision maker: $p$ can be interpreted as the DM's degree of belief in the subsets of $\cS$, and the DM's preferred action is the one maximizing SEU according to the $(u,p)$ pair.
+There is no constraint on the probability $p$: any pair $(u,p)$ corresponds to a coherent decision-maker. 
+
+Savage's result is beautiful, in that it builds a probability measure $p$ and a utility function $u$ over states from a coherent (in the sense of satisfying the Savage axioms) ranking of actions.
+Following Savage, there is no need to assume that the phenomenon we are studying is probabilistic, or to dissentangle different forms of uncertainty: a coherent decision maker \emph{must} have a utility and a probability in mind!
+
+\subsection{A closer look at the axioms}
+\cite{Sav54} derives a unique (finitely additive) probability on $2^\cS$ and utility function directly from a preference relation over acts $a:\cS\rightarrow\cZ$. He relies on NM, but without compound acts (considered as artificial) and no physical chance mechanism (unlike Ramsey or Anscombe \& Aumann). Since axiom numbers `Px' in the original paper of \cite{Sav54} are often referred to, I use them as labels. Yet I introduce axioms in the same order as \cite{PaIn09}.
+
+\begin{axiom}{P1 (Preference)}\label{a:P1}
+$\succ$ is complete and transitive.
+\end{axiom}
+
+\begin{axiom}{P5 (No total indifference)}\label{a:P5}
+$\exists z_1,z_2\in\cZ$ such that $z_1\succ z_2$.
+\end{axiom}
+
+Now for $a,b\in\cA$, $T\in\cS$, define action $a_{T}^b$ by $a_{T}^b(\theta) = a(\theta)1_{\theta\in T} + b(\theta)1_{\theta\in T}$.
+
+\begin{axiom}{P2 (Sure Thing principle)}\label{a:P2}
+$\forall a,b,h_1,h_2\in\cA$ and $\forall T\subset\cS$,
+$$ a_{T^c}^{h_1} \succ b_{T^c}^{h_1} \Leftrightarrow a_{T^c}^{h_2} \succ b_{T^c}^{h_2}.$$
+\end{axiom}
+% Axiom~\ref{a:P2} is similar to \ref{a:NM2}, but doesn't use compound acts. 
+Here, Savage directly formulates that if two acts coincide on part of $\cS$, then preference should only depend on their values where they differ. As a side remark, we can now define a new family of preference relations, called \emph{conditional preferences}.
+Let $T\subset\cS$, and define $a\succ b\vert T$ by
+\begin{equation}
+c_{T}^a \succ c_T^b
+\label{e:conditionalPreference}
+\end{equation}
+for some (equivalently all) $c\in \cA$. 
+This family of conditional preferences will be discussed later, when we consider how to rank actions after some $T$ has been observed.
+% Note that it is ambiguous to define what humans means as posterior preference once $T$ has obtained, and \cite{PaIn09} thus add a ``before/after" axiom here that says that it is equivalent to \eqref{e:conditionalPreference}.
+
+Define now a null state as a $T\subset\cS$ such that $a\sim b\vert T$ for all $a,b\in\cA$. That is, preferences are insensitive to $T$ obtaining.
+\begin{axiom}{P3 (No reduction to conditional indifference)}\label{a:P3}
+If $T$ is not null, then $a_{T}^{z_1}\succ a_T^{z_2}\vert T$ iff $z_1\succ z_2$.
+\end{axiom}
+In \ref{a:P3}, we have identified $z\in\cZ$ with the constant action $z:s\mapsto z$. Note that by \ref{a:P2}, the values of $a$ and $b$ outside $T$ do not matter. Axiom~\ref{a:P3} makes sure that no preference among consequences can be reduced to indifference conditional on a non-null event. I do not fully grasp this axiom, but it seems harmless.
+
+\begin{axiom}{P4 (Separation)}\label{a:P4}
+Assume that $z_1\succ z_2$ and $z_1'\succ z_2'$. Let $T_1,T_2\subset \cS$, and
+$$a = {z_2}_{T_1}^{z_1}, b = {z_2}_{T_2}^{z_1}, a'={z_2'}_{T_1}^{z_1'}, b'= {z_2'}_{T_2}^{z_1'}.$$
+Then $a\succ b\Leftrightarrow a'\succ b'$.
+\end{axiom}
+In words, for two actions that are both piecewise constant taking the same set of values, I can change the constant values without altering the preference, as long as I preserve the order between outcomes. Intuitively, if outcomes were money, your willingness to bet on $T_1$ obtaining rather than $T_2$ obtaining does not depend on how much money you make/lose in each of these two bets.
+
+We can now define a binary relation $T_1\succ T_2$ over subsets of $\cS$ that we could interpret as \un{``$T_1$ is more likely to me that $T_2$"}. We say $T_1\succ T_2$ if for all $z_1, z_2\in\cZ$ such that $z_1\succ z_2$,
+$$
+{z_2}_{T_1}^{z_1} \succ {z_2}_{T_2}^{z_1}.
+$$
+In the betting metaphor, you're more willing to bet on $T_1$ obtaining than $T_2$ for the same 
+%(equivalently different but same order by \ref{a:P4}) 
+rewards.
+
+These first five axioms are enough to get the following representation.
+\begin{theorem}[Qualitative representation]
+If \ref{a:P1}, \ref{a:P2}, \ref{a:P3}, \ref{a:P4}, and \ref{a:P5} hold, then $\succ$ on $\cS$ is a qualitative probability, that is
+\begin{itemize}
+\item $\succ$ is negatively transitive: $T_1\preccurlyeq T_2 \preccurlyeq T_3$ implies $T_1\preccurlyeq T_3$,
+\item $\forall R\subset \cS$, $T\succ \emptyset$.
+\item If $T_1\cap U = T_2\cap U=\emptyset$, then $T_1\succ T_2$ iff $T_1\cup U\succ T_2\cup U$.
+\end{itemize}
+\end{theorem}
+
+We could stop here and work with beliefs specified by pairwise rankings of events.
+ But \cite{Sav54} goes forward, and keeps adding axioms to get a more usual \emph{quantitative} probability. 
+ In particular, we need an additional structural axiom on $\cS$. 
+ There are variations of this ``partition axiom", and Savage chooses to embed it in its Archimedean axiom.
+
+\begin{axiom}{P6 (Archimedean)}\label{a:P6}
+$\forall a,b\in\cA$ such that $a\succ b$, and $\forall z\in\cZ$, there exists a finite partition of $\cS = T_1\cup\dots\cup T_M$ such that for all $T_i$, either
+$a_{T_i}^z \succ b$ or $a\succ b_{T_i}^z$.
+\end{axiom}
+An important consequence of \ref{a:P6} is that $\cS$ must be rich enough to be splittable into tiny pieces suiting any pair of actions. 
+This is in general not possible for a discrete space, and we will generally have to use a continuous state space. 
+
+\begin{theorem}[Qualitative representation]
+Under \ref{a:P1}, \ref{a:P2}, \ref{a:P3}, \ref{a:P4}, \ref{a:P5}, and \ref{a:P6}, there exists a unique finitely additive probability measure $\Pi$ on $2^\cS$ such that
+\begin{itemize}
+\item $T_1\succ T_2$ iff $\Pi(T_1)>\Pi(T_2)$,
+\item $\forall T_1\subset \cS$ and $k\in[0,1]$, there exists $T_2\subset \cS$ such that
+$\Pi(T_2) = k\Pi(T_1)$.
+\end{itemize}
+\label{t:savageIntermediate}
+\end{theorem}
+
+Now to obtain a full expected utility representation, we need a final axiom.
+\begin{axiom}{P7 (No aversion to risk)}\label{a:P7}
+$\forall T\subset\cS$,
+\begin{itemize}
+\item If $\forall s\in T$, $a\succ b(s)\vert T$, then $a\succ b\vert T$.
+\item If $\forall s\in T$, $a(s)\succ b\vert T$, then $a\succ b\vert T$.
+\end{itemize}
+\end{axiom}
+I call this \emph{no aversion to risk}, since it intuitively means that you do not make a difference between preferring $a$ over $b$ to preferring $a$ over any sure consequence of $b$, and vice versa. I guess this plays a role in paradoxes like Ellsberg's where people can revert preferences in favour of more sure outcomes.
+\begin{theorem}[Qualitative representation]
+Under \ref{a:P1}, \ref{a:P2}, \ref{a:P3}, \ref{a:P4}, \ref{a:P5}, \ref{a:P6}, and \ref{a:P7}, there exists a unique finitely additive probability measure satisfying the results of Theorem~\ref{t:savageIntermediate}. Furthermore, there is a unique (up to positive affine transformations) bounded utility function $u:\cZ\rightarrow \mathbb{R}$ such that
+$$ a\succ b \Leftrightarrow \int u(a(s))d\pi > \int u(b(s))d\pi.$$
+\label{t:representationSavage}
+\end{theorem}
+It is crucial to note that the probability measure in Theorem~\ref{t:representationSavage} is finitely additive, and defined on the Boolean algebra $2^\cS$ of all subsets of $\cS$. In particular, the integrals in Theorem~\ref{t:representationSavage} are \emph{not} Lebesgue integrals, see e.g. \cite{Kre88}.
+
+\subsection{Major criticisms}
+Yet there are several points that can be raised against using Savage's result to justify Bayesian learning, which we roughly rank by increasing seriousness. 
+First, the resulting probability measure is only finitely additive: it is hard to bring a $\sigma$-algebra like $\Sigma_\mathcal{S}$ into the picture with a consensual coherence axiom that does not involve an infinite number of choices from the DM. 
+This is a minor inconvenience, as we can always restrict actions to a set of measurable functions and choose a \emph{bona fide} probability distribution.
+The price is that we might be unable to represent all coherent behaviour.
+A second objection is the boundedness of the utility function, first noticed by \citep{Fis70}. 
+Common losses such as the squared loss need to be trimmed to fit into the picture without modifying the axioms.
+At the cost of some less natural axioms, one can however accomodate unbounded loss functions \citep{Wak93}.
+A third objection is the pivotal role played by constant actions in Savage's (and actually von Neumann and Morgenstern's) proof.
+Constant actions are those that assign the same reward $r\in\mathcal{R}$ to all states $s\in\mathcal{S}$.
+The utility function in approaches derived from \cite{VoMo} is defined by finding the weight in a convex combination of two extreme constant actions; see e.g. \citep[Chapter 3]{PaIn09}. 
+But constant actions are not part of the action sets that we considered in Section~\ref{s:expected_utility}.
+In binary classification, for instance, there are two constant actions: the ideal classifier $a^\star$ that always predicts the right label, and the worst possible classifier $a_\star$, which consistently predicts the wrong label. 
+The utility function of any reward $r$ is defined in reference to these two idealized classifiers.  
+It would be more satisfying to have a set of axioms that does not give such a key role to \emph{non-physical} classifiers. 
+A fourth and related objection is that the utility in Savage's result is independent of the state: $u(a(s))$ only depends on the state through $a(s)$. 
+This means that the notation $L(a,s) = -u(a(s))$ is inappropriate, as it lets the user think that the loss of action $a$ can depend on the state $s$. 
+In textbook ML tasks, this is not much of a problem, but in real applications, this can prove limiting; see \citep[Chapter XXX]{PaIn09}.
+
+Maybe the most important weakness of axiomatic constructions like Savage's is that they do not prescribe what action to choose after some part of the state is observed. 
+Using the conditional SEU is only a natural candidate for what to do, not more.
+We should not be fooled by the name ``conditional expectation'': call it ``strange mathematical construction" and then try to think if this is how you want to change your behaviour once you observe an event.
+There are ways to justify conditioning by means of sequential Dutch books \citep{}, but none that is not controversial in the general case of an infinite state space.
+Worse: it is doubtful that this can be done, since in practice, we all refrain from conditioning from time to time. 
+For instance, if you observe that your classifier has poor test error, you change the family $\mathcal{G}$ of classifiers that you consider.
+Unless you included the choice of $\mathcal{G}$ in your state space, this kind of ``external'' move, which looks at some calibration property of a subjective model, is not constrained by Savage-like constructions. 
+Modern attempts to build Bayesian statistics with more focus on calibration include the prequential view of \cite{Daw}.
+One could also argue that PAC-Bayes goes along those lines, by abandoning conditioning in favour of better frequentist properties; more about this in Section~\ref{s:because_you_are_a_frequentist}.
+
 % % ###############################################
 
 % % ###############################################
@@ -82,6 +222,7 @@ In other words, as long as the prior $p(\theta)$ does not depend on data, the Ba
 
 % % ###############################################
 \section{Because you are a Waldian frequentist in disguise}
+\label{e:because_you_are_a_frequentist}
 % % ###############################################
 
 \subsection{On the consistency of Bayesian estimators}
