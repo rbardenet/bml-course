@@ -66,7 +66,8 @@ Let
 $$
 \Delta_d = \{\theta\in\mathbb[0,1]^d \text{ such that } \sum_{k=1}^d \theta_d = 1\}.
 $$
-Let further $\alpha\in(\mathbb{R}_+)^d$. The Dirichlet pdf is defined by
+Let further $\alpha\in(\mathbb{R}_+)^d$. 
+The Dirichlet pdf is defined by
  $$
  \text{Dir}(\theta\vert \alpha) = \frac{1}{B(\alpha)} \prod_{k=1}^d \theta_k^{\alpha_k -1} 1_{\theta\in \Delta_d},$$
 where
@@ -78,7 +79,8 @@ where
    p(\theta, y_{1:N}) = \frac{B(\alpha+c)}{B(\alpha)} \text{Dir}(\theta\vert \alpha + c),
 \label{e:joint}
  \end{equation}
- where $c=(\sum_{i=1}^N 1_{y_i=k})_{1\leq k \leq d}$ is the vector of counts. Note that \eqref{e:joint} implies that $\theta\vert y_{1:N} \sim \text{Dir}(\theta\vert \alpha)$ and that the marginal likelihood $p(y_{1:n}) = B(\alpha)/B(\alpha+c)$.
+ where $c=(\sum_{i=1}^N 1_{y_i=k})_{1\leq k \leq d}$ is the vector of counts. 
+ Note that \eqref{e:joint} implies that $\theta\vert y_{1:N} \sim \text{Dir}(\theta\vert \alpha)$ and that the marginal likelihood $p(y_{1:n}) = B(\alpha+c)/B(\alpha)$.
 
 
 \solution{
