@@ -4,11 +4,8 @@
 * Rémi Bardenet (CNRS, Univ. Lille), https://rbardenet.github.io
 * Julyan Arbel (Inria, Univ. Grenoble-Alpes), https://www.julyanarbel.com
 ## Material
-* The annotated slides for lecture 1 are [here](https://nextcloud.univ-lille.fr/index.php/s/tzbHA5c3b8Tpwny).
-* The annotated slides for lecture 2 are [here](https://nextcloud.univ-lille.fr/index.php/s/q35iJeSBd8YmYGE).
-* The annotated slides for lecture 3 are [here](https://nextcloud.univ-lille.fr/index.php/s/CJkcdHSxxPNSwRw) and [here](https://nextcloud.univ-lille.fr/index.php/s/6s5mCtgBe2rAewY).
-* The annotated slides for lecture 4 are in the  `slides` folder.
-* The annotated slides for lecture 5 are [here](https://nextcloud.univ-lille.fr/index.php/s/xFznPfRPQexFNFM).
+* Annotated slides for lecture 1 on [Bayesics](https://www.dropbox.com/s/fuk79kdiw3ukgk2/01_bayesics.pdf?dl=0).
+* Annotated slides for lecture 2 on [Gaussian processes](https://www.dropbox.com/s/on40rf57h7coqtw/02_gp.pdf?dl=0) and [Bayesian deep learning](https://www.dropbox.com/s/ijugk8ffwey60ce/02_bdl.pdf?dl=0).
 
 ## Objective of the course
 By the end of the course, the students should
@@ -44,5 +41,5 @@ landscape.
 ## References
 * Parmigiani, G. and Inoue, L. 2009. Decision theory: principles and approaches. Wiley.
 * Robert, C. 2007. The Bayesian choice. Springer.
-* Murphy, K. 2012. Machine learning: a probabilistic perspective. MIT Press.
+* Murphy, K. 2023. Probabilistic Machine Learning: Advanced Topics. MIT Press. pdf available at this [link](https://probml.github.io/pml-book/book2.html).
 * Ghosal, S., & Van der Vaart, A. W. 2017. Fundamentals of nonparametric Bayesian inference. Cambridge University Press.
