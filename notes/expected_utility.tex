@@ -45,15 +45,24 @@ The distinction will come later in Chapter~\ref{ch:foundations}, when we discuss
 
 \section{Bayesians maximize expected utility}
 
-By definition, a Bayesian is someone who, facing a decision problem, picks a joint distribution $p$ over $(\cS, \Sigma_\cS)$, and chooses action
+By definition, a Bayesian is someone who, facing a decision problem, picks a joint distribution $p$ over $(\cS, \Sigma_\cS)$ and commits to choosing actions according to the following principle.
+After observing $T\in\Sigma_\cS$, they will pick action
+\begin{equation}
+    a^\star \in \arg\max_{a\in\cA} \mathbb{E} \left [ u(a(s)) | T \right ].
+    \label{e:conditional_expected_utility}
+\end{equation}
+Usually, one states \eqref{e:conditional_expected_utility} in the particular case where $T=\cS$, i.e.
 \begin{equation}
     a^\star \in \arg\max_{a\in\cA} \mathbb{E}_{s\sim p} u(a(s)).
     \label{e:expected_utility}
 \end{equation}
-The principle of decision-making encoded by \eqref{e:expected_utility} is called \emph{expected utility}, or \emph{subjective} expected utility, to insist on the fact that $p$ is an arbitrary choice from the decision maker.
-At this stage, we have not discussed how Bayesians choose $p$, and there are many ways to do so; see Section~\ref{s:choosing_the_joint}.
+Prescription \eqref{e:expected_utility} is called the \emph{subjective} expected utility principle (SEU),
+to insist on the fact that $p$ is an arbitrary choice from the decision maker.
+We choose to rather define a Bayesian as one following the conditional SEU \eqref{e:conditional_expected_utility}, because for subtle reasons to be discussed in Section~\ref{s:why}, abiding by \eqref{e:expected_utility} does not imply that we should use conditional expectations to select actions after we have observed an event. 
+At this stage, we also have not discussed how Bayesians choose $p$, and there are many ways to do so; see Section~\ref{s:choosing_the_joint}.
 Finally, to give an example of Bayesian decision, the ridge regression estimator is the Bayes action for a particular decision problem and joint distribution over states; see Section~\ref{s:linear_regression}.
 
+\subsection{Posterior subjective expected utility}
 In ML, it is customary to split the state variable into $(s_O,s_U)$, where $O, U\subset \{1,\dots,\text{dim} \cS\}$ are disjoint subsets that respectively index observed states (``data") and unknown states. 
 In particular, we can rewrite \eqref{e:expected_utility} as
 \begin{equation}
@@ -70,7 +79,8 @@ And since $g$ is a function of $s_O$ only, the optimal $g$ is
     g^\star: s_O \mapsto \arg\max_{g} \mathbb{E}_{s_U\vert s_O} u(a_g(s)).
 \end{equation}
 Indeed, by maximizing the innermost expectation in \eqref{e:expected_utility} for each fixed value of $s_O$, we maximize the whole expectation. 
-The resulting $g^\star$ is called the \emph{Bayes decision rule}.
+The resulting $g^\star$ is called the \emph{Bayes decision rule}. 
+The expectation in \eqref{e:posterior_expected_utility} is called \emph{posterior} expected utility, in reference to the fact that, in practice, we often compute it for a single value of $s_O$, \emph{after} $s_O$ has been observed. 
 
 \section{Specifying a joint model}
 We assume here familiarity with probabilistic graphical models, to the point of telling from a graph whether two sets of nodes are independent given a third one. 

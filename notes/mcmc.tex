@@ -29,13 +29,13 @@ Chebyshev's inequality would lead to
   as soon as $\sigma(f)^2 := \mathbb{E}_{X\sim\pi} [f(X) - \int f(x)\pi(x)\d x]<+\infty$.
 
 In practice, we never have access to a sampler of $\pi$, so we choose an instrumental distribution $q(x)\d x$, sample $x_t$ i.i.d. from $q$.
-If we can evaluate $\pi$, then $w_t=\pi(x_t)/q(x_t)$ leads to an unbiased estimator called the \emph{importance sampling}. 
+If we can evaluate $\pi$, then $w_t=\pi(x_t)/q(x_t)$ leads to an unbiased estimator called the \emph{importance sampling}.
 Its error can also be controlled by the Chebyshev inequality. 
 But more often than not, we can only evaluate an unnormalized density $\pi_u$. 
 An alternative is to then set $w_t\propto \pi_u(x_t)/q(x_t)$ and normalize the weights so that $\sum_t w_t=1$. 
 This leads to the \emph{self-normalized importance sampling estimator}
 $$
-\widehat I_T^\text{NIS} = \frac{\sum_{t=1}^T \frac{\pi_u(\theta_t)}{q(\theta_t)} f(x_t)}{\sum_{t=1}^T \frac{\pi_u(\theta_t)}{q(\theta_t)}} \rightarrow \frac{\int f(x)\pi_u(x)\d x}{\int \pi_u(x)\d x} = \int f(x)\d x,
+\widehat I_T^\text{NIS} = \frac{\sum_{t=1}^T \frac{\pi_u(\theta_t)}{q(\theta_t)} f(x_t)}{\sum_{t=1}^T \frac{\pi_u(\theta_t)}{q(\theta_t)}} \rightarrow \frac{\int f(x)\pi_u(x)\d x}{\int \pi_u(x)\d x} = \int f(x)\pi(x)\d x,
 $$
 where the convergence is almost sure (apply the strong law of large numbers to both the numerator and the denominator).
 \begin{proposition}[CLT for NIS] The NIS estimator satisfies
@@ -64,30 +64,30 @@ To see how to build $(X_t)$, remember first the law of large numbers for Markov 
     Let $(X_t)_{t\in\mathbb N}$ be a Markov chain with Markov kernel $P$.
     If
     \begin{enumerate}
-      \item There exists $\pi$ s.t. 
+      \item There exists $\mu$ s.t. 
       $$
-      \int \d\pi(x) P(x, B) = \pi(B).
+      \int \d\mu(x) P(x, B) = \mu(B).
       $$
-      \item For any $A$ with $\pi(A)>0$, for any $\theta\in \Theta$,
+      \item For any $A$ with $\mu(A)>0$, for any $\theta\in \Theta$,
       $$ 
       \mathbb{P}_{x} \left(\sum_{t=0}^\infty 1_{\theta_t\in A} = +\infty\right) = 1,
       $$
     \end{enumerate}
     then for any initial distribution $\mu_0$ of $X_0$, almost surely
     $$
-    \frac{1}{T} \sum_{t=1}^T f(\theta_t) \rightarrow \int f\mathrm{d}\pi,
+    \frac{1}{T} \sum_{t=1}^T f(\theta_t) \rightarrow \int f\mathrm{d}\mu,
     $$
-    where $f\in L^1(\pi)$. 
+    where $f\in L^1(\mu)$. 
 \end{proposition}
-The first condition states that $\pi$ is an \emph{invariant distribution} of the chain: if $X_t\sim\pi$, then $X_{t+1}\sim\pi$. 
-The second condition is called \emph{Harris recurrence}: starting from any $x$, i.e. $X_0\sim\delta_{x}$, then the chain returns an infinite number of times to $A$ almost surely, as soon as $A$ is charged by $\pi$. 
+The first condition states that $\pi$ is an \emph{invariant distribution} of the chain: if $X_t\sim\mu$, then $X_{t+1}\sim\mu$. 
+The second condition is called \emph{Harris recurrence}: starting from any $x$, i.e. $X_0\sim\delta_{x}$, then the chain returns an infinite number of times to $A$ almost surely, as soon as $A$ is charged by $\mu$. 
 Intuitively, this makes sure that there is an infinity of nodes on $A$, so that the integral of $f$ on $A$ is accurately estimated.
 
 \section{Gibbs sampling}
 
 \section{Hamiltonian Monte Carlo}
 We closely follow \cite{BoSa18}, who give a clear introduction to the ingredients of HMC.
-To facilitate going back and forth between the notes and \citep{BoSa18}, we temporarily adopt their notational conventions: the variable over which we wish to integrate is $q\in\mathbb{R}^d$, while $x\in\cX$ denotes a generic variable, later taken to be $x=(p,q)$.
+To facilitate going back and forth between the notes and \citep{BoSa18}, we temporarily adopt their notational conventions: the variable over which we wish to integrate is $q\in\mathbb{R}^d$, while $x\in\cX$ denotes a generic variable, later taken to be $x=(p,q)\in\mathbb{R}^{2d}$.
 Note that vanilla HMC is limited to continuous variables.
 
 \subsection{An abstract variant of Metropolis-Hastings}

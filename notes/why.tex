@@ -77,36 +77,54 @@ In other words, as long as the prior $p(\theta)$ does not depend on data, the Ba
 The literature on the foundations of subjective Bayes is rich, and we refer to \citep{PaIn09} for entry points. 
 A major milestone was obtained by \cite{Sav53}, building on work of \cite{VoMo} and \cite{Ram}. 
 Savage gave a list of properties (the so-called \emph{Savage axioms} of coherence) that a binary relation $\succ$ on the action space $\cA$ should satisfy in order for it to have an essentially unique expected utility representation.
-More precisely, $\preccurlyeq$ satisfies the Savage axioms if and only if there is a bounded utility function $u:\mathcal{S}\rightarrow\mathcal{R}_+$ and a (finitely additive) probability measure $p$ on $\mathcal{S}$ such that for $a, b\in \mathcal{A}$, 
+More precisely, $\succ$ satisfies the Savage axioms if and only if there is a bounded utility function $u:\mathcal{S}\rightarrow\mathcal{R}_+$ and a (finitely additive) probability measure $p$ on $\mathcal{S}$ such that for $a, b\in \mathcal{A}$, 
 $$
 a \succ b \Leftrightarrow \int u(a(s))\d p(s) > \int u(b(s))\d p(s);
 $$
 $u$ is unique up to affine transformations. 
-The pair $(u,p)$ thus characterizes the behaviour of a Savage-abiding decision maker: $p$ can be interpreted as the DM's degree of belief in the subsets of $\cS$, and the DM's preferred action is the one maximizing SEU according to the $(u,p)$ pair.
-There is no constraint on the probability $p$: any pair $(u,p)$ corresponds to a coherent decision-maker. 
+The pair $(u,p)$ thus characterizes the behaviour of a Savage-abiding decision maker, whose preferred action is the one minimizing the expected utility. 
+This is the sense of the word \emph{subjective} in SEU: the probability $p$, as well as the utility $u$, live in the mind of the DM. 
+This is also the sense in which $p$ can be interpreted as the DM's degree of belief.
+Finally, note that there is no constraint on the probability $p$: any pair $(u,p)$ corresponds to a coherent decision-maker. 
+In other words, Savage tells you that to be coherent you have to follow SEU, but it does not help you choose a joint model over states, let alone a prior.
 
-Savage's result is beautiful, in that it builds a probability measure $p$ and a utility function $u$ over states from a coherent (in the sense of satisfying the Savage axioms) ranking of actions.
+Savage's result is beautiful, in that it builds a probability measure $p$ and a utility function $u$ over states from a coherent ranking of actions.
 Following Savage, there is no need to assume that the phenomenon we are studying is probabilistic, or to dissentangle different forms of uncertainty: a coherent decision maker \emph{must} have a utility and a probability in mind!
+We now take a closer look at Savage's axioms as an example of prescritive subjective Bayesian framework, and examine some common criticisms.
 
 \subsection{A closer look at the axioms}
-\cite{Sav54} derives a unique (finitely additive) probability on $2^\cS$ and utility function directly from a preference relation over acts $a:\cS\rightarrow\cZ$. He relies on NM, but without compound acts (considered as artificial) and no physical chance mechanism (unlike Ramsey or Anscombe \& Aumann). Since axiom numbers `Px' in the original paper of \cite{Sav54} are often referred to, I use them as labels. Yet I introduce axioms in the same order as \cite{PaIn09}.
+% \cite{Sav54} derives a unique (finitely additive) probability on $2^\cS$ and utility function directly from a preference relation over acts $a:\cS\rightarrow\cZ$. He relies on NM, but without compound acts (considered as artificial) and no physical chance mechanism (unlike Ramsey or Anscombe \& Aumann).
+Since axiom numbers `Px' in the original paper of \cite{Sav54} are often referred to as such, I use them as labels. Yet I introduce axioms in the same order as \cite{PaIn09}.
+
+An important thing to notice before looking at his axioms, is that Savage considers the action set $\cA$ to be all functions from $\cS$ to $\cZ$. 
+In particular, constant actions, i.e. actions of the type $s\mapsto z$ for some $z\in\cZ$, play a crucial role in Savage's derivation, even if they do not correspond to actual actions available to the decision maker (DM) in most cases. 
+In the sequel, we abusively denote by $z$ the constant action $s\mapsto z$.
 
 \begin{axiom}{P1 (Preference)}\label{a:P1}
 $\succ$ is complete and transitive.
 \end{axiom}
 
+Since $\succ$ is complete, we can thus check whether $z_1\succ z_2$ for any two constant actions $z_1,z_2$.
+
 \begin{axiom}{P5 (No total indifference)}\label{a:P5}
 $\exists z_1,z_2\in\cZ$ such that $z_1\succ z_2$.
 \end{axiom}
+\begin{example}
+  \label{e:binary_classification}
+  If we take binary classification as a running example, where $\cZ=\{0,1\}$, the only two constant actions are the ``ideal" classifier $0$ that is always right and the one that is always wrong.
+  Most of us will likely elicit $0\succ 1$, to say that we prefer being always right to being always wrong.
+  Note that none of the two constant actions usually belong to the "pratically accessible" actions $\{a_g:s \mapsto y - g(x; x_{1:n}, y_{1:n}), g\in \mathcal{G}\}$.
+\end{example}
 
-Now for $a,b\in\cA$, $T\in\cS$, define action $a_{T}^b$ by $a_{T}^b(\theta) = a(\theta)1_{\theta\in T} + b(\theta)1_{\theta\in T}$.
+Now for $a,b\in\cA$, $T\in\cS$, define action $a_{T}^b$ by $a_{T}^b(s) = a(s)1_{s\in T} + b(s)1_{s\in T}$.
 
 \begin{axiom}{P2 (Sure Thing principle)}\label{a:P2}
 $\forall a,b,h_1,h_2\in\cA$ and $\forall T\subset\cS$,
 $$ a_{T^c}^{h_1} \succ b_{T^c}^{h_1} \Leftrightarrow a_{T^c}^{h_2} \succ b_{T^c}^{h_2}.$$
 \end{axiom}
 % Axiom~\ref{a:P2} is similar to \ref{a:NM2}, but doesn't use compound acts. 
-Here, Savage directly formulates that if two acts coincide on part of $\cS$, then preference should only depend on their values where they differ. As a side remark, we can now define a new family of preference relations, called \emph{conditional preferences}.
+Here, Savage directly formulates that if two acts coincide on part of $\cS$, then preference should only depend on their values where they differ. 
+In particular, under \ref{a:P2}, we can define a new family of preference relations, called \emph{conditional preferences}.
 Let $T\subset\cS$, and define $a\succ b\vert T$ by
 \begin{equation}
 c_{T}^a \succ c_T^b
@@ -114,13 +132,18 @@ c_{T}^a \succ c_T^b
 \end{equation}
 for some (equivalently all) $c\in \cA$. 
 This family of conditional preferences will be discussed later, when we consider how to rank actions after some $T$ has been observed.
+\begin{example}[Continuation of Example~\ref{e:binary_classification}]
+  % In our binary classification example, TBC?our preference between two classifiers should only take into account states that correspond to a different classification result  where $\cS = (\cX\times \cY)^n \times \cX\times \cY$, take $T = \{(x_1,y_1), \dots, (x_n,y_n))\} \times \cX\times \cY$.
+  % Under \ref{a:P2}, our preference between two classifiers, represented by $a_g$ and $a_h$, can only
+\end{example}
+
 % Note that it is ambiguous to define what humans means as posterior preference once $T$ has obtained, and \cite{PaIn09} thus add a ``before/after" axiom here that says that it is equivalent to \eqref{e:conditionalPreference}.
 
-Define now a null state as a $T\subset\cS$ such that $a\sim b\vert T$ for all $a,b\in\cA$. That is, preferences are insensitive to $T$ obtaining.
+Define now a null state as a $T\subset\cS$ such that $a\sim b\vert T$ for all $a,b\in\cA$. Intuitively, this means that preferences are insensitive to $T$ obtaining.
 \begin{axiom}{P3 (No reduction to conditional indifference)}\label{a:P3}
 If $T$ is not null, then $a_{T}^{z_1}\succ a_T^{z_2}\vert T$ iff $z_1\succ z_2$.
 \end{axiom}
-In \ref{a:P3}, we have identified $z\in\cZ$ with the constant action $z:s\mapsto z$. Note that by \ref{a:P2}, the values of $a$ and $b$ outside $T$ do not matter. Axiom~\ref{a:P3} makes sure that no preference among consequences can be reduced to indifference conditional on a non-null event. I do not fully grasp this axiom, but it seems harmless.
+Note that by \ref{a:P2}, the values of $a$ and $b$ outside $T$ do not matter. Axiom~\ref{a:P3} makes sure that no preference among consequences can be reduced to indifference conditional on a non-null event. 
 
 \begin{axiom}{P4 (Separation)}\label{a:P4}
 Assume that $z_1\succ z_2$ and $z_1'\succ z_2'$. Let $T_1,T_2\subset \cS$, and
@@ -177,22 +200,25 @@ $\forall T\subset\cS$,
 \item If $\forall s\in T$, $a(s)\succ b\vert T$, then $a\succ b\vert T$.
 \end{itemize}
 \end{axiom}
-I call this \emph{no aversion to risk}, since it intuitively means that you do not make a difference between preferring $a$ over $b$ to preferring $a$ over any sure consequence of $b$, and vice versa. I guess this plays a role in paradoxes like Ellsberg's where people can revert preferences in favour of more sure outcomes.
+I call this \emph{no aversion to risk}, since it intuitively means that if you prefer $a$ to all certain consequences of $b$n then you prefer $a$ to $b$. 
+%I guess this plays a role in paradoxes like Ellsberg's where people can revert preferences in favour of more sure outcomes.
 \begin{theorem}[Qualitative representation]
 Under \ref{a:P1}, \ref{a:P2}, \ref{a:P3}, \ref{a:P4}, \ref{a:P5}, \ref{a:P6}, and \ref{a:P7}, there exists a unique finitely additive probability measure satisfying the results of Theorem~\ref{t:savageIntermediate}. Furthermore, there is a unique (up to positive affine transformations) bounded utility function $u:\cZ\rightarrow \mathbb{R}$ such that
 $$ a\succ b \Leftrightarrow \int u(a(s))d\pi > \int u(b(s))d\pi.$$
 \label{t:representationSavage}
 \end{theorem}
-It is crucial to note that the probability measure in Theorem~\ref{t:representationSavage} is finitely additive, and defined on the Boolean algebra $2^\cS$ of all subsets of $\cS$. In particular, the integrals in Theorem~\ref{t:representationSavage} are \emph{not} Lebesgue integrals, see e.g. \cite{Kre88}.
+Note that the probability measure in Theorem~\ref{t:representationSavage} is finitely additive, and defined on the Boolean algebra $2^\cS$ of all subsets of $\cS$. In particular, the integrals in Theorem~\ref{t:representationSavage} are \emph{not} Lebesgue integrals, see e.g. \cite{Kre88}.
 
 \subsection{Major criticisms}
-Yet there are several points that can be raised against using Savage's result to justify Bayesian learning, which we roughly rank by increasing seriousness. 
+There are several points that can be raised against using Savage's result to justify Bayesian learning, which we roughly rank by increasing seriousness. 
 First, the resulting probability measure is only finitely additive: it is hard to bring a $\sigma$-algebra like $\Sigma_\mathcal{S}$ into the picture with a consensual coherence axiom that does not involve an infinite number of choices from the DM. 
 This is a minor inconvenience, as we can always restrict actions to a set of measurable functions and choose a \emph{bona fide} probability distribution.
-The price is that we might be unable to represent all coherent behaviour.
+The price is that we might be unable to represent all coherent behaviours, and there might be interesting statistical stances to be had with finitely additive probability \citep{}.
+
 A second objection is the boundedness of the utility function, first noticed by \citep{Fis70}. 
 Common losses such as the squared loss need to be trimmed to fit into the picture without modifying the axioms.
 At the cost of some less natural axioms, one can however accomodate unbounded loss functions \citep{Wak93}.
+
 A third objection is the pivotal role played by constant actions in Savage's (and actually von Neumann and Morgenstern's) proof.
 Constant actions are those that assign the same reward $r\in\mathcal{R}$ to all states $s\in\mathcal{S}$.
 The utility function in approaches derived from \cite{VoMo} is defined by finding the weight in a convex combination of two extreme constant actions; see e.g. \citep[Chapter 3]{PaIn09}. 
@@ -200,6 +226,7 @@ But constant actions are not part of the action sets that we considered in Secti
 In binary classification, for instance, there are two constant actions: the ideal classifier $a^\star$ that always predicts the right label, and the worst possible classifier $a_\star$, which consistently predicts the wrong label. 
 The utility function of any reward $r$ is defined in reference to these two idealized classifiers.  
 It would be more satisfying to have a set of axioms that does not give such a key role to \emph{non-physical} classifiers. 
+
 A fourth and related objection is that the utility in Savage's result is independent of the state: $u(a(s))$ only depends on the state through $a(s)$. 
 This means that the notation $L(a,s) = -u(a(s))$ is inappropriate, as it lets the user think that the loss of action $a$ can depend on the state $s$. 
 In textbook ML tasks, this is not much of a problem, but in real applications, this can prove limiting; see \citep[Chapter XXX]{PaIn09}.
