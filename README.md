@@ -6,6 +6,7 @@
 ## Material
 * Annotated slides for lecture 1 on [Bayesics](https://www.dropbox.com/s/fuk79kdiw3ukgk2/01_bayesics.pdf?dl=0).
 * Annotated slides for lecture 2 on [Gaussian processes](https://www.dropbox.com/s/on40rf57h7coqtw/02_gp.pdf?dl=0) and [Bayesian deep learning](https://www.dropbox.com/s/ijugk8ffwey60ce/02_bdl.pdf?dl=0).
+* Annotated slides for lecture 3 on [MCMC](https://nextcloud.univ-lille.fr/index.php/s/nG57HL9Pcdt4W2t).
 
 ## Objective of the course
 By the end of the course, the students should
