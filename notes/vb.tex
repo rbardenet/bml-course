@@ -1,21 +1,37 @@
 %!TEX root=./main.tex
 
-While Monte Carlo methods are randomized numerical quadratures, \emph{variational Bayes} (VB) stands for finding an approximation to the target distribution within some prespecified set $\mathcal Q$ of distributions.
-This is done by minimizing some notion of distance between the target $\pi$ and the so-called variational approximation $q\in\mathcal Q$.
-For instance, a common choice is to solve
+Monte Carlo methods are randomized numerical quadratures that approximate the target measure $\d\mu(x) = \pi(x)\d x$ by a random discrete measure with a finite number of atoms. 
+Alternately, one might try to approximate $\mu$ by directly miniziming some distance between $\mu$ and a candidate approximation $q(x)\d x$ in some parametrized subset $\cQ\subset \cM_1$ of non-atomic candidate approximations. 
+Since our ultimate goal is to approximate expected utilities with respect to $\mu$, see Section~\ref{s:expected_utility}, one may wish to find a $q\in\cQ$ that minimizes the worst-case error we would make by replacing $\pi$ with $q$ in the integration of some class $\cF$ of functions.
+Formally, we might wish to minimize
 \begin{equation}
-q^\star \in \arg\min_{q\in\mathcal Q} \text{KL}(q, \pi) := \mathbb E_q \log \frac{q(\theta)}{\pi(\theta)} = \int q(\theta) \log \frac{q(\theta)}{\pi(\theta)} \d\theta,
+  \label{e:IPM}
+  q\mapsto d_\cF(\pi, q) \eqdef \sup_{f\in\cF} \left\vert \int f(x)\pi(x)\d x - \int f(x)q(x)\d x \right\vert
+\end{equation}
+When $\cF$ is a reproducing kernel Hilbert space and $\cQ$ is the set of weighted measures with $N$ atoms, this leads to kernel herding; see Section~\ref{s:alternative_methods}. 
+
+In this chapter, we rather consider minimizing the KL divergence between $q$ and $\pi$, i.e.
+\begin{equation}
+  q^\star \in \arg\min_{q\in\mathcal Q} \text{KL}(q, \pi) := \mathbb E_q \log \frac{q(x)}{\pi(x)} = \int q(x) \log \frac{q(x)}{\pi(x)} \d x.
 \label{e:VB}
 \end{equation}
-where $\pi$ and $q$ are PDFs w.r.t. some common measure $\d\theta$.
-Once \eqref{e:VB} has been solved, one can either use the resulting $q^\star$ as a plug-in replacement for the target $\pi$, or, say, use $q^\star(\theta)\d\theta$ as a proposal distribution in importance sampling.
+Once \eqref{e:VB} has been solved, one can use the resulting $q^\star$ as a plug-in replacement for the target $\pi$.
+Unfortunately, the (reverse) KL divergence does not have the form \eqref{e:IPM}, and in general, $q^\star$ will not be guaranteed to lead to a controlled integration error. 
+Actually, the combined use of the reverse KL and of $\cQ \subsetneq \cM_1$ usually leads an optimal $q^\star$ with a smaller support than $\pi$.
+This also makes it difficult to use $q^\star$ as a proposal distribution in importance sampling.
 
-Compared to MCMC, the big plus of VB is that some modification of the optimization problem \eqref{e:VB} can often be implemented in large-scale settings where either the number of data items or the dimension of the problem are large, e.g. in deep learning.
-The major downside of VB is the difficulty to provide theoretical guarantees on its results.
-One reason for this is that the distance to minimize, such as the reverse KL divergence in \eqref{e:VB}, is often chosen for computational convenience rather than for its guarantees on integrating functions of interest.
-Another reason is that approximating complex target distributions requires a large set $\mathcal Q$ of variational approximations, which usually makes \eqref{e:VB} a difficult optimization problem that has to be further modified before an efficient implementation is possible.
+While replacing \eqref{e:IPM} by \eqref{e:VB} might seem disappointing at first sight, our sacrifice will not be in vain. 
+We shall see in Sections~\ref{s:elbo} to \ref{s:gradient_based_VB} that minimizing \eqref{e:VB} can be computationally tractable in settings where no efficient Monte Carlo method has been proposed yet, in particular in very high dimensions such as when fitting a deep neural network. 
+There is research in frequentist theoretical results that support using \eqref{e:VB}, generalized formulations of Bayesian inference that justify \eqref{e:VB}, and case-specific empirical demonstrations that $q^\star$ retains some of the desireable properties of the posterior; we survey some of these results in Section~\ref{s:theory_for_VB}.
+Closing the gap between VB and Bayes is an exciting current research topic.
+
+% Compared to MCMC, the big plus of VB is that some modification of the optimization problem \eqref{e:VB} can often be implemented in large-scale settings where either the number of data items or the dimension of the problem are large, e.g. in deep learning.
+% The major downside of VB is the difficulty to provide theoretical guarantees on its results.
+% One reason for this is that the distance to minimize, such as the reverse KL divergence in \eqref{e:VB}, is often chosen for computational convenience rather than for its guarantees on integrating functions of interest.
+% Another reason is that approximating complex target distributions requires a large set $\mathcal Q$ of variational approximations, which usually makes \eqref{e:VB} a difficult optimization problem that has to be further modified before an efficient implementation is possible.
 
 \section{The evidence lower bound (ELBO)}
+\label{s:elbo}
 Remember that the density $\pi$ is often known only though the evaluation of an unnormalized version $\pi_u$, i.e., $\pi_u(\theta) = Z\pi(\theta), \forall \theta$.
 If we are to carry out \eqref{e:VB}, we thus need to know how to express $\text{KL}(q,\pi)$ using only $\pi_u$.
 
@@ -173,6 +189,7 @@ As an exercise, derive the updates for the marginalized LDA model of Section~\re
 TBC
 
 \section{Gradient-based algorithms}
+\label{s:gradient_based_VB}
 An alternate approach to finding a simple $\mathcal Q$ leading to closed-form updates is to directly run a gradient algorithm on the ELBO \eqref{e:ELBO}.
 Take $\mathcal{Q} = \{q(\cdot\vert\phi), \phi \in\Phi\}$, where for all $x$, $\phi\mapsto q(x\vert\phi)$ is differentiable.
 Then, assuming the necessary regularity conditions, \cite{PaBlJo12} note that gradient of the ELBO can be rewritten using the so-called \emph{score function trick} as
@@ -186,7 +203,7 @@ The first term can be estimated by vanilla Monte Carlo.
 The entropy term can usually be differentiated in closed form; if not, it can be estimated by vanilla Monte Carlo as well. 
 Overall, we can plug an unbiased estimator of the gradient of the ELBO in any stochastic gradient algorithm. 
 More often than not, the ELBO as a function of $\phi$ is not convex, though, and one has to be happy with searching for local optima. 
-Moreover, vanilla Monte Carlo estimators of \eqref{e:gradient_of_the_ELBO} have been reported to have high variance even in simple models \cite{PaBlJo12}. 
+Moreover, vanilla Monte Carlo estimators of \eqref{e:gradient_of_the_ELBO} have been reported to have high variance even in simple models \citep{PaBlJo12}. 
 
 Variance reduction for ELBO gradients has been a field of active research.
 \cite{PaBlJo12} propose to use control variates, while \cite{KiWe14} and a large body of follow-up work propose \emph{reparametrization tricks} that work as follows. 
@@ -239,4 +256,21 @@ Now the chain rule yields
 
 \section{Theoretical guarantees}
 
-\section{Alternatives to the KL divergence}
+\section{An alternative derivation of VB, and generalizations}
+We defined VB as minimizing $q\mapsto KL(q,\pi)$ over $\cQ$. 
+There is an equivalent definition that sheds some light on the relationship of VB with Bayes, and leads to natural generalizations of VB; see \citep{KnJeDa22} and references therein.
+
+We consider the problem of inference for simplicity. 
+Given a loss function $\ell$, a divergence $D$, and a set of distributions $\cQ$, consider the optimization problem $P(\ell, D, \cQ)$ defined by 
+\begin{equation}
+  \label{e:GVI}
+  \tag{$P(\ell, D, \cQ)$}
+  q^\star \in \arg\min_{q\in \cQ} \mathbb{E}_q \sum_{i=1}^N \ell(\theta, x_i) + D(q(\theta)\d\theta, p(\theta)d\theta).
+\end{equation}
+A classical result going back at least to \citep{DoVa75} implies that taking $\ell(\theta, x_i) = -\log p(y_{1:N}\vert \theta)$, $D=\text{KL}$, and $\cQ=\cM_1$ leads to $q^\star(\theta) = \pi(\theta) \propto p(y_{1:N}\vert\theta)p(\theta)$.
+Moreover, taking $\cQ\subsetneq \cM_1$ leads to VB, i.e. $q^\star \in \arg\min \text{KL}(q,\pi)$.
+In that sense, VB corresponds to the same optimization problem as Bayes, but with a constraint on where the ``posterior" may lie.  
+\cite{KnJeDa22} examine justifications behind what they call the \emph{optimization-centric} view on Bayesian inference, and how the choices of $\ell$ and $D$ in \eqref{e:GVI} impacts the results of VB.
+In particular, when the prior has a structure that does not represent what we expect from a posterior, like when using an uncorrelated Gaussian prior on the weights of a neural network, while we expect large correlations across layers and multimodality from a posterior.
+\cite{KnJeDa22} demonstrate that empirical performance in regression benefits from replacing the KL by Renyi's $\alpha$-divergence. 
+Interestingly, this benefit depends on $\alpha$ being in a certain finite range, which allows both a weaker dependence to the prior, and the support of the resulting $q^\star$ not collapsing to a single point. 
