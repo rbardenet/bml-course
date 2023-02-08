@@ -150,7 +150,7 @@ $L(q)$ is thus \un{a lower bound for the evidence} $p(\text{data})$ (ELBO).
 \begin{block}{Lemma (exercise)}
 Let $\Psi(\cdot) := \Gamma'(\cdot)/\Gamma(\cdot)$ be the digamma function. Then
 $$
-\mathbb{E}_{\text{Dir}(\theta\vert\eta)} \log \theta_i = \Psi(\eta_i) - \Psi(\Vert \eta\Vert_1).
+\mathbb{E}_{\text{Dir}(\theta\vert\eta)} \log \theta_i = \Psi(\eta_i) - \Psi(\Vert \eta\Vert_1) =: \Psi_i(\eta).
 $$
 \end{block}
 \vfill
@@ -222,7 +222,7 @@ $$
 \end{frame}
 
 \section{Generalizing VB}
-\begin{frame}{``Optimization-centric'' Bayesian inference}
+\begin{frame}{``Optimization-centric'' Bayesian inference\footcite{KnJeDa22}}
   Given a loss $\ell$, a divergence $D$, and a set of distributions $\mathcal{Q}$, consider\begin{equation}
   \label{e:GVI}
   \tag{$P(\ell, D, \mathcal{Q})$}
