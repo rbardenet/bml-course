@@ -262,7 +262,7 @@ $$
 \hat\theta_{\text{Bayes}} \in \argmin_{\hat\theta} \mathbb{E}_{\theta\vert x_{1:n},y_{1:n}} L(\theta,\hat\theta)
 $$
 such that
-$$ \forall \theta, \quad \mathbb E_{y_{1:n}\vert x_{1:n},\theta} L(\theta,\hat\theta_{\text{Bayes}}) < E_{y_{1:n}\vert x_{1:n},\theta} L(\theta,\tilde\theta).$$
+$$ \forall \theta, \quad \mathbb E_{y_{1:n}\vert x_{1:n},\theta} L(\theta,\hat\theta_{\text{Bayes}}) \leq E_{y_{1:n}\vert x_{1:n},\theta} L(\theta,\tilde\theta).$$
 \end{block}
 \begin{alertblock}{Bayesian estimators thus have good frequentist properties}
 But finding the ``right" prior can be difficult. Frequentists typically use Bayesian derivations with particular (often data-dependent) priors; see e.g. empirical Bayes procedures \citep{Efr10}.
@@ -282,7 +282,7 @@ $$
 \begin{block}{Spike-and-slab priors}
   \vspace{-5pt}
   $$
-    p(\theta\vert w) = (1-w)\delta_0 + w q(\theta).
+    p(\theta\vert w) = \prod_{i=1}^d \left[(1-w)\delta_0(\theta_i) + w q(\theta_i)\right].
   $$
 \end{block}
 
