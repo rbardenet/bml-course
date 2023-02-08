@@ -98,7 +98,7 @@
   with \un{$ q^\star \in \argmin_{q\in \mathcal Q} \text{distance}(\pi, q)$}. 
   Often we take
   $$
-    \text{distance}(\pi, \tilde q) = \text{KL}(\tilde q, \pi) := \int q(\theta) \log \frac{q(\theta)}{\pi(\theta)}\d\theta.
+    \text{distance}(\pi, q) = \text{KL}( q, \pi) := \int q(\theta) \log \frac{q(\theta)}{\pi(\theta)}\d\theta.
   $$
   for computational convenience.
 \end{block}
@@ -211,11 +211,6 @@ $$
   \blank
 \end{frame}
 
-\begin{frame}{Automatic differentiation variational inference  \citep{KTRGB17}}
-  \vfill
-  \blank
-  \end{frame}
-
 \begin{frame}{Lots of variants of VB exist \citep{Mur12}}
   \begin{itemize}
     \item For hidden variable models, \un{EM} is VB with $$q(z,\theta) = \pi(z\vert \theta)\delta_{\tilde\theta}(\theta).$$
@@ -225,6 +220,27 @@ $$
     \item These days, \un{ADVI with stochastic gradients} is the default VI choice in probabilistic programming software like PyMC3, Stan, or PyRo.
   \end{itemize}
 \end{frame}
+
+\section{Generalizing VB}
+\begin{frame}{``Optimization-centric'' Bayesian inference}
+  Given a loss $\ell$, a divergence $D$, and a set of distributions $\mathcal{Q}$, consider\begin{equation}
+  \label{e:GVI}
+  \tag{$P(\ell, D, \mathcal{Q})$}
+  q^\star \in \arg\min_{q\in \mathcal{Q}} \mathbb{E}_q \sum_{i=1}^N \ell(\theta, x_i) + D(q(\theta)\d\theta, p(\theta)d\theta).
+\end{equation}
+\blank
+\end{frame}
+
+\begin{frame}{Conclusion on VB}
+  \begin{itemize}
+    \item Computationally attractive alternative to MCMC.
+    \item Lots of open questions on connecting VB and to the original SEU problem: is VB justified in itself or is it simply a computationally convenient backup option?
+    \item Many partial answers, e.g. try to use VB in importance sampling, optimization-centric viewpoint.
+    \item More meaningful alternatives to the KL: maximum mean discrepancy, etc.
+  \end{itemize}
+\end{frame}
+
+
 
 \section*{References}
 \setbeamertemplate{bibliography item}[text]%,
