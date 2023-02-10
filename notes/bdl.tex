@@ -32,7 +32,13 @@
 
 \subsection{Monte Carlo dropout}
 
+The dropout technique can be reinterpreted as a form of approximate Bayesian variational inference~\citep{kingma2015variational,gal2016dropout}.  \cite{gal2016dropout} build a connection between dropout and the Gaussian process representation, while \citet{kingma2015variational} propose a way to interpret Gaussian dropout. They develop a \textit{variational dropout} where each weight of a model has its individual dropout rate. \textit{Sparse variational dropout}, proposed by \citet{molchanov2017variational}, extends \textit{variational dropout} to all possible values of dropout rates and leads to a sparse solution. The approximate posterior is chosen to factorize either over rows or over individual entries of the weight matrices. The prior usually factorizes in the same way.  Therefore, performing dropout can be used as a Bayesian approximation. However, as noted by \citet{duvenaud2014avoiding}, dropout has no regularization effect on infinitely-wide hidden layers.  \citet{nalisnick2019dropout} propose a Bayesian interpretation of regularization via multiplicative noise, with dropout being the particular case of Bernoulli noise. They find that noise applied to hidden units ties the scale parameters in the same way as the ARD algorithm \citep{neal1996bayesian}, a well-studied shrinkage prior. 
 
+Let us describe Monte Carlo dropout in more details. The idea is simple and consists in performing random sampling at test time. Instead of turning off the dropout layers at test time (as is usually done), hidden units are randomly dropped out according to a Bernoulli$(p)$ distribution. Repeating this operation $M$ times provides $M$ versions of the MAP estimate of the network parameters $\bw^m$, $m=1,\ldots,M$ (where some units of the MAP are dropped), yielding an approximate posterior predictive in the form of the equal-weight average:
+\begin{equation}\label{eq:MCdropout_post_pred}
+	p(y\vert x, \mathcal{D}^n)\approx \frac{1}{M}\sum_{m=1}^M p(y\vert x, \bw^m).
+\end{equation}
+Monte Carlo dropout captures some uncertainty from out-of-distribution (OOD) inputs, but is nonetheless incapable of providing valid posterior uncertainty. Indeed, Monte Carlo dropout changes the Bayesian model under study, which modifies also the properties of the approximate Bayesian inference performed. Specifically, \cite{folgoc2021mc} shows that the Monte Carlo dropout posterior predictive~\eqref{eq:MCdropout_post_pred} assigns zero probability to the true model posterior predictive distribution.
 \subsection{Variational inference}
 
 
