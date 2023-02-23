@@ -5,8 +5,9 @@
 * Julyan Arbel (Inria, Univ. Grenoble-Alpes), https://www.julyanarbel.com
 ## Material
 * Annotated slides for lecture 1 on [Bayesics](https://www.dropbox.com/s/fuk79kdiw3ukgk2/01_bayesics.pdf?dl=0).
-* Annotated slides for lecture 2 on [Gaussian processes](https://www.dropbox.com/s/on40rf57h7coqtw/02_gp.pdf?dl=0) and [Bayesian deep learning](https://www.dropbox.com/s/ijugk8ffwey60ce/02_bdl.pdf?dl=0).
+* Annotated slides for lecture 2 on [Gaussian processes](https://www.dropbox.com/s/on40rf57h7coqtw/02_gp.pdf?dl=0) and [Bayesian deep learning (part 1)](https://www.dropbox.com/s/ijugk8ffwey60ce/02_bdl.pdf?dl=0).
 * Annotated slides for lecture 3 on [MCMC](https://nextcloud.univ-lille.fr/index.php/s/nG57HL9Pcdt4W2t).
+* Annotated slides for lecture 6 on [Bayesian deep learning (part 2)](https://www.dropbox.com/s/kmrjkjwu05efdxc/07_bdl_2.pdf?dl=0), layout of [Bayesian nonparametrics](https://www.dropbox.com/s/htoykep8jxgtd25/04_bnp.pdf?dl=0), and [asymptotics](https://www.dropbox.com/s/z8cdvprc4xgbyrc/04_asymp.pdf?dl=0).
 
 ## Objective of the course
 By the end of the course, the students should
