@@ -10,6 +10,7 @@
 * Slides for lectures 4 and 5 are in the slides folder.
 * Annotated slides for lecture 6 on [Bayesian deep learning (part 2)](https://www.dropbox.com/s/kmrjkjwu05efdxc/07_bdl_2.pdf?dl=0), layout of [Bayesian nonparametrics](https://www.dropbox.com/s/htoykep8jxgtd25/04_bnp.pdf?dl=0), and [asymptotics](https://www.dropbox.com/s/z8cdvprc4xgbyrc/04_asymp.pdf?dl=0).
 * Slides for lecture 7 on [Bayesian nonparametrics: random probability measures](https://www.dropbox.com/s/d8vhv5vqcn7x72y/bnp.pdf?dl=0).
+* Harmonized slides on BNP and BDL are also now available in the slides folder.
 
 ## Objective of the course
 By the end of the course, the students should
