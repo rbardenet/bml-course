@@ -1,21 +1,1000 @@
+\paragraph{References.}
+\begin{itemize}
+	\item \citet{Ghosh2003}
+	\item \citet{hjort2010bayesian}
+	\item \citet{ghosal2017fundamentals}
+\end{itemize}
 
 
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Introduction}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+
+
+{Why Asymptotics}
+
+\begin{itemize}
+\item Construction of a prior on a nonparametric space is difficult
+\item We cannot hope to cover all the space of density (for example) with our prior (the prior does not have full support)
+\item \alert{We need to check that our inference is not completely off! }
+\end{itemize}
+  
+\begin{block}{Parametric setting}
+We have the celebrated \alert{Bernstein--von Mises} theorem that implies that the effect of the prior on the posterior inference vanishes when the amount of information grows. 
+\end{block}
+\begin{center}
+\alert{This is not true anymore in a nonparametric setting! }
+\end{center}
+
+
+
+
+
+
+{Why asymptotics?}
+
+A first order approximation is to consider the asymptotic setting:
+
+\begin{itemize}
+\item Adopt a Frequentist point of view: ``There exists a \emph{true} parameter $\theta_0$, and we study the posterior distribution with data generated w.r.t. $\theta_0$.'' 
+\item Ideally, the posterior distribution will \alert{concentrate} around $\theta_0$ when $n\to \infty$.
+\end{itemize}
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Posterior consistency}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\subsection{Doob's theorem}
+%\subsection{Doob's theorem}
+%
+%\subsection{Schwartz' approach}
 
-\subsection{Schwartz' approach}
 
 
+%\subsection{Some definition}
+
+
+{Consistency}
+
+Setting:
+\begin{itemize}
+\item $\forall n \in \N$, let $\Xn$ be some observations in a sample space $\{\mathcal{X}^n,\mathcal{A}^n\}$ with distribution $P_\theta$
+\item $\theta \in \Theta$ with $(\Theta,d)$ a (semi-)metric space 
+\end{itemize}
+
+Let $\Pi$ be a prior distribution on $\Theta$ and $\Pi(\cdot|\Xn)$ a version of its posterior distribution. 
+\begin{definition}[Consistency]
+The posterior distribution $\Pi(\cdot|\Xn)$ is said to be \alert{weakly consistent} at $\theta_0$ if for all $\epsilon >0$ 
+$$
+\Pi\left(d(\theta,\theta_0) > \epsilon|\Xn\right) \xrightarrow[n\to \infty]{P_{\theta_0}} 0. 
+$$
+If the convergence is \alert{almost sure}, then the posterior is said to be \alert{strongly consistent}.
+\end{definition}
+
+
+
+
+%\begin{center}
+%\animategraphics[height = 0.8\textheight,autoplay,loop]{10}{figures_julyan/asymp/images/gif_contraction/0000}{01}{99}
+%\end{center}
+
+
+{Point estimators}
+
+Naturally one will hope that posterior consistency implies that some summary of the posterior location would be a consistent estimator. 
+ 
+
+\begin{theorem}
+Let $\Pi(\cdot|\Xn)$ be a posterior distribution on $\Theta$ and suppose that it is consistent at $\theta_0$ relative to a metric $d$ on $\Theta$. For $\alpha \in (0,1)$, define $\hat{\theta}_n$ as the centre of the smallest ball containing at least $\alpha$ of the posterior mass. Then 
+$$
+d(\hat{\theta}_n, \theta_0) \xrightarrow[n\to \infty]{P_{\theta_0}, \text{ or } P_{\theta_0}~a.s. } 0. 
+$$   
+\end{theorem}
+
+
+
+
+
+
+
+
+
+{Extra notes}
+
+	Take $\alpha = 1/2$ for simplicity and consistency in probability. Define $B(\theta,r)$ the closed ball of radius $r$ centred around $\theta$, and let 
+	$$
+\hat{r}(\theta) = \inf\{r, \Pi(B(\theta,r) | \Xn)\geq 1/2  \}
+	$$
+	(and $\inf$ over the empty set is $\infty$). Now let $\hat{\theta}_n$ be such that 
+	$$
+\hat{r}(\hat{\theta}_n) \leq \inf_{\theta \in \Theta} r(\theta) + 1/n
+	$$ 
+	Consistency implies that $\Pi(B(\theta_0,\epsilon) |\Xn) \to 1$ so $\hat{r}(\theta_0) \leq \epsilon$ with probability tending to 1. Furthermore, $\hat{r}(\hat{\theta}_n)  \leq \hat{r}(\theta_0) + 1/n $ thus $\hat{r}(\hat{\theta}_n)  \leq \epsilon + 1/n$ with probability tending to $1$.
+ 
+	In addition, $B(\theta_0,\epsilon)\cap B(\hat{\theta}_n,\hat{r}(\hat{\theta}_n)) \neq \emptyset$ otherwise $\Pi(B(\theta_0,\epsilon)\cup B(\hat{\theta}_n,\hat{r}(\hat{\theta}_n)) |\Xn) = \Pi(B(\theta_0,\epsilon)|\Xn) + \Pi(B(\hat{\theta}_n,\hat{r}(\hat{\theta}_n)) |\Xn) \to 1 + 1/2$. So we have 
+	$$
+d(\theta_0,\hat{\theta}_n) \leq \hat{r}(\hat{\theta}_n) + \epsilon \leq 2\epsilon + 1/n
+	$$
+	with probability that goes to $1$. 
+
+
+
+
+\begin{itemize}
+\item If $\Theta$ is a vector space, then one might want to use the \alert{posterior mean}.
+\item But... weak convergence to a Dirac does not imply convergence of moments.
+\item Consistency of the posterior mean requires additional assumptions such as boundedness of posterior moments in probability or a.s. for some $p>1$ would be sufficient. 
+\end{itemize}
+
+
+
+
+
+
+{Point estimator}
+
+Under some assumption on the space $\Theta$ and on the metric $d$ one can show consistency of the posterior mean through consistency of the posterior distribution. 
+\begin{theorem}[Posterior mean]
+Assume that the balls of the metric space $(\Theta,d)$ are convex. Suppose that for any sequence $\theta_{1,n}, \theta_{2,n}$ in $\Theta$ and $\lambda_n \to 0$
+$$
+d(\theta_{1,n}, (1-\lambda_n) \theta_{1,n} + \lambda_n \theta_{2,n}) \to 0 
+$$
+Then consistency of the posterior distribution implies consistency of the posterior mean. 
+\end{theorem}
+
+
+
+
+
+
+
+
+
+
+{Extra notes}
+
+	% For $\epsilon >0$ we have 
+	% \begin{align*}
+	% d(\E(\theta|\Xn),\theta_0) &\leq \E(d(\theta,\theta_0)) \\ 
+ % & = \int_{B(\theta_0,\epsilon)} d(\theta,\theta_0) \Pi(d\theta|\Xn) + \int_{B(\theta_0,\epsilon)^c} d(\theta,\theta_0) \Pi(d\theta|\Xn)
+	% \end{align*}
+	Let $\epsilon >0$ and write $\hat{\theta}_n = \int \theta \Pi(d\theta|\Xn)$. We decompose 
+	$$
+\hat{\theta}_n = \int_{B(\theta_0,\epsilon)} \theta \Pi(d\theta|\Xn) + \int_{B(\theta_0,\epsilon)^c} \theta \Pi(d\theta|\Xn) = \theta_{1,n} (1-\lambda_n) + \lambda_n\theta_{2,n}
+	$$
+	where $\theta_{1,n} =\int_{B(\theta_0,\epsilon)} \theta \frac{\Pi(d\theta|\Xn))}{\Pi(B(\theta_0,\epsilon)|\Xn)} $, $\lambda_n = \Pi(B(\theta_0,\epsilon)|\Xn)$ and similarly for $\theta_{2,n}$ on the complement of $B(\theta_0,\epsilon)$.
+	Using Jensen inequality we have 
+	\begin{equation*}
+	d(\theta_{n,1},\theta_0) \leq \int_{B(\theta_0,\epsilon)} d(\theta,\theta_0) \frac{\Pi(d\theta|\Xn))}{\Pi(B(\theta_0,\epsilon)|\Xn)} \leq \epsilon
+	\end{equation*}
+	In addition we have 
+	$$
+	d(\hat{\theta}_n,\theta_0) \leq d(\theta_{n,1},\theta_0) + d(\theta_{n,1}, \theta_{1,n} (1-\lambda_n) + \lambda_n\theta_{2,n} ).
+	$$
+	Using the fact that $\lambda_n \to 0$ since the posterior is consistent, we have the desired result. 
+	\begin{remark}
+	For the condition on $d$ to hold, one can assume it to be convex and uniformly bounded. 
+	\end{remark}
+
+
+
+
+
+
+{A first consistent posterior}
+
+\begin{example}[Dirichlet process]
+Assume the following model 
+\begin{align*}
+X_1, \dots, X_n &\overset{iid}{\sim} P, \\ P &\sim \text{DP}(M\alpha)
+\end{align*}
+Consider the semi-metric $d_A(P,Q) = |P(A) - Q(A)|$ for some measurable event $A$ on $\Theta$, then $\Pi(\cdot |\Xn)$ is \alert{strongly consistent} at any $P_0$ for $d_A$. 
+\end{example}
+ 
+
+From this result, we can easily obtain consistency under the weak topology. We could also obtain stronger consistency using Glivenko--Cantelli theorem. 
+
+
+
+
+
+
+
+
+
+{Extra notes}
+
+	Consider $\Pi(|P(A) - P_0(A)| \geq \epsilon | \Xn)$ which calls for applying Markov inequality. Properties of the Dirichlet process imply that $$P\vert \Xn \sim \text{DP}(M\alpha + n\mathbb{P}_n),$$ thus $$P(A)\vert \Xn \sim \text{Beta}(M\alpha(A) + n\mathbb{P}_n(A), M\alpha(A^c) + n\mathbb{P}_n(A^c)).$$ We thus have 
+	\begin{align*}
+	\E(P(A)|\Xn) &= \frac{M}{M+n} \alpha(A) + \frac{n}{M+n} \mathbb{P}_n(A) := \bar{P}(A)\\
+    \mathrm{var}(P(A)|\Xn) &= \frac{\bar{P}(A)\bar{P}(A^c)}{1 + n + M} \leq \frac{1}{4(1+n+M)}.
+	\end{align*}
+Markov inequality gives 
+	\begin{align*}
+	\Pi(|P(A) - P_0(A)| \geq \epsilon | \Xn) &\leq \frac{1}{\epsilon^2} \left( |\bar{P}(A) - P_0(A)|^2 +  \mathrm{var}(P(A)|\Xn) \right)\\
+	 & \to 0 ~ [P_0, a.s. ] 
+	\end{align*}
+using the law of large numbers on $\mathbb{P}(A)$.
+
+
+
+%\subsection{Why bother?} 
+
+
+
+{Bayesian modelling perspective}
+
+From a Bayesian point of view, a \alert{Dirac measure at $\theta_0$} corresponds to perfect knowledge of the parameter. 
+\begin{itemize}
+	\item Prior and posterior distributions model our knowledge about the parameter.
+	\item Consistency thus implies that when the amount of information grows, we tend towards perfect knowledge of the parameter. 
+\end{itemize}
+
+
+
+
+
+
+{A validation of Bayesian methods}
+
+The frequentist setting where there exists a \emph{true} parameter $\theta_0$ that generates the data can be seen as an idealized set-up. 
+\begin{itemize}
+	\item An experimenter feeds a Bayesian with some data using the same data-generating mechanism. 
+	\item When the number of observation grows, a Bayesian should be able to pin-point the data-generating mechanism, whatever their prior. 
+	\item<2> \alert{A prior that does not lead to a consistent posterior should not be used.} 
+\end{itemize}
+
+
+
+
+
+
+
+{Robustness}
+
+Two Bayesians walk into a bar... with \emph{almost} the same prior, then their posterior inference should not differ that much.  
+\begin{itemize}
+\item Let $\Pi_1$ be the prior of Bayesian number 1
+\item Bayesian number 2 uses an ``$\epsilon$-corrupted'' prior $\Pi_2 = (1-\epsilon)\Pi_1 + \epsilon \delta_{p_0}$ for some $p_0 \in \Theta$
+\end{itemize}
+The posterior of Bayesian number 2 is consistent at $p_0$ (to be seen later), now what if $\Pi_1$ is not consistent at $p_0$? 
+ 
+Let $d_W$ be the metric for the weak topology, then $d_W(\Pi_1(\cdot|\Xn), \Pi_2(\cdot|\Xn))$ would not go to $0$. 
+
+
+
+
+
+
+
+
+
+
+{Extra notes}
+
+There exists some $\varepsilon_0 >0$ such that 
+$$
+\Pi_{n,1}(B(\theta_0,\varepsilon_0)|\Xn) \not\to 0 
+$$
+Thus 
+$$
+|\Pi_{n,1}(B(\theta_0,\varepsilon_0)|\Xn) - \Pi_{n,2}(B(\theta_0,\varepsilon_0)|\Xn) | \not\to 0
+$$
+since $\Pi_{n,2}(B(\theta_0,\varepsilon_0)|\Xn) \to 0$.
+
+
+
+
+\subsection{Doob's Theorem}
+
+
+
+
+{Doob's Theorem}
+
+Can one get general conditions on the prior to ensure that it is consistent?  
+\begin{itemize}
+ \item A first answer: Doob's Theorem
+ \item The posterior is consistent at every $\theta$ $\Pi$-a.s. 
+ \end{itemize} 
+  
+ Consider the case of \emph{i.i.d.} observations
+ \begin{theorem}[Doob's Theorem]
+ Let $\{\mathcal{X}^n, P_\theta, \Theta\}$ be a statistical model where $\{\mathcal{X}^n,\mathcal{A}^n\}$ is a Polish space with Borel $\sigma$-field and $\Theta$ a Borel subset of a Polish space. Suppose that the map $\theta \mapsto P_\theta(A)$ is Borel measurable for evey $A\in \mathcal{A}$ and $\theta \mapsto P_\theta$ is one-to-one. \\
+ Then for any prior distribution $\Pi$ on $\Theta$, if $X_1, \dots, X_n \overset{iid}{\sim} P_\theta$, $\theta \sim \Pi$, \alert{the posterior is strongly consistent at any $\theta$ $\Pi$-a.s.}
+ \end{theorem}
+
+
+
+
+
+
+{Doob's Theorem}
+
+\begin{block}{Some remarks on Doob's Theorem}
+\begin{itemize}
+\item The conditions of the theorem are extremely weak
+\item And no conditions on the prior
+\item However this is only true \alert{$\Pi$-almost surely}. 
+\item Note: the $\Pi$-null set can be quite big! we can be happy with this result only if we are confident that the parameters are on the support of the prior. In general no one can be sure that the parameter generating the data inside the support of the prior, this is a real problem in fact in general the support of the prior can be quite thin. 
+
+An extreme example is the case were the prior is a Dirac on some parameter $\theta_0$. Then Doob's theorem still holds. 
+
+%An exception is the case where $\Theta$ is countable. 
+\end{itemize}
+\end{block}
+
+
+
+
+\subsection{Schwartz approach}
+
+\paragraph{Setting}
+
+
+
+{Setting}
+Doob's approach is not enough to show consistency of the posterior. For simplicity we focus on the \textcolor{forestgreen}{density estimation} setting.
+\begin{itemize}
+ \item $\Theta$ is the set of probability density functions on $\mathcal{X}$ w.r.t. a common dominating measure $\nu$. We denote the parameter $p$ (instead of $\theta$) and $P$ the associated probability measure. 
+ \item Observations follow $X_1, \dots, X_n \overset{iid}{\sim} p$, and $p\sim \Pi$.
+ \end{itemize}
+ 
+
+Considering  \textcolor{forestgreen}{density estimation} makes things easier  without being too simplistic. The same results can be extended to  \textcolor{forestgreen}{nonparametric regression}.  
+
+
+
+
+\paragraph{Hypotheses}
+
+
+
+{KL property}
+
+To achieve consistency, we do not want to require that the true parameter $p_0$ is  \textcolor{orange2}{inside} the support of $\Pi$. However we still require \textcolor{orange2}{some prior mass \emph{near} $p_0$}. 
+\begin{definition}[Kullback--Leibler]
+Let $p$ and $p_0$ be two p.d.f. with respect to a common measure such that $p_0 \ll p$. Then the Kullback--Leibler divergence between $p$ and $p_0$ is 
+$$
+\text{KL}(p,p_0) = \int p_0 \log(p_0/p) d\nu.
+$$ 
+\end{definition}
+
+
+
+
+
+
+
+{KL property}
+
+\begin{definition}[KL property]
+We say that a prior distribution $\Pi$ satisfies the \textcolor{orange2}{Kullback--Leibler property} at $p_0$ if for every $\epsilon>0$, 
+$$
+\Pi(p:\,\text{KL}(p,p_0)\geq \epsilon) >0 
+$$
+We note $p_0\in \text{KL}(\Pi)$ and alternatively will say that $p_0$ is in the KL-support of $\Pi$.
+\end{definition}
+
+This extends quite a lot the parameters at which the posterior can be consistent. 
+
+
+
+
+
+
+
+{Existence of tests}
+
+The other requirement is that the parameter set is not too complex.   
+
+\begin{definition}[Exponentially consistent tests]
+We say that a sequence of tests $\phi_n$ for $H_0: p = p_0$ versus $H_1: p \in U^c$ is exponentially consistent if 
+$$
+P_0^n(\phi_n) \lesssim e^{-Cn}, ~ \sup_{p\in U^c} P^n(1-\phi_n) \lesssim e^{-Cn} 
+$$
+\end{definition}
+A test is understood as a measurable map $\mathcal{X}^n \to [0,1]$ and the corresponding statistic $\phi_n(X_1, \dots, X_n)$. $\phi_n$ is interpreted as the probability that the null is rejected. 
+
+
+
+
+
+
+
+
+
+{Extra notes}
+
+	The existence of tests means that we can differentiate between $p_0$ and parameter in $U^c$. 
+
+	It is enough to have uniformly consistent sequence of test 
+	$$
+P_0(\phi_n) \to 0, ~ \sup_{p\in U^c} P(1-\phi_n) \to 0. 
+	$$
+
+Since the test is uniformly consistent then there exists $k\in \N$ such that $P_0^k(\phi_k) \leq 1/4$, $P^k(1-\phi_k) \leq 1/4$. Now for $n$ large, write $n = mk+r$. Slice $\Xn = (X_1, \dots, X_n)$ into $m$ sub-sample of size $k$ $\Xn_l = (X_{(l-1)k+1},\dots, X_{lk})$ and define $Y_{l,n} = \phi_k(\Xn_l)$. Now create a new test $\psi_n = \I\{\bar{Y}_m > 1/2\}$. We have for every $p \in U^c$, $P(1-Y_j) \leq 1/4$
+\begin{multline*}
+P(\psi_n) = P(\bar{Y} \leq 1/2) = P(1-\bar{Y} \geq 1/2) = \\ 
+P(1-\bar(Y) \geq 1/2) \leq e^{-2m/16} \lesssim e^{-Cn}
+\end{multline*}
+Using Hoeffding inequality: $\mathsf{P}(\bar{X} - \E(X) \geq \epsilon ) \leq \exp\left\{ - 2 \epsilon^2 m \right\}$.
+
+
+
+
+
+\paragraph{Schwartz Theorem}
+
+\begin{theorem}[Schwartz Theorem]
+Let $\Pi$ be a prior distribution on $\Theta$ such that $p_0\in KL(\Pi)$. Let $U$ be a neighbourhood of $p_0$ such that there exists an exponentially consistent sequence of tests for $p_0$ against $U^c$. Then 
+$$
+\Pi(U^c | \Xn) \to 0 ~ [P_0 a.s].
+$$
+\end{theorem}
+
+This theorem is not due to Herman Schwarz (without t!), nor to Laurent Schwartz the Fields Medalist! But to Lorraine Schwartz, former student of Lucien Le Cam.
+
+
+
+
+
+
+
+
+
+{Extra notes} 
+
+$$
+\Pi(U^c|\Xn) = {\int_{U^c} \prod_{i=1}^n  \frac{p}{p_0}(X_i) d\Pi(p) \over \int_{\mathcal{P}} \prod_{i=1}^n  \frac{p}{p_0}(X_i) d\Pi(p)} := \frac{N_n}{D_n}.
+$$
+We first show $\lim\inf D_n e^{n\epsilon} / \Pi(KL(p,p_0)>\epsilon)   \geq 1 $, $P_0[a.s.]$. Let $\Pi_0(\cdot) = \Pi(\cdot \cap \text{KL}(p,p_0)>\epsilon)/\Pi(KL(p,p_0)>\epsilon)$. Then 
+\begin{align*}
+\log(D_n) &\geq \log\left(\int_{KL(p,p_0)>\epsilon} \frac{p}{p_0}(X_i) d\Pi_0(p)\right) + \log(\Pi(KL(p,p_0)<\epsilon)) \\ 
+&\geq \int_{KL(p,p_0)>\epsilon} \log\left( \prod_{i=1}^n  \frac{p}{p_0}(X_i) \right) d\Pi_0(p) + \log(\Pi(KL(p,p_0)<\epsilon)) \\ 
+&=  \sum_{i=1}^n \int \log \frac{p}{p_0}(X_i) d\Pi_0(p) + \log(\Pi(KL(p,p_0)<\epsilon)) 
+\end{align*}
+The law of large numbers implies 
+$$
+\frac{1}{n} \sum_{i=1}^n \int \log \frac{p}{p_0}(X_i) d\Pi_0(p) \to P_0 \int \frac{p}{p_0}(X_i) d\Pi_0(p),~ P_0[a.s.] 
+$$
+which is $- \int \text{KL}(p,p_0) d\Pi_0(p) > -\epsilon $.
+Thus 
+$$
+\lim\inf D_n e^{n\epsilon} / \Pi(KL(p,p_0)>\epsilon)   \geq 1 ,~ P_0[a.s.]
+$$ 
+	For $n$ large enough we have the following $P_0[a.s.]$ 
+	\begin{align*}
+	\Pi(U^c|\Xn) & \leq  \phi_n + (1-\phi_n) \frac{N_n}{D_n} \\
+                 & \leq \phi_n  + (1-\phi_n) N_n e^{\epsilon n } \Pi(KL(p,p_0)>\epsilon)  
+	\end{align*}
+Furthermore we have that 
+\begin{align*}
+P_0^n  N_n (1-\phi_n) &= P_0^n  \int_{U^c} (1-\phi_n) \prod_{i=1}^{n} \frac{p}{p_0}(X_i) \Pi(dp) \\ 
+                      &= \int_{U^c} P^n (1-\phi_n) \Pi(dp) \leq e^{-Cn} 
+\end{align*}
+
+We thus get $P_0\Pi(U^c|\Xn) \leq e^{-C'n}$ for $\epsilon < C$ and for $C' = C - \epsilon$. Using Borel--Cantelli we get that $\Pi(U^c |\Xn) \to 0 P_0[a.s.]$. 
+
+
+
+
+
+
+{Schwartz Theorem}
+
+% In this original version of Schwartz theorem, we need to be able to test away for all the function in $U^c$. This might not be possible for strong metrics such as $L_1$ metrics. 
+\begin{itemize}
+\item Need to test away all densities in $U^c$
+\item Might not be possible for strong neighbourhood of $p_0$ ($L_1$ metrics)
+\end{itemize}
+ 
+\begin{block}{Extension of Schwartz theorem}
+The idea is that not \emph{all} functions in $U^c$ matters and we can discard function with very low prior probabilities. 
+\end{block}
+ 
+\begin{theorem}
+The results of the previous theorem are still valid if we replace the assumption on the existence of tests by: 
+\begin{align*}
+&\Theta_n \subset \Theta \\ 
+&\Pi(\Theta_n) \leq e^{-Cn}, ~ P_0^n \phi_n \leq e^{-Cn}, ~ \sup_{p \in U^c \cap \Theta_n} P(1-\phi_n) \leq e^{-Cn} 
+\end{align*}
+\end{theorem}
+
+
+
+
+\paragraph{Existence of tests}
+
+
+
+{Existence of tests}
+
+Schwartz' theorem requires the existence of exponentially consistent tests.
+\begin{itemize}
+\item We can differentiate between $\theta_0$ and $U^c$
+\item The model is not too complex 
+\end{itemize}
+ 
+\begin{block}{Question}
+When do such tests exist? 
+\end{block}
+
+Let's see the example of iid observations. 
+
+
+
+
+
+
+
+{Sketch of the proof}
+
+\begin{itemize}
+\item Cannot directly construct test against $U^c = \{p, d(p,p_0) > \epsilon \}$... 
+\item Construct an exponentially consistent test against a generic ball that is at least at distance $\epsilon$
+\item Cover $U^c$ with $N$ of these balls, and construct a test from the $N$ corresponding tests.
+\end{itemize}
+
+
+
+
+
+
+\paragraph{Consistency under Entropy bound}
+
+
+
+{Consistency under Entropy bound}
+
+We combine the preceding results to get general conditions \alert<2->{on the prior} and \alert<2->{on the model}, that ensure consistency. 
+
+	\begin{theorem}
+	The posterior is strongly consistent relative to the $L_1$ distance at every $p_0$ in the KL-support of the prior if for every $\epsilon>0$ there exist $\Theta_n$ such that for $C>0$ and $0<c < 1/2$
+	$$
+\Pi(\Theta_n^c) \leq e^{-Cn},~ \log N(\epsilon,\Theta_n,\Vert\cdot\Vert_1) \leq c n \epsilon_n^2,
+	$$
+	for $n$ large enough. 
+	\end{theorem}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Concentration rates}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\subsection{General theorem in the iid case}
+
+{Definition}
+
+Contraction rates are a refinement of posterior consistency.  
+\begin{itemize}
+\item How fast posterior concentrates its mass around the true parameter
+\item Helps to see how much the prior influences the posterior
+\end{itemize}
+ 
+
+\begin{definition}
+Let $\epsilon_n$ be a positive sequence. The posterior contracts at the rate $\epsilon_n$ at $\theta_0$ if for any $M_n \to \infty$ 
+$$
+\Pi(d(\theta,\theta_0)> M_n \epsilon_n|\Xn) \xrightarrow[n \to \infty]{P_{\theta_0}} 0 
+$$
+If all the experiments share the same probability space and the convergence is $P_{\theta_0}[a.s]$ we say that the posterior contracts in the strong sense.
+\end{definition}
 
 
-\subsection{More general observations: non iid case}
+
+
+
+
+
+
+{Remarks}
+
+\begin{itemize}
+\item Any slower rate than $\epsilon_n$ also fits the definition so we will say \emph{a} posterior contraction rate
+\item We will naturally try to find the fastest possible rate! 
+\end{itemize}
+ 
+\begin{block}{Regarding $M_n$}
+\begin{itemize}
+\item The sequence $M_n$ plays	 virtually no role in the posterior rate. In many cases it can be fixed to a constant $M$. 
+\item For finite dimensional models $M_n$ must be allowed to grow to obtain the usual $n^{-1/2}$ rate in smooth models. 
+\end{itemize}
+
+\end{block}
+
+
+
+
+
+
+
+
+
+{Consequences of posterior contraction}
+\begin{block}{Point Estimator}
+\begin{itemize}
+\item Let $\hat{\theta}_n$ = centre of the smallest ball that contains at least $1/2$ of the posterior mass. 
+\item Assume that the posterior contracts at $\theta_0$ with rate $\epsilon_n$ for the metric $d$
+\end{itemize}
+
+Then $d(\hat{\theta}_n,\theta) = O_P(\epsilon_n)$ in $P_0$ probability (or a.s. if strong contraction).
+\end{block}
+
+
+
+
+
+
+{Consequences of posterior contraction}
+
+\begin{block}{Posterior mean}
+If the metric $d$ is bounded and $\theta \mapsto d^s(\theta, \theta_0)$ is convex for some $s \geq 1$ then the posterior mean $\tilde{\theta}_n$ satisfies 
+$$
+d(\tilde{\theta}_n,\theta_0) \leq M_n\epsilon_n + \Vert d \Vert_\infty^{1/s} \Pi_n(d(\theta,\theta_0) \geq M_n \epsilon_n|\Xn)^{1/s}.
+$$
+\end{block}
+ 
+\begin{itemize}
+\item First term is the dominating term
+\item The second term is exponentially small in general
+\end{itemize}
+
+
+
+
+
+
+{Some first Examples - Parametric models}
+
+\begin{itemize}
+\item Let $X_1, \dots, X_n |\theta \overset{iid}{\sim} \mathcal{B}(\theta) $, and $\theta\sim \text{Beta}(\alpha,\beta)$. The posterior contracts at a rate $n^{-1/2}$
+\item Let $X_1,\dots, X_n|\theta \overset{iid}{\sim} \mathcal{U}([0,\theta])$ and $\pi(\theta) \propto \theta^{-a}$. The posterior contracts at a rate $n^{-1}$.
+\end{itemize}
+ 
+\begin{block}{Parametric regular models}
+In fact for all regular finite dimensional models the \alert{Bernstein von-Mises} theorem implies a posterior rate of $n^{-1/2}$. 
+\end{block}
+
+
+
+
+
+
+{Nonparametric example: Dirichlet Process}
+
+\begin{itemize}
+\item $X_1, \dots, X_n | P \overset{iid}{\sim} P $ 
+\item $P\sim \text{DP}(M\alpha)$ for $\alpha$ a probability measure on $\mathcal{X}$. 
+\end{itemize}
+
+The posterior distribution is $P|\Xn \sim \text{DP}(M\alpha + n\mathbb{P}_n)$. 
+ 
+\begin{block}{Local semi-metric\footnote{ie $d(P,Q) \geq 0$ but might be 0 for $P\neq Q$.}}
+For a measurable set $A$, let $d(P,Q) = |P(A) - Q(A)|$. The posterior distribution is consistent at $P_0$ at a rate $n^{-1/2}$.  
+\end{block}
+ 
+
+\begin{block}{Global metric}
+For $\nu$ a $\sigma$-finite measure and $F$ and $G$ two c.d.f. let $d(F,G) = \Vert F-G\Vert_\nu^2 = \int (F(t) - G(t))^2 d\nu(t)$. The posterior contracts at rate $n^{-1/2}$ at $P_0$ for this metric. 
+\end{block}
+
+
+
+
+
+
+
+
+{Nonparametric example: White Noise}
+
+Consider the following model for $W_t$ a white noise
+$$
+X_t = f(t) + n^{-1/2}W_t.
+$$
+Projecting this model onto the Fourier basis if $f\in L_2$, we have the equivalent formulation
+$$
+X_{i,n} = \theta_i + n^{-1/2} \epsilon_i,~ i \in \N^* 
+$$
+$\theta \in \ell_2(\R)$. Assume the following prior 
+$$
+\theta_i \overset{ind.}{\sim} \mathcal{N}(0, i^{-2\alpha - 1}).  
+$$ 
+If $\theta_0 \in \mathcal{S}_\beta^{2,2}$ then the posterior contracts at $\theta_0$ at the rate $n^{-\min(\alpha,\beta)/(2\alpha + 1)}$. 
+
+
+
+
+\subsection[iid case]{General theorem in the iid case}
+
+
+%\subsection{First Theorem}
+
+
+
+{General theorem}
+
+\begin{itemize}
+\item Result similar to Schwartz theorem? 
+\item We focus on the case of i.i.d observations $X_1, \dots, X_n \overset{iid}{\sim} P$ 
+\item The parameter set $\Theta$ is the set of probability densities with respect to a common dominating measure $\mu$. 
+\end{itemize}
+ 
+
+Let $\Pi_n$ be a sequence of priors. We study the sequence of posterior distributions $\Pi_n(\cdot|\Xn)$ under the assumption that the data are generated from $P$. 
+
+
+
+
+
+
+
+
+%{General Theorem}
+We follow the same steps as for Schwartz' Theorem: 
+\begin{itemize}
+\item Existence of tests to separate $p_0$ from the complement of balls
+\item KL condition: the prior puts enough mass on neighbourhood of $p_0$
+\end{itemize}
+Define $V_{2,0}$, the 2nd KL variation
+$$
+V_{2} = P_0 \left( \log^2\left(\frac{p_0}{p}(X) \right)\right),
+$$ 
+and define two KL neighbourhoods as
+\begin{align*}
+B_0(p_0,\epsilon) &= \{p, \text{KL}(p_0,p) \leq \epsilon^2\},\\
+B_2(p_0,\epsilon) &= \{p, \text{KL}(p_0,p) \leq \epsilon^2, V_{2}(p_0,p) \leq \epsilon^2\}.
+\end{align*}
+
+
+
+
+
+
+
+%{General theorem}
+
+\begin{theorem}[Ghosal, Ghosh and van der Vaart]
+Let $d \leq h$ be a metric on $\Theta$ for which balls are convex, and let $\Theta_n \subset \Theta $. The posterior contracts at a rate $\epsilon_n$ for all $\epsilon_n$ such that $n\epsilon_n^2 \to \infty$ and such that for positive constants $c_1$, $c_2$ and any $\underline{\epsilon}_n \leq \epsilon_n$
+\begin{align*}
+\log N(\epsilon_n, \Theta_n, d) \leq c_1 n \epsilon_n^2, \\ 
+\Pi_n(B_{2,0}(p_0,\underline{\epsilon}_n^2)) \geq e^{-c_2 n \underline{\epsilon}_n^2}\\
+\Pi(\Theta_n^c) \leq e^{-(c_2+3)n \underline{\epsilon}_n^2}
+\end{align*}
+\end{theorem}
+
+
+
+
+
+
+
+
+%{General Theorem}
+\begin{itemize}
+\item The KL condition can be refined, but the idea is basically the same
+\item Entropy condition is useful for the existence of tests
+\item Entropy condition can be replaced by a local entropy, which is more like a \emph{dimension of $\Theta_n$}
+\end{itemize}
+ 
+\begin{block}{Interpretation}
+Assume that $d$ and $KL$ are equivalent
+\begin{itemize}
+\item We need $e^{n\epsilon_n^2}$ balls to cover $\Theta_n$. 
+\item If the prior spread evenly the mass on these balls, we have $e^{-Cn\epsilon_n^2}$ mass on each of these balls thus KL condition is satisfied
+\item If the spread is uneven, then KL condition might not be satisfied for some $p_0$. 
+\end{itemize}
+\end{block}
+
+
+
+
+
+
+
+\subsection[Non iid case]{Non iid  observations}
+
+
+
+
+\paragraph{General result}
+
+
+
+
+{General observations}
+
+\begin{itemize}
+\item The previous theorem can be generalized to other models (like regression for instance)
+\item But we have to be careful with the metric we use, and the existence of test is not guaranteed! 
+\item To be general we will have to assume that we can test away parameters
+\end{itemize}
+ 
+\begin{block}{Existence of tests}
+Let $d_n$ and $e_n$ be two semi-metrics on $\Theta$. For $\epsilon >0$, and for all $\theta_1 \in \Theta$ such that \alert<6->{$d_n(\theta_0,\theta_1)> \epsilon$} there exists $\phi_n$ 
+$$
+P_{\Theta_0}^n  \phi_n \leq e^{-Kn\epsilon^2}, ~ \sup_{\theta, \alert<6->{e_n(\theta,\theta_1)\leq \xi \epsilon}} P_{\theta}^n (1-\phi_n) \leq e^{-Kn\epsilon^2}
+$$
+\end{block}
+
+
+
+
+
+
+
+{General theorem}
+Define the following KL-neighbourhood 
+\begin{align*}
+V_{k,0}(f,g) = \int f|\log(f/g) - \text{KL}(f,g)|^k d\mu \\ 
+B_n(\theta_0,\epsilon,k) = \left\{ \theta \in \Theta \text{KL}(p^n_{\theta_0},p^n_\theta)\leq n\epsilon^2, V_{k,0}(p_{\theta_0}^n, p^n_\theta) \leq n^{k/2}\epsilon^k \right\}
+\end{align*}
+
+
+
+
+
+
+{General theorem}
+\begin{theorem}
+Let $d_n$ and $e_n$ be two semi-metrics on $\Theta$, such that tests exists, $\epsilon_n\to 0 $, $n\epsilon_n^2 \to \infty$, $k>1$, $\Theta_n \subset \Theta$ such that for sufficiently large $j\in \N$ 
+\begin{align*}
+\sup_{\epsilon \geq \epsilon_n} \log N\left( \frac{1}{2} \xi \epsilon, \{\theta \in \Theta_n d_n(\theta_0,\theta)\leq \epsilon \}, e_n  \right) &\leq n\epsilon_n^2\\ 
+{\Pi_n(\theta \in \Theta_n, j\epsilon_n \leq d_n(\theta,\theta_0)\leq 2j\epsilon_n) \over \Pi_n(B_n(\theta_0,\epsilon_n,k))} &\leq e^{Kn\epsilon_n^2j^2/2}\\ 
+{\Pi_n(\Theta_n^c) \over \Pi_n(B_n(\theta_0,\epsilon_n,k))} & \leq e^{-2n\epsilon_n}
+\end{align*}
+then $P_{\theta_0}^n \Pi_n(d_n(\theta_0,\theta)\geq M_n \epsilon_n) = o(1)$
+\end{theorem}
+
+
+
+
+\paragraph{Independent Observations}
+
+
+
+{Independent observations}
+
+\begin{itemize}
+\item Assume that the measure $P_\theta^n = \bigotimes_{i=1}^{n} P_{i,\theta}$ on some product space $\bigotimes_{i=1}^n \{\mathcal{X}_i, \mathcal{A}_i\}$. 
+\item Assume that each measures $P_{i,\theta}$ are absolutely continuous w.r.t $\mu_i$ 
+\item Define the Root average Hellinger distance 
+$$
+d_{n,H} (\theta, \theta') = \left( \frac{1}{n} \sum_{i=1}^n \int (\sqrt{dP_{i,\theta}} - \sqrt{dP_{i,\theta'}})^2 \right)^{1/2}
+$$
+\end{itemize}
+
+\begin{lemma}
+For all here exists tests $\phi_n$ such that 
+$$
+P_{\theta_0}^n \phi_n \leq e^{-nd_{n,H}(\theta_0,\theta_1)},~  P_{\theta}^n \leq e^{-nd_{n,H}(\theta_0,\theta_1)}
+$$
+for all $\theta$ such that $d_{n,H}(\theta,\theta_1) \leq \tfrac{1}{18} d_{n,H}(\theta_0,\theta_1)$.
+\end{lemma}
+
+
+
+
+
+
+
+
+{Independent observations}
+
+We can also simplify the KL condition in this case.  Note that 
+$$
+KL(p^n_{\theta_0}),p^n_{\theta}) = \sum_{i=1}^n \text{KL}(p_{i,\theta_0},p_{i,\theta})
+$$ 
+
+Furthermore for the KL-variation term we have that 
+$$
+V_{k,0}(p^n_{\theta_0},p^n_\theta) \leq n^{k/2} C_k \frac{1}{n}\sum_{i=1}^n V_{k,0}(p_{i,\theta_0},p_{i,\theta}) 
+$$
+
+Thus the KL condition can be re-written
+\begin{multline*}
+B_n^*(\theta_0,\epsilon,k) = \Big\{\theta ,\frac{1}{n} \sum_{i=1}^n \text{KL}(p_{i,\theta_0},p_{i,\theta}) \leq \epsilon^2 , \frac{1}{n} \sum_{i=1}^n V_{k,0}(p_{i,\theta_0},p_{i,\theta})  \leq C_k \epsilon^2 \Big\}
+\end{multline*}
+
+
+
+
+
+
+\paragraph{Example: Nonparametric Regression using Splines}
+
+
+% \section{Examples}
+
+% 
+
+
+% \begin{columns}
+% \begin{column}{0.5\textwidth}
+% \tableofcontents[currentsection]
+% \end{column}
+
+% \begin{column}{0.5\textwidth}
+% \includegraphics[width = \textwidth]{images/thinker.jpg}
+% \end{column}
+
+% \end{columns}
+
+% 
+
+
+
+
+
+{NP Regression with splines}
+
+Consider the model 
+$$
+X_i = f(z_i) + \epsilon_i, ~ i=1, \dots, n
+$$
+where $\epsilon_i \overset{iid}{\sim} \mathcal{N}(0,\sigma^2)$ and the $z_i\in \R$ are known fixed covariates. For simplicity $\sigma^2$ is also assume to be known.  
+Let $\mathbb{P}_n^z = \frac{1}{n} \sum_{i=1}^n \delta_{z_i}$ and $\Vert \cdot \Vert_n$ the $L_2(\mathbb{P}_n^z)$ norm
+
+
+\begin{lemma}
+We have the following results
+\begin{align*}
+KL(P_{f,i},P_{g,i}) &= \frac{1}{2\sigma^2} (f(z_i) - g(z_i))^2 \\ 
+ V_{0,2}(P_{f,i},P_{g,i}) &=\frac{1}{\sigma^2} (f(z_i) - g(z_i))^2 
+\end{align*}
+\end{lemma}
+
+
+
+
+
+Assume that $f_0 \in \mathcal{H}(\alpha,L)$ such that $\Vert f_0 \Vert_\infty \leq H$, then the $d_{n,H}^2$ and $\Vert \cdot \Vert_n^2$ are equivalent. 
+ 
+\begin{block}{Spline prior}
+Consider $(B_j)_{j=1}^J$ the B-splines basis with $J$ equally spaced nodes, and consider 
+$$
+f_\beta(\cdot) = \sum_{j=1}^J \beta_j B_j(\cdot)
+$$ 
+and induce a prior on $f$ by choosing a prior on $\beta$, 
+$\beta_j \overset{iid}{\sim} g $.
+\end{block}
+ 
+Approximation techniques with splines gives us that for $\beta^* \in \R^J$ the coefficient of the projection of $f_0$ in $\mathrm{Span}(B_j)$, 
+$$
+\Vert f_{\beta^*} - f_0 \Vert_\infty \leq J^{-\alpha} \Vert f_0 \Vert_\alpha 
+$$ 
+
+
+We also need to impose conditions on the design. Let $\Sigma_n$ be such that $\Sigma_{n,i,j} = \int B_i B_j d\mathbb{P}_n^z$. We assume that 
+$$
+J^{-1} \Vert \beta\Vert^2 \asymp \beta' \Sigma_n \beta   
+$$ 
+so that 
+$$
+\Vert f_{\beta_1} - f_{\beta_2} \Vert_n \asymp \sqrt{J} \Vert \beta_1 - \beta_2 \Vert
+$$
+
+We can thus perform calculations in terms of the Euclidean norm of the coefficients.
+
+
+
+
+\begin{theorem}
+Assume that $g$ is a standard Gaussian distribution, and assume that $J = J_n \asymp n^{1/(2\alpha + 1)}$, then the posterior contracts at a rate $\epsilon_n = n^{-\alpha/(2\alpha + 1)}$. 
+\end{theorem}
+ 
+\begin{itemize}
+\item This is the minimax rate, in addition this rate is uniform over all bounded $\mathcal{H}(\alpha,L)$ functions. 
+\item Some condition can be relaxed, in particular, $g$ could be any distribution such that for every $\beta^*$ such that $\Vert \beta^*\Vert_\infty \leq C$ $\Pi(\Vert \beta - \beta^* \Vert \leq \epsilon) \geq e^{-c J \log(1/\epsilon)}$. Some $\log$ factor may appear in the rate.
+\item The boundedness condition could also be dropped by considering likelihood ratio tests for $\Vert \cdot \Vert_n$ norm. 
+\end{itemize}
+
