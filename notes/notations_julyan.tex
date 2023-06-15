@@ -1,0 +1,224 @@
+
+\definecolor{forestgreen}{rgb}{0.13, 0.55, 0.13}
+\definecolor{darkblue}{rgb}{0.0, 0.0, 0.65}
+\definecolor{violet2}{rgb}{0.5,0,0.5}
+\definecolor{orange2}{rgb}{0.8, 0.1, 0.1}       
+\definecolor{red2}{rgb}{1, 0.4, 0}
+
+% specifics copy/paste Beamer
+\newcommand{\alert}[1]{#1}
+%\newenvironment{block}[<n-args>][<default>]{<begin-code>}{<end-code>}
+\newenvironment{block}[1]% environment name
+{% begin code
+  \par\vspace{\baselineskip}\noindent
+  \textbf{#1}%\begin{itshape}%
+  %\par\vspace{\baselineskip}\noindent\ignorespaces
+}%
+{% end code
+  %\end{itshape}\ignorespacesafterend
+}
+
+\setlength{\parskip}{0.5\baselineskip}%
+\setlength{\parindent}{0pt}%
+
+
+\newcommand{\T}{{\text{\tiny\sffamily\upshape\mdseries T}}}
+\newcommand{\bx}{\boldsymbol{x}}
+\newcommand{\bmu}{\boldsymbol{\mu}}
+\newcommand{\bh}{\boldsymbol{h}}
+\newcommand{\bb}{\boldsymbol{b}}
+\newcommand{\bV}{\boldsymbol{V}}
+\newcommand{\bW}{\boldsymbol{W}}
+%\newcommand{\bU}{\boldsymbol{U}}
+\newcommand{\bH}{\boldsymbol{H}}
+\newcommand{\bw}{\boldsymbol{w}}
+\newcommand{\bz}{\boldsymbol{z}} 
+\newcommand{\bX}{\boldsymbol{X}} 
+%\newcommand{\by}{\boldsymbol{y}} 
+\newcommand{\bg}{\boldsymbol{g}} 
+\newcommand{\bv}{\boldsymbol{v}} 
+\newcommand{\be}{\boldsymbol{e}} 
+\newcommand{\boldf}{\boldsymbol{f}} 
+\newcommand{\Lnorm}{\mathcal{L}} 
+\newcommand{\R}{\mathbb{L}} 
+\newcommand{\subW}{subW} % \normalfont 
+
+\def\simiid{\overset{\text{iid}}{\sim}}
+\def\simind{\overset{\text{ind}}{\sim}}
+\newcommand{\indep}{\perp\!\!\!\!\perp} 
+
+% for BNP part
+
+%% Michal's
+
+\newcommand{\PrecisonParam}{\alpha}
+\newcommand{\Dir}{\text{Dir}}
+\newcommand{\Beta}{\text{Beta}}
+
+\usepackage{mathtools}
+
+\newcommand\diseq{\stackrel{\mathclap{\normalfont\mbox{\small{d}}}}{=}}
+
+
+%\newcommand{\distas}[1]{\mathbin{\overset{#1}{\kern\z@\sim}}}%
+\newsavebox{\mybox}\newsavebox{\mysim}
+\newcommand{\distras}[1]{%
+  \savebox{\mybox}{\hbox{\kern3pt$\scriptstyle#1$\kern3pt}}%
+  \savebox{\mysim}{\hbox{$\sim$}}%
+  \mathbin{\overset{#1}{\kern\z@\resizebox{\wd\mybox}{\ht\mysim}{$\sim$}}}%
+}
+
+
+%% mathbb
+\newcommand{\bbC}{\mathbb{C}}
+\newcommand{\indic}{\mathds{1}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\X}{\mathbb{X}}
+%\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Sd}{\mathbb{S}}
+\newcommand{\Y}{\mathbb{Y}}
+
+
+%% mathds
+%\newcommand{\R}{\mathbb{R}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Cov}{\mathsf{Cov}}
+\newcommand{\Var}{\mathsf{Var}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Nbb}{\mathds{N}}
+%\renewcommand{\P}{\mathds{P}}
+
+\newcommand{\Xn}{X^n}
+
+
+
+%%% Script letters
+\newcommand{\Bcr}{\mathscr{B}}
+\newcommand{\Fcr}{\mathscr{F}}
+\newcommand{\Dcr}{\mathscr{D}}
+\newcommand{\Icr}{\mathscr{I}}
+\newcommand{\Lcr}{\mathscr{L}}
+\newcommand{\Pcr}{\mathscr{P}}
+\newcommand{\Xcr}{\mathscr{X}}
+\newcommand{\Mcr}{\mathscr{M}}
+\newcommand{\Ycr}{\mathscr{Y}}
+\newcommand{\Acr}{\mathscr{A}}
+\newcommand{\Gcr}{\mathscr{G}}
+\newcommand{\Vcr}{\mathscr{V}}
+
+%%% Mathfrak
+\newcommand{\Xf}{\mathfrak{X}}
+\newcommand{\Sf}{\mathfrak{\sigma}}
+
+\newcommand{\ddr}{\mathrm{d}}
+\newcommand{\edr}{\mathrm{e}}
+\newcommand{\idr}{\mathrm{i}}
+
+%\renewcommand{\abstractname}{SUMMARY}
+\renewcommand{\theparagraph}{\arabic{paragraph}}
+%\numberwithin{equation}{paragraph}
+
+\newcommand{\Rt}{\Rightarrow}
+\newcommand{\rt}{\rightarrow}
+\newcommand{\lrt}{\longrightarrow}
+\newcommand{\Lerit}{\Leftrightarrow}
+\newcommand{\dimo}{\underline{\textsc{Proof.}} }
+\newcommand{\cc}{\hfill $\square$}
+\newcommand{\ind}{\bm 1}
+\newcommand{\bm}{\mathbf}
+\newcommand{\var}{\varepsilon}
+\newcommand{\intre}{\int_{\mathbb{R}}}
+\newcommand{\intoinf}{\int_0^{+\infty}}
+
+\newcommand{\Bc}{\mathcal{B}}
+\newcommand{\Cc}{\mathcal{C}}
+\newcommand{\Fc}{\mathcal{F}}
+\newcommand{\Lc}{\mathcal{L}}
+\newcommand{\Nc}{\mathcal{N}}
+\newcommand{\Pc}{\mathcal{P}}
+\newcommand{\Ic}{\mathcal{I}}
+\newcommand{\Zc}{\mathcal{Z}}
+
+\newcommand{\dir}{P_{\alpha}}
+\newcommand{\ep}{\varepsilon}
+%\newcommand{\e}{\mathsf{E}}
+\newcommand{\trunc}{{\sigma,\tau}}
+%\newcommand{\p}{\mathbb{P}}
+\newcommand{\prob}{\mathsf{P}}
+\newcommand{\Ga}{\Gamma_\alpha}
+\newcommand{\Ma}{M_\alpha}
+\newcommand{\Ua}{U_\alpha}
+\newcommand{\Va}{V_\alpha}
+\newcommand{\wt}{\widetilde}
+
+\def\simind{\stackrel{\mbox{\scriptsize{ind}}}{\sim}}
+\def\simiid{\stackrel{\mbox{\scriptsize{iid}}}{\sim}}
+
+% altro
+\newcommand{\mt}{{\mu}} % misura completamente aleatoria (CRM)
+\newcommand{\hti}{{h}}
+\newcommand{\St}{{S}}
+\newcommand{\pt}{\tilde{p}} % legge aleatoria
+\newcommand{\At}{\tilde{A}} %
+\newcommand{\Bt}{\tilde{B}} %
+\newcommand{\Lz}{\mathcal{L}_Z} % legge di Z
+
+\newcommand{\AC}{\\[7pt]} % a capo
+\newcommand{\La}{\mathcal{L}}
+%\newcommand{\p}{\mathbb{P}}
+%\newcommand{\AC}{\\[7pt]}
+\newcommand{\bn}{\bar{n}}
+\newcommand{\I}{\mathcal{I}}
+\newcommand{\C}{\mathcal{C}}
+\newcommand{\Ac}{\mathcal{A}}
+
+% Ju
+\newcommand{\vertju}{\,\vert\,}
+\newcommand{\twoPD}{two-parameter Poisson-Dirichlet process\xspace}
+\newcommand{\DP}{\text{Dirichlet process}\xspace}
+\newcommand{\levy}{L\'evy\xspace}
+\newcommand{\Gumbel}{\text{Gumbel}\xspace}
+\newcommand{\Exp}{\text{Exp}\xspace}
+\def\simiid{\stackrel{\mbox{\scriptsize{iid}}}{\sim}}
+\def\simind{\stackrel{\mbox{\scriptsize{ind}}}{\sim}}
+\def\proptoind{\stackrel{\mbox{\scriptsize{ind}}}{\propto}}
+\newcommand{\citp}[1]{\textcolor{blue}{\citep{#1}}}
+\newcommand{\citt}[1]{\textcolor{blue}{\citet{#1}}}
+
+
+\newcommand{\crms}{completely random measures\xspace}
+\newcommand{\crm}{completely random measure\xspace}
+\newcommand{\CRM}{CRM\xspace}
+\newcommand{\Crms}{Completely random measures\xspace}
+\newcommand{\Crm}{Completely random measure\xspace}
+\newcommand{\muA}{\tilde \mu(A)\xspace}
+\newcommand{\muX}{\tilde \mu(\X)\xspace}
+\newcommand{\cnkpar}{\binom{n}{k_1\cdots k_n}}
+\newcommand{\cnkfact}{\frac{n!}{k_1!\ldots k_n!}}
+\newcommand{\g}{\mathbf{g}}
+\newcommand{\FK}{\citeauthor{ferguson1972representation}\xspace} 
+\newcommand{\FKa}{\citeauthor{ferguson1972representation} algorithm\xspace} 
+\newcommand{\BP}{\ensuremath{\text{BP}}\xspace} 
+\newcommand{\BeP}{\ensuremath{\text{BeP}}\xspace} 
+%\newcommand{\gg}{\ensuremath{\text{GG}}\xspace} 
+\newcommand{\GG}{generalized gamma process\xspace} 
+\newcommand{\SBP}{stable-beta process\xspace} 
+\newcommand{\IBP}{Indian buffet process\xspace} 
+\newcommand{\IG}{inverse-Gaussian process\xspace} 
+\newcommand{\NMC}{N_{\text{\tiny{FK}}}} 
+\newcommand{\EFK}{\mathbb{E}_{\text{\tiny{FK}}}}
+
+
+\def\unit{\mathbf{1}}
+\def\bc{c}
+\def\prob{\mathbb{P}}
+\def\bc{c}
+\def\Ac{\mathcal{A}}
+\def\VI{\text{VI}}
+\def\En{\text{H}}
+\def\B{\text{B}}
+%\def\argmax{\text{argmax}}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\def\1{\unit}
+
