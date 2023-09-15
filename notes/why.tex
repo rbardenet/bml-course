@@ -225,7 +225,12 @@ The utility function in approaches derived from \cite{VoMo} is defined by findin
 But constant actions are not part of the action sets that we considered in Section~\ref{s:expected_utility}.
 In binary classification, for instance, there are two constant actions: the ideal classifier $a^\star$ that always predicts the right label, and the worst possible classifier $a_\star$, which consistently predicts the wrong label. 
 The utility function of any reward $r$ is defined in reference to these two idealized classifiers.  
-It would be more satisfying to have a set of axioms that does not give such a key role to \emph{non-physical} classifiers. 
+It would be more satisfying to have a set of axioms that does not give such a key role to \emph{non-physical} classifiers.\footnote{
+  The inclusion of constant actions is also what prevents one from making $u$ depend on $s$ outside of the consequence of the action. 
+  One could for instance (mistakenly) argue that, for $f$ a probability density w.r.t. $\pi$, the pair $u'(s,z) = u(z)/f(s)$ and $\d\pi' = f(s)\d\pi$ leads to the same expected utilities as $u(s,z) = u(z)$ and $\pi$.
+  But this is only true for some actions: the expected utility of a constant action $s\mapsto (s_0,z_0)$ would be different according to the two pairs.
+  Forcing the rankings to be the same will actually force $f\equiv 1$; along the lines of \citep[Lemma 3.141]{Sch12}.
+} 
 
 A fourth and related objection is that the utility in Savage's result is independent of the state: $u(a(s))$ only depends on the state through $a(s)$. 
 This means that the notation $L(a,s) = -u(a(s))$ is inappropriate, as it lets the user think that the loss of action $a$ can depend on the state $s$. 
