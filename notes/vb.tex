@@ -273,4 +273,7 @@ In that sense, VB corresponds to the same optimization problem as Bayes, but wit
 \cite{KnJeDa22} examine justifications behind what they call the \emph{optimization-centric} view on Bayesian inference, and how the choices of $\ell$ and $D$ in \eqref{e:GVI} impacts the results of VB.
 In particular, when the prior has a structure that does not represent what we expect from a posterior, like when using an uncorrelated Gaussian prior on the weights of a neural network, while we expect large correlations across layers and multimodality from a posterior.
 \cite{KnJeDa22} demonstrate that empirical performance in regression benefits from replacing the KL by Renyi's $\alpha$-divergence. 
-Interestingly, this benefit depends on $\alpha$ being in a certain finite range, which allows both a weaker dependence to the prior, and the support of the resulting $q^\star$ not collapsing to a single point. 
+Interestingly, this benefit depends on $\alpha$ being in a certain finite range, which allows both a weaker dependence to the prior, and the support of the resulting $q^\star$ not collapsing to a single point.
+
+\section{Variants of the ELBO}
+TBC: unbiased estimators of the marginal likelihood + Jensen leads to another bound, can approximate it by importance sampling, and even sophisticated SIS variants (Thin, Doucet, Teh).
