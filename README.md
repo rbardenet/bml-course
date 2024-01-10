@@ -32,7 +32,7 @@ landscape.
 * It is recommended to have followed either "Probabilistic graphical models" or "Computational statistics" during the first semester.
 
 ## Organization of courses
-* 8x3 hours of lectures, out of which 4 practical sessions of 1h30 and 1 student seminar of 3h will be carved.
+* 8x3 hours of lectures, the last session being a student seminar.
 * All classes and material will be in English. Students may write their final report either in French or English.
 
 ## Validation
