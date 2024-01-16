@@ -5,7 +5,7 @@
 * Julyan Arbel (Inria, Univ. Grenoble-Alpes), https://www.julyanarbel.com
 
 ## Material
-* Annotated slides will be posted here. 
+* Annotated slides for Lecture 1 are [here](https://nextcloud.univ-lille.fr/index.php/s/e8PSAqaRgRQF3Ls). 
 * Incomplete and drafty lecture notes are available in the `notes` folder. Any comment welcome, live or as a raised issue.
 * Practicals and exercises are available in the corresponding folders. They are to be done on a voluntary basis. Solutions will be provided on demand.
 
