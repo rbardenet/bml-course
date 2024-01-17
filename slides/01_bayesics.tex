@@ -92,51 +92,50 @@
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%
-\section{Introduction}
-%%%%%%%%%%%%%%%%%%%%%%
+% \section{Introduction}
+% %%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}
-  \frametitle{A quick motivating example before we go formal 1/2}
-  \begin{itemize}
-    \vfill\item Let $N$ individuals evolve from Susceptible to Infected to Recovered, $x_n(t) \in\{S,I,R\}$, $1\leq n\leq N$, $t\in[0,T]$.
-    \vfill\item Each susceptible individual $n$ moves to $I$ according to a Poisson process with intensity
-    $$\sum_{k:x_k(t)=I} \lambda_{nk}(\unn{\theta_{SI}}).$$
-    \vfill\item Each infected person recovers after a Gamma(\unn{$a,b$}) time.
-    \vfill\item This allows to express
-    $$
-    p(x_1(t_{1,1}), \dots, x_1(t_{1,T_1}), \cdots, x_N(t_{N,1}), \dots, x_1(t_{N,T_N})\vert \unn{\theta}).
-    $$
-    where \unn{$\theta= (\theta_{SI}, a, b)$}.
-    \vfill\item Now, consider $p(\theta\vert \text{data}) \propto p(\text{data}\vert \theta) \un{p(\theta)}.$
-  \end{itemize}
-\end{frame}
+% \begin{frame}
+%   \frametitle{A quick motivating example before we go formal 1/2}
+%   \begin{itemize}
+%     \vfill\item Let $N$ individuals evolve from Susceptible to Infected to Recovered, $x_n(t) \in\{S,I,R\}$, $1\leq n\leq N$, $t\in[0,T]$.
+%     \vfill\item Each susceptible individual $n$ moves to $I$ according to a Poisson process with intensity
+%     $$\sum_{k:x_k(t)=I} \lambda_{nk}(\unn{\theta_{SI}}).$$
+%     \vfill\item Each infected person recovers after a Gamma(\unn{$a,b$}) time.
+%     \vfill\item This allows to express
+%     $$
+%     p(x_1(t_{1,1}), \dots, x_1(t_{1,T_1}), \cdots, x_N(t_{N,1}), \dots, x_1(t_{N,T_N})\vert \unn{\theta}).
+%     $$
+%     where \unn{$\theta= (\theta_{SI}, a, b)$}.
+%     \vfill\item Now, consider $p(\theta\vert \text{data}) \propto p(\text{data}\vert \theta) \un{p(\theta)}.$
+%   \end{itemize}
+% \end{frame}
 
-\begin{frame}
-\frametitle{A quick motivating example before we go formal 2/2}
-  \begin{itemize}
-  \vfill\item If asked to report an interval $A$ on a particular function of $\theta$, say $R_0 = h(\theta)$, I would report a small interval $A$ such that
-  $$ \int 1_{h(\theta)\in A} \, p(\theta\vert \text{data}) \,\d\theta = p (h(\theta)\in A \vert \text{data}) \geq 0.95.$$
-  \vfill\item If asked whether we should close universities, I would ask for
-  \begin{itemize}
-    \item \un{the cost $\alpha$ of closing unis when $R_0<1$},
-    \item \unn{the cost $\beta$ of keeping unis open while $R_0>1$}.
-  \end{itemize}
-  \vfill\item Then I would recommend closing if and only if
-  $$
-  p(R_0>1\vert \text{data}) > \frac{\un{\alpha}}{\un{\alpha}+\unn{\beta}}.
-  $$
-  \vfill\item Additionally, I would check that the decision doesn't change if I change my prior $p(\theta)$ a little.
-  \vfill\item If it did, then I would refine my likelihood and/or wait for more data.
-\end{itemize}
-  % \tikz{ %
-  %   \node[latent] (S) {$S$};%
-  %   \node[latent,right=of S] (I) {$I$}; %
-  %   \node[latent,right=of I] (R) {$R$}; %
-  %   \edge S I;
-  %   \edge I R;
-  % }
-\end{frame}
-
+% \begin{frame}
+% \frametitle{A quick motivating example before we go formal 2/2}
+%   \begin{itemize}
+%   \vfill\item If asked to report an interval $A$ on a particular function of $\theta$, say $R_0 = h(\theta)$, I would report a small interval $A$ such that
+%   $$ \int 1_{h(\theta)\in A} \, p(\theta\vert \text{data}) \,\d\theta = p (h(\theta)\in A \vert \text{data}) \geq 0.95.$$
+%   \vfill\item If asked whether we should close universities, I would ask for
+%   \begin{itemize}
+%     \item \un{the cost $\alpha$ of closing unis when $R_0<1$},
+%     \item \unn{the cost $\beta$ of keeping unis open while $R_0>1$}.
+%   \end{itemize}
+%   \vfill\item Then I would recommend closing if and only if
+%   $$
+%   p(R_0>1\vert \text{data}) > \frac{\un{\alpha}}{\un{\alpha}+\unn{\beta}}.
+%   $$
+%   \vfill\item Additionally, I would check that the decision doesn't change if I change my prior $p(\theta)$ a little.
+%   \vfill\item If it did, then I would refine my likelihood and/or wait for more data.
+% \end{itemize}
+%   % \tikz{ %
+%   %   \node[latent] (S) {$S$};%
+%   %   \node[latent,right=of S] (I) {$I$}; %
+%   %   \node[latent,right=of I] (R) {$R$}; %
+%   %   \edge S I;
+%   %   \edge I R;
+%   % }
+% \end{frame}
 
 \begin{frame}{Quotes from \cite{GCSDVR13} on Bayesian methods}
 % put book picture
@@ -403,9 +402,9 @@ a^\star \in \argmin_{a\in\mathcal{A}} \mathbb{E}_{s\sim p} L(a,s).
 Now partition $s=(s_{\text{obs}}, s_{\text{u}})$, then 
 $$ a^\star \in \argmin_{a\in\mathcal{A}} \mathbb{E}_{s_{\text{obs}}} \mathbb{E}_{s_{\text{u}}\vert s_{\text{obs}}} L(a,s).$$
 In ML, $\cA = \{a_g\}$, with $g = g(s_\text{obs})$, so that
-\eqref{e:seu} is equivalent to
+\eqref{e:seu} is equivalent to $a^\star = a_{g^\star}$, with
 $$
-a^\star = \delta(s_\text{obs}) = \argmin_{a\in\mathcal{A}} \un{\mathbb{E}_{s_{\text{u}}\vert s_{\text{obs}}} L(a,s)}.$$
+g^\star (s_\text{obs}) \triangleq \argmin_{g} \un{\mathbb{E}_{s_{\text{u}}\vert s_{\text{obs}}} L(a,s)}.$$
 \end{block}
 \end{frame}
 
