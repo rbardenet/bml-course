@@ -38,7 +38,7 @@ landscape.
 ## Validation
 * Students form groups. Each group reads and reports on a research paper from a list. We strongly encourage a dash of creativity: students should identify a weak point, shortcoming or limitation of the paper, and try to push in that direction. This can mean extending a proof, implementing another feature, investigating different experiments, etc.
 * Deliverables are a small report and a short oral presentation in front of the class, in the form of a student seminar, which will take place during the last lecture.
-* "Auditeurs libres" who need a grade will be given a different assignment.
+* "Auditeurs libres" who need a grade will be given a different assignment, depending on their situation.
 
 ## References
 * Parmigiani, G. and Inoue, L. 2009. Decision theory: principles and approaches. Wiley.
