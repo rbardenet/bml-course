@@ -81,8 +81,8 @@
 }
 \date{}
 
-\newcommand\un[1]{\textcolor{magenta}{#1}}
-\newcommand\unn[1]{\textcolor{blue}{#1}}
+\renewcommand\un[1]{\textcolor{magenta}{#1}}
+\renewcommand\unn[1]{\textcolor{blue}{#1}}
 \newcommand\unnn[1]{\textcolor{red}{#1}}
 \newcommand\unnnn[1]{\textcolor{orange}{#1}}
 \def\blank{\vspace{.5\textheight}}
@@ -109,7 +109,7 @@
   \begin{block}{Minimizing the posterior expected loss}
   If $\cA= \{a_g\}$ and we partition $s=(s_{\text{obs}}, s_{\text{u}})$, then, given $s_\text{obs}$, we choose
   $$
-  g^\star(s_\text{obs}) = \argmin_{a\in\mathcal{A}} \un{\mathbb{E}_{s_{\text{u}}\vert s_{\text{obs}}} L(a,s)}.
+  g^\star(s_\text{obs}) = \argmin_{g\in\mathcal{A}} \un{\mathbb{E}_{s_{\text{u}}\vert s_{\text{obs}}} L(a,s)}.
   $$
 \end{block}
 
@@ -161,7 +161,7 @@
 \begin{frame}{Riemann-like integration is impractical when $d\gg 1$.}
 \blank
 \begin{itemize}
-\item For modern developments, see quasi-Monte Carlo integration \cite{DiPi10}.
+\item For modern developments, see quasi-Monte Carlo integration \citep{DiPi10}.
 \end{itemize}
 \end{frame}
 
@@ -389,12 +389,12 @@ Consider a physical system described by Hamiltonian $H(q,p)$ in phase space $(q,
 
 \begin{frame}{Hamiltonian Monte Carlo mimics a physical system}
   \begin{itemize}
-    \item Let $\log \tpi(x, p) =  \log \pi(x) + \frac12 p^T M(x) p$.
+    \item Let $\log \tpi(q, p) =  \log \pi(q) + \frac12 p^T M(q) p$.
     \item Consider the Markov kernel $P((q,p), (q',p'))$ given by the product of
     $$ p'\sim \cN(0,M(q)^{-1})$$
     and
     $$
-    P_{aHMC}(x,A) = \alpha(x) 1_{\Phi(x)\in A} + (1-\alpha(x))1_{S(x)\in A}, \text{ where } x=(p,q).
+    P_{aHMC}(x,A) = \alpha(x) 1_{\psi_h^n(x)\in A} + (1-\alpha(x))1_{S(x)\in A}, \text{ where } x=(p,q).
     $$
     where 
     \begin{equation}

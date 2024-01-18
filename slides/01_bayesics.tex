@@ -411,10 +411,10 @@ g^\star (s_\text{obs}) \triangleq \argmin_{g} \un{\mathbb{E}_{s_{\text{u}}\vert 
 \section{Specifying joint models}
 \begin{frame}{A recap on probabilistic graphical models 1/2}
   \begin{itemize}
-    \item PGMs (aka ``Bayesian" networks) represent the dependencies in a joint distribution $p(y)$ by \un{a directed graph $G=(E,V)$}.
+    \item PGMs (aka ``Bayesian" networks) represent the dependencies in a joint distribution $p(s)$ by \un{a directed graph $G=(E,V)$}.
     \item Two important properties:
     $$
-    p(y) = \prod_{v\in V} p(y\vert y_{\text{pa(v)}}) \qquad\text{and}\qquad
+    p(s) = \prod_{v\in V} p(s_v\vert s_{\text{pa(v)}}) \qquad\text{and}\qquad
     y_v \perp y_{nd(v)} \vert y_{pa(v)}.
     $$
     \blank
@@ -423,23 +423,37 @@ g^\star (s_\text{obs}) \triangleq \argmin_{g} \un{\mathbb{E}_{s_{\text{u}}\vert 
 \end{frame}
 
 \begin{frame}{A recap on probabilistic graphical models 2/2}
-  \begin{itemize}
-    \item Also good to know how to determine whether $A\perp B\vert C$; see \citep[Section 10.5]{Mur12}.
-  \end{itemize}
-  \centering
-  \only<1>{
-    \includegraphics[width=.7\textwidth]{Figures/bayes_ball_1}
-  }
-  \only<2>{
-    \includegraphics[width=.8\textwidth]{Figures/bayes_ball_2}
-  }
-  \only<3>{
+  Also good to know how to determine whether $A\perp B\vert C$; see \citep[Section 10.5]{Mur12}.
+
+  \begin{block}{$d$-blocking}
+    An undirected path $P$ in $G$ is $d$-blocked by $E\subset V$ if at least one of the following conditions hold.
+    \begin{itemize}
+     \item $P$ contains a ``chain" $a\rightarrow b\rightarrow c$ and $b\in E$.
+     \item $P$ contains a ``tent" $a \leftarrow b\rightarrow c$ and $b\in E$. 
+     \item $P$ contains a ``v-structure" $a \rightarrow b \leftarrow c$ and neither $b$ nor any of its descendants are in $E$.      
+    \end{itemize}
+  \end{block}
+
+  \begin{block}{Theorem}
+  \end{block}
+
+  % \centering
+  % \only<1>{
+  %   \includegraphics[width=.7\textwidth]{Figures/bayes_ball_1}
+  % }
+  % \only<2>{
+  %   \includegraphics[width=.8\textwidth]{Figures/bayes_ball_2}
+  % }
+
+\end{frame}
+
+\begin{frame}{Exercise}
     \includegraphics[width=.8\textwidth]{Figures/bayes_ball_3}
     \begin{itemize}
-      \item Check that $x_2\perp x_6\vert x_5,x_1$, but that $x_2\not\perp x_6\vert x_5,x_1,x_7$.
+      \item Does $x_2\perp x_6\vert x_5,x_1$? 
+      \item Does $x_2\perp x_6\vert x_1$?
+      \item Write the joint distribution as factorized over the graph.
     \end{itemize}
-    }
-
 \end{frame}
 
 
