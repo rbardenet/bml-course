@@ -1,0 +1,72 @@
+\documentclass[12pt]{article}%
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{fancyhdr}
+\usepackage{parskip}
+
+
+\usepackage{url}
+\usepackage[nohead]{geometry}
+\geometry{left=1in,right=1in,top=1.00in,bottom=1.0in}
+
+\usepackage{graphicx}%
+\usepackage[colorlinks=True,urlcolor=blue]{hyperref}
+
+%\usepackage{natbib} % natbib is essentially incompatible with multibib
+%\setcitestyle{numbers}
+%\renewcommand{\cite}{\citet}
+\usepackage[resetlabels,labeled]{multibib}
+% biblio commands
+\newcites{Easy}{\large Short and ``easy" papers}
+\newcites{Hard}{\large Long or difficult papers}
+
+\begin{document}
+
+\title{Bayesian ML: project topics}
+\author{R\'emi Bardenet and Julyan Arbel}
+\maketitle
+
+\section{Nature of the project}
+A group is made of either one or two students.
+Each group is to pick one of the papers listed below, and each paper can be chosen only once.
+The assignment in on a first-come first-served basis.
+Groups of two must choose a paper from the ``long/difficult" list. 
+For groups of one, there will be bonus points for picking a paper identified as ``long/difficult'', but it will be possible to get the maximum grade with a paper identified as ``short/easy''.
+You can also choose to work on a paper of your choice, subject to our explicit approval; in that case, we trust you not to pick a paper that you are or have been working on in another class.
+
+The whole point is to read your paper with a critical mind. 
+For the paper your group will have chosen, you should: (1) explain the contents of the paper, (2) emphasize the strong and weak points of the paper, and (3) apply it to real data of your choice when applicable. 
+Bonus points will be considered if you are creative and add something insightful that is not in the original paper: this can be a theoretical point, an illustrative experiment, etc. 
+Be explicit in your introduction what is your creative contribution.
+
+\section{Assignment of papers}
+As a first step, we ask each group to fill the spreadsheet at
+\begin{center}
+   \href{https://lite.framacalc.org/zr1v1h3ld6-9z79}{https://lite.framacalc.org/zr1v1h3ld6-9z79}
+ \end{center}
+with the title of the paper, a link to it (if available), and the composition of the group.
+Please fill the form {\bf before Thursday 16 February}. 
+%By that time, you will have had an outline of the last two courses, so that you can make your choices with enough information. Then, we will solve the \href{https://en.wikipedia.org/wiki/Assignment_problem}{assignment problem} to find an optimal matching of papers and groups, and will make the result known to all as soon as possible on the \href{Github}{https://github.io/bml-course} page of the course. We will allow up to two groups per paper, but in that case we expect of course the deliverables to be significantly different.
+
+\section{Format of the deliverable}
+Please have each group send
+\begin{itemize}
+\item one report as a pdf ($\leq 5$ pages) in the \href{https://www.overleaf.com/latex/templates/neurips-2020/mnshsmqkjsqz}{NeurIPS template},
+\item the link to a \href{https://github.com/}{GitHub} or \href{https://about.gitlab.com/}{GitLab} repository containing your code and a detailed readme file with instructions to (compile/install and) run the code.
+\end{itemize} to both \href{mailto:remi.bardenet@gmail.com}{remi.bardenet@gmail.com} and \href{mailto: julyan.arbel@inria.fr}{ julyan.arbel@inria.fr}{\bf no later than March 16th}. 
+We will then meet on March 23rd for presentations (10+5 minutes per group).
+
+\section{Proposed papers}
+\label{s:papers}
+
+\bibliographystyleEasy{plain}
+\bibliographystyleHard{plain}
+
+\nociteEasy{*}
+\nociteHard{*}
+
+\bibliographyEasy{easy.bib}
+\bibliographyHard{hard.bib}
+\end{document}
