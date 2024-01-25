@@ -229,7 +229,7 @@ is small (with large probability, in quadratic mean, converges in law at some ra
   \begin{itemize}
     \item There exists $\pi$ s.t. 
     $$
-    \int \d\pi(x) P(x, B) = \pi(B).
+    \int \d\pi(\theta) P(\theta, B) = \pi(B).
     $$
     \item For any $A$ with $\pi(A)>0$, for any $\theta\in \Theta$,
     $$ 
@@ -249,8 +249,8 @@ is small (with large probability, in quadratic mean, converges in law at some ra
 \Aitem \For $t\setto1$ \To $T$
 \Aitem \mt $\theta\setto\theta_{t-1}$
 \Aitem \mt $\theta'\sim \un{q(.\vert\theta)}$, $u\sim\mathcal U_{(0,1)}$,
-\Aitem \mt $\rho =  \unn{\frac{\pi(\theta')}{\pi(\theta)}} \un{\frac{q(\theta\vert\theta')}{q(\theta'\vert\theta)}}$.
-\Aitem \mt \If $u<\rho$,
+\Aitem \mt $\alpha =  1\wedge \unn{\frac{\pi(\theta')}{\pi(\theta)}} \un{\frac{q(\theta\vert\theta')}{q(\theta'\vert\theta)}}$.
+\Aitem \mt \If $u<\alpha$,
 \Aitem \mtt $\theta_{t}\setto\theta'$
 \mt \algoremark{\unn{Accept}}
 \Aitem \mt \Else $\theta_{t}\setto\theta$

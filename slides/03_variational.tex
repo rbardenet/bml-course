@@ -24,7 +24,7 @@
 \usepackage{hyperref}
 \usepackage{mathtools}
 \usepackage{mathrsfs}
-\input{notations}
+% \input{notations}
 \usepackage{tikz}
 \usetikzlibrary{bayesnet}
 \usetikzlibrary{arrows}
@@ -37,6 +37,9 @@
 \newcommand\unn[1]{\textcolor{blue}{#1}}
 \newcommand\unnn[1]{\textcolor{red}{#1}}
 \newcommand\unnnn[1]{\textcolor{orange}{#1}}
+\renewcommand\d{\mathrm{d}}
+\newcommand\argmin{\arg\min}
+\def\cO{\mathcal{O}}
 \def\blank{\vspace{.5\textheight}}
 \definecolor{vert}{rgb}{0.47, 0.67, 0.19}
 
@@ -183,7 +186,7 @@ $$
 \begin{align*}
 \log &p(y, z, \pi, B)\\
      & \propto \sum_{i=1}^N \left[\sum_{k=1}^K \alpha_k \log \pi_{ik} + \sum_{\ell=1}^{L_i} \left(\un{\sum_{k=1}^K 1_{z_{i\ell}=k}\log\pi_{_{ik}}} + \unn{\sum_{v=1}^V \sum_{k=1}^K 1_{y_{i\ell}=v}1_{z_{i\ell}=k} \log b_{kv}}\right)\right] 
-    + \unnnn{\sum_{k=1}^K \sum_{v=1}^V \gamma_k\log b_{kv}}.
+    + \unnnn{\sum_{k=1}^K \sum_{v=1}^V \gamma_v\log b_{kv}}.
   \end{align*}
   \vfill
   \blank
@@ -201,12 +204,17 @@ $$
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Reparametrization+SGD vs mean-field+closed updates}
+\begin{frame}{Gradient-based VB}
   \vfill
   \blank
 \end{frame}
 
-\begin{frame}{VB for deep networks}
+\begin{frame}{VB for deep networks 1/2}
+  \vfill
+  \blank
+\end{frame}
+
+\begin{frame}{VB for deep networks 2/2}
   \vfill
   \blank
 \end{frame}
