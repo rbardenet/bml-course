@@ -6,7 +6,7 @@
 
 ## Material
 * Annotated slides on Bayesics are [here](https://nextcloud.univ-lille.fr/index.php/s/e8PSAqaRgRQF3Ls) and [here](https://nextcloud.univ-lille.fr/index.php/s/y6zgdSGYdpxwa3b).
-* Annotated slides on MCMC are [here](https://nextcloud.univ-lille.fr/index.php/s/Bt4qdjS394ZgjXx).
+* Annotated slides on MCMC are [here](https://nextcloud.univ-lille.fr/index.php/s/Bt4qdjS394ZgjXx) and [here](https://nextcloud.univ-lille.fr/index.php/s/ZxY7PonjZ4rjS4t).
 * Incomplete and drafty lecture notes are available in the `notes` folder. Any comment welcome, live or as a raised issue.
 * Practicals and exercises are available in the corresponding folders. They are to be done on a voluntary basis. Solutions will be provided on demand.
 
