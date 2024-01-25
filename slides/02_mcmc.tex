@@ -15,6 +15,14 @@
 \usepackage[natbib=true,backend=biber,citestyle=authoryear]{biblatex}
 \bibliography{../bib/stats}
 
+\definecolor{bleu}{rgb}{0.2,0.4,0.65}
+\setbeamercolor{palette primary}{bg=bleu,fg=white}
+\setbeamercolor{palette secondary}{bg=bleu,fg=white}
+\setbeamercolor{palette tertiary}{bg=bleu,fg=white}
+\setbeamercolor{palette quaternary}{bg=bleu,fg=white}
+\setbeamercolor{structure}{fg=bleu} % itemize, enumerate, etc
+\setbeamercolor{section in toc}{fg=bleu} % TOC sections
+
 \let\oldcite=\cite
 \renewcommand\cite[1]{\hyperlink{#1}{\textcolor{vert}{\oldcite{#1}}}}
 \let\oldcitep=\citep
@@ -23,19 +31,21 @@
 \usepackage{amsmath,amssymb,amsthm,bbm}             % AMS Math
 \usepackage[utf8]{inputenc}
 \usepackage[english]{babel}
-\usepackage{myAlgorithm}
 \usepackage{xcolor}
 \usepackage{graphicx}
+\usepackage{myAlgorithm}
 \usepackage{subfigure}
 \usepackage{hyperref}
 \usepackage{mathtools}
 \usepackage{mathrsfs}
+\usepackage{cancel}
 \input{notations}
 \usepackage{tikz}
 \usetikzlibrary{bayesnet}
 \usetikzlibrary{arrows}
 \usepackage{url}
 
+\def\tpi{\widetilde{\pi}}
 \def\figdir{Figures}
 
 \setbeamertemplate{footline}[frame number]
@@ -58,7 +68,7 @@
 }
 \makeatletter
 
-\title[Bayesian ML: Bayesics]{BML lecture \#2: MCMC}
+\title[Bayesian ML: Bayesics]{BML: MCMC}
 \subtitle{\url{http://github.com/rbardenet/bml-course}}
 \author[Rémi Bardenet (CNRS \& Univ. Lille)] % (optional, for multiple authors)
 {Rémi Bardenet}
@@ -70,6 +80,13 @@
 \qquad \includegraphics[width=0.4\textwidth]{/Users/rbardenet/Work/Tex/PosterImages/cristalLogo.pdf}
 }
 \date{}
+
+\renewcommand\un[1]{\textcolor{magenta}{#1}}
+\renewcommand\unn[1]{\textcolor{blue}{#1}}
+\newcommand\unnn[1]{\textcolor{red}{#1}}
+\newcommand\unnnn[1]{\textcolor{orange}{#1}}
+\def\blank{\vspace{.5\textheight}}
+\definecolor{vert}{rgb}{0.47, 0.67, 0.19}
 
 \begin{document}
 \begin{frame}
@@ -90,9 +107,9 @@
 
 \begin{frame}{Expected utility requires computing integrals}
   \begin{block}{Minimizing the posterior expected loss}
-  If we partition $s=(s_{\text{obs}}, s_{\text{u}})$, then, given $s_\text{obs}$, we choose
+  If $\cA= \{a_g\}$ and we partition $s=(s_{\text{obs}}, s_{\text{u}})$, then, given $s_\text{obs}$, we choose
   $$
-  a^\star = \delta(s_\text{obs}) = \argmin_{a\in\mathcal{A}} \un{\mathbb{E}_{s_{\text{u}}\vert s_{\text{obs}}} L(a,s)}.
+  g^\star(s_\text{obs}) = \argmin_{g\in\mathcal{A}} \un{\mathbb{E}_{s_{\text{u}}\vert s_{\text{obs}}} L(a,s)}.
   $$
 \end{block}
 
@@ -144,7 +161,7 @@
 \begin{frame}{Riemann-like integration is impractical when $d\gg 1$.}
 \blank
 \begin{itemize}
-\item For modern developments, see quasi-Monte Carlo integration \cite{DiPi10}.
+\item For modern developments, see quasi-Monte Carlo integration \citep{DiPi10}.
 \end{itemize}
 \end{frame}
 
@@ -171,11 +188,11 @@ is small (with large probability, in quadratic mean, converges in law at some ra
   $$
   so that $\sum w_t = 1$.
   \item Then
-  $$$$
-  \vfill
+  \vspace{2cm}
   \item One can show that $ \sqrt{T}\un{\mathcal{E}_T(f)} \rightarrow \cN(0, \sigma^2_{\text{NIS}}(f))$.
   \item Problem is that for reasonable choices of $f,q,\pi$, \un{$\log \sigma_{\text{NIS}}(f) \propto d$}.
 \end{itemize}
+\vfill
 \end{frame}
 
 \section{The Metropolis-Hastings algorithm}
@@ -208,11 +225,11 @@ is small (with large probability, in quadratic mean, converges in law at some ra
 \end{frame}
 
 \begin{frame}{A law of large numbers for Markov chains}
-  Let $(\theta_t)_{t\in\mathbb N}$ be a Markov chain on $\mathcal \Theta$, with Markov kernel $P$. If
+  Let $(\theta_t)_{t\in\mathbb N}$ be a Markov chain on $\Theta$, with Markov kernel $P$. If
   \begin{itemize}
     \item There exists $\pi$ s.t. 
     $$
-    \int \d\pi(x) P(x, B) = \pi(B).
+    \int \d\pi(\theta) P(\theta, B) = \pi(B).
     $$
     \item For any $A$ with $\pi(A)>0$, for any $\theta\in \Theta$,
     $$ 
@@ -232,8 +249,8 @@ is small (with large probability, in quadratic mean, converges in law at some ra
 \Aitem \For $t\setto1$ \To $T$
 \Aitem \mt $\theta\setto\theta_{t-1}$
 \Aitem \mt $\theta'\sim \un{q(.\vert\theta)}$, $u\sim\mathcal U_{(0,1)}$,
-\Aitem \mt $\rho =  \unn{\frac{\pi(\theta')}{\pi(\theta)}} \un{\frac{q(\theta\vert\theta')}{q(\theta'\vert\theta)}}$.
-\Aitem \mt \If $u<\rho$,
+\Aitem \mt $\alpha =  1\wedge \unn{\frac{\pi(\theta')}{\pi(\theta)}} \un{\frac{q(\theta\vert\theta')}{q(\theta'\vert\theta)}}$.
+\Aitem \mt \If $u<\alpha$,
 \Aitem \mtt $\theta_{t}\setto\theta'$
 \mt \algoremark{\unn{Accept}}
 \Aitem \mt \Else $\theta_{t}\setto\theta$
@@ -291,7 +308,7 @@ $$
 q(\theta'\vert\theta) = \frac1d \sum_{k=1}^d \un{\pi(\theta'_k\vert \theta_{\setminus k})} 1_{\theta'_{\setminus k} = \theta_{\setminus k}}, \quad \theta_{\setminus k}:= (\theta_1,\dots,\theta_{k-1},\theta_{k+1},\dots,\theta_d).
 $$
 \item Then the probability of acceptance $\alpha(\theta,\theta')$ is always $1$.
-$$$$
+\vspace{2cm}
 \vfill
 \item In practice, the systematic scan Gibbs sampler is more common, which consists in repeatedly: drawing $\theta_1\vert\theta_{\setminus 1}$, then $\theta_2\vert\theta_{\setminus 2}$, etc. always conditioning on the newest values available of each $\theta_k$.
 \item You can also partition $\theta$ in arbitrary blocks.
@@ -299,6 +316,16 @@ $$$$
 \end{frame}
 
 \begin{frame}{An example: Latent Dirichlet allocation}
+\centering
+\includegraphics[width=.9\textwidth]{\figdir/lda.jpg}
+\vfill
+\end{frame}
+
+\begin{frame}{A Gibbs sampler for LDA 1/2}
+
+\end{frame}
+
+\begin{frame}{A Gibbs sampler for LDA 2/2}
 
 \end{frame}
 
@@ -307,36 +334,75 @@ $$$$
 \end{frame}
 
 \section{Hamiltonian Monte Carlo}
+
+\begin{frame}{An abstract variant of MH}
+\begin{itemize}
+  \item Let $S$ be a linear involution of $\cX\subset\mathbb{R}^{2d}$, such that $\eta\circ S = \eta$ for some (possibly unnormalized) PDF $\eta$.
+  \vspace{2.5cm}
+  \item Let further $\Phi:\mathbb{R}^{2d}\rightarrow \mathbb{R}^{2d}$ be a $C^1$-diffeomorphism such that $S\circ \Phi = \Phi^{-1}\circ S$.
+  \item Now let 
+\begin{equation}
+    \label{e:acceptance_probability_abstract_HMC}
+    \alpha(x) \triangleq 1\wedge \frac{\eta(\Phi(x))}{\eta(x)} \vert\Phi'(x)\vert,
+\end{equation}
+and consider the Markov kernel
+$$
+P_{aHMC}(x,A) = \alpha(x) 1_{\Phi(x)\in A} + (1-\alpha(x))1_{S(x)\in A}.
+$$
+\end{itemize}
+\begin{block}{Proposition}
+$P_{aHMC}$ leaves $\eta$ invariant.
+\end{block}
+\end{frame}
+
 \begin{frame}{Hamiltonian dynamics is the source of inspiration}
 \begin{block}{Hamilton's equations of motion}
-Consider a physical system described by Hamiltonian $H(x,\xi)$ in phase space $(x,\xi)\in \mathbb{R}^{2d}$. Then the trajectories are prescribed by
+Consider a physical system described by Hamiltonian $H(q,p)$ in phase space $(q,p)\in \mathbb{R}^{2d}$. Then the trajectories are prescribed by
 \begin{equation}
   \label{e:hamilton}
-  \dot{x_i} = \frac{\partial H}{\partial \xi_i} \qquad \dot{\xi_i} = -\frac{\partial H}{\partial x_i}.
+  \dot{q_i} = \frac{\partial H}{\partial p_i} \qquad \dot{p_i} = -\frac{\partial H}{\partial q_i}.
 \end{equation}
 \end{block}
 \begin{itemize}
-  \item Given an initial point $(x,\xi)$, solve \eqref{e:hamilton} and denote the corresponding position in $\mathbb{R}^{2d}$ at time $t>0$ by $\Phi_t(x,\xi)$.
-  \item \eqref{e:hamilton} implies that $t\mapsto H(\Phi_t(x,\xi))$ is constant.
-  \item $\Phi_t$ has an inverse, and $\int_A \d x\d \xi = \int_{\Phi_t(A)} \d x\d \xi$.
-  \item As an example, consider $H(x,\xi) = \frac12 x^2 + \frac12 \xi^2.$
+  \item Given an initial point $(q,p)$, solve \eqref{e:hamilton} and denote the corresponding position in $\mathbb{R}^{2d}$ at time $t>0$ by $\Phi_t(q,p)$.
+  \item \eqref{e:hamilton} implies that $t\mapsto H(\Phi_t(q,p))$ is constant.
+  \item As an example, consider $H(q,p) = \frac12 q^2 + \frac12 p^2.$
 \end{itemize}
 \blank
 % Describe, show Jacobian, show scaling with dimension, % discuss automatic differentiation and pymc3
 \end{frame}
 
+\begin{frame}{Numerical approximations of the Hamiltonian flow}
+\begin{itemize}
+  \item One idea would be to put some monotone function of the target in the Hamiltonian, such as $ H(q,p) = -\log \pi(q) + \frac12 p^T M p $.
+  \item We know approximations of the Hamiltonian flow, such as the leapfrog (aka velocity Verlet) integrator. It is defined as $\psi_h^n = \psi_h \circ \dots \psi_h$, where $(p',q') = \psi_h(p,q)$ is 
+\begin{align*}
+    p_{1/2} &= p + \frac{h}{2}\nabla \log \pi(q)\\
+    q' &= q+hM^{-1}p_{1/2}\\
+    p' &= p_{1/2} + \frac{h}{2} \nabla \log\pi (q');
+\end{align*}
+\end{itemize}
+\begin{block}{Proposition}
+  The leapfrog integrator satisfies $S\circ \psi_h^n = (\psi_h^n)^{-1}\circ S$ for $S(q,p) = (q,-p)$, and $\vert \det (\psi_h^n)'(q,p)\vert = 1$. 
+\end{block}
+\end{frame}
+
 \begin{frame}{Hamiltonian Monte Carlo mimics a physical system}
   \begin{itemize}
-    \item Let $\log \pi(x, \xi) =  \log \pi(x) + \frac12 \xi^T M(x) \xi$.
-    \item For $t>0$ fixed, consider the Markov kernel $P((x,\xi), (x,\xi'))$ corresponding to
-    $$ \xi\sim \cN(0,M(x)^{-1})$$
-    followed  by
-    $$(x',\xi') = \phi_T(x,\xi).$$
-    Then $\pi(x,\xi)$ is invariant for $P$, and \un{so is its marginal $\pi(x)$}.
-    \vspace{2.5cm}
-    \item \un{Integrating the Hamilton flow can lead to long jumps} compared to MH with a Gaussian proposal, especially in high dimensions.
-    \item In practice, $\phi_T$ has to be approximated, thus requiring an acceptance step. Parameters like $T$ have to be tuned, as in NUTS \citep{HoGe14}, which favors long jumps with no U-turns.
+    \item Let $\log \tpi(q, p) =  \log \pi(q) + \frac12 p^T M(q) p$.
+    \item Consider the Markov kernel $P((q,p), (q',p'))$ given by the product of
+    $$ p'\sim \cN(0,M(q)^{-1})$$
+    and
+    $$
+    P_{aHMC}(x,A) = \alpha(x) 1_{\psi_h^n(x)\in A} + (1-\alpha(x))1_{S(x)\in A}, \text{ where } x=(p,q).
+    $$
+    where 
+    \begin{equation}
+      \alpha(x) \triangleq 1\wedge \frac{\tpi(\psi_h^n(x))}{\tpi(x)} \cancel{\vert (\psi_h^n)'(x))\vert},
+    \end{equation}
+    Then \un{$P$ leaves $\pi$ invariant}.
 \end{itemize}
+\blank
 \end{frame}
 
 % Show Chi Feng's demo.
@@ -366,6 +432,7 @@ We need to monitor both cross-chain and within-chain behavior.
     \item Compute $W:=\frac1P \sum_{p=1}^P\left[ \frac{1}{T-1} \sum_{t=1}^T (\bar f_{tp}-\bar f_{\cdot p})^2\right].$
     \item Then check whether
     $$\hat R = \sqrt{\frac{\un{\frac{T-1}{T}W + \frac1T B}}{\unnnn{W}}}\in[1,1.1].$$
+    \item See \citep{VaKn21} for an insightful discussion.
   \end{itemize}
 \end{block}
 \end{frame}
@@ -374,15 +441,17 @@ We need to monitor both cross-chain and within-chain behavior.
 \begin{block}{Single-chain diagnostics}
   \begin{itemize}
   \item The idea is to compare different chunks of a single chain.
-  \item At stationarity, large chunks should be statistically hard to distinguish.
-  \item The \un{Geweke diagnostic} tests this similarity \citep{Gew04}
+  \item At stationarity, large chunks should be statistically indistinguishable.
+  \item The \un{Geweke diagnostic} tests this similarity \citep{Gew92}
   \end{itemize}
 \end{block}
 
 \begin{block}{Effective sample size}
   \begin{itemize}
   \item Autocorrelation in each chain is what increases the variance of scalar estimands, compared to i.i.d. draws from $\pi$.
-  \item We can estimate this autocorrelation, and build an estimator for the ratio of the two variances $\widehat{ESS}\in [1,PT]$, called the \un{\emph{effective sample size}}; see Section 11.5 of \citep{GCSDVR13}.
+  \item We can estimate this autocorrelation, and build an estimator for $PT$ times the ratio of the two variances $\widehat{ESS}\in [1,PT]$, called, the \un{\emph{effective sample size}}; see Section 11.5 of \citep{GCSDVR13}.
+  \item \cite{VaKn21} note that
+  $$\hat R \approx \sqrt{1+P/\widehat{ESS}},$$ so $\hat R=1.1$ \un{only} corresponds to $\widehat{ESS}=5P$ .
   \end{itemize}
 \end{block}
 \end{frame}

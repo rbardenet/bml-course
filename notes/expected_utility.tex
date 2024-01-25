@@ -86,4 +86,20 @@ The expectation in \eqref{e:posterior_expected_utility} is called \emph{posterio
 We assume here familiarity with probabilistic graphical models, to the point of telling from a graph whether two sets of nodes are independent given a third one. 
 The reader needing a recap is referred to \citep[Sections 10.1 to 10.5]{Mur12}.
 
+To specify a joint distribution over states, we typically give a list of conditional distributions, that multiplied together give the joint. 
+
+\begin{example}[Classification]
+    \label{ex:classification}
+    We take the set of states from Table~\ref{t:}, and add a set of parameters $\Theta$, $\cS = (\mathbb{X}\times\mathbb{Y})^n \times (\mathbb{X}\times\mathbb{Y}) \times \theta$.
+    Consider for instance $y_i\vert x_i, \theta \sim \mathrm{Ber}(\sigma(x_i^T\theta))$ and $y\vert x, \theta \sim \mathrm{Ber}(\sigma(x^T\theta))$, all independent. Take also $\theta\sim \cN(0,\sigma^2 I)$, and $x_1, \dots, x_n$ to be i.i.d. from an arbitrary distribution. 
+    Then we have fixed
+    $$
+        p(x_{1:n}, y_{1:n}, x, y, \theta)
+    $$
+
+ 
+    One way to 
+\end{example}
+
+
 \section{The Bayes decision rule for common ML problems}
