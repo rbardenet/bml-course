@@ -106,7 +106,7 @@ where, for each $x$, $q(\cdot\vert x)$ is a probability distribution, and
 \end{proof}
 Note that \eqref{e:mh_acceptance_rate} is not the only way to satisfy detailed balance; see e.g. Barker's acceptance rate and Peskun's result on the optimality of the MH acceptance rate.
 
-Now that we have shown that $\pi$ is left invariant, it remains to check Harris recurrence to ge the LLN.
+Now that we have shown that $\pi$ is left invariant, it remains to check Harris recurrence to get the LLN.
 Intuitively, it is enough that the proposal distribution charges the whole space, so that there is a small chance to move anywhere in a single step.
 Indeed, \cite{RoCa04} prove that if 
 $$
@@ -114,30 +114,121 @@ $$
 $$
 then $P_{\text{MH}}$ satisfies the LLN.
 
-For future reference, we finally note that if $P_1$ and $P_2$ both leave $\pi$ invariant, then so does the compound kernel
+\begin{example}[Logistic regression with pyMC]
+\end{example}
+
+\section{Gibbs sampling}
+\label{s:gibbs_sampling}
+
+While sampling from $\pi$ is not accessible in general, it is sometimes possible to sample from the conditionals of some components of $x$ given the rest of the components. 
+Let $[d]$ be partitioned in $I_1, \dots, I_p$,
+The MH kernel with proposal
+$$
+    q(\theta'\vert\theta) = \frac1p \sum_{k=1}^p \un{\pi(\theta'_{I_k}\vert \theta_{\setminus I_k})} 1_{\theta'_{\setminus I_k} = \theta_{\setminus I_k}}, \quad \theta_{\setminus I_k}:= (\theta_{I_1},\dots,\theta_{I_{k-1}},\theta_{I_{k+1}},\dots,\theta_{I_d}),
+$$
+has acceptance probability $1$. 
+The algorithm that iteratively applies this MH kernel is called the (random scan) Gibbs sampler.
+
+As an example of application, recall the LDA model of \cref{ex:lda}. 
+This is a joint distribution for which we can easily derive the conditionals for the natural partition given by the names of the unobserved variables.
+To derive them, we shall repeatedly use Bayes's theorem as well as the DAG structure.
+We start with a general observation: if $x_A\perp x_B\vert x_C$ in a DAG, then 
+\begin{equation}
+    \label{e:conditional_independence}
+    p(x_A\vert x_B, x_C) = \frac{p(x_A, x_B, x_C)}{p(x_B, x_C)} = \frac{p(x_A, x_B \vert x_C) p(x_C)}{p(x_B, x_C)} = \frac{p(x_A\vert x_C) p(x_B\vert x_C) p(x_C)}{{p(x_B\vert x_C)p(x_C)}} = p(x_A\vert x_C).
+\end{equation}
+
+\paragraph{The conditional of $\pi_i$} 
+Fix a document index $i\in[N]$. 
+Using \eqref{e:conditional_independence}, the conditional of $\pi_i$ given the rest in LDA is simply
+$$ 
+    \pi_i \vert \pi_{\setminus i}, \mathbf{z}, \mathbf{y}, B = \pi_i \vert z_{i:} \, .
+$$
+Now we recognize a conjugate model, the Dirichlet-categorical (see exercise sheet), so that 
+$$
+    \pi_i \vert z_{i:} \sim \mathrm{Dir}\left ((\alpha_k + \sum_{\ell=1}^{L_i} 1_{z_{i\ell}=k})_{k\in [K]} \right ).
+$$
+
+\paragraph{The conditional of $B_{k:}$}
+Fix a topic index $k\in[K]$, then by \eqref{e:conditional_independence},
+$$
+    B_{k:} \vert \mathbf{\pi}, \mathbf{z}, \mathbf{y}, B_{\setminus k,:} \sim B_{k:} \vert \mathbf{z}, \mathbf{y}.
+$$
+Now a trained eye would recognize a Dirichlet-categorical conjugate situation again. 
+Alternately, we can use Bayes' theorem and force terms to appear that we have specified in our model
+\begin{align*}
+    p(B \vert \mathbf{z}, \mathbf{y}) &\propto p(B, \mathbf{\pi}, \mathbf{z}, \mathbf{y})\\
+    & = \un{p(\mathbf{y} \vert B, \mathbf{z})} p(\mathbf{z}\vert B) \unn{p(B)}.
+\end{align*}
+Note that $\mathbf{z}\perp B$ in the DAG, so that $p(\mathbf{z}\vert B) = p(\mathbf{z})$ is independent of $B$.
+We thus obtain
+\begin{align*}
+    p(B \vert \mathbf{z}, \mathbf{y})
+    &\propto \un{\prod_{i=1}^N \prod_{\ell=1}^{L_i} \prod_{k=1}^K B_{kv}^{1_{z_{i\ell}=k}1_{y_{i\ell}=v}}} \unn{\prod_{k=1}^K 1_{\Delta_V}(B_{k:}) \prod_{v=1}^V B_{kv}^{\gamma_v-1}}.\\
+    &= \prod_{k=1}^K\left[ 1_{\Delta_V}(B_{k:}) \prod_{i=1}^N \prod_{\ell=1}^{L_i} B_{kv}^{1_{z_{i\ell}=k}1_{y_{i\ell}=v}} \prod_{v=1}^V B_{kv}^{\gamma_v-1} \right].
+\end{align*}
+The conjugacy should now be obvious, as well as the conditional independence of the rows of $B$. 
+We see in particular that
+$$
+    B_{k:} \vert \mathbf{z}, \mathbf{y} \sim \mathrm{Dir}\left( (\gamma_v + \sum_{i=1}^N \sum_{\ell=1}^{L_i} 1_{z_{i\ell}=k}1_{y_{i\ell}=v})_{v\in [V]} \right).
+$$
+
+\paragraph{The conditional of $z_{i\ell}$}
+Fix $i\in[N]$ and $\ell\in[L_i]$. 
+Then by \eqref{e:conditional_independence} and the DAG structure,
+$$
+    z_{i\ell} \vert \mathbf{\pi}, \mathbf{z}_{\setminus i\ell}, \mathbf{y}, B \sim z_{i\ell} \vert \pi_i, y_{i\ell}, B.
+$$
+Using Bayes' theorem, we can again force terms to appear that we have specified in our model.
+\begin{align*}
+    p(z_{i\ell} = k \vert \pi_i, y_{i\ell}, B) 
+    &\propto p(z_{i\ell} = k, \pi_i, y_{i\ell}, B)\\
+    &= p(y_{i\ell}\vert z_{i\ell} = k, \pi_i, B) p(z_{i\ell} = k, B\vert\pi_i) p(\pi_i).
+\end{align*}
+Upong noting that $y_{i\ell}\perp \pi_i\vert z_{i\ell} = k,  B$ and $z_{i\ell} = k \perp B\vert\pi_i$, and keeping only terms that contain $z_{i\ell}$, it comes 
+$$
+    p(z_{i\ell} = k \vert \pi_i, y_{i\ell}, B) \propto p(y_{i\ell}\vert z_{i\ell} = k, B) p(z_{i\ell} = k \vert\pi_i) \propto B_{k y_{i\ell}} \pi_{ik}.
+$$
+To sample from the conditional of $z_{i\ell}$, it is thus enough to draw a new index $k\in[K]$ with probability 
+$$
+    \frac{B_{k y_{i\ell}} \pi_{ik}}{\sum_{k=1}^K B_{k y_{i\ell}} \pi_{ik}}.
+$$
+
+\section{Combining MCMC kernels}
+Note that if $P_1$ and $P_2$ both leave $\pi$ invariant, then so does the compound kernel
 $$
     P_1P_2(x, x') = \int P_1(x, \xi)P_2(\xi, x') \d\xi.
 $$
-In particular, one can apply two MH kernels with different proposals one after the other, and still get a valid kernel, in the sense that it leaves the same target invariant.
+In particular, one can apply two MH kernels with different proposals one after the other, and still get a valid kernel, in the sense that it leaves the same target invariant. 
+Another basic example is the systematic scan Gibbs sampler; see exercise sheet.
+Alternately, we can combine an MH and a Gibbs kernel, to use the fact that we can sample some of the components of the state conditionally on the others.
 
-\section{Gibbs sampling}
-\label{s:gibbs}
-While sampling from $\pi$ is not accessible in general, it is sometimes possible to sample from the conditionals of some components of $x$ given the rest of the components. 
-In particular, the MH kernel with proposal
-$$
-    q(\theta'\vert\theta) = \frac1d \sum_{k=1}^d \un{\pi(\theta'_k\vert \theta_{\setminus k})} 1_{\theta'_{\setminus k} = \theta_{\setminus k}}, \quad \theta_{\setminus k}:= (\theta_1,\dots,\theta_{k-1},\theta_{k+1},\dots,\theta_d)
-$$
-has acceptance probability $1$.
+\begin{example}[Hierarchical logistic regression]
+    TBC
+\end{example}
+
+Another famous example of compound kernel is Hamiltonian Monte Carlo.
 
 \section{Hamiltonian Monte Carlo}
-We closely follow \cite{BoSa18}, who give a clear introduction to the ingredients of HMC.
-To facilitate going back and forth between the notes and \citep{BoSa18}, we temporarily adopt their notational conventions: the variable over which we wish to integrate is $q\in\mathbb{R}^d$, while $x\in\cX$ denotes a generic variable, later taken to be $x=(p,q)\in\mathbb{R}^{2d}$.
+\label{s:HMC}
+
+Check out Chi Feng's MCMC gallery\footnote{\url{https://chi-feng.github.io/mcmc-demo}}.
+In particular, run MH and the Gibbs sampler on the banana-shaped Gaussian, and see how difficult it is for the corresponding chains to move along the banana. 
+Intuitively, it would be more efficient to have an MCMC kernel that somehow follows the level lines of the target $\pi$. 
+Inspired by numerical schemes for solving differential equations in mechanics, \cite{Nea00} introduced HMC, an MCMC kernel that approximately follows the level lines of an augmented target with marginal $\pi$.
+The HMC kernel and its adaptive variants like NUTS are now the default choice in most probabilistic programming languages, such as PyMC and Stan.
+
+While sometimes handwavingly introduced as an instance MH, we believe that the practical popularity of HMC justifies understanding it in its own right.
+We closely follow \cite{BoSa18}; and temporarily adopt their notational conventions: the variable over which we wish to integrate is $q\in\mathbb{R}^d$, while $x\in\cX$ denotes a generic variable, later taken to be $x=(p,q)\in\mathbb{R}^{2d}$.
 Note that vanilla HMC is limited to continuous variables.
 
 \subsection{An abstract variant of Metropolis-Hastings}
 \label{s:abstract_HMC}
 Let $S$ be a linear involution of $\cX\subset\mathbb{R}^{2d}$, such that $\eta\circ S = \eta$ for some (possibly unnormalized) PDF $\eta$.
-Let further $\Phi:\mathbb{R}^{2d}\rightarrow \mathbb{R}^{2d}$ be a $C^1$-diffeomorphism that is reversible w.r.t. to $S$, that is, $S\circ \Phi = \Phi^{-1}\circ S$.
+Let further $\Phi:\mathbb{R}^{2d}\rightarrow \mathbb{R}^{2d}$ be a $C^1$-diffeomorphism\footnote{
+    While we prefer to keep $\Phi$ generic at this stage, you can intuitively think of $\Phi$ as moving along a level line of $\eta$.
+} 
+that is reversible w.r.t. to $S$, that is, $S\circ \Phi = \Phi^{-1}\circ S$.
 Now let 
 \begin{equation}
     \label{e:acceptance_probability_abstract_HMC}

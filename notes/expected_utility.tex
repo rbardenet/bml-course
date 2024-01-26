@@ -83,23 +83,73 @@ The resulting $g^\star$ is called the \emph{Bayes decision rule}.
 The expectation in \eqref{e:posterior_expected_utility} is called \emph{posterior} expected utility, in reference to the fact that, in practice, we often compute it for a single value of $s_O$, \emph{after} $s_O$ has been observed. 
 
 \section{Specifying a joint model}
-We assume here familiarity with probabilistic graphical models, to the point of telling from a graph whether two sets of nodes are independent given a third one. 
+We assume here familiarity with probabilistic graphical models, to the point of telling from a directed acyclic graph (DAG) whether two sets of nodes are independent given a third one. 
 The reader needing a recap is referred to \citep[Sections 10.1 to 10.5]{Mur12}.
 
-To specify a joint distribution over states, we typically give a list of conditional distributions, that multiplied together give the joint. 
+To specify a joint distribution over states, we typically give a list of conditional distributions. 
+To make sure we consistently define a joint distribution, we give a directed acyclic graph, and list the conditional of each node given its parents.
 
-\begin{example}[Classification]
+\begin{figure}[!ht]
+    \centering
+    \begin{tikzpicture}
+    \node[latent] (xi) {$x_i$};
+    \node[latent,left= of xi] (yi) {$y_i$}; %
+    \node[latent,below= of xi] (x) {$x$};
+    \node[latent,left= of x] (y) {$y$}; %
+    \node[latent,left= of yi] (theta) {$\theta$};
+    \edge x y;
+    \edge {xi} {yi};
+    \edge {theta} {y,yi};
+    \plate {} {(xi)(yi)} {\footnotesize $i=1,\dots, N$};
+    % \edge theta yi;
+  \end{tikzpicture}
+  \caption{A possible DAG for a classification task.}
+  \label{f:classification_dag}
+\end{figure}
+
+\begin{example}[Logistic regression]
     \label{ex:classification}
-    We take the set of states from Table~\ref{t:}, and add a set of parameters $\Theta$, $\cS = (\mathbb{X}\times\mathbb{Y})^n \times (\mathbb{X}\times\mathbb{Y}) \times \theta$.
-    Consider for instance $y_i\vert x_i, \theta \sim \mathrm{Ber}(\sigma(x_i^T\theta))$ and $y\vert x, \theta \sim \mathrm{Ber}(\sigma(x^T\theta))$, all independent. Take also $\theta\sim \cN(0,\sigma^2 I)$, and $x_1, \dots, x_n$ to be i.i.d. from an arbitrary distribution. 
+    We take the set of states for classification from Table~\ref{t:}, and add a set of parameters $\Theta$ to describe the joint, so that $\cS = (\mathbb{X}\times\mathbb{Y})^n \times (\mathbb{X}\times\mathbb{Y}) \times \theta$.
+    Note that, formally, it is not necessary to include $\Theta$ in the state space if the value of your actions does not depend on $\theta$, but we prefer to add them to keep track of all variables to later integrate over.
+    Consider the DAG of \cref{f:classification_dag}.
+    To specify the factors, we for instance take $y_i\vert x_i, \theta \sim \mathrm{Ber}(\sigma(x_i^T\theta))$ and $y\vert x, \theta \sim \mathrm{Ber}(\sigma(x^T\theta))$. Take also $\theta\sim \cN(0,\sigma^2 I)$, and any prior on each of the $x_i$.
     Then we have fixed
     $$
-        p(x_{1:n}, y_{1:n}, x, y, \theta)
+        p(x_{1:n}, y_{1:n}, x, y, \theta) = p(\theta) p(x) p(y\vert x_i, \theta) \prod_{i=1}^N \left[p(x_i) p(y_i\vert x_i, \theta)\right].
     $$
-
- 
-    One way to 
 \end{example}
 
+\begin{figure}[!ht]
+    \centering
+    \begin{tikzpicture}
+    \node[latent] (pi_i) {$\pi_i$};
+    \node[latent,right= of pi_i] (z_il) {$z_{i\ell}$}; %
+    \node[latent,right= of z_il] (y_il) {$y_{i\ell}$};
+    \node[latent,right= of y_il] (B) {$B$}; %
+    \edge {pi_i} {z_il};
+    \edge {z_il} {y_il};
+    \edge {B} {y_il};
+    \plate[] {} {(y_il)(z_il)} {\footnotesize $\ell \in [L_i]$};
+    \plate[inner sep=0.35cm, yshift=-0.1cm] {} {(pi_i)(y_il)(z_il)} {};
+    % \edge theta yi;
+  \end{tikzpicture}
+  \caption{The DAG for LDA \citep{}.}
+  \label{f:classification_dag}
+\end{figure}
+
+\begin{example}[Latent Dirichlet allocation; \citep{}]
+    \label{ex:lda}
+    Consider the problem of topic assignment in a corpus of $N$ documents, i.e. document $i\in [N]$ is represented by a list $(y_{i\ell})_{1\leq \ell L_i}$ of words in $[V]$, with $V\geq 1$ the size of the vocabulary. 
+    On top of the words of all texts, we want to be able to ask questions on the topics contained in a text, so we will associate each word $y_{i\ell}$ to a topic $z_{i\ell}\in [K]$. 
+    To describe the distribution of a word conditionally on its topic, we also need a marginal distribution of words within each topic. 
+    Stacking these distributions on top of each other, we keep a matrix $B$ with $K$ rows, each of which is in $\Delta_V$. 
+    Finally, we also need a marginal distribution for the topics within a given document. 
+    We will denote it by $\pi_i\in\Delta_K$.
+
+    We consider the DAG in \cref{f:lda_dag}. 
+    The factors are given by, for all $i\in[N]$ and $\ell\in[L_i]$, $y_{i\ell}\vert z_{i\ell}=k, B \sim \mathrm{Cat}(B_{k:})$, $z_{i\ell}\sim \mathrm{Cat}(\pi_i)$. 
+    Moreover, it is customary to take independent Dirichlet priors with the same parameter $\mathrm{Dir(\gamma)}$ on all rows of $B$, as well as independent Dirichlet priors $\pi_i\sim \mathrm{Dir}(\alpha)$ for each $i\in[N]$. 
+    The motivation behind the Dirichlet prior shall be explained in \cref{s:gibbs_sampling}.
+\end{example}
 
 \section{The Bayes decision rule for common ML problems}
