@@ -4,8 +4,8 @@ Maximizing expected utility requires computing integrals.
 Numerical integration consists in finding $T$ nodes $x_t$ and weights $w_t$, such
 that
 $$
-{\mathcal{E}_T(f)} \triangleq  \int f(x)\d\mu(x)  - \quad \sum_{t=1}^T w_t f(x_t) = o_{T\rightarrow \infty}(1), \quad \forall
-f:\mathbb{R}^d\rightarrow\mathbb{R}\in\mathcal C,
+    {\mathcal{E}_T(f)} \triangleq  \int f(x)\d\mu(x)  - \quad \sum_{t=1}^T w_t f(x_t) = o_{T\rightarrow \infty}(1), \quad \forall
+    f:\mathbb{R}^d\rightarrow\mathbb{R}\in\mathcal C,
 $$
 where $\mathcal C$ is a large class of functions.
 For any smooth $f$, Riemann-like (i.e., grid-based) integration leads to $\mathcal{E}_T(f) \sim \sqrt{d} T^{-1/d}$, so that grids become essentially useless beyond $d=3$.
@@ -157,7 +157,7 @@ $$
 Now a trained eye would recognize a Dirichlet-categorical conjugate situation again. 
 Alternately, we can use Bayes' theorem and force terms to appear that we have specified in our model
 \begin{align*}
-    p(B \vert \mathbf{z}, \mathbf{y}) &\propto p(B, \mathbf{\pi}, \mathbf{z}, \mathbf{y})\\
+    p(B \vert \mathbf{z}, \mathbf{y}) &\propto p(B, \mathbf{z}, \mathbf{y})\\
     & = \un{p(\mathbf{y} \vert B, \mathbf{z})} p(\mathbf{z}\vert B) \unn{p(B)}.
 \end{align*}
 Note that $\mathbf{z}\perp B$ in the DAG, so that $p(\mathbf{z}\vert B) = p(\mathbf{z})$ is independent of $B$.
