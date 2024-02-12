@@ -1,0 +1,38 @@
+\boolfalse {citerequest}\boolfalse {citetracker}\boolfalse {pagetracker}\boolfalse {backtracker}\relax 
+\babel@toc {english}{}
+\defcounter {refsection}{0}\relax 
+\beamer@sectionintoc {1}{Motivations to go nonparametric}{6}{0}{1}
+\defcounter {refsection}{0}\relax 
+\beamer@sectionintoc {2}{Gaussian processes}{23}{0}{2}
+\defcounter {refsection}{0}\relax 
+\beamer@subsectionintoc {2}{1}{Introduction}{24}{0}{2}
+\defcounter {refsection}{0}\relax 
+\beamer@subsectionintoc {2}{2}{Examples}{37}{0}{2}
+\defcounter {refsection}{0}\relax 
+\beamer@subsectionintoc {2}{3}{Reproducing kernel Hilbert space}{48}{0}{2}
+\defcounter {refsection}{0}\relax 
+\beamer@sectionintoc {3}{Discrete random probability measures}{56}{0}{3}
+\defcounter {refsection}{0}\relax 
+\beamer@subsectionintoc {3}{1}{Introduction}{57}{0}{3}
+\defcounter {refsection}{0}\relax 
+\beamer@subsectionintoc {3}{2}{Dirichlet process}{59}{0}{3}
+\defcounter {refsection}{0}\relax 
+\beamer@subsectionintoc {3}{3}{Mixture models and model-based clustering}{95}{0}{3}
+\defcounter {refsection}{0}\relax 
+\beamer@subsectionintoc {3}{4}{Priors beyond the DP}{113}{0}{3}
+\defcounter {refsection}{0}\relax 
+\beamer@sectionintoc {4}{Asymptotic evaluation of the posterior}{143}{0}{4}
+\defcounter {refsection}{0}\relax 
+\beamer@subsectionintoc {4}{1}{Introduction}{144}{0}{4}
+\defcounter {refsection}{0}\relax 
+\beamer@subsectionintoc {4}{2}{Posterior consistency}{155}{0}{4}
+\defcounter {refsection}{0}\relax 
+\beamer@subsubsectionintoc {4}{2}{1}{Doob's Theorem}{174}{0}{4}
+\defcounter {refsection}{0}\relax 
+\beamer@subsubsectionintoc {4}{2}{2}{Schwartz approach}{183}{0}{4}
+\defcounter {refsection}{0}\relax 
+\beamer@subsectionintoc {4}{3}{Concentration Rates}{207}{0}{4}
+\defcounter {refsection}{0}\relax 
+\beamer@subsubsectionintoc {4}{3}{1}{General theorem in the iid case}{232}{0}{4}
+\defcounter {refsection}{0}\relax 
+\beamer@subsubsectionintoc {4}{3}{2}{Non iid observations}{246}{0}{4}
