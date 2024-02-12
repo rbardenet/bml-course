@@ -1,0 +1,41 @@
+\documentclass[9pt]{beamer} %,handout
+
+\def\Title{Bayesian machine learning\\\vspace{3mm}
+Bayesian nonparametrics: random probability measures}
+
+\include{preamble}
+
+\include{notations_julyan}
+
+
+\begin{document}
+
+\begin{frame}[plain]
+  \titlepage
+\end{frame}
+
+\begin{frame}{Outline}
+	\tableofcontents[pausesections,subsectionstyle=hide,subsubsectionstyle=hide]
+\end{frame}
+
+\input{Sections/_introNP}
+\input{Sections/_GP}
+\input{Sections/_RPM}
+\input{Sections/_intro_mixtures}
+\input{Sections/_beyondDP}
+\input{Sections/_asymp}
+
+
+
+\section*{References}
+\setbeamertemplate{bibliography item}[text]%,
+\begin{frame}[allowframebreaks]
+\frametitle{References}
+\small
+\printbibliography
+\normalsize
+\end{frame}
+
+\end{document}
+
+
