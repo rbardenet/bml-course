@@ -1,0 +1,18 @@
+\BOOKMARK [2][]{Outline0.1}{Motivations to go nonparametric}{}% 1
+\BOOKMARK [2][]{Outline0.2}{Gaussian processes}{}% 2
+\BOOKMARK [3][]{Outline0.2.1.23}{Introduction}{Outline0.2}% 3
+\BOOKMARK [3][]{Outline0.2.2.37}{Examples}{Outline0.2}% 4
+\BOOKMARK [3][]{Outline0.2.3.46}{Gaussian process regression}{Outline0.2}% 5
+\BOOKMARK [3][]{Outline0.2.4.51}{Reproducing kernel Hilbert space}{Outline0.2}% 6
+\BOOKMARK [2][]{Outline0.3}{Discrete random probability measures}{}% 7
+\BOOKMARK [3][]{Outline0.3.1.60}{Introduction}{Outline0.3}% 8
+\BOOKMARK [3][]{Outline0.3.2.63}{Dirichlet process}{Outline0.3}% 9
+\BOOKMARK [3][]{Outline0.3.3.106}{Mixture models and model-based clustering}{Outline0.3}% 10
+\BOOKMARK [3][]{Outline0.3.4.121}{Priors beyond the DP}{Outline0.3}% 11
+\BOOKMARK [3][]{Outline0.3.5.142}{Beyond mixtures: non-exchangeable settings and feature allocation models}{Outline0.3}% 12
+\BOOKMARK [2][]{Outline0.4}{Asymptotic evaluation of the posterior}{}% 13
+\BOOKMARK [3][]{Outline0.4.1.161}{Introduction}{Outline0.4}% 14
+\BOOKMARK [3][]{Outline0.4.2.172}{Posterior consistency}{Outline0.4}% 15
+\BOOKMARK [3][]{Outline0.4.3.224}{Concentration rates}{Outline0.4}% 16
+\BOOKMARK [2][]{Outline0.5}{References}{}% 17
+\BOOKMARK [2][]{Outline0.6}{References}{}% 18

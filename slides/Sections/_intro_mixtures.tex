@@ -121,7 +121,7 @@ Examples with Euclidean parameter spaces:
 
 \begin{frame}{Deriving an optimal clustering}
 
-The posterior expected loss of clustering $c'$, denoted by $L(c')$, is obtained by \alert{averaging the loss with respect to posterior weight}
+The posterior expected loss of clustering $c'$, denoted by $L(c')$, is obtained by \alert{averaging the loss with respect to posterior weights}
 $$L(c') = \sum_{c\in\Ac_n} L(c,c')p(c|\bx),$$
 and the decision is taken by choosing the best
 
@@ -145,32 +145,32 @@ Several losses have been considered:
 which is to say that the expected loss of $c'$ is \alert{all the posterior mass except that of $c'$.} So that it is easily minimized at the value $c'$ which has \alert{maximum} posterior weight:
 $$\hat c =  \arg \min_{c' \in \Ac_n} L_{0-1}(c') =   \arg \max_{c' \in \Ac_n} p(c'|\bx):= MAP.$$\pause
 
-Negative results by \citet{rajkowski2019analysis} show that the \alert{mode a posteriori (MAP) is inconsistent}.
+Negative results by \citet{rajkowski2019analysis} show that the \alert{maximum a posteriori (MAP) is inconsistent}.
 	
 \end{frame}
 
-\begin{frame}{Variation of information}
-\alert{Variation of information} (VI) by \citet{meila2007comparing} for cluster comparison. From information theory, compares information in two clusterings with information shared between the two clusterings:
-\begin{align*}
-&\VI(\bc,\widehat{\bc})=\En(\bc)+\En(\widehat{\bc})-2\I(\bc,\widehat{\bc})
-\end{align*}
-\end{frame}
-
-
-\begin{frame}{Variation of information}
-\citet{wade2018bayesian} 
-compare Binder and VI:\bigskip
-
-\begin{center}
-\includegraphics[width=.7\textwidth]{figures_julyan/mixtures/wade_example_binder}
-\includegraphics[width=.7\textwidth]{figures_julyan/mixtures/wade_example_VI}	
-\end{center}
-\end{frame}
-
-
-\begin{frame}{Variation of information}
-\citet{wade2018bayesian} 
-also provide \alert{credible balls} around the estimated clustering, based on Hasse diagram:\bigskip
-
-\includegraphics[width=\textwidth]{figures_julyan/mixtures/hasse_diagram}
-\end{frame}
+%\begin{frame}{Variation of information}
+%\alert{Variation of information} (VI) by \citet{meila2007comparing} for cluster comparison. From information theory, compares information in two clusterings with information shared between the two clusterings:
+%\begin{align*}
+%&\VI(\bc,\widehat{\bc})=\En(\bc)+\En(\widehat{\bc})-2\I(\bc,\widehat{\bc})
+%\end{align*}
+%\end{frame}
+%
+%
+%\begin{frame}{Variation of information}
+%\citet{wade2018bayesian} 
+%compare Binder and VI:\bigskip
+%
+%\begin{center}
+%\includegraphics[width=.7\textwidth]{figures_julyan/mixtures/wade_example_binder}
+%\includegraphics[width=.7\textwidth]{figures_julyan/mixtures/wade_example_VI}	
+%\end{center}
+%\end{frame}
+%
+%
+%\begin{frame}{Variation of information}
+%\citet{wade2018bayesian} 
+%also provide \alert{credible balls} around the estimated clustering, based on Hasse diagram:\bigskip
+%
+%\includegraphics[width=\textwidth]{figures_julyan/mixtures/hasse_diagram}
+%\end{frame}

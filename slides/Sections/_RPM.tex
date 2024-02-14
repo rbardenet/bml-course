@@ -69,9 +69,16 @@ $ (P(A_1),\ldots,P(A_k)) $ is Dirichlet distributed
 \end{frame}
 
 \begin{frame}{Notations}
-	Two notations are valid ones: $ P \sim \text{DP}(\alpha, P_0) $, as well as $ P \sim \text{DP}(\alpha P_0) $. The only difference is that the second one take a single parameter in argument, in the form of a measure (not necessarily a probability measure). 
+	Two \alert{notations} are valid ones: $ P \sim \text{DP}(\alpha, P_0) $, as well as $ P \sim \text{DP}(\alpha P_0) $. The only difference is that the second one take a single parameter in argument, in the form of a measure (not necessarily a probability measure). \pause
 	
-	\alert{Question}: can you move from one to the other? For instance, what are the  $((\alpha, P_0) $ parameters associated to the notation $ P \sim \text{DP}(G_0)$, with $G_0$ a measure.
+	\question{Can you move from one to the other?}\pause 
+	
+	\question{For instance, what are the  $((\alpha, P_0) $ parameters associated to the notation $ P \sim \text{DP}(G_0)$, with $G_0$ a measure.}
+	
+	\begin{center}
+\includegraphics[width=\textwidth]{figures_julyan/introRPM/DP-drawing}
+\end{center}
+
 \end{frame}
 
 \begin{frame}[allowframebreaks]{Moments of Dirichlet process}
@@ -94,7 +101,8 @@ and
 \begin{equation*}
     \Var(P(A))=\frac{\PrecisionParam^2 P_0(A)( 1-P_0(A) )}{\PrecisionParam^2 (\PrecisionParam + 1)}.
 \end{equation*}
-We derive the covariance result by developing the terms of $\Cov (P(A), P(B)) = \Cov (P(A\cap B) +P(A\cap B^c), P(B\cap A) + P(B\cap A^c) )$.
+
+\question{Derive the covariance result by developing the terms of $\Cov (P(A), P(B)) = \Cov (P(A\cap B) +P(A\cap B^c), P(B\cap A) + P(B\cap A^c) )$.}
 \hfill $\square$
 \end{frame}
 
@@ -300,7 +308,7 @@ which proves property (\ref{distr_of_Kn}).
 
 \begin{frame}{Distribution of distinct values}
 
-To prove (\ref{mathfrakC_def}) let use define a polynomial $A_n(s)$ as $A_n(s) = \sum_{i=1}^\infty \mathfrak{C}_n(k)s^k$. Then using (\ref{mathfrakC_property}) polynomial $A_n(s)$ can be written as
+To prove (\ref{mathfrakC_def}) let us define a polynomial $A_n(s)$ as $A_n(s) = \sum_{i=1}^\infty \mathfrak{C}_n(k)s^k$. Then using (\ref{mathfrakC_property}) polynomial $A_n(s)$ can be written as
 \begin{equation*}
 \begin{split}
     A_n(s)&=\sum_{k=1}^\infty \bigg(  \frac 1n \mathfrak{C}_{n-1}(k-1)+\frac{n-1}{n}\mathfrak{C}_{n-1}(k)   \bigg) s_k\\

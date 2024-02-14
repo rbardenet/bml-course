@@ -1,0 +1,42 @@
+\boolfalse {citerequest}\boolfalse {citetracker}\boolfalse {pagetracker}\boolfalse {backtracker}\relax 
+\babel@toc {english}{}
+\defcounter {refsection}{0}\relax 
+\beamer@sectionintoc {1}{Motivations to go nonparametric}{6}{0}{1}
+\defcounter {refsection}{0}\relax 
+\beamer@sectionintoc {2}{Gaussian processes}{22}{0}{2}
+\defcounter {refsection}{0}\relax 
+\beamer@subsectionintoc {2}{1}{Introduction}{23}{0}{2}
+\defcounter {refsection}{0}\relax 
+\beamer@subsectionintoc {2}{2}{Examples}{37}{0}{2}
+\defcounter {refsection}{0}\relax 
+\beamer@subsectionintoc {2}{3}{Gaussian process regression}{46}{0}{2}
+\defcounter {refsection}{0}\relax 
+\beamer@subsectionintoc {2}{4}{Reproducing kernel Hilbert space}{51}{0}{2}
+\defcounter {refsection}{0}\relax 
+\beamer@sectionintoc {3}{Discrete random probability measures}{59}{0}{3}
+\defcounter {refsection}{0}\relax 
+\beamer@subsectionintoc {3}{1}{Introduction}{60}{0}{3}
+\defcounter {refsection}{0}\relax 
+\beamer@subsectionintoc {3}{2}{Dirichlet process}{63}{0}{3}
+\defcounter {refsection}{0}\relax 
+\beamer@subsectionintoc {3}{3}{Mixture models and model-based clustering}{106}{0}{3}
+\defcounter {refsection}{0}\relax 
+\beamer@subsectionintoc {3}{4}{Priors beyond the DP}{121}{0}{3}
+\defcounter {refsection}{0}\relax 
+\beamer@subsectionintoc {3}{5}{Beyond mixtures: non-exchangeable settings and feature allocation models}{142}{0}{3}
+\defcounter {refsection}{0}\relax 
+\beamer@sectionintoc {4}{Asymptotic evaluation of the posterior}{160}{0}{4}
+\defcounter {refsection}{0}\relax 
+\beamer@subsectionintoc {4}{1}{Introduction}{161}{0}{4}
+\defcounter {refsection}{0}\relax 
+\beamer@subsectionintoc {4}{2}{Posterior consistency}{172}{0}{4}
+\defcounter {refsection}{0}\relax 
+\beamer@subsubsectionintoc {4}{2}{1}{Doob's Theorem}{191}{0}{4}
+\defcounter {refsection}{0}\relax 
+\beamer@subsubsectionintoc {4}{2}{2}{Schwartz approach}{200}{0}{4}
+\defcounter {refsection}{0}\relax 
+\beamer@subsectionintoc {4}{3}{Concentration rates}{224}{0}{4}
+\defcounter {refsection}{0}\relax 
+\beamer@subsubsectionintoc {4}{3}{1}{General theorem in the iid case}{249}{0}{4}
+\defcounter {refsection}{0}\relax 
+\beamer@subsubsectionintoc {4}{3}{2}{Non iid observations}{263}{0}{4}

@@ -1,0 +1,17 @@
+[0] Config.pm:302> INFO - This is Biber 2.11
+[0] Config.pm:305> INFO - Logfile is '/Users/jarbel/Dropbox/Julyan/Teaching/cours MVA/bml-course/slides/05_bnp.blg'
+[37] biber-darwin:313> INFO - === Wed Feb 14, 2024, 16:02:29
+[63] Biber.pm:371> INFO - Reading '/Users/jarbel/Dropbox/Julyan/Teaching/cours MVA/bml-course/slides/05_bnp.bcf'
+[160] Biber.pm:857> INFO - Found 27 citekeys in bib section 0
+[175] Biber.pm:3976> INFO - Processing section 0
+[187] Biber.pm:4136> INFO - Looking for bibtex format file '../bib/biblio_julyan.bib' for section 0
+[204] bibtex.pm:1500> INFO - LaTeX decoding ...
+[738] bibtex.pm:1316> INFO - Found BibTeX data source '../bib/biblio_julyan.bib'
+[819] Utils.pm:193> WARN - month field 'April' in entry 'hjort2010bayesian' is not an integer - this will probably not sort properly.
+[985] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[985] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[985] Biber.pm:3804> INFO - Sorting list 'nty/global//global/global' of type 'entry' with template 'nty' and locale 'en-US'
+[985] Biber.pm:3810> INFO - No sort tailoring available for locale 'en-US'
+[1020] bbl.pm:617> INFO - Writing '/Users/jarbel/Dropbox/Julyan/Teaching/cours MVA/bml-course/slides/05_bnp.bbl' with encoding 'UTF-8'
+[1043] bbl.pm:720> INFO - Output to /Users/jarbel/Dropbox/Julyan/Teaching/cours MVA/bml-course/slides/05_bnp.bbl
+[1043] Biber.pm:110> INFO - WARNINGS: 1

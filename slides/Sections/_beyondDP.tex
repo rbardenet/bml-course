@@ -240,39 +240,97 @@ With $n=50, \alpha=1$ and \textcolor{red2}{$\sigma=0.2,0.3,\ldots, 0.8$} \textco
 
 }
 \begin{center}
-\visible<3->{\adjincludegraphics[width=.7\textwidth,trim={0 {.1\height} 0 {.12\height}},clip]{figures_julyan/introRPM/prior_K_n_PY.pdf}\\
+\visible<3->{\adjincludegraphics[width=.6\textwidth,trim={0 {.1\height} 0 {.12\height}},clip]{figures_julyan/introRPM/prior_K_n_PY.pdf}\\
 }
 \end{center}
 \end{frame}
 
 \subsection{Beyond mixtures: non-exchangeable settings and feature allocation models}
 
+\begin{frame}{Hierarchical Dirichlet process}
+
+Remember that \alert{Latent Dirichlet Allocation} \citep[LDA,][]{blei2003latent}  is a probabilistic model used for topic modeling. It assumes that each document is a mixture of various topics, and each topic is a mixture of various words. The goal of LDA is to uncover these topics given a collection of documents.
+
+\alert{Hierarchical Dirichlet Process} (HDP) due to  \citet{teh2006hierarchical} is an extension of the Dirichlet process, which is a way of modeling distributions over an unknown number of groups or clusters. The HDP allows for an infinite number of topics to be inferred from a collection of documents, meaning it can automatically determine the appropriate number of topics rather than requiring it to be specified beforehand.
+\end{frame}
 
 \begin{frame}{Hierarchical Dirichlet process}
-A nonparametric version of \alert{Latent dirichlet allocation} \citep{blei2003latent} due to  \citet{teh2006hierarchical}\\
 \begin{center}
-		\includegraphics[width=.5\textwidth]{figures_julyan/beyond_DP/HDP}
+		\includegraphics[width=.6\textwidth]{figures_julyan/beyond_DP/HDP}
 \end{center}
 \hfill\textcolor{gray}{[Image by M. Jordan]}
-\pause
+\end{frame}
+
+\begin{frame}{HDP. Chinese Restaurant Franchise}
+The partition distribution of the HDP is called \alert{Chinese Restaurant Franchise}. It is corresponds to the marginal clustering distribution obtained once the process is integrated out. The \alert{generative process} is as follows:
+\begin{itemize}
+	\item \alert{Franchise Aspect}: each restaurant can be seen as its own ``franchise" of the overall restaurant chain, with its own set of customers.
+	\item \alert{Restaurant Metaphor}: each restaurant has an infinite number of tables, each representing a different topic or cluster. Each table can accommodate an infinite number of customers.
+	\item \alert{Customers}: these represent data points, such as words in documents. Each customer needs to choose a table to sit at.
+	\item \alert{Choosing a Table}: in the same way as for the Chinese Restaurant process.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{HDP. Stick-breaking representation}
+	\begin{columns}
+	\begin{column}{0.5\textwidth}
+   	Each process of the processes of the HDP admit a stick-breaking representation, both the first layer $G_0$ and the second-layer $G_i$'s.\pause
 	
-	Associated partition distr. called \alert{Chinese Restaurant Franchise}.
+	\begin{itemize}[<+->]
+		\item \question{What can you say of the SB of the second-layer $G_i$'s?}
+		\item 	\question{Hint: $G_0$ is itself a draw from a DP, meaning it has its own SB representation.}
+	\end{itemize}
+\end{column}
+\begin{column}{0.5\textwidth}
+    \begin{center}
+     \includegraphics[width=\textwidth]{figures_julyan/beyond_DP/HDP}
+     \end{center}
+\end{column}
+\end{columns}
 \end{frame}
 
 \begin{frame}{Indian Buffet process}
-	Feature allocation model by  \citet{ghahramani2006infinite}, where observations may share several features.\pause 	\alert{Generative model is as follows}
+	\alert{Feature allocation model} by  \citet{ghahramani2006infinite}, where observations may share \alert{several features}. Note how different this is with \alert{clustering} where each observation is assigned to \alert{one and only one cluster}. 
+	
+	\pause 	\alert{Generative model} is as follows: \pause
 	\begin{itemize}[<+->]
-		\item first customer samples $\text{Poisson}(\gamma)$ dishes
-		\item second customer chooses every dish of first customer \textit{wp} $1/2$, plus  $\text{Poisson}(\gamma/2)$ new dishes
+		\item first customer samples $\text{Poisson}(\gamma)$ dishes.
+		\item second customer chooses every dish of first customer \textit{wp} $1/2$, plus  $\text{Poisson}(\gamma/2)$ new dishes.
 		\item $\ldots$
 		\item $i$th step: $K$ dishes have been sampled, each by $n_1,\ldots,n_K$ customers;  $i$th customer chooses $j$th dish  \textit{wp} $n_j/i$, plus  $\text{Poisson}(\gamma/i)$ new dishes.
-	\end{itemize}\pause
+	\end{itemize}
 	
-	\alert{Log growth}: $K_n\sim \text{Poisson}(\gamma\log n)$.
-	
-		\begin{center}
-			\includegraphics[width=.7\textwidth]{figures_julyan/beyond_DP/IBP_draw}
+\begin{center}
+		\includegraphics[width=.7\textwidth]{figures_julyan/beyond_DP/IBP_draw}
 		\end{center}
 		\hfill\textcolor{gray}{[Image by M. Jordan]}
 \end{frame}
 
+
+\begin{frame}{IBP. Growth of $K_n$}
+Each customer samples Poisson$(\gamma)$ dishes.\pause
+
+How does \alert{$K_n$}, the number of different dishes, \alert{grow as $n\to\infty$?}\pause 
+
+Use the \alert{additivity} property of Poisson to derive:
+\begin{align*}
+	K_n&\sim 
+	\text{Poisson}(\gamma)+\text{Poisson}(\gamma/2)+\cdots+\text{Poisson}(\gamma/n)\\
+	&=
+	\text{Poisson}\left (\gamma\left(1+\frac{1}{2}+\cdots+\frac{1}{n}\right)\right)
+	\asymp
+	\text{Poisson}(\gamma\log n).
+\end{align*}
+	
+\begin{center}
+		\includegraphics[width=.7\textwidth]{figures_julyan/beyond_DP/IBP_draw}
+		\end{center}
+		\hfill\textcolor{gray}{[Image by M. Jordan]}
+\end{frame}
+
+\begin{frame}{Three-parameter IBP}
+In real-data applications, the log-growth of the number of dishes may not be adapted. How to tweak the IBP generative process in order to sample new dishes more often (ideally, at a power-law rate)?\pause
+
+Think as for the PY and Gibbs-type processes with the addition of a \alert{discount} parameter $\sigma\in(0,1)$.
+	
+\end{frame}
