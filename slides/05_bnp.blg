@@ -1,9 +1,0 @@
-[0] Config.pm:302> INFO - This is Biber 2.11
-[0] Config.pm:305> INFO - Logfile is '/Users/jarbel/Dropbox/Julyan/Teaching/cours MVA/bml-course/slides/05_bnp.blg'
-[30] biber-darwin:313> INFO - === Mon Feb 12, 2024, 11:01:45
-[52] Biber.pm:371> INFO - Reading '/Users/jarbel/Dropbox/Julyan/Teaching/cours MVA/bml-course/slides/05_bnp.bcf'
-[119] Biber.pm:857> INFO - Found 28 citekeys in bib section 0
-[131] Biber.pm:3976> INFO - Processing section 0
-[144] Biber.pm:4136> INFO - Looking for bibtex format file '../bib/biblio_julyan.bib' for section 0
-[254] Utils.pm:209> ERROR - Cannot find '../bib/biblio_julyan.bib'!
-[254] Biber.pm:114> INFO - ERRORS: 1
