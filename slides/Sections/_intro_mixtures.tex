@@ -1,13 +1,14 @@
 \subsection[Mixture models]{Mixture models and model-based clustering}
-\begin{frame}{A {parametric} approach}
- Mixture model with $K$ components
+\begin{frame}{Parametric mixtures}
+ A mixture model with $K$ components has the form
+ $$p(X|\pi,\phi) = \sum_{k=1}^K \pi_k p(x|\phi_k),$$
+where the vector of weights $\pi = (\pi_1,\ldots,\pi_K)$ is a probability vector.
+
+It mixes the parametric kernel (density) $p(\cdot|\phi)$ with the mixing measure
 	
-	$$G = \sum_{k=1}^K \pi_k \delta_{\phi_k}$$
+$$G = \sum_{k=1}^K \pi_k \delta_{\phi_k},$$
 	
-	$\delta_{\phi_k}$ is a point mass at ${\phi_k}$.
-	
-	$G$ is to be understood as a $K$-faceted dice. The  mixture density is:
-	$$p(X|\pi,\phi) = \sum_{k=1}^K \pi_k p(x|\phi_k)$$
+where $\delta_{\phi_k}$ is a point mass (Dirac Measure) at ${\phi_k}$.
 	
 \begin{center}
 		\includegraphics[width=.8\textwidth]{figures_julyan/mixtures/plate_mixture}
@@ -15,44 +16,42 @@
 \end{frame}
 
 
-\begin{frame}{A {Bayesian parametric} approach}
-	 \alert{Bayesian}   mixture Models with $K$ components
-	
-We need a distribution over the probability measure (aka dice) $G$, that is a distribution over weights or classes $\pi = (\pi_1,\ldots,\pi_K)$ and over mean and covariance (for 2-dimensional data) $\phi_k = (\mu_k,\Sigma_k)$
+\begin{frame}{Bayesian parametric mixtures}
+	 For \alert{Bayesian}   mixture models, we need a distribution over the probability measure $G$, that is a distribution over weights $\pi = (\pi_1,\ldots,\pi_K)$ and over cluster-specific parameters $\phi_k$ (eg mean and covariance  $\phi_k = (\mu_k,\Sigma_k)$):
 
 \begin{itemize}
-	\item $\pi\sim \text{Dirichlet}(\alpha/K, \ldots,\alpha/K)$
+	\item $\pi\sim \text{Dir}(\alpha/K, \ldots,\alpha/K)$
 	\item $(\mu_k,\Sigma_k)\sim \text{Normal}\times\text{Inverse-Wishart}$
 \end{itemize}
-This makes $G = \sum_{k=1}^K \pi_k \delta_{\phi_k}$ a random dice
+This makes $G = \sum_{k=1}^K \pi_k \delta_{\phi_k}$ a random probability measure (with finitely many atoms).
 
 \begin{center}
 		\includegraphics[width=.8\textwidth]{figures_julyan/mixtures/plate_bayes_mixture}
 \end{center}
 \end{frame}
-\begin{frame}{Choosing $K$}
-There are several options for choosing $K$
+\begin{frame}{Choosing the number of components $K$}
+There are several options for choosing the \alert{number of components} $K$
 \begin{itemize}
-	\item Model selection with information criteria: AIC, BIC, or cross-validation, etc
-	\item Hierarchical model, with a prior on $K$
-	\item Be nonparametric, and let $K$ get large... possibly infinite.
+	\item Model selection with  \alert{information criteria}: AIC, BIC, or cross-validation, etc
+	\item  \alert{Hierarchical model}, with a prior on $K$
+	\item  \alert{Nonparametric model}, and let $K$ get large... or even possibly infinite. 
 \end{itemize}
 	
 \end{frame}
 
 
 \begin{frame}{A {Bayesian nonparametric} approach}
-	 \alert{Bayesian nonparametric}   mixture Models
+	 \alert{Bayesian nonparametric}   mixture models.
 	 
 	 We now move to $G$ being an infinite sum $G = \sum_{k=1}^\infty \pi_k \delta_{\phi_k}$ 
 	
-We need a distribution over this infinite dice $G$, that is exactly what the \alert{Dirichlet process} does. It is parameterized by the precision parameter $\alpha$ and the base measure $G_0$.
+We need a distribution over this infinite random probability measure $G$. This is exactly what the \alert{Dirichlet process} does. It is parameterized by a precision parameter $\alpha$ and a base measure $G_0$.
 
 \begin{columns}
 \column{.45\textwidth}
 \begin{itemize}
 	\item $\pi = (\pi_1,\pi_2,\ldots)\sim \text{GEM}(\alpha)$
-	\item $\phi_k\sim G_0$
+	\item $\phi_k\simiid G_0$
 \end{itemize}
 
 \column{.45\textwidth}

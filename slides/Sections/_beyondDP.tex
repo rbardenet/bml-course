@@ -130,15 +130,15 @@ A discrete random probability measure $P$ can be classified in 3 main categories
 
 \begin{frame}[allowframebreaks]{Pitman--Yor process}
 	\begin{proposition}
-[Pitman Sampling formula] The multiplicities $(m_1,\ldots,m_n)$ in $X_1,\ldots, X_n|P\simiid P,\ P\sim PY(\sigma, \PrecisonParam P_0)$ have distribution
+[Pitman Sampling formula] The multiplicities $(m_1,\ldots,m_n)$ in $X_1,\ldots, X_n|P\simiid P,\ P\sim PY(\sigma, \PrecisionParam, P_0)$ have distribution
 \begin{equation*}
-    p(m_1,\ldots,m_n)=\frac{n!}{(1+\PrecisonParam)_{(n-1)}}(\PrecisonParam +\sigma)\cdots (\PrecisonParam+(k-1)\sigma)\prod_{\ell=1}^n\frac{1}{m_\ell!}\bigg(\frac{(1-\sigma)_{(\ell-1)} }{\ell!}\bigg)^{m_\ell}
+    p(m_1,\ldots,m_n)=\frac{n!}{(1+\PrecisionParam)_{(n-1)}}(\PrecisionParam +\sigma)\cdots (\PrecisionParam+(k-1)\sigma)\prod_{\ell=1}^n\frac{1}{m_\ell!}\bigg(\frac{(1-\sigma)_{(\ell-1)} }{\ell!}\bigg)^{m_\ell}
 \end{equation*}
 \end{proposition}
 
 
 \textbf{Proof.}
-Same technique as for the DP ESF.
+Same technique as for the DP Ewens sampling formula.
 
 
 
@@ -150,11 +150,11 @@ Same technique as for the DP ESF.
 \begin{proposition}[Power law and $\sigma$-diversity]
 For $\sigma >0$ we have the almost sure convergence 
 $$
-n^{-\sigma}K_n\rightarrow S_{\sigma, \PrecisonParam},
+n^{-\sigma}K_n\rightarrow S_{\sigma, \PrecisionParam},
 $$
-where $ S_{\sigma, \PrecisonParam}$ is called $\sigma$-diversity of the PY, whose density is a polynomially tilted \alert{Mittag--Leffler density} (ML):
+where $ S_{\sigma, \PrecisionParam}$ is called $\sigma$-diversity of the PY, whose density is a polynomially tilted \alert{Mittag--Leffler density} (ML):
 \begin{equation*}
-    g_{\sigma,\PrecisonParam}(x)\propto x^{\PrecisonParam/\sigma}g_\PrecisonParam (x),
+    g_{\sigma,\PrecisionParam}(x)\propto x^{\PrecisionParam/\sigma}g_\PrecisionParam (x),
 \end{equation*}
 and $g_\alpha$ is ML density.
 \end{proposition}
@@ -169,9 +169,9 @@ and $g_\alpha$ is ML density.
 \framebreak
 
 \begin{theorem}[Stick breaking representation for PY]
-If $V_j\simind Be(1-\sigma, \PrecisonParam + j\sigma)$ and $p_1=V_1,\ p_j=V_j\prod_{l<j}(1-V_l)$ and further we have $\phi_j\simiid P_0$ then 
+If $V_j\simind Be(1-\sigma, \PrecisionParam + j\sigma)$ and $p_1=V_1,\ p_j=V_j\prod_{l<j}(1-V_l)$ and further we have $\phi_j\simiid P_0$ then 
 $$
-P=\sum_{j=1}^\infty p_j \delta_{\phi_j} \sim PY(\sigma,\PrecisonParam P_0).
+P=\sum_{j=1}^\infty p_j \delta_{\phi_j} \sim PY(\sigma,\PrecisionParam P_0).
 $$
 \end{theorem}
 
@@ -179,17 +179,17 @@ $$
 
 
 \begin{proposition}
-[Moments of PY] If $P\sim PY(\sigma, \PrecisonParam P_0)$, then for every measurable sets $A,B$ we have
+[Moments of PY] If $P\sim PY(\sigma, \PrecisionParam, P_0)$, then for every measurable sets $A,B$ we have
 \begin{enumerate}
     \item[1)] $\E [P(A)] = P_0(A),$
-    \item[2)] $\E[P(A)P(B)]=(1-\sigma)/(1+\PrecisonParam)P_0(A\cap B) + (\PrecisonParam + \sigma)/(1+ \PrecisonParam)P_0(A)P_0(B),$
-    \item[3)] $\Cov[P(A),P(B)] = (1-\sigma)/(1+\PrecisonParam)\big(P_0(A\cap B) -P_0(A)P_0(B)\big)$.  
+    \item[2)] $\E[P(A)P(B)]=(1-\sigma)/(1+\PrecisionParam)P_0(A\cap B) + (\PrecisionParam + \sigma)/(1+ \PrecisionParam)P_0(A)P_0(B),$
+    \item[3)] $\Cov[P(A),P(B)] = (1-\sigma)/(1+\PrecisionParam)\big(P_0(A\cap B) -P_0(A)P_0(B)\big)$.  
 \end{enumerate}
 \end{proposition}
 \framebreak
 
 
-\textbf{Proof.}
+\alert{Proof.}
 \begin{enumerate}
     \item[1)] We use the stick-breaking representation:
     \begin{equation*}
@@ -201,11 +201,11 @@ $$
     \end{equation*}
     Lets investigate two terms above: from 1) we know that $\P(X_1\in A)=P_0(A)$. We know the predictive of PY:
     \begin{equation*}
-        X_2|X_1 \sim \frac{\PrecisonParam + \sigma}{\PrecisonParam + 1}P_0+\frac{1-\sigma}{\PrecisonParam + 1}\delta_{X_1},
+        X_2|X_1 \sim \frac{\PrecisionParam + \sigma}{\PrecisionParam + 1}P_0+\frac{1-\sigma}{\PrecisionParam + 1}\delta_{X_1},
     \end{equation*}
     and hence
     \begin{equation*}
-        \P(X_2\in B|X_1\in A) = \frac{\PrecisonParam + \sigma}{\PrecisonParam + 1}P_0(B) + \frac{1-\sigma}{\PrecisonParam + 1}P_{0A}(B),
+        \P(X_2\in B|X_1\in A) = \frac{\PrecisionParam + \sigma}{\PrecisionParam + 1}P_0(B) + \frac{1-\sigma}{\PrecisionParam + 1}P_{0A}(B),
     \end{equation*}
     when we used notation $P_{0A}(B)=P_0(B|A)=P_0(A\cap B)/P_0(A)$ for a conditional measure.
     \item[3)] It is straightforward combination of 1) and 2).
@@ -213,41 +213,43 @@ $$
 
 \framebreak
 
-Unlike the DP, PY is not conjugate under incoming independent samples. However, the posterior can be explicited.
+Unlike the DP, the \alert{PY is not conjugate}. However, the posterior can be explicited.
 
 \begin{theorem}
-[Posterior distribution of PY] If $P\sim PY(\sigma, \PrecisonParam P_0)$ then the posterior of $P$ based on observations $X_{1:n}|P\simiid P$ has the distribution of the random probability measure
+[Posterior distribution of PY] If $P\sim PY(\sigma, \PrecisionParam, P_0)$ then the posterior of $P$ based on observations $X_{1:n}|P\simiid P$ has the distribution of the random probability measure
 \begin{equation*}
     (1-q_n)P_n + q_n \sum_{j=1}^{K_n}p_j^*\delta_{X_j^*},
 \end{equation*}
-where $X^*_{1:n}$ are the $K_n$ distinct values in $X_{1:n}$, frequencies are referred to as $n_1,\ldots,n_{K_n}$ and 
+where $X^*_{1:n}$ are the $K_n$ distinct values in $X_{1:n}$, frequencies are denoted $n_1,\ldots,n_{K_n}$ and 
 \begin{itemize}
-    \item $q_n\sim Beta(n-K_n \sigma, \PrecisonParam +K_n\sigma)$,
-    \item $(p_1^*, \ldots, p^*_{K_n})\sim \Dir_{K_n}(n_1-\sigma, \ldots, n_{K_n} -\sigma)$,
-    \item $P_n\sim PY(\sigma, (\PrecisonParam + \sigma K_n)P_0)$.
+    \item $q_n\sim Beta(n-K_n \sigma, \PrecisionParam +K_n\sigma)$,
+    \item $(p_1^*, \ldots, p^*_{K_n})\sim \Dir(n_1-\sigma, \ldots, n_{K_n} -\sigma)$,
+    \item $P_n\sim PY(\sigma, (\PrecisionParam + \sigma K_n)P_0)$.
 \end{itemize}
 \end{theorem} 
 \end{frame}
 
 \begin{frame}{Impact of the stability parameter $\sigma$}
-Prior distribution of the number of clusters $k_n$ 
+Prior distribution of the number of clusters $K_n$ 
 \begin{itemize}
 \item<1-> \textcolor<1>{red2}{$\alpha$ controls the location} (as for the DP)
 \item<2-> \textcolor<2>{red2}{$\sigma$ controls the flatness (or variability)}
 \end{itemize}
 \visible<3->{
-Example with $n=50, \alpha=1$ and \textcolor{red2}{$\sigma=0.2,0.3,\ldots, 0.8$}
+With $n=50, \alpha=1$ and \textcolor{red2}{$\sigma=0.2,0.3,\ldots, 0.8$} \textcolor{gray}{[Image from \citet{deblasi2015gibbs}]}
+
 }
 \begin{center}
 \visible<3->{\adjincludegraphics[width=.7\textwidth,trim={0 {.1\height} 0 {.12\height}},clip]{figures_julyan/introRPM/prior_K_n_PY.pdf}\\
-	\hfill\textcolor{gray}{[Image by \citet{deblasi2015gibbs}]}
 }
 \end{center}
 \end{frame}
 
+\subsection{Beyond mixtures: non-exchangeable settings and feature allocation models}
+
 
 \begin{frame}{Hierarchical Dirichlet process}
-A nonparametric version of \textbf{Latent dirichlet allocation} \citep{blei2003latent} due to  \citet{teh2006hierarchical}\\
+A nonparametric version of \alert{Latent dirichlet allocation} \citep{blei2003latent} due to  \citet{teh2006hierarchical}\\
 \begin{center}
 		\includegraphics[width=.5\textwidth]{figures_julyan/beyond_DP/HDP}
 \end{center}

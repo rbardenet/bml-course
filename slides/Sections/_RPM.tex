@@ -4,11 +4,22 @@
 \subsection{Introduction}
 
 
+
+\begin{frame}{Gaussian process, Dirichlet process, and their parametric counterparts}
+	\begin{center}
+		\includegraphics[width=\textwidth]{figures_julyan/gp/gp-and-dp.pdf}
+	\end{center}
+\end{frame}
+
+
+
+
 \begin{frame}{References}
 \begin{itemize}
-	\item \alert{One of the first textbooks on the Dirichlet process}: \fullcite{Ghosh2003}
+	\item \alert{One of the first textbooks}: \fullcite{Ghosh2003}
 	\item \alert{One that reads very well}: \fullcite{hjort2010bayesian}
-	\item \alert{Chapter 14} on Discrete Random Structures of \fullcite{ghosal2017fundamentals}
+	\item \alert{Quite a comprehensive one on the theory side}: \fullcite{ghosal2017fundamentals}
+	\item \alert{Chapter 31} on Nonparametric Bayesian models of \fullcite{murphy2023probabilisticMLadvanced} (as of today, the full version of this chapter can be found in the supplementary of the book)
 \end{itemize}
 \end{frame}
 
@@ -16,18 +27,29 @@
 \subsection{Dirichlet process}
 
 \begin{frame}{Dirichlet distribution}
-	The \textit{Dirichlet distribution} on the simplex $\Delta_K$ is a probability distribution with parameter $\boldsymbol{\alpha} = (\alpha_1,\ldots,\alpha_K)$ with $\alpha_j>0$ and density function, for $\boldsymbol{x} = (x_1, \ldots, x_K)\in \Delta_K$,
+	The \alert{Dirichlet distribution} on the simplex $\Delta_K$ is a probability distribution with parameter $\boldsymbol{\alpha} = (\alpha_1,\ldots,\alpha_K)$ with $\alpha_j>0$ and density function, for $\boldsymbol{x} = (x_1, \ldots, x_K)\in \Delta_K$,
 \begin{displaymath}
 f(\boldsymbol{x}; \boldsymbol{\alpha}) = \frac{1}{B(\alpha)}\prod_{i=1}^Kx_i^{\alpha_i - 1}.
 \end{displaymath}
 % where $(x_i)$ form a simplex. 
 
-The Dirichlet distribution is conjugate for the multinomial distribution. 
+The Dirichlet distribution is \alert{conjugate} for the \alert{multinomial distribution}. 
 
 \begin{center}
 \includegraphics[width = .6\textwidth]{figures_julyan/intro_DP/dirichlet_distribution}
 \end{center}
 \hfill\textcolor{gray}{[Image by Y.W. Teh]}
+\end{frame}
+
+
+\begin{frame}{Reminder on useful distributions}
+	Let \alert{$X\sim \text{Be}(a,b)$}, then $\displaystyle E[X] = \frac{a}{a+b}$ and $\displaystyle\text{Var}[X]=\frac{ab}{(a+b)^2(a+b+1)}$.
+	
+	Let \alert{${\displaystyle X=(X_{1},\ldots ,X_{K})\sim \operatorname {Dir} ({\boldsymbol {\alpha }})}$} and ${\displaystyle |\alpha|=\sum _{i=1}^{K}\alpha _{i}}$. 
+	
+	Then for any $i$, $X\sim \text{Be}(\alpha_i,|\alpha|-\alpha_i)$, and ${\displaystyle \operatorname {E} [X_{i}]={\frac {\alpha _{i}}{|\alpha|}},}$ and ${\displaystyle \operatorname {Var} [X_{i}]={\frac {\alpha _{i}(|\alpha|-\alpha _{i})}{|\alpha|^{2}(|\alpha|+1)}}.}$ 
+	
+	If $i\neq j$, then ${\displaystyle \operatorname {Cov} [X_{i},X_{j}]={\frac {-\alpha _{i}\alpha _{j}}{|\alpha|^{2}(|\alpha|+1)}}.}$
 \end{frame}
 
 
@@ -38,114 +60,101 @@ A central Bayesian nonparametric prior \citep{ferguson1973bayesian}.\pause
 A \alert{Dirichlet process} on the space $\mathcal{Y}$ is a random process $ P $ such that there exist $ \alpha>0 $ (precision parameter) and $ P_0 $ (base/centering distribution) \pause such that for any finite partition $ \{A_1,\ldots,A_k\} $ of $\mathcal{Y}$, the random vector
 $ (P(A_1),\ldots,P(A_k)) $ is Dirichlet distributed
 \[ (P(A_1),\ldots,P(A_k))\sim \text{Dir}(\alpha P_0(A_1),\ldots,\alpha P_0(A_k)) \]
-\textit{Notation}: $ P \sim \text{DP}(\alpha, P_0) $
+\alert{Notation}: $ P \sim \text{DP}(\alpha, P_0) $
 \end{block}
 \begin{center}
-\visible<3->{\includegraphics[width=\textwidth]{figures_julyan/intro_DP/DP_marginal}}
+\visible<3->{\includegraphics[width=\textwidth]{figures_julyan/introRPM/DP-drawing}}
 %\animategraphics[loop, width=\textwidth]{2}{figures_julyan/intro_DP/density_2D_}{1}{10} % pb ici: should specify pdf for images...
 \end{center}
 \end{frame}
 
+\begin{frame}{Notations}
+	Two notations are valid ones: $ P \sim \text{DP}(\alpha, P_0) $, as well as $ P \sim \text{DP}(\alpha P_0) $. The only difference is that the second one take a single parameter in argument, in the form of a measure (not necessarily a probability measure). 
+	
+	\alert{Question}: can you move from one to the other? For instance, what are the  $((\alpha, P_0) $ parameters associated to the notation $ P \sim \text{DP}(G_0)$, with $G_0$ a measure.
+\end{frame}
+
 \begin{frame}[allowframebreaks]{Moments of Dirichlet process}
 	\begin{proposition}
-Let $P\sim \text{DP}(\PrecisonParam, P_0)$ then for every measurable sets $A, B$ we have
+Let $P\sim \text{DP}(\PrecisionParam, P_0)$ then for every measurable sets $A, B$ we have
 \begin{align*}
     \E[ P(A)] &= P_0(A),\\
-    \Var[P(A)] &= \frac{P_0(A)(1-P_0(A))}{1+\PrecisonParam},\\
-    \Cov( P(A), P(B) )&=\frac{P_0(A \cap B) - P_0(A)P_0(B) }{1+\PrecisonParam}\label{Dir:Covariance}.
+    \Var[P(A)] &= \frac{P_0(A)(1-P_0(A))}{1+\PrecisionParam},\\
+    \Cov( P(A), P(B) )&=\frac{P_0(A \cap B) - P_0(A)P_0(B) }{1+\PrecisionParam}\label{Dir:Covariance}.
 \end{align*}
 \end{proposition}
-
-% \begin{enumerate}
-%     \item $\E( p(A)) = P_0(A)$,
-%     \item ${\rm Var}(p(A)) = \frac{P_0(A)(1-P_0(A))}{1+\PrecisonParam}$,
-%     \item $\Cov( p(A), p(B) )=\frac{P_0(A \cap B) - P_0(A)P_0(B) }{1+\PrecisonParam}$.
-% \end{enumerate}
 \framebreak
 
-\textbf{Proof.}
-We will make use of  $p(A)\sim \Beta(\alpha P_0(A), \alpha (1-P_0(A)))$. From this we obtain 
+\alert{Proof.}
+We make use of  $P(A)\sim \Beta(\alpha P_0(A), \alpha (1-P_0(A)))$. From this we obtain 
 \begin{equation*}
-    \E (p(A)) = \frac{\PrecisonParam P_0(A)}{\PrecisonParam( P_0(A) + 1 - P_0(A) )} = P_0(A)
+    \E (P(A)) = \frac{\PrecisionParam P_0(A)}{\PrecisionParam( P_0(A) + 1 - P_0(A) )} = P_0(A)
 \end{equation*}
 and 
 \begin{equation*}
-    \Var(p(A))=\frac{\PrecisonParam^2 P_0(A)( 1-P_0(A) )}{\PrecisonParam^2 (\PrecisonParam + 1)}.
+    \Var(P(A))=\frac{\PrecisionParam^2 P_0(A)( 1-P_0(A) )}{\PrecisionParam^2 (\PrecisionParam + 1)}.
 \end{equation*}
-We derive the covariance term in two cases, firstly taking into consideration the one with $A\cap B = \emptyset$. In that case any space $\Omega$ may be decomposed into three sets: 
-$$
-\Omega = \{A, B, (A\cup B)^c\}.
-$$
-Using de Morgan's law the last can be written as $(A\cup B)^c = A^c\cap B^c =: C$. Therefore we may write a joint probability vector
-\begin{equation*}
-    \big( P(A), P(B), P(A^c\cap B^c) \big)\sim \Dir\big(\PrecisonParam P_0(A), \PrecisonParam P_0(B), \PrecisonParam P_0(C) \big)
-\end{equation*}
-and hence $\Cov(P(A), P(B)) = -P_0(A)P_0(B)/(1+\PrecisonParam) $. 
-In the more general case one may decompose 
-\begin{align*}
-    A &= (A\cap B) \cup (A\cap B^c)\\
-    B &= (B\cap A)\cup (B\cap A^c),
-\end{align*}
-so that 
-\begin{equation*}
-    \begin{split}
-    \Cov (P(A), P(B)) &= \Cov (P(A\cap B) +P(A\cap B^c), P(B\cap A) + P(B\cap A^c) ) 
-    % &=\Cov (P(A\cap B) , P(B\cap A)  ) + \Cov (P(A\cap B),  P(B\cap A^c) ) +\\
-    % &+\Cov (P(A\cap B^c), P(B\cap A)  ) + \Cov (P(A\cap B^c),  P(B\cap A^c) ),
-    \end{split}
-\end{equation*}
-and so forth using the linearity of covariance.\hfill $\square$
+We derive the covariance result by developing the terms of $\Cov (P(A), P(B)) = \Cov (P(A\cap B) +P(A\cap B^c), P(B\cap A) + P(B\cap A^c) )$.
+\hfill $\square$
 \end{frame}
 
 
 \begin{frame}{Marginalizing out the DP}
-	Property $\E[ P(A)] = P_0(A)$ can be written equivalently as
-\begin{equation*}
-    \E( P(A)) = P_0(A) = \int P(A)\ddr \text{DP}(P). 
-\end{equation*}
-
-%
-%The precision parameter $\PrecisonParam$ in $DP(\PrecisonParam, P_0)$ controls variability of $P(A)$ around $P_0(A)$, so called \textit{base measure} of underlying Dirichlet process. 
 
 A Dirichlet process model can be constructed as a two level sampling model:
 \begin{equation*}
     \left \{ \begin{matrix}
-P \sim \text{DP}(\PrecisonParam, P_0)\\ 
+P \sim \text{DP}(\PrecisionParam, P_0)\\ 
 X|P \sim P,
 \end{matrix}\right.
 \end{equation*}
-i.e. we  sample a probability measure $P$ from the Dirichlet process and then given  $P$, we sample random variables $X_i$.\bigskip
+i.e. a probability measure $P$ is first sampled from the Dirichlet process and then given  $P$, we sample a random variable $X$. 
 
-\textcolor{red2}{Marginalizing out $P$}, we obtain the marginal distribution of $X$:
+This defines a \alert{joint} distribution on $(P,X)$. 
+
+\pause
+
+\textcolor{red2}{Marginalizing out $P$}, we obtain the marginal distribution of $X$. Property $\E[ P(A)] = P_0(A)$ can be written equivalently as
+\begin{equation*}
+    \E( P(A)) = P_0(A) = \int P(A)\ddr \text{DP}(P),
+\end{equation*}
+
+which yields that marginally,
+
 $$X\sim P_0.$$
 
 \end{frame}
 
 
-\begin{frame}[allowframebreaks]{Posterior distribution}
-	Let $X_{1:n} := (X_1,\ldots, X_n)$ be sampled from the hierarchical model 
+\begin{frame}{Posterior distribution}
+	Let $X_{1:n} := (X_1,\ldots, X_n)$ be sampled from the \alert{hierarchical model} 
 \begin{equation*}
     \left \{ \begin{matrix}
-P \sim \text{DP}(\PrecisonParam, P_0)\\ 
-X_{1:n}|P \simiid P.
+P \sim \text{DP}(\PrecisionParam, P_0)\\ 
+X_{1:n}|P \simiid P
 \end{matrix}\right.
 \end{equation*}
-This model is usually used as a building block in a larger hierarchical model, e.g. mixture models, graphs, etc. 
+to be used as a building block of a larger hierarchical model (e.g. mixture a model).
+\pause
+ 
 \begin{theorem}[DP posterior distribution] 
 The DP is \alert{conjugate}, with posterior equal to
 \begin{equation*}
-    P|X_{1:n}\sim \text{DP}(\PrecisonParam P_0 + \sum_{i=1}^n\delta_{X_i}).
+    P|X_{1:n}\sim \text{DP}(\PrecisionParam P_0 + \sum_{i=1}^n\delta_{X_i}) = DP(\alpha_n, P_n)
 \end{equation*}
-The \alert{predictive distribution}, called \alert{P\'olya urn} or \alert{Blackwell--MacQueen scheme}, is given by
+with $$\alpha_n = \alpha+n, \quad P_n = \frac{\PrecisionParam}{\PrecisionParam +n} P_0 + \frac{n}{\PrecisionParam + n}\tilde P_n,$$
+ where $\tilde P_n = \frac{1}{n}\sum_{i=1}^n\delta_{X_i}$ is the data empirical measure. The \alert{predictive distribution}, called \alert{P\'olya urn} or \alert{Blackwell--MacQueen scheme}, is given by
 \begin{equation*}
-    \P(X_{n+1} | X_{1:n}) = \frac{\PrecisonParam}{\PrecisonParam +n} P_0 + \frac{1}{\PrecisonParam + n}\sum_{i=1}^n\delta_{X_i}.
+    X_{n+1} | X_{1:n} \sim P_n.
 \end{equation*}
 \end{theorem}
+\end{frame}
 
-\framebreak
 
-\textbf{Proof.}
-The posterior distribution of $\boldsymbol{a} = (a_1, \ldots, a_k) = ( P(A_1), \ldots, P(A_k) )$ depends on the observations only via their cell counts $\boldsymbol{N}= (N_1, \ldots, N_k)$, $N_j = \# \{ i : X_i \in A_j\}$  (it comes from \textit{tail--free} property), so
+\begin{frame}{Posterior distribution. Proof}
+
+\alert{Proof.}
+The posterior distribution of $\boldsymbol{a} = (a_1, \ldots, a_k) = ( P(A_1), \ldots, P(A_k) )$ depends on the observations only via their cell counts $\boldsymbol{N}= (N_1, \ldots, N_k)$, $N_j = \# \{ i : X_i \in A_j\}$  (it comes from \alert{tail--free} property), so
 \begin{equation*}
   \boldsymbol{a} \vert X_{1:n}\sim \boldsymbol{a} \vert N_{1:k}.
 \end{equation*}
@@ -153,65 +162,74 @@ The prior  and model are
 \begin{equation*}
     \left \{ 
     \begin{matrix}
-\boldsymbol{a} \sim \Dir_k (\PrecisonParam P_0(A_1), \ldots, \PrecisonParam P_0(A_k))
+\boldsymbol{a} \sim \Dir_k (\PrecisionParam P_0(A_1), \ldots, \PrecisionParam P_0(A_k))
 \\
 \boldsymbol{N}\vert P \sim {\rm Multinom}_k (\boldsymbol{a}).
 \end{matrix}\right.
 \end{equation*}
 This results in the posterior of form 
 \begin{align*}
-    p(\boldsymbol{a}\vert \boldsymbol{N}) 
-    &\propto a_1^{\PrecisonParam P_0(A_1) +N_1-1}\cdots a_k^{\PrecisonParam P_0(A_k)+N_k -1}\\ 
-    &= \Dir_k\big( \PrecisonParam P_0(A_1) +N_1, \ldots, \PrecisonParam P_0(A_k) +N_k\big).
+    P(\boldsymbol{a}\vert \boldsymbol{N}) 
+    &\propto a_1^{\PrecisionParam P_0(A_1) +N_1-1}\cdots a_k^{\PrecisionParam P_0(A_k)+N_k -1}\\ 
+    &= \Dir_k\big( \PrecisionParam P_0(A_1) +N_1, \ldots, \PrecisionParam P_0(A_k) +N_k\big).
 \end{align*} \hfill $\square$
 %Property (\ref{Dir:predictive}) is a result of taking the expected value of (\ref{Dir:posterior}). \hfill $\square$
 \end{frame}
 
 
-%----------------
-% Combinatorial properties: Number of distinct values
-\begin{frame}[allowframebreaks]{Combinatorial properties: Number of distinct values}
 
-Assume that the base measure $P_0$ is non-atomic. Then  with probability 1:
-$$
-X_i\notin\{X_1,\ldots, X_{i-1}\} \Leftrightarrow X_i \sim P_0.
-$$
-% what means that $X_i$ is a new value.
-Let $D_i =  \mathbb{I}(X_i \text{ is a new value})$ and lets denote $K_n=\sum_{i=1}^nD_i$, a number of distinct values $X_1,\ldots, X_n$ with distribution $\mathcal{L}(K_n)$.
+\begin{frame}{Number of distinct values}
+
+
+Let $D_i =  \mathbb{I}(X_i \text{ is a new value})$ and denote by $K_n=\sum_{i=1}^nD_i$ the \alert{number of distinct values} in $X_1,\ldots, X_n$.
+
+Denote its distribution $\mathcal{L}(K_n)$. Assuming that the base measure $P_0$ is non-atomic, then  with probability 1:
+$X_i\notin\{X_1,\ldots, X_{i-1}\} \Leftrightarrow X_i \sim P_0$.
+
+\pause 
+
 \begin{proposition}[Asymptotics for $K_n$]
-Random variables $D_i$ are distributed i.i.d. with respect to $Bernoulli(\PrecisonParam/(\PrecisonParam + i - 1))$. Therefore for fixed $\PrecisonParam$ and for $n\rightarrow \infty$ we have:
+Random variables $D_i$ are \alert{$Bernoulli(\PrecisionParam/(\PrecisionParam + i - 1))$}. For $n\rightarrow \infty$:
 \begin{enumerate}
-    \item[i)] $\E K_n\sim \PrecisonParam \log n \sim \Var(K_n)$
-    \item[ii)] $K_n/\log(n)\xrightarrow{a.s.} \PrecisonParam$
+    \item[i)] $\E K_n\sim \PrecisionParam \log n \sim \Var(K_n)$
+    \item[ii)] $K_n/\log(n)\xrightarrow{a.s.} \PrecisionParam$
     \item[iii)] $(K_n - \E K_n)/\text{sd}(K_n)\rightarrow N(0,1) $
     \item[iv)] $\text{d}_{\text{TV}}\big( \mathcal{L}(K_n), \text{Poisson}(\E K_n) \big)=o \big(1 / \log(n)\big)$ where $$
     \text{d}_{\text{TV}}(P,Q)=\text{sup}|P(A)-Q(A)|
     $$
-    over measurable  partition $A$
+    over measurable  partitions $A$.
 \end{enumerate}
 \end{proposition}
 
-\framebreak
+\end{frame}
 
-\textbf{Proof.}
+
+
+\begin{frame}{Number of distinct values}
+
+\alert{Proof.}
 \begin{enumerate}
-    \item[i)] $\E K_n = \sum_{i=1}^n \frac{\PrecisonParam}{\PrecisonParam+i-1} $ and $ \Var(K_n) = \sum_{i=1}^n\frac{\PrecisonParam(i-1)}{(\PrecisonParam + i -1)^2}$.
+    \item[i)] $\E K_n = \sum_{i=1}^n \frac{\PrecisionParam}{\PrecisionParam+i-1} $ and $ \Var(K_n) = \sum_{i=1}^n\frac{\PrecisionParam(i-1)}{(\PrecisionParam + i -1)^2}$.
     \item[ii)] Since $D_i$'s are $\mathbb{I}$ one may use Kolmogorov law of strong numbers and 
     $$
-    \sum_{i=1}^\infty \frac{\Var (D_i)}{ (\log i)^2 }= \sum_{i=1}^\infty \frac{\PrecisonParam(i-1)}{(\PrecisonParam +i-1)^2 (\log i)^2}<\infty$$
+    \sum_{i=1}^\infty \frac{\Var (D_i)}{ (\log i)^2 }= \sum_{i=1}^\infty \frac{\PrecisionParam(i-1)}{(\PrecisionParam +i-1)^2 (\log i)^2}<\infty$$
     by e.g. the fact that $\sum_i (1/i(\log i)^2)$ converges.
     \item[iii)]By Lindeberg central limit theorem.
     \item[iv)] This is implied from Chein--Stein approximation. %https://faculty.math.illinois.edu/~psdey/414CourseNotes.pdf 
 \end{enumerate}
 \hfill $\square$
-\framebreak
+\end{frame}
+
+
+
+\begin{frame}{Number of distinct values}
 
 A central limit theorem for independent random variables (possibly not identically distributed).
 
 \begin{theorem}[Lindeberg central limit theorem]
 Suppose $X_i$ are i.i.d. such that $\E X_i = \mu_i$ and $\Var X_i = \sigma_i^2 <\infty$. Define $Y_i = X_i - \mu_i,\ T_n = \sum_{i=1}^n Y_i,\ s_n^2 = \Var (T_n) = \sum_{i=1}^n\sigma_i^2$. Then provided that
 \begin{equation*}
-    \forall \epsilon > 0\quad \frac{1}{s_n^2}\sum_{i=1}^n\E \big(Y_i^2 \mathbb{I}(|Y_i|>\epsilon s_n) \big)\xrightarrow{n\rightarrow \infty} 0 \text{[Lindeberg condition],}
+    \forall \epsilon > 0\quad \frac{1}{s_n^2}\sum_{i=1}^n\E \big(Y_i^2 \mathbb{I}(|Y_i|>\epsilon s_n) \big)\xrightarrow{n\rightarrow \infty} 0 \quad \text{[Lindeberg condition],}
 \end{equation*}
 we have the central limit theorem: $T_n/s_n \xrightarrow{\small{d}}N(0,1)$.
 \end{theorem}
@@ -219,15 +237,12 @@ we have the central limit theorem: $T_n/s_n \xrightarrow{\small{d}}N(0,1)$.
 \end{frame}
 
 
-
-%------------
-% Combinatorial properties: Distribution of distinct values
-\begin{frame}[allowframebreaks]{Combinatorial properties: Distribution of distinct values}
-	We have now the limits of $K_n$ and we know its approximate distribution $\mathcal{L}(K_n)$. The \alert{exact distribution of $K_n$} is:
+\begin{frame}{Distribution of distinct values}
+	We have now the limits of $K_n$ and we know  approximations of its distribution $\mathcal{L}(K_n)$. The \alert{exact distribution of $K_n$} is:
 \begin{proposition}[Distribution of $K_n$]
 If $P_0$ is non-atomic then 
 \begin{equation}\label{distr_of_Kn}
-    \P(K_n=k) = \mathfrak{C}_n(k) n!\PrecisonParam ^k \frac{\Gamma(\PrecisonParam)}{\Gamma(\PrecisonParam+n)},
+    \P(K_n=k) = \mathfrak{C}_n(k) n!\PrecisionParam ^k \frac{\Gamma(\PrecisionParam)}{\Gamma(\PrecisionParam+n)},
 \end{equation}
 where 
 \begin{equation}\label{mathfrakC_def}
@@ -238,9 +253,12 @@ and $\mathfrak{J}_n(k)=\{ S\subset \{ 1,\ldots,n-1\},\ |S|=n-k \}$.
 
  Recall the definition of the \alert{Gamma function} $\Gamma(x)=\int_0^\infty u^{x-1}e^{-u}du$.
  
-\framebreak
+\end{frame}
 
 
+\begin{frame}{Distribution of distinct values}
+
+\alert{Proof.}
 
 Let us consider when we may deal with events $K_n = k$: we have two cases
 \begin{equation*}
@@ -252,27 +270,35 @@ K_{n-1} = k \text{ and } X_n \text{ is not a new value}.
  This results in
 % either in proceeding case $K_{n-1}$ we have $K_{n-1}=k-1 $ and $X_n$ is a new value or we have $K_{n-1} = k$ and $X_n$ does not take new value.
 \begin{equation}\label{CombinatorialProperties}
-    p_n(k,\PrecisonParam) := \P(k_n = k|\PrecisonParam) = \frac{\PrecisonParam}{\PrecisonParam +n -1 }p_{n-1} (k-1,\PrecisonParam)+\frac{n-1}{\PrecisonParam +n -1}p_{n-1}(k,\PrecisonParam).
+    p_n(k,\PrecisionParam) := \P(k_n = k|\PrecisionParam) = \frac{\PrecisionParam}{\PrecisionParam +n -1 }p_{n-1} (k-1,\PrecisionParam)+\frac{n-1}{\PrecisionParam +n -1}p_{n-1}(k,\PrecisionParam).
 \end{equation}
-Now let us remark that $\mathfrak{C}_n(k)=p_n(k,\PrecisonParam =1)$. Therefore
+Now let us remark that $\mathfrak{C}_n(k)=p_n(k,\PrecisionParam =1)$. Therefore
 \begin{equation}\label{mathfrakC_property}
     \mathfrak{C}_n(k)=\frac 1n \mathfrak{C}_{n-1}(k-1)+\frac{n-1}{n}\mathfrak{C}_{n-1}(k).
 \end{equation}
 By induction over $n$: first we check case $n=1$:
 \begin{equation*}
-    p_1(1,\PrecisonParam)=\mathfrak{C}_1(1)\frac{\PrecisonParam}{\PrecisonParam}=\mathfrak{C}_1(1).
+    p_1(1,\PrecisionParam)=\mathfrak{C}_1(1)\frac{\PrecisionParam}{\PrecisionParam}=\mathfrak{C}_1(1).
 \end{equation*}
+\end{frame}
+
+
+\begin{frame}{Distribution of distinct values}
 To check case $n>1$ we use (\ref{distr_of_Kn}) and then (\ref{CombinatorialProperties}):
 \begin{equation*}
     \begin{split}
-        p_n(k,\PrecisonParam)&=\frac{\PrecisonParam}{\PrecisonParam +n -1 }p_{n-1} (k-1,\PrecisonParam)+\frac{n-1}{\PrecisonParam +n -1}p_{n-1}(k,\PrecisonParam) \\
-        &=\frac{\PrecisonParam}{\PrecisonParam +n -1 }\mathfrak{C}_{n-1}(k-1)(n-1)!\PrecisonParam^{k-1}\frac{\Gamma (\PrecisonParam)}{\Gamma(\PrecisonParam+n-1)} +\\
-        &+\frac{n-1}{\PrecisonParam +n -1}\mathfrak{C}_{n-1}(k)(n-1)!\PrecisonParam^{k}\frac{\Gamma (\PrecisonParam)}{\Gamma(\PrecisonParam+n-1)}\\
-        &=\frac{\PrecisonParam^k}{\PrecisonParam+n-1}(n-1)!\frac{\Gamma(\PrecisonParam)}{ \Gamma(\PrecisonParam+n-1) }n\bigg(\frac 1n \mathfrak{C}_{n-1}(k-1) + \frac{n-1}{n} \mathfrak{C}_{n-1}(k)\bigg)\\
-        &=\mathfrak{C}_{n}(k)n!\PrecisonParam^k\frac{\Gamma(\PrecisonParam)}{\Gamma(\PrecisonParam+n)},
+        p_n(k,\PrecisionParam)&=\frac{\PrecisionParam}{\PrecisionParam +n -1 }p_{n-1} (k-1,\PrecisionParam)+\frac{n-1}{\PrecisionParam +n -1}p_{n-1}(k,\PrecisionParam) \\
+        &=\frac{\PrecisionParam}{\PrecisionParam +n -1 }\mathfrak{C}_{n-1}(k-1)(n-1)!\PrecisionParam^{k-1}\frac{\Gamma (\PrecisionParam)}{\Gamma(\PrecisionParam+n-1)} +\\
+        &+\frac{n-1}{\PrecisionParam +n -1}\mathfrak{C}_{n-1}(k)(n-1)!\PrecisionParam^{k}\frac{\Gamma (\PrecisionParam)}{\Gamma(\PrecisionParam+n-1)}\\
+        &=\frac{\PrecisionParam^k}{\PrecisionParam+n-1}(n-1)!\frac{\Gamma(\PrecisionParam)}{ \Gamma(\PrecisionParam+n-1) }n\bigg(\frac 1n \mathfrak{C}_{n-1}(k-1) + \frac{n-1}{n} \mathfrak{C}_{n-1}(k)\bigg)\\
+        &=\mathfrak{C}_{n}(k)n!\PrecisionParam^k\frac{\Gamma(\PrecisionParam)}{\Gamma(\PrecisionParam+n)},
     \end{split}
 \end{equation*}
 which proves property (\ref{distr_of_Kn}).
+\end{frame}
+
+
+\begin{frame}{Distribution of distinct values}
 
 To prove (\ref{mathfrakC_def}) let use define a polynomial $A_n(s)$ as $A_n(s) = \sum_{i=1}^\infty \mathfrak{C}_n(k)s^k$. Then using (\ref{mathfrakC_property}) polynomial $A_n(s)$ can be written as
 \begin{equation*}
@@ -287,44 +313,36 @@ Last equality implies from the fact that $\mathfrak{C}_1(k)=\ind\{k=1\}$ and hen
 
 \end{frame}
 
+\begin{frame}{Chinese Restaurant process}
+This is a culinary metaphor of the \alert{random partition} induced by the DP. 
 
-
-
-%------------
-% Combinatorial properties: CRP
-\begin{frame}[allowframebreaks]{Combinatorial properties: Chinese Restaurant process}
-A culinary metaphor of the \alert{random partition} induced by the DP. Customers join tables with probability proportional to \alert{$n_j$}, the number of clients already sitting, or sit at new table with probability  proportional to \alert{$\PrecisonParam$}.
+\alert{Generative process}: customers join tables with probability proportional to \alert{$n_j$}, the number of clients already sitting, or sit at \alert{new table} with probability  proportional to \alert{$\PrecisionParam$}.
 \begin{center}
 	\includegraphics[width = .5\textwidth]{figures_julyan/intro_DP/CRP}
 \end{center}
 
 \begin{proposition}[Chinese Restaurant process]
-A random sample $X_{1:n}$ from a DP with precision parameter $\PrecisonParam$ induces a partition of $\{1,\ldots,n\}$ into $k$ sets of sizes $n_1,\ldots,n_k$ with probability 
+A random sample $X_{1:n}$ from a DP with precision parameter $\PrecisionParam$ induces a partition of $\{1,\ldots,n\}$ into $k$ sets of sizes $n_1,\ldots,n_k$ with probability 
 \begin{equation*}
-    p(n_1,\ldots,n_k)=p(\{n_1,\ldots,n_k\})=\PrecisonParam^k\frac{\Gamma(\PrecisonParam)}{\Gamma(\PrecisonParam+n)}\prod_{j=1}^k\Gamma (n_j).
+    p(n_1,\ldots,n_k)=p(\{n_1,\ldots,n_k\})=\PrecisionParam^k\frac{\Gamma(\PrecisionParam)}{\Gamma(\PrecisionParam+n)}\prod_{j=1}^k\Gamma (n_j).
 \end{equation*}
 \end{proposition}
 
-\framebreak
-\textbf{Proof.}
+\end{frame}
+
+\begin{frame}{Chinese Restaurant process. Proof}
+\alert{Proof.}
 	We use the P\'olya urn scheme slightly changed by using $n_1,\ldots, n_k$
 \begin{equation*}
-    \P(X_{n+1}|X_{1:n})=\frac{\PrecisonParam}{\PrecisonParam + n}P_0 + \frac{1}{\PrecisonParam + n}\sum_{j=1}^kn_j\delta_{X^*_j}.
+    \P(X_{n+1}|X_{1:n})=\frac{\PrecisionParam}{\PrecisionParam + n}P_0 + \frac{1}{\PrecisionParam + n}\sum_{j=1}^kn_j\delta_{X^*_j}.
 \end{equation*}
     By exchangeability, the distribution of $\{n_1,\ldots, n_k\}$ does not depend on the order of the observations. Let's compute $p(n_1,\ldots, p_k)$ as the probability of one draw where the first table consists of first $n_1$ observations etc. 
     
     To proceed, let us use P\'olya urn scheme: we denote $\bar{n}_j=\sum_{i=1}^jn_i$ and hence $\bar{n}_k=n$, the total number of observations. We can observe the following pattern: first ball open new table, following $n_j-1$ ones fill in that table and so forth. That quantity can be rewritten as 
     $$
-    \frac{\PrecisonParam^k}{\PrecisonParam(\PrecisonParam+1)\ldots(\PrecisonParam+n-1)}\prod_{j=1}^k(n_j-1)!,
+    \frac{\PrecisionParam^k}{\PrecisionParam(\PrecisionParam+1)\ldots(\PrecisionParam+n-1)}\prod_{j=1}^k(n_j-1)!=\PrecisionParam^k\frac{\Gamma(\PrecisionParam)}{\Gamma(\PrecisionParam+n)}\prod_{j=1}^k\Gamma (n_j).
     $$
-where one can rewrite both terms using Gamma function $\Gamma(x)=\int_0^\infty u^{x-1}e^{-u}du$: the first  term  can be written as 
-$$
-\frac{\PrecisonParam^k}{\PrecisonParam(\PrecisonParam+1)\ldots(\PrecisonParam+n-1)}=\frac{\Gamma(\PrecisonParam+n)}{\Gamma(\PrecisonParam)},
-$$
-while the second one as
-$(n_j-1)!=\Gamma(n_j)$.
-
-One should remark that for ordered partitions we have 
+Note that for ordered partitions we have 
 $$
 \bar{p}(n_1,\ldots,n_k)=\frac{p(n_1,\ldots,n_k)}{k!}.
 $$
@@ -332,19 +350,7 @@ $$
 \end{frame}
 
 
-%
-%%------------
-%% Combinatorial properties: Ewens
-%\begin{frame}[allowframebreaks]{Combinatorial properties: Ewens sampling formula}
-%\end{frame}
-%
-%
-
-
-
-%------------
-% Combinatorial properties: Ewens
-\begin{frame}[allowframebreaks]{Combinatorial properties: Ewens sampling formula}
+\begin{frame}{Ewens sampling formula}
 
 Ewens sampling formula (ESF), presented originally by \citet{ewens1972sampling}, is the distribution of multiplicities $m=(m_1,\ldots, m_n)$, $m_\ell$ is the number of groups of size $\ell$.
 Also known as allelic partitions in population genetics, when there is no selective difference between types: null hypothesis in non Darwinian theory.
@@ -353,27 +359,26 @@ See also \citet{antoniak1974mixtures}.
 \begin{proposition}[Ewens sampling formula]\label{ESF}
 The distribution of the multiplicities $(m_1,\ldots, m_n)$ induced by a DP is
 \begin{equation*}
-    p(m_1,\ldots, m_n)=\frac{\PrecisonParam^k}{\PrecisonParam_{(n)}}\frac{n!}{\prod_{\ell=1}^n \ell^{m_\ell}m_\ell!}.
+    p(m_1,\ldots, m_n)=\frac{\PrecisionParam^k}{\PrecisionParam_{(n)}}\frac{n!}{\prod_{\ell=1}^n \ell^{m_\ell}m_\ell!}.
 \end{equation*}
 \end{proposition}\bigskip
 
-Notation $n_{(k)}:=n(n-1)\cdots(n-k+1)$.
+Notation $n_{(k)}:=n(n+1)\cdots(n+k-1)$.
 
 
 
-%\vskip -1cm
-%\begin{center}
-%	\includegraphics[width = .6\textwidth]{figures_julyan/CRP}
-%\end{center}
+\end{frame}
 
-\framebreak
-\textbf{Proof.}
+
+\begin{frame}{Ewens sampling formula}
+
+\alert{Proof.}
 Two steps: 1) Compute probability of particular sequence of $X_1, \ldots, X_n$ in given class $(m_1,\ldots,m_n)$, note that all such sequences are equally likely and 2) multiply obtained quantity by the number of such sequences. 
 
 \begin{itemize}
     \item[1)] Consider a sequence $X_1,\ldots, X_n$ such that $X_1, \ldots, X_{m_1}$ occur each only once, then the next $m_2$ occur only twice and so on. This sequence has probability which may be obtained by the P\'olya Urn scheme in the same fashion as CRP:
     \begin{equation*}
-        \frac{\PrecisonParam^{m_1} (\PrecisonParam \cdot 1)^{m_2} \ldots \big( \PrecisonParam \cdot 1 \cdot\ldots \cdot (n-1) \big)^{m_n}  }{\PrecisonParam_{(n)}}=\frac{\PrecisonParam^k}{\PrecisonParam_{(n)}}\prod_{\ell=1}^n ((\ell-1)!)^{m_\ell}.
+        \frac{\PrecisionParam^{m_1} (\PrecisionParam \cdot 1)^{m_2} \ldots \big( \PrecisionParam \cdot 1 \cdot\ldots \cdot (n-1) \big)^{m_n}  }{\PrecisionParam_{(n)}}=\frac{\PrecisionParam^k}{\PrecisionParam_{(n)}}\prod_{\ell=1}^n ((\ell-1)!)^{m_\ell}.
     \end{equation*}
 %    Each term in the numerator comes from $m_\ell$ species observed $\ell$ times.
     \item[2)] Number of sequences $X_1,\ldots,X_n$ with frequencies $(m_1, \ldots, m_n)$ is a number of ways of putting $n$ distinct objects into bins, so called multinomial coefficient. Since ordering of the $m_\ell$ bins of frequency $\ell$ is irrelevant,  divide by $m_\ell!$:
@@ -389,11 +394,6 @@ n\\
 To finish one needs to multiply results obtained in 1) and 2). \hfill $\square$
 \end{frame}
 
-
-
-
-%-------------
-% Stick-breaking
 
 \begin{frame}{Stick-breaking representation}
 The \alert{DP} has almost surely \alert{discrete} realizations (Sethuraman, 1994)\pause
@@ -418,54 +418,87 @@ weights $\pi_{j}=\tilde \pi_j\prod_{l<j}(1-\tilde \pi_{l})$ with $\tilde \pi_{j}
 
 \end{frame}
 
-\begin{frame}[allowframebreaks]{Stick-breaking representation}
 
-A constructive representation of the DP due to \citet{sethuraman1994constructive}.
+\begin{frame}{Stick-breaking representation}
+
+A \alert{constructive representation} of the DP due to \citet{sethuraman1994constructive}.
 \begin{theorem}[Stick-breaking]\label{theorem:sethuraman}
-If $V_1, V_2, \ldots \simiid Be(1, \PrecisonParam)$ and $\phi_1, \phi_2, \ldots \simiid P_0$ are i.i.d. variables, then define $p_1=V_1$ and 
+If $V_1, V_2, \ldots \simiid Be(1, \PrecisionParam)$ and $\phi_1, \phi_2, \ldots \simiid P_0$ are independent random variables, and $p_1=V_1$ and 
 
 $$
-p_j=V_j \prod_{1\leq l \leq j}(1-V_l)
+p_j=V_j \prod_{l < j}(1-V_l),
 $$ 
 then 
 $$
-P=\sum_{i=1}^\infty p_i\delta_{\phi_i}\sim \text{DP}(\PrecisonParam, P_0).
+P=\sum_{i=1}^\infty p_i\delta_{\phi_i}\sim \text{DP}(\PrecisionParam, P_0).
 $$
 \end{theorem}
 
-\pause
+The vector $\boldsymbol p = (p_1,p_2,\ldots)$ constructed in this way is an infinite random probability vector. Its distribution is called the \alert{GEM distribution}, named after Griffiths, Engen and McClosky, denoted by $\boldsymbol p \sim\text{GEM}(\PrecisionParam)$.
+
+
+\end{frame}
+
+\begin{frame}{Stick-breaking representation. Proof}
+
+The main ingredient of the proof is:
 
 \begin{lemma}
-For independent $\phi\sim P_0$ and $V\sim Be(1,\PrecisonParam)$ the DP is the only solution of the distributional equation 
+For independent $\phi\sim P_0$ and $V\sim Be(1,\PrecisionParam)$, the DP is the only solution of the distributional equation 
 \begin{equation*}\label{Dir:distributional_equation}
-    P \sim V\delta_\phi + (1-V)P, 
+    P \overset{d}{=} V\delta_\phi + (1-V)P. 
 \end{equation*}
-where $P\sim \text{DP}(\PrecisonParam, P_0)$.
 \end{lemma}
+
+\pause
+
+\alert{Proof of the Lemma.}
+
+
+\alert{Existence.} The DP is indeed a solution by combining its definition with the regenerative property:
+
+If $p\sim Dir(\boldsymbol\alpha)$, $N\sim Multinoulli(\boldsymbol\alpha)$ and $V\sim Beta(1,|\boldsymbol\alpha|)$ are independent, then 
+$$Vn+(1-V)P \sim Dir(\boldsymbol\alpha).$$
+
+\alert{Uniqueness.} Comes from this lemma:
+
+\begin{lemma}
+Let $X$ and $V\in [-1, 1]$ be random variables such that $P(|V|<1) = 1$. Then the distribution of any random variable $Y$ that is independent of $(X, V)$ and satisfies the distributional equation $Y \overset{d}{=} X + VY$ is unique.
+\end{lemma}
+See Lemma L.2 in \cite{ghosal2017fundamentals}.
 
 %We say that such a RPM is solution of (\ref{Dir:distributional_equation}) if $P$ is independent of $(V, \phi)$ and if for every measurable partition $(A_1, \ldots, A_k)$ of $X$ both sides of (\ref{Dir:distributional_equation}) are random vectors equal in distribution in $\mathbb{R}^k$. 
 %Proof of the lemma follows from properties of Dirichlet distribution. We are ready now to prove the  theorem.
 
-\framebreak
+\end{frame}
 
-\textbf{Proof.}
+\begin{frame}{Stick-breaking representation. Proof}
+
+\alert{Proof of the SB Theorem.}
 1) The weights $(p_1, p_2,\ldots)$ need to form a probability vector. The leftover mass at stage $j$ is 
 $$
 1-\bigg(\sum_{i=1}^j p_i\bigg)=\prod_{i=1}^j(1-V_i) =: R_j.
 $$
-One may notice that $R_j$ is decreasing and for every $j$ we have $R_j\in [0,1]$, hence we obtain almost sure convergence which is equivalent with convergence in mean. Therefore
+Notice that $R_j$ is decreasing and for every $j$ we have $R_j\in [0,1]$. Hence almost sure convergence is equivalent with convergence in mean. We can check convergence in mean easily:
 $$
-\E R_j=\E \prod_j (1-V_j)= \prod_j \E(1-V_j) = \bigg( \frac{\PrecisonParam}{\PrecisonParam + 1}\bigg)^j \rightarrow 0.
+\E R_j=\E \prod_j (1-V_j)= \prod_j \E(1-V_j) = \bigg( \frac{\PrecisionParam}{\PrecisionParam + 1}\bigg)^j \rightarrow 0.
 $$
-So ($p_1, \ldots$) is a probability vector almost surely and $P$ is a probability measure almost surely. 
+So ($p_1, p_2,\ldots$) is a probability vector almost surely and $P$ is a probability measure almost surely. 
 
-\framebreak
+\end{frame}
 
-2) Now one may write 
+
+\begin{frame}{Stick-breaking representation}
+
+2) Now write 
 $$
 P=p_1\delta_{\phi_1}+\sum_{j=2}^\infty p_j\delta_{\phi_j} = V_1\delta_{\phi_1}+(1-V_1)\sum_{j=1}^\infty \Tilde{p_j}\delta_{\Tilde{\phi}_j},
 $$
-where $\Tilde{p}_j=\frac{p_{j+1} }{1-V_1}=V_{j+1}\prod_{l=2}^j(1-V_l)$ and $\Tilde{\phi}_j=\phi_{j+1}$, then $(\Tilde{p}_j)$ and $(\Tilde{\phi}_j)$ satisfy the same distributional definitions as $(p_j)$ and $(\phi_j)$, hence $\Tilde{P}\sim P$ and so $P$ is solution of the Lemma equation (\ref{Dir:distributional_equation}) whose only solution is the DP.
+where 
+$$\Tilde{p}_j=\frac{p_{j+1} }{1-V_1}=V_{j+1}\prod_{l=2}^j(1-V_l), \quad \Tilde{\phi}_j=\phi_{j+1}.$$
+Then $(\Tilde{p}_j)$ and $(\Tilde{\phi}_j)$ satisfy the same distributional definitions as $(p_j)$ and $(\phi_j)$, hence $\Tilde{P} \overset{d}{=} P$ in distribution. 
+
+So $P$ is a solution of the Lemma equation (\ref{Dir:distributional_equation}) whose only solution is the DP.
 \hfill $\square$
 \end{frame}
 
@@ -487,21 +520,21 @@ This ensures that the process has non-decreasing right continuous sample path $u
 \end{definition}
 
 \begin{theorem}
-For every $\PrecisonParam>0$ and for every cumulative distribution function $G$, a random cumulative distribution function such that
+For every $\PrecisionParam>0$ and for every cumulative distribution function $G$, a random cumulative distribution function such that
 \begin{equation*}
-    F(t) = \frac{S(\PrecisonParam G(t))}{S(\PrecisonParam)}
+    F(t) = \frac{S(\PrecisionParam G(t))}{S(\PrecisionParam)}
 \end{equation*}
-is the distribution of a $\mathsf{DP}(\PrecisonParam,G)$.
+is the distribution of a $\mathsf{DP}(\PrecisionParam,G)$.
 \end{theorem}
 
-\textbf{Proof.}
+\alert{Proof.}
 For any set of $t_i$ satisfying $-\infty = t_0 < t_1 < \ldots < t_k = \infty$ we have 
 $$
-S(\PrecisonParam G(t_i)) - S(\PrecisonParam G(t_{i-1})) \sim Ga\big( \PrecisonParam G(t_i)-\PrecisonParam G(t_{i-1}),1\big).
+S(\PrecisionParam G(t_i)) - S(\PrecisionParam G(t_{i-1})) \sim Ga\big( \PrecisionParam G(t_i)-\PrecisionParam G(t_{i-1}),1\big).
 $$
-Use property that if $Y_i \simind Ga(\PrecisonParam_i, 1)$ then $(Y_1, \ldots, Y_n)/\sum_i Y_i \sim \Dir_n (\PrecisonParam_1,\ldots, \PrecisonParam_n)$ to obtain 
+Use property that if $Y_i \simind Ga(\PrecisionParam_i, 1)$ then $(Y_1, \ldots, Y_n)/\sum_i Y_i \sim \Dir_n (\PrecisionParam_1,\ldots, \PrecisionParam_n)$ to obtain 
 $$
-\big(F(t_1)-F(t_0), \ldots, F(t_k) - F(t_{k-1}) \big) \sim \Dir_k\big(\PrecisonParam G(t_1) -\PrecisonParam G(t_0), \ldots, \PrecisonParam G(t_k) -\PrecisonParam G(t_{k-1})\big).
+\big(F(t_1)-F(t_0), \ldots, F(t_k) - F(t_{k-1}) \big) \sim \Dir_k\big(\PrecisionParam G(t_1) -\PrecisionParam G(t_0), \ldots, \PrecisionParam G(t_k) -\PrecisionParam G(t_{k-1})\big).
 $$
 Hence the definition of DP holds for every partition in intervals. These form a measure determining class, so that the definition holds for every partition in general. \hfill $\square$
 
@@ -515,18 +548,18 @@ Hence the definition of DP holds for every partition in intervals. These form a 
 %------------
 % P\'olya Urn charact
 \begin{frame}{Definition via the P\'olya urn scheme}
-A P\'olya sequence with parameter $\PrecisonParam P_0$ is a sequence of random variables $X_1, \ldots, X_n$ whose joint distribution satisfies
+A P\'olya sequence with parameter $\PrecisionParam P_0$ is a sequence of random variables $X_1, \ldots, X_n$ whose joint distribution satisfies
 \begin{equation*}
-    X_1 \sim P_0,\ X_{n+1}|X_1,\ldots,X_n\sim \frac{\PrecisonParam}{\PrecisonParam + n}P_0 + \frac{1}{\PrecisonParam + n}\sum_{i=1}^n \delta_{X_i}.
+    X_1 \sim P_0,\ X_{n+1}|X_1,\ldots,X_n\sim \frac{\PrecisionParam}{\PrecisionParam + n}P_0 + \frac{1}{\PrecisionParam + n}\sum_{i=1}^n \delta_{X_i}.
 \end{equation*}\pause
 
 \begin{theorem}
-If $X_1,X_2,\ldots $ is a P\'olya sequence then exists random probability measure $P$ such that $X_i|P\simiid P$ and $P\sim \text{DP}(\PrecisonParam, P_0)$.
+If $X_1,X_2,\ldots $ is a P\'olya sequence then there exists a random probability measure $P$ such that $X_i|P\simiid P$ and $P\sim \text{DP}(\PrecisionParam, P_0)$.
 \end{theorem}\pause
 
-\textbf{Proof.}
-We can consider P\'olya sequence as an outcome of P\'olya urn, we see that it is exchangeable. By de Finetti theorem exists such probability measure $P$ such that $X_i|P \simiid P$. So far we have proved existence of the DP and know that DP generates a P\'olya sequence. Since the RPM given by de Finetti's theorem is unique this proves that
-$P\sim \text{DP}(\PrecisonParam, P_0)$.\hfill $\square$
+\alert{Proof.}
+Considering a P\'olya sequence as the outcome of a P\'olya urn, we see that it is exchangeable. By de Finetti's theorem there exists such a probability measure $P$ such that $X_i|P \simiid P$. So far we have proved existence of the DP and know that the DP generates a P\'olya sequence. Since the random probability measure given by de Finetti's theorem is unique this proves that
+$P\sim \text{DP}(\PrecisionParam, P_0)$.\hfill $\square$
 
 \end{frame}
 
