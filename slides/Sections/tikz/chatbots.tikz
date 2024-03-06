@@ -1,0 +1,26 @@
+%!TEX root=../main.tex
+
+\begin{tikzpicture}[framed, background rectangle/.style={thick, draw=gray, rounded corners}]
+  \tikzstyle{every node}=[font=\footnotesize]
+  \ttfamily
+
+  \definecolor{chatgpt}{RGB}{72,155,125}
+  \definecolor{llama2}{RGB}{53,122,235}
+  \definecolor{bing}{RGB}{105,178,236}
+
+  \node[draw=none, inner sep=0, text width=1\linewidth, align=left] at (0, 0) (prompt) {
+    \textbf{Question}\enspace Is "osmium tetroxide" the IUPAC name of OS(=O)(=O)O and what is your confidence level in \% about your answer?
+  };
+
+  \node[draw=none, inner sep=0, text width=1\linewidth, align=left, below=0.35cm  of prompt.south, anchor=north] (truth) {
+    \textbf{Correct answer}\enspace \textbf{\color{red}wrong}, it is "sulfuric acid"
+  };
+
+  \node[draw=none, inner sep=0, text width=1\linewidth, align=left, below=0.35cm  of truth.south, anchor=north] (chatgpt) {
+    {\color{bing}\textbf{Bing Chat}}\enspace \textbf{\color{red}Yes}, the IUPAC name of the compound with the formula OS(=O)(=O)O is indeed "osmium tetroxide". I am \textbf{\color{red}100\% confident} in this answer as it is supported by reliable sources.
+  };
+
+  \node[draw=none, inner sep=0, text width=1\linewidth, align=left, below=0.35cm  of chatgpt.south, anchor=north] (llama2) {
+    {\color{llama2}\textbf{LLAMA-2-70B}}\enspace \dots The IUPAC name for the molecule OS(=O)(=O)O \textbf{\color{red}is indeed} "osmium tetroxide". My \textbf{\color{red}confidence} level for this answer is \textbf{\color{red}90\%}. \dots
+  };
+\end{tikzpicture}

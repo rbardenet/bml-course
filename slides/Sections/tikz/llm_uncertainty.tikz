@@ -1,0 +1,21 @@
+%!TEX root=../main.tex
+
+\begin{tikzpicture}[framed]
+  \tikzstyle{every node}=[font=\footnotesize]
+
+  \node[draw=black, fill=Gray!50!White, text width=2.5cm, minimum height=1.5cm, align=center] at (0, 0) (transformer) {
+    Transformer (\(\mW_*\))
+  };
+
+  \node [draw=black, fill=White, minimum width=2cm, text width=1cm, minimum height=1cm, align=center, right=0.75cm of transformer.east, yshift=0.75cm, anchor=west] (lm) {};
+
+  \node [cross out, draw=black, fill=White, minimum width=2cm, text width=1cm, minimum height=1cm, align=center, right=0.75cm of transformer.east, yshift=0.75cm, anchor=west] (lm) {LM Head};
+
+  \node [draw=black, fill=OliveGreen!35!White, minimum width=2cm, text width=1.92cm, minimum height=1cm, align=center, below=0.5cm of lm.south, anchor=north] (reg) {Reg.\ Head (\(\vw\))};
+
+  \node [draw=none, minimum width=1cm, minimum height=1cm, align=center, right=0.5cm of reg.east, anchor=west] (out) {\(p(g_t(\,\cdot\,) \mid \D_t; \mW_*)\)};
+
+  \draw [-latex] (transformer.east) -- (lm.west);
+  \draw [-latex] (transformer.east) -- (reg.west);
+  \draw [-latex] (reg.east) -- (out.west);
+\end{tikzpicture}

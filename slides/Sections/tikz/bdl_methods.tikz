@@ -1,0 +1,60 @@
+%!TEX root=../main.tex
+
+\begin{tikzpicture}
+  \tikzstyle{every node}=[font=\scriptsize]
+  \pgfplotsset{
+    % define the layers you need.
+    % (Don't forget to add `main' somewhere in that list!!)
+    layers/my layer set/.define layer set={
+        background,
+        main,
+        foreground
+    }{},
+    set layers=my layer set,
+  }
+
+  \begin{axis}[
+    % title={Mixture of Gaussians},
+    xlabel={$\Theta$},
+    ylabel={$f(x)$},
+    legend pos=north east,
+    legend cell align={left},
+    grid=none,
+    axis x line*=bottom,
+    axis y line=none,
+    xmin=-8, xmax=12,
+    ymin=-0.0, ymax=0.5,
+    ticks=none,
+    xticklabels=none,
+    x label style={at={(axis description cs:0.5,-0.025)},anchor=north}
+  ]
+
+  % True Posterior (0.3*N(-3, 1) + 0.7*N(4, 3^2))
+  \addplot[domain=-8:12, samples=100, smooth, black, ultra thick] {0.3*exp(-(x+3)^2 / (2*1^2)) / (1 * sqrt(2*pi)) + 0.7*exp(-(x-4)^2 / (2*3^2)) / (3 * sqrt(2*pi))};
+
+  % MAPs
+  \addplot[mark=*, Red, very thick, only marks, on layer=foreground, clip mode=individual, forget plot] coordinates {(-3,0)};
+  \addplot[mark=*, Red, very thick, only marks, on layer=foreground, clip mode=individual] coordinates {(4,0)};
+
+  % Laplace
+  \addplot[domain=-8:12, samples=100, smooth, NavyBlue, very thick] {exp(-(x+3)^2 / (2*1^2)) / (1 * sqrt(2*pi))};
+
+  % Variational
+  \addplot[domain=-8:12, samples=100, smooth, Magenta, very thick] {exp(-(x-4)^2 / (2*3^2)) / (3 * sqrt(2*pi))};
+
+  % MCMC
+  \addplot[mark=star, BurntOrange, very thick, mark size=3pt, only marks, forget plot] coordinates {(-4,0)};
+  \addplot[mark=star, BurntOrange, very thick, mark size=3pt, only marks, forget plot] coordinates {(-3.5,0)};
+  \addplot[mark=star, BurntOrange, very thick, mark size=3pt, only marks, forget plot] coordinates {(-3.2,0)};
+  \addplot[mark=star, BurntOrange, very thick, mark size=3pt, only marks, forget plot] coordinates {(-2.8,0)};
+  \addplot[mark=star, BurntOrange, very thick, mark size=3pt, only marks, forget plot] coordinates {(-1,0)};
+  \addplot[mark=star, BurntOrange, very thick, mark size=3pt, only marks, forget plot] coordinates {(2,0)};
+  \addplot[mark=star, BurntOrange, very thick, mark size=3pt, only marks, forget plot] coordinates {(3.5,0)};
+  \addplot[mark=star, BurntOrange, very thick, mark size=3pt, only marks, forget plot] coordinates {(4.25,0)};
+  \addplot[mark=star, BurntOrange, very thick, mark size=3pt, only marks, forget plot] coordinates {(5,0)};
+  \addplot[mark=star, BurntOrange, very thick, mark size=3pt, only marks] coordinates {(8,0)};
+
+  \legend{\(p(\theta \mid \mathcal{D})\), MAP, Laplace, Variational, MCMC}
+
+  \end{axis}
+\end{tikzpicture}
