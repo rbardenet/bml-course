@@ -1,0 +1,52 @@
+This is BibTeX, Version 0.99d (TeX Live 2018)
+Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
+The top-level auxiliary file: /Users/jarbel/Dropbox/Julyan/Teaching/cours MVA/bml-course/slides/06_bdl.aux
+The style file: apalike.bst
+Database file #1: ../bib/biblio_julyan.bib
+Repeated entry---line 3496 of file ../bib/biblio_julyan.bib
+ : @article{maddox2019simple
+ :                          ,
+I'm skipping whatever remains of this entry
+Warning--I didn't find a database entry for "papamarkou2024position"
+You've used 155 entries,
+            1935 wiz_defined-function locations,
+            1131 strings with 33272 characters,
+and the built_in function-call counts, 65044 in all, are:
+= -- 5840
+> -- 3925
+< -- 36
++ -- 1426
+- -- 1390
+* -- 5622
+:= -- 11752
+add.period$ -- 467
+call.type$ -- 155
+change.case$ -- 1461
+chr.to.int$ -- 145
+cite$ -- 155
+duplicate$ -- 2423
+empty$ -- 4106
+format.name$ -- 1579
+if$ -- 12342
+int.to.chr$ -- 11
+int.to.str$ -- 0
+missing$ -- 159
+newline$ -- 778
+num.names$ -- 465
+pop$ -- 1716
+preamble$ -- 1
+purify$ -- 1467
+quote$ -- 0
+skip$ -- 1467
+stack$ -- 0
+substring$ -- 2770
+swap$ -- 179
+text.length$ -- 4
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 920
+warning$ -- 0
+while$ -- 377
+width$ -- 0
+write$ -- 1906
+(There was 1 error message)

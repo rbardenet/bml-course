@@ -1,273 +1,273 @@
 \headcommand {\slideentry {0}{0}{1}{1/1}{}{0}}
 \headcommand {\beamer@framepages {1}{1}}
-\headcommand {\slideentry {0}{0}{2}{2/2}{}{0}}
-\headcommand {\beamer@framepages {2}{2}}
-\headcommand {\beamer@sectionpages {1}{2}}
-\headcommand {\beamer@subsectionpages {1}{2}}
-\headcommand {\sectionentry {1}{Introduction}{3}{Introduction}{0}}
-\headcommand {\slideentry {1}{0}{1}{3/3}{}{0}}
-\headcommand {\beamer@framepages {3}{3}}
-\headcommand {\slideentry {1}{0}{2}{4/4}{}{0}}
-\headcommand {\beamer@framepages {4}{4}}
-\headcommand {\slideentry {1}{0}{3}{5/5}{}{0}}
-\headcommand {\beamer@framepages {5}{5}}
-\headcommand {\slideentry {1}{0}{4}{6/6}{}{0}}
-\headcommand {\beamer@framepages {6}{6}}
-\headcommand {\slideentry {1}{0}{5}{7/7}{}{0}}
-\headcommand {\beamer@framepages {7}{7}}
-\headcommand {\beamer@subsectionpages {3}{7}}
-\headcommand {\beamer@subsectionentry {0}{1}{1}{8}{Uncertainty Quantification}}
-\headcommand {\slideentry {1}{1}{1}{8/8}{Uncertainty Quantification}{0}}
+\headcommand {\slideentry {0}{0}{2}{2/7}{}{0}}
+\headcommand {\beamer@framepages {2}{7}}
+\headcommand {\beamer@sectionpages {1}{7}}
+\headcommand {\beamer@subsectionpages {1}{7}}
+\headcommand {\sectionentry {1}{Introduction}{8}{Introduction}{0}}
+\headcommand {\slideentry {1}{0}{1}{8/8}{}{0}}
 \headcommand {\beamer@framepages {8}{8}}
-\headcommand {\slideentry {1}{1}{2}{9/9}{Uncertainty Quantification}{0}}
-\headcommand {\beamer@framepages {9}{9}}
-\headcommand {\slideentry {1}{1}{3}{10/10}{Uncertainty Quantification}{0}}
-\headcommand {\beamer@framepages {10}{10}}
-\headcommand {\beamer@subsectionpages {8}{10}}
-\headcommand {\beamer@subsectionentry {0}{1}{2}{11}{Data Efficiency}}
-\headcommand {\slideentry {1}{2}{1}{11/11}{Data Efficiency}{0}}
-\headcommand {\beamer@framepages {11}{11}}
-\headcommand {\slideentry {1}{2}{2}{12/12}{Data Efficiency}{0}}
-\headcommand {\beamer@framepages {12}{12}}
-\headcommand {\beamer@subsectionpages {11}{12}}
-\headcommand {\beamer@subsectionentry {0}{1}{3}{13}{Adaptability to New and Evolving Domains}}
-\headcommand {\slideentry {1}{3}{1}{13/13}{Adaptability to New and Evolving Domains}{0}}
-\headcommand {\beamer@framepages {13}{13}}
-\headcommand {\slideentry {1}{3}{2}{14/14}{Adaptability to New and Evolving Domains}{0}}
-\headcommand {\beamer@framepages {14}{14}}
-\headcommand {\beamer@subsectionpages {13}{14}}
-\headcommand {\beamer@subsectionentry {0}{1}{4}{15}{Model Misspecification and Interpretability}}
-\headcommand {\slideentry {1}{4}{1}{15/15}{Model Misspecification and Interpretability}{0}}
-\headcommand {\beamer@framepages {15}{15}}
-\headcommand {\slideentry {1}{4}{2}{16/16}{Model Misspecification and Interpretability}{0}}
+\headcommand {\slideentry {1}{0}{2}{9/11}{}{0}}
+\headcommand {\beamer@framepages {9}{11}}
+\headcommand {\slideentry {1}{0}{3}{12/15}{}{0}}
+\headcommand {\beamer@framepages {12}{15}}
+\headcommand {\slideentry {1}{0}{4}{16/16}{}{0}}
 \headcommand {\beamer@framepages {16}{16}}
-\headcommand {\slideentry {1}{4}{3}{17/17}{Model Misspecification and Interpretability}{0}}
-\headcommand {\beamer@framepages {17}{17}}
-\headcommand {\beamer@sectionpages {3}{17}}
-\headcommand {\beamer@subsectionpages {15}{17}}
-\headcommand {\sectionentry {2}{Recap on Deep Learning}{18}{Recap on Deep Learning}{0}}
-\headcommand {\slideentry {2}{0}{1}{18/18}{}{0}}
-\headcommand {\beamer@framepages {18}{18}}
-\headcommand {\slideentry {2}{0}{2}{19/19}{}{0}}
-\headcommand {\beamer@framepages {19}{19}}
-\headcommand {\slideentry {2}{0}{3}{20/20}{}{0}}
-\headcommand {\beamer@framepages {20}{20}}
-\headcommand {\slideentry {2}{0}{4}{21/21}{}{0}}
+\headcommand {\slideentry {1}{0}{5}{17/20}{}{0}}
+\headcommand {\beamer@framepages {17}{20}}
+\headcommand {\beamer@subsectionpages {8}{20}}
+\headcommand {\beamer@subsectionentry {0}{1}{1}{21}{Uncertainty Quantification}}
+\headcommand {\slideentry {1}{1}{1}{21/21}{Uncertainty Quantification}{0}}
 \headcommand {\beamer@framepages {21}{21}}
-\headcommand {\slideentry {2}{0}{5}{22/22}{}{0}}
-\headcommand {\beamer@framepages {22}{22}}
-\headcommand {\slideentry {2}{0}{6}{23/23}{}{0}}
-\headcommand {\beamer@framepages {23}{23}}
-\headcommand {\slideentry {2}{0}{6}{23/24}{}{0}}
-\headcommand {\beamer@framepages {23}{24}}
-\headcommand {\slideentry {2}{0}{7}{25/25}{}{0}}
-\headcommand {\beamer@framepages {25}{25}}
-\headcommand {\slideentry {2}{0}{8}{26/26}{}{0}}
-\headcommand {\beamer@framepages {26}{26}}
-\headcommand {\beamer@sectionpages {18}{26}}
-\headcommand {\beamer@subsectionpages {18}{26}}
-\headcommand {\sectionentry {3}{Challenges for BDL}{27}{Challenges for BDL}{0}}
-\headcommand {\slideentry {3}{0}{1}{27/27}{}{0}}
-\headcommand {\beamer@framepages {27}{27}}
-\headcommand {\slideentry {3}{0}{2}{28/28}{}{0}}
-\headcommand {\beamer@framepages {28}{28}}
-\headcommand {\beamer@subsectionpages {27}{28}}
-\headcommand {\beamer@subsectionentry {0}{3}{1}{29}{Laplace and Variational Approximations}}
-\headcommand {\slideentry {3}{1}{1}{29/29}{Laplace and Variational Approximations}{0}}
-\headcommand {\beamer@framepages {29}{29}}
-\headcommand {\slideentry {3}{1}{2}{30/30}{Laplace and Variational Approximations}{0}}
-\headcommand {\beamer@framepages {30}{30}}
-\headcommand {\slideentry {3}{1}{3}{31/31}{Laplace and Variational Approximations}{0}}
-\headcommand {\beamer@framepages {31}{31}}
-\headcommand {\slideentry {3}{1}{4}{32/32}{Laplace and Variational Approximations}{0}}
-\headcommand {\beamer@framepages {32}{32}}
-\headcommand {\slideentry {3}{1}{5}{33/33}{Laplace and Variational Approximations}{0}}
-\headcommand {\beamer@framepages {33}{33}}
-\headcommand {\beamer@subsectionpages {29}{33}}
-\headcommand {\beamer@subsectionentry {0}{3}{2}{34}{Ensembles}}
-\headcommand {\slideentry {3}{2}{1}{34/34}{Ensembles}{0}}
-\headcommand {\beamer@framepages {34}{34}}
-\headcommand {\slideentry {3}{2}{2}{35/35}{Ensembles}{0}}
-\headcommand {\beamer@framepages {35}{35}}
-\headcommand {\beamer@subsectionpages {34}{35}}
-\headcommand {\beamer@subsectionentry {0}{3}{3}{36}{Posterior Sampling Algorithms}}
-\headcommand {\slideentry {3}{3}{1}{36/36}{Posterior Sampling Algorithms}{0}}
+\headcommand {\slideentry {1}{1}{2}{22/26}{Uncertainty Quantification}{0}}
+\headcommand {\beamer@framepages {22}{26}}
+\headcommand {\slideentry {1}{1}{3}{27/35}{Uncertainty Quantification}{0}}
+\headcommand {\beamer@framepages {27}{35}}
+\headcommand {\beamer@subsectionpages {21}{35}}
+\headcommand {\beamer@subsectionentry {0}{1}{2}{36}{Data Efficiency}}
+\headcommand {\slideentry {1}{2}{1}{36/36}{Data Efficiency}{0}}
 \headcommand {\beamer@framepages {36}{36}}
-\headcommand {\slideentry {3}{3}{2}{37/37}{Posterior Sampling Algorithms}{0}}
-\headcommand {\beamer@framepages {37}{37}}
-\headcommand {\slideentry {3}{3}{3}{38/38}{Posterior Sampling Algorithms}{0}}
-\headcommand {\beamer@framepages {38}{38}}
-\headcommand {\slideentry {3}{3}{4}{39/39}{Posterior Sampling Algorithms}{0}}
-\headcommand {\beamer@framepages {39}{39}}
-\headcommand {\beamer@subsectionpages {36}{39}}
-\headcommand {\beamer@subsectionentry {0}{3}{4}{40}{Tempered and Cold Posteriors}}
-\headcommand {\slideentry {3}{4}{1}{40/40}{Tempered and Cold Posteriors}{0}}
-\headcommand {\beamer@framepages {40}{40}}
-\headcommand {\slideentry {3}{4}{2}{41/41}{Tempered and Cold Posteriors}{0}}
-\headcommand {\beamer@framepages {41}{41}}
-\headcommand {\beamer@subsectionpages {40}{41}}
-\headcommand {\beamer@subsectionentry {0}{3}{5}{42}{Prior Specification}}
-\headcommand {\slideentry {3}{5}{1}{42/42}{Prior Specification}{0}}
-\headcommand {\beamer@framepages {42}{42}}
-\headcommand {\slideentry {3}{5}{2}{43/43}{Prior Specification}{0}}
+\headcommand {\slideentry {1}{2}{2}{37/42}{Data Efficiency}{0}}
+\headcommand {\beamer@framepages {37}{42}}
+\headcommand {\beamer@subsectionpages {36}{42}}
+\headcommand {\beamer@subsectionentry {0}{1}{3}{43}{Adaptability to New and Evolving Domains}}
+\headcommand {\slideentry {1}{3}{1}{43/43}{Adaptability to New and Evolving Domains}{0}}
 \headcommand {\beamer@framepages {43}{43}}
-\headcommand {\beamer@subsectionpages {42}{43}}
-\headcommand {\beamer@subsectionentry {0}{3}{6}{44}{Scalability}}
-\headcommand {\slideentry {3}{6}{1}{44/44}{Scalability}{0}}
-\headcommand {\beamer@framepages {44}{44}}
-\headcommand {\slideentry {3}{6}{2}{45/45}{Scalability}{0}}
-\headcommand {\beamer@framepages {45}{45}}
-\headcommand {\slideentry {3}{6}{3}{46/46}{Scalability}{0}}
+\headcommand {\slideentry {1}{3}{2}{44/45}{Adaptability to New and Evolving Domains}{0}}
+\headcommand {\beamer@framepages {44}{45}}
+\headcommand {\beamer@subsectionpages {43}{45}}
+\headcommand {\beamer@subsectionentry {0}{1}{4}{46}{Model Misspecification and Interpretability}}
+\headcommand {\slideentry {1}{4}{1}{46/46}{Model Misspecification and Interpretability}{0}}
 \headcommand {\beamer@framepages {46}{46}}
-\headcommand {\beamer@subsectionpages {44}{46}}
-\headcommand {\beamer@subsectionentry {0}{3}{7}{47}{Foundation Models}}
-\headcommand {\slideentry {3}{7}{1}{47/47}{Foundation Models}{0}}
-\headcommand {\beamer@framepages {47}{47}}
-\headcommand {\slideentry {3}{7}{2}{48/48}{Foundation Models}{0}}
-\headcommand {\beamer@framepages {48}{48}}
-\headcommand {\beamer@subsectionpages {47}{48}}
-\headcommand {\beamer@subsectionentry {0}{3}{8}{49}{Diagnostics, Metrics and Benchmarks}}
-\headcommand {\slideentry {3}{8}{1}{49/49}{Diagnostics, Metrics and Benchmarks}{0}}
-\headcommand {\beamer@framepages {49}{49}}
-\headcommand {\slideentry {3}{8}{2}{50/50}{Diagnostics, Metrics and Benchmarks}{0}}
-\headcommand {\beamer@framepages {50}{50}}
-\headcommand {\beamer@sectionpages {27}{50}}
-\headcommand {\beamer@subsectionpages {49}{50}}
-\headcommand {\sectionentry {4}{Priors for Bayesian neural networks}{51}{Priors for Bayesian neural networks}{0}}
-\headcommand {\slideentry {4}{0}{1}{51/51}{}{0}}
-\headcommand {\beamer@framepages {51}{51}}
-\headcommand {\beamer@subsectionpages {51}{51}}
-\headcommand {\beamer@subsectionentry {0}{4}{1}{52}{Connection prior-initialization}}
-\headcommand {\slideentry {4}{1}{1}{52/52}{Connection prior-initialization}{0}}
-\headcommand {\beamer@framepages {52}{52}}
-\headcommand {\slideentry {4}{1}{2}{53/53}{Connection prior-initialization}{0}}
-\headcommand {\beamer@framepages {53}{53}}
-\headcommand {\slideentry {4}{1}{3}{54/54}{Connection prior-initialization}{0}}
+\headcommand {\slideentry {1}{4}{2}{47/49}{Model Misspecification and Interpretability}{0}}
+\headcommand {\beamer@framepages {47}{49}}
+\headcommand {\slideentry {1}{4}{3}{50/53}{Model Misspecification and Interpretability}{0}}
+\headcommand {\beamer@framepages {50}{53}}
+\headcommand {\beamer@sectionpages {8}{53}}
+\headcommand {\beamer@subsectionpages {46}{53}}
+\headcommand {\sectionentry {2}{Recap on Deep Learning}{54}{Recap on Deep Learning}{0}}
+\headcommand {\slideentry {2}{0}{1}{54/54}{}{0}}
 \headcommand {\beamer@framepages {54}{54}}
-\headcommand {\beamer@subsectionpages {52}{54}}
-\headcommand {\beamer@subsectionentry {0}{4}{2}{55}{Neural-network Gaussian process (NN-GP), Gaussian hypothesis}}
-\headcommand {\slideentry {4}{2}{1}{55/55}{Neural-network Gaussian process (NN-GP), Gaussian hypothesis}{0}}
+\headcommand {\slideentry {2}{0}{2}{55/55}{}{0}}
 \headcommand {\beamer@framepages {55}{55}}
-\headcommand {\slideentry {4}{2}{2}{56/56}{Neural-network Gaussian process (NN-GP), Gaussian hypothesis}{0}}
+\headcommand {\slideentry {2}{0}{3}{56/56}{}{0}}
 \headcommand {\beamer@framepages {56}{56}}
-\headcommand {\beamer@subsectionpages {55}{56}}
-\headcommand {\beamer@subsectionentry {0}{4}{3}{57}{Neural tangent kernel (NTK)}}
-\headcommand {\slideentry {4}{3}{1}{57/57}{Neural tangent kernel (NTK)}{0}}
+\headcommand {\slideentry {2}{0}{4}{57/57}{}{0}}
 \headcommand {\beamer@framepages {57}{57}}
-\headcommand {\slideentry {4}{3}{2}{58/58}{Neural tangent kernel (NTK)}{0}}
+\headcommand {\slideentry {2}{0}{5}{58/58}{}{0}}
 \headcommand {\beamer@framepages {58}{58}}
-\headcommand {\beamer@subsectionpages {57}{58}}
-\headcommand {\beamer@subsectionentry {0}{4}{4}{59}{Edge of Chaos}}
-\headcommand {\slideentry {4}{4}{1}{59/59}{Edge of Chaos}{0}}
+\headcommand {\slideentry {2}{0}{6}{59/59}{}{0}}
 \headcommand {\beamer@framepages {59}{59}}
-\headcommand {\slideentry {4}{4}{2}{60/60}{Edge of Chaos}{0}}
-\headcommand {\beamer@framepages {60}{60}}
-\headcommand {\slideentry {4}{4}{3}{61/61}{Edge of Chaos}{0}}
-\headcommand {\beamer@framepages {61}{61}}
-\headcommand {\slideentry {4}{4}{4}{62/62}{Edge of Chaos}{0}}
-\headcommand {\beamer@framepages {62}{62}}
-\headcommand {\beamer@subsectionpages {59}{62}}
-\headcommand {\beamer@subsectionentry {0}{4}{5}{63}{Unit priors get heavier with depth}}
-\headcommand {\slideentry {4}{5}{1}{63/63}{Unit priors get heavier with depth}{0}}
-\headcommand {\beamer@framepages {63}{63}}
-\headcommand {\slideentry {4}{5}{2}{64/64}{Unit priors get heavier with depth}{0}}
-\headcommand {\beamer@framepages {64}{64}}
-\headcommand {\slideentry {4}{5}{3}{65/65}{Unit priors get heavier with depth}{0}}
-\headcommand {\beamer@framepages {65}{65}}
-\headcommand {\slideentry {4}{5}{4}{66/66}{Unit priors get heavier with depth}{0}}
-\headcommand {\beamer@framepages {66}{66}}
-\headcommand {\beamer@sectionpages {51}{66}}
-\headcommand {\beamer@subsectionpages {63}{66}}
-\headcommand {\sectionentry {5}{Proposed Future Directions}{67}{Proposed Future Directions}{0}}
-\headcommand {\slideentry {5}{0}{1}{67/67}{}{0}}
-\headcommand {\beamer@framepages {67}{67}}
-\headcommand {\beamer@subsectionpages {67}{67}}
-\headcommand {\beamer@subsectionentry {0}{5}{1}{68}{Posterior Sampling Algorithms}}
-\headcommand {\slideentry {5}{1}{1}{68/68}{Posterior Sampling Algorithms}{0}}
-\headcommand {\beamer@framepages {68}{68}}
-\headcommand {\slideentry {5}{1}{2}{69/69}{Posterior Sampling Algorithms}{0}}
+\headcommand {\slideentry {2}{0}{6}{59/60}{}{0}}
+\headcommand {\beamer@framepages {59}{60}}
+\headcommand {\slideentry {2}{0}{7}{61/64}{}{0}}
+\headcommand {\beamer@framepages {61}{64}}
+\headcommand {\slideentry {2}{0}{8}{65/68}{}{0}}
+\headcommand {\beamer@framepages {65}{68}}
+\headcommand {\beamer@sectionpages {54}{68}}
+\headcommand {\beamer@subsectionpages {54}{68}}
+\headcommand {\sectionentry {3}{Challenges for BDL}{69}{Challenges for BDL}{0}}
+\headcommand {\slideentry {3}{0}{1}{69/69}{}{0}}
 \headcommand {\beamer@framepages {69}{69}}
-\headcommand {\slideentry {5}{1}{3}{70/70}{Posterior Sampling Algorithms}{0}}
-\headcommand {\beamer@framepages {70}{70}}
-\headcommand {\beamer@subsectionpages {68}{70}}
-\headcommand {\beamer@subsectionentry {0}{5}{2}{71}{Hybrid Bayesian Approaches}}
-\headcommand {\slideentry {5}{2}{1}{71/71}{Hybrid Bayesian Approaches}{0}}
-\headcommand {\beamer@framepages {71}{71}}
-\headcommand {\slideentry {5}{2}{2}{72/72}{Hybrid Bayesian Approaches}{0}}
-\headcommand {\beamer@framepages {72}{72}}
-\headcommand {\slideentry {5}{2}{3}{73/73}{Hybrid Bayesian Approaches}{0}}
+\headcommand {\slideentry {3}{0}{2}{70/72}{}{0}}
+\headcommand {\beamer@framepages {70}{72}}
+\headcommand {\beamer@subsectionpages {69}{72}}
+\headcommand {\beamer@subsectionentry {0}{3}{1}{73}{Laplace and Variational Approximations}}
+\headcommand {\slideentry {3}{1}{1}{73/73}{Laplace and Variational Approximations}{0}}
 \headcommand {\beamer@framepages {73}{73}}
-\headcommand {\beamer@subsectionpages {71}{73}}
-\headcommand {\beamer@subsectionentry {0}{5}{3}{74}{Deep Kernel Processes and Machines}}
-\headcommand {\slideentry {5}{3}{1}{74/74}{Deep Kernel Processes and Machines}{0}}
+\headcommand {\slideentry {3}{1}{2}{74/74}{Laplace and Variational Approximations}{0}}
 \headcommand {\beamer@framepages {74}{74}}
-\headcommand {\beamer@subsectionpages {74}{74}}
-\headcommand {\beamer@subsectionentry {0}{5}{4}{75}{Semi-Supervised and Self-Supervised Learning}}
-\headcommand {\slideentry {5}{4}{1}{75/75}{Semi-Supervised and Self-Supervised Learning}{0}}
-\headcommand {\beamer@framepages {75}{75}}
-\headcommand {\beamer@subsectionpages {75}{75}}
-\headcommand {\beamer@subsectionentry {0}{5}{5}{76}{Mixed Precision and Tensor Computations}}
-\headcommand {\slideentry {5}{5}{1}{76/76}{Mixed Precision and Tensor Computations}{0}}
-\headcommand {\beamer@framepages {76}{76}}
-\headcommand {\beamer@subsectionpages {76}{76}}
-\headcommand {\beamer@subsectionentry {0}{5}{6}{77}{Compression Strategies}}
-\headcommand {\slideentry {5}{6}{1}{77/77}{Compression Strategies}{0}}
-\headcommand {\beamer@framepages {77}{77}}
-\headcommand {\beamer@sectionpages {67}{77}}
-\headcommand {\beamer@subsectionpages {77}{77}}
-\headcommand {\sectionentry {6}{Softwares}{78}{Softwares}{0}}
-\headcommand {\slideentry {6}{0}{1}{78/78}{}{0}}
-\headcommand {\beamer@framepages {78}{78}}
-\headcommand {\slideentry {6}{0}{2}{79/79}{}{0}}
-\headcommand {\beamer@framepages {79}{79}}
-\headcommand {\beamer@sectionpages {78}{79}}
-\headcommand {\beamer@subsectionpages {78}{79}}
-\headcommand {\sectionentry {7}{References}{80}{References}{0}}
-\headcommand {\beamer@sectionpages {80}{79}}
-\headcommand {\beamer@subsectionpages {80}{79}}
-\headcommand {\sectionentry {8}{References}{80}{References}{0}}
-\headcommand {\slideentry {8}{0}{0}{80/80}{}{0}}
-\headcommand {\beamer@framepages {80}{80}}
-\headcommand {\slideentry {8}{0}{0}{80/81}{}{0}}
-\headcommand {\beamer@framepages {80}{81}}
-\headcommand {\slideentry {8}{0}{0}{80/82}{}{0}}
-\headcommand {\beamer@framepages {80}{82}}
-\headcommand {\slideentry {8}{0}{0}{80/83}{}{0}}
-\headcommand {\beamer@framepages {80}{83}}
-\headcommand {\slideentry {8}{0}{0}{80/84}{}{0}}
-\headcommand {\beamer@framepages {80}{84}}
-\headcommand {\slideentry {8}{0}{0}{80/85}{}{0}}
+\headcommand {\slideentry {3}{1}{3}{75/79}{Laplace and Variational Approximations}{0}}
+\headcommand {\beamer@framepages {75}{79}}
+\headcommand {\slideentry {3}{1}{4}{80/85}{Laplace and Variational Approximations}{0}}
 \headcommand {\beamer@framepages {80}{85}}
-\headcommand {\slideentry {8}{0}{0}{80/86}{}{0}}
-\headcommand {\beamer@framepages {80}{86}}
-\headcommand {\slideentry {8}{0}{0}{80/87}{}{0}}
-\headcommand {\beamer@framepages {80}{87}}
-\headcommand {\slideentry {8}{0}{0}{80/88}{}{0}}
-\headcommand {\beamer@framepages {80}{88}}
-\headcommand {\slideentry {8}{0}{0}{80/89}{}{0}}
-\headcommand {\beamer@framepages {80}{89}}
-\headcommand {\slideentry {8}{0}{0}{80/90}{}{0}}
-\headcommand {\beamer@framepages {80}{90}}
-\headcommand {\slideentry {8}{0}{0}{80/91}{}{0}}
-\headcommand {\beamer@framepages {80}{91}}
-\headcommand {\slideentry {8}{0}{0}{80/92}{}{0}}
-\headcommand {\beamer@framepages {80}{92}}
-\headcommand {\slideentry {8}{0}{0}{80/93}{}{0}}
-\headcommand {\beamer@framepages {80}{93}}
-\headcommand {\slideentry {8}{0}{0}{80/94}{}{0}}
-\headcommand {\beamer@framepages {80}{94}}
-\headcommand {\slideentry {8}{0}{0}{80/95}{}{0}}
-\headcommand {\beamer@framepages {80}{95}}
-\headcommand {\slideentry {8}{0}{0}{80/96}{}{0}}
-\headcommand {\beamer@framepages {80}{96}}
-\headcommand {\slideentry {8}{0}{0}{80/97}{}{0}}
-\headcommand {\beamer@framepages {80}{97}}
-\headcommand {\slideentry {8}{0}{0}{80/98}{}{0}}
-\headcommand {\beamer@framepages {80}{98}}
-\headcommand {\slideentry {8}{0}{0}{80/99}{}{0}}
-\headcommand {\beamer@framepages {80}{99}}
-\headcommand {\beamer@partpages {1}{99}}
-\headcommand {\beamer@subsectionpages {80}{99}}
-\headcommand {\beamer@sectionpages {80}{99}}
-\headcommand {\beamer@documentpages {99}}
+\headcommand {\slideentry {3}{1}{5}{86/88}{Laplace and Variational Approximations}{0}}
+\headcommand {\beamer@framepages {86}{88}}
+\headcommand {\beamer@subsectionpages {73}{88}}
+\headcommand {\beamer@subsectionentry {0}{3}{2}{89}{Ensembles}}
+\headcommand {\slideentry {3}{2}{1}{89/89}{Ensembles}{0}}
+\headcommand {\beamer@framepages {89}{89}}
+\headcommand {\slideentry {3}{2}{2}{90/93}{Ensembles}{0}}
+\headcommand {\beamer@framepages {90}{93}}
+\headcommand {\beamer@subsectionpages {89}{93}}
+\headcommand {\beamer@subsectionentry {0}{3}{3}{94}{Posterior Sampling Algorithms}}
+\headcommand {\slideentry {3}{3}{1}{94/94}{Posterior Sampling Algorithms}{0}}
+\headcommand {\beamer@framepages {94}{94}}
+\headcommand {\slideentry {3}{3}{2}{95/95}{Posterior Sampling Algorithms}{0}}
+\headcommand {\beamer@framepages {95}{95}}
+\headcommand {\slideentry {3}{3}{3}{96/99}{Posterior Sampling Algorithms}{0}}
+\headcommand {\beamer@framepages {96}{99}}
+\headcommand {\slideentry {3}{3}{4}{100/102}{Posterior Sampling Algorithms}{0}}
+\headcommand {\beamer@framepages {100}{102}}
+\headcommand {\beamer@subsectionpages {94}{102}}
+\headcommand {\beamer@subsectionentry {0}{3}{4}{103}{Tempered and Cold Posteriors}}
+\headcommand {\slideentry {3}{4}{1}{103/103}{Tempered and Cold Posteriors}{0}}
+\headcommand {\beamer@framepages {103}{103}}
+\headcommand {\slideentry {3}{4}{2}{104/105}{Tempered and Cold Posteriors}{0}}
+\headcommand {\beamer@framepages {104}{105}}
+\headcommand {\beamer@subsectionpages {103}{105}}
+\headcommand {\beamer@subsectionentry {0}{3}{5}{106}{Prior Specification}}
+\headcommand {\slideentry {3}{5}{1}{106/106}{Prior Specification}{0}}
+\headcommand {\beamer@framepages {106}{106}}
+\headcommand {\slideentry {3}{5}{2}{107/114}{Prior Specification}{0}}
+\headcommand {\beamer@framepages {107}{114}}
+\headcommand {\beamer@subsectionpages {106}{114}}
+\headcommand {\beamer@subsectionentry {0}{3}{6}{115}{Scalability}}
+\headcommand {\slideentry {3}{6}{1}{115/115}{Scalability}{0}}
+\headcommand {\beamer@framepages {115}{115}}
+\headcommand {\slideentry {3}{6}{2}{116/118}{Scalability}{0}}
+\headcommand {\beamer@framepages {116}{118}}
+\headcommand {\slideentry {3}{6}{3}{119/124}{Scalability}{0}}
+\headcommand {\beamer@framepages {119}{124}}
+\headcommand {\beamer@subsectionpages {115}{124}}
+\headcommand {\beamer@subsectionentry {0}{3}{7}{125}{Foundation Models}}
+\headcommand {\slideentry {3}{7}{1}{125/125}{Foundation Models}{0}}
+\headcommand {\beamer@framepages {125}{125}}
+\headcommand {\slideentry {3}{7}{2}{126/130}{Foundation Models}{0}}
+\headcommand {\beamer@framepages {126}{130}}
+\headcommand {\beamer@subsectionpages {125}{130}}
+\headcommand {\beamer@subsectionentry {0}{3}{8}{131}{Diagnostics, Metrics and Benchmarks}}
+\headcommand {\slideentry {3}{8}{1}{131/131}{Diagnostics, Metrics and Benchmarks}{0}}
+\headcommand {\beamer@framepages {131}{131}}
+\headcommand {\slideentry {3}{8}{2}{132/136}{Diagnostics, Metrics and Benchmarks}{0}}
+\headcommand {\beamer@framepages {132}{136}}
+\headcommand {\beamer@sectionpages {69}{136}}
+\headcommand {\beamer@subsectionpages {131}{136}}
+\headcommand {\sectionentry {4}{Priors for Bayesian neural networks}{137}{Priors for Bayesian neural networks}{0}}
+\headcommand {\slideentry {4}{0}{1}{137/137}{}{0}}
+\headcommand {\beamer@framepages {137}{137}}
+\headcommand {\beamer@subsectionpages {137}{137}}
+\headcommand {\beamer@subsectionentry {0}{4}{1}{138}{Connection prior-initialization}}
+\headcommand {\slideentry {4}{1}{1}{138/138}{Connection prior-initialization}{0}}
+\headcommand {\beamer@framepages {138}{138}}
+\headcommand {\slideentry {4}{1}{2}{139/139}{Connection prior-initialization}{0}}
+\headcommand {\beamer@framepages {139}{139}}
+\headcommand {\slideentry {4}{1}{3}{140/140}{Connection prior-initialization}{0}}
+\headcommand {\beamer@framepages {140}{140}}
+\headcommand {\beamer@subsectionpages {138}{140}}
+\headcommand {\beamer@subsectionentry {0}{4}{2}{141}{Neural-network Gaussian process (NN-GP), Gaussian hypothesis}}
+\headcommand {\slideentry {4}{2}{1}{141/141}{Neural-network Gaussian process (NN-GP), Gaussian hypothesis}{0}}
+\headcommand {\beamer@framepages {141}{141}}
+\headcommand {\slideentry {4}{2}{2}{142/142}{Neural-network Gaussian process (NN-GP), Gaussian hypothesis}{0}}
+\headcommand {\beamer@framepages {142}{142}}
+\headcommand {\beamer@subsectionpages {141}{142}}
+\headcommand {\beamer@subsectionentry {0}{4}{3}{143}{Neural tangent kernel (NTK)}}
+\headcommand {\slideentry {4}{3}{1}{143/143}{Neural tangent kernel (NTK)}{0}}
+\headcommand {\beamer@framepages {143}{143}}
+\headcommand {\slideentry {4}{3}{2}{144/144}{Neural tangent kernel (NTK)}{0}}
+\headcommand {\beamer@framepages {144}{144}}
+\headcommand {\beamer@subsectionpages {143}{144}}
+\headcommand {\beamer@subsectionentry {0}{4}{4}{145}{Edge of Chaos}}
+\headcommand {\slideentry {4}{4}{1}{145/145}{Edge of Chaos}{0}}
+\headcommand {\beamer@framepages {145}{145}}
+\headcommand {\slideentry {4}{4}{2}{146/146}{Edge of Chaos}{0}}
+\headcommand {\beamer@framepages {146}{146}}
+\headcommand {\slideentry {4}{4}{3}{147/147}{Edge of Chaos}{0}}
+\headcommand {\beamer@framepages {147}{147}}
+\headcommand {\slideentry {4}{4}{4}{148/148}{Edge of Chaos}{0}}
+\headcommand {\beamer@framepages {148}{148}}
+\headcommand {\beamer@subsectionpages {145}{148}}
+\headcommand {\beamer@subsectionentry {0}{4}{5}{149}{Unit priors get heavier with depth}}
+\headcommand {\slideentry {4}{5}{1}{149/149}{Unit priors get heavier with depth}{0}}
+\headcommand {\beamer@framepages {149}{149}}
+\headcommand {\slideentry {4}{5}{2}{150/150}{Unit priors get heavier with depth}{0}}
+\headcommand {\beamer@framepages {150}{150}}
+\headcommand {\slideentry {4}{5}{3}{151/151}{Unit priors get heavier with depth}{0}}
+\headcommand {\beamer@framepages {151}{151}}
+\headcommand {\slideentry {4}{5}{4}{152/152}{Unit priors get heavier with depth}{0}}
+\headcommand {\beamer@framepages {152}{152}}
+\headcommand {\beamer@sectionpages {137}{152}}
+\headcommand {\beamer@subsectionpages {149}{152}}
+\headcommand {\sectionentry {5}{Proposed Future Directions}{153}{Proposed Future Directions}{0}}
+\headcommand {\slideentry {5}{0}{1}{153/153}{}{0}}
+\headcommand {\beamer@framepages {153}{153}}
+\headcommand {\beamer@subsectionpages {153}{153}}
+\headcommand {\beamer@subsectionentry {0}{5}{1}{154}{Posterior Sampling Algorithms}}
+\headcommand {\slideentry {5}{1}{1}{154/154}{Posterior Sampling Algorithms}{0}}
+\headcommand {\beamer@framepages {154}{154}}
+\headcommand {\slideentry {5}{1}{2}{155/155}{Posterior Sampling Algorithms}{0}}
+\headcommand {\beamer@framepages {155}{155}}
+\headcommand {\slideentry {5}{1}{3}{156/156}{Posterior Sampling Algorithms}{0}}
+\headcommand {\beamer@framepages {156}{156}}
+\headcommand {\beamer@subsectionpages {154}{156}}
+\headcommand {\beamer@subsectionentry {0}{5}{2}{157}{Hybrid Bayesian Approaches}}
+\headcommand {\slideentry {5}{2}{1}{157/157}{Hybrid Bayesian Approaches}{0}}
+\headcommand {\beamer@framepages {157}{157}}
+\headcommand {\slideentry {5}{2}{2}{158/158}{Hybrid Bayesian Approaches}{0}}
+\headcommand {\beamer@framepages {158}{158}}
+\headcommand {\slideentry {5}{2}{3}{159/159}{Hybrid Bayesian Approaches}{0}}
+\headcommand {\beamer@framepages {159}{159}}
+\headcommand {\beamer@subsectionpages {157}{159}}
+\headcommand {\beamer@subsectionentry {0}{5}{3}{160}{Deep Kernel Processes and Machines}}
+\headcommand {\slideentry {5}{3}{1}{160/160}{Deep Kernel Processes and Machines}{0}}
+\headcommand {\beamer@framepages {160}{160}}
+\headcommand {\beamer@subsectionpages {160}{160}}
+\headcommand {\beamer@subsectionentry {0}{5}{4}{161}{Semi-Supervised and Self-Supervised Learning}}
+\headcommand {\slideentry {5}{4}{1}{161/161}{Semi-Supervised and Self-Supervised Learning}{0}}
+\headcommand {\beamer@framepages {161}{161}}
+\headcommand {\beamer@subsectionpages {161}{161}}
+\headcommand {\beamer@subsectionentry {0}{5}{5}{162}{Mixed Precision and Tensor Computations}}
+\headcommand {\slideentry {5}{5}{1}{162/162}{Mixed Precision and Tensor Computations}{0}}
+\headcommand {\beamer@framepages {162}{162}}
+\headcommand {\beamer@subsectionpages {162}{162}}
+\headcommand {\beamer@subsectionentry {0}{5}{6}{163}{Compression Strategies}}
+\headcommand {\slideentry {5}{6}{1}{163/163}{Compression Strategies}{0}}
+\headcommand {\beamer@framepages {163}{163}}
+\headcommand {\beamer@sectionpages {153}{163}}
+\headcommand {\beamer@subsectionpages {163}{163}}
+\headcommand {\sectionentry {6}{Softwares}{164}{Softwares}{0}}
+\headcommand {\slideentry {6}{0}{1}{164/164}{}{0}}
+\headcommand {\beamer@framepages {164}{164}}
+\headcommand {\slideentry {6}{0}{2}{165/165}{}{0}}
+\headcommand {\beamer@framepages {165}{165}}
+\headcommand {\beamer@sectionpages {164}{165}}
+\headcommand {\beamer@subsectionpages {164}{165}}
+\headcommand {\sectionentry {7}{References}{166}{References}{0}}
+\headcommand {\beamer@sectionpages {166}{165}}
+\headcommand {\beamer@subsectionpages {166}{165}}
+\headcommand {\sectionentry {8}{References}{166}{References}{0}}
+\headcommand {\slideentry {8}{0}{0}{166/166}{}{0}}
+\headcommand {\beamer@framepages {166}{166}}
+\headcommand {\slideentry {8}{0}{0}{166/167}{}{0}}
+\headcommand {\beamer@framepages {166}{167}}
+\headcommand {\slideentry {8}{0}{0}{166/168}{}{0}}
+\headcommand {\beamer@framepages {166}{168}}
+\headcommand {\slideentry {8}{0}{0}{166/169}{}{0}}
+\headcommand {\beamer@framepages {166}{169}}
+\headcommand {\slideentry {8}{0}{0}{166/170}{}{0}}
+\headcommand {\beamer@framepages {166}{170}}
+\headcommand {\slideentry {8}{0}{0}{166/171}{}{0}}
+\headcommand {\beamer@framepages {166}{171}}
+\headcommand {\slideentry {8}{0}{0}{166/172}{}{0}}
+\headcommand {\beamer@framepages {166}{172}}
+\headcommand {\slideentry {8}{0}{0}{166/173}{}{0}}
+\headcommand {\beamer@framepages {166}{173}}
+\headcommand {\slideentry {8}{0}{0}{166/174}{}{0}}
+\headcommand {\beamer@framepages {166}{174}}
+\headcommand {\slideentry {8}{0}{0}{166/175}{}{0}}
+\headcommand {\beamer@framepages {166}{175}}
+\headcommand {\slideentry {8}{0}{0}{166/176}{}{0}}
+\headcommand {\beamer@framepages {166}{176}}
+\headcommand {\slideentry {8}{0}{0}{166/177}{}{0}}
+\headcommand {\beamer@framepages {166}{177}}
+\headcommand {\slideentry {8}{0}{0}{166/178}{}{0}}
+\headcommand {\beamer@framepages {166}{178}}
+\headcommand {\slideentry {8}{0}{0}{166/179}{}{0}}
+\headcommand {\beamer@framepages {166}{179}}
+\headcommand {\slideentry {8}{0}{0}{166/180}{}{0}}
+\headcommand {\beamer@framepages {166}{180}}
+\headcommand {\slideentry {8}{0}{0}{166/181}{}{0}}
+\headcommand {\beamer@framepages {166}{181}}
+\headcommand {\slideentry {8}{0}{0}{166/182}{}{0}}
+\headcommand {\beamer@framepages {166}{182}}
+\headcommand {\slideentry {8}{0}{0}{166/183}{}{0}}
+\headcommand {\beamer@framepages {166}{183}}
+\headcommand {\slideentry {8}{0}{0}{166/184}{}{0}}
+\headcommand {\beamer@framepages {166}{184}}
+\headcommand {\slideentry {8}{0}{0}{166/185}{}{0}}
+\headcommand {\beamer@framepages {166}{185}}
+\headcommand {\beamer@partpages {1}{185}}
+\headcommand {\beamer@subsectionpages {166}{185}}
+\headcommand {\beamer@sectionpages {166}{185}}
+\headcommand {\beamer@documentpages {185}}
 \headcommand {\gdef \inserttotalframenumber {99}}

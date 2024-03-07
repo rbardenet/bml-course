@@ -1,0 +1,31 @@
+\BOOKMARK [2][]{Outline0.1}{Introduction}{}% 1
+\BOOKMARK [3][]{Outline0.1.1.21}{Uncertainty Quantification}{Outline0.1}% 2
+\BOOKMARK [3][]{Outline0.1.2.36}{Data Efficiency}{Outline0.1}% 3
+\BOOKMARK [3][]{Outline0.1.3.43}{Adaptability to New and Evolving Domains}{Outline0.1}% 4
+\BOOKMARK [3][]{Outline0.1.4.46}{Model Misspecification and Interpretability}{Outline0.1}% 5
+\BOOKMARK [2][]{Outline0.2}{Recap on Deep Learning}{}% 6
+\BOOKMARK [2][]{Outline0.3}{Challenges for BDL}{}% 7
+\BOOKMARK [3][]{Outline0.3.1.73}{Laplace and Variational Approximations}{Outline0.3}% 8
+\BOOKMARK [3][]{Outline0.3.2.89}{Ensembles}{Outline0.3}% 9
+\BOOKMARK [3][]{Outline0.3.3.94}{Posterior Sampling Algorithms}{Outline0.3}% 10
+\BOOKMARK [3][]{Outline0.3.4.103}{Tempered and Cold Posteriors}{Outline0.3}% 11
+\BOOKMARK [3][]{Outline0.3.5.106}{Prior Specification}{Outline0.3}% 12
+\BOOKMARK [3][]{Outline0.3.6.115}{Scalability}{Outline0.3}% 13
+\BOOKMARK [3][]{Outline0.3.7.125}{Foundation Models}{Outline0.3}% 14
+\BOOKMARK [3][]{Outline0.3.8.131}{Diagnostics, Metrics and Benchmarks}{Outline0.3}% 15
+\BOOKMARK [2][]{Outline0.4}{Priors for Bayesian neural networks}{}% 16
+\BOOKMARK [3][]{Outline0.4.1.138}{Connection prior-initialization}{Outline0.4}% 17
+\BOOKMARK [3][]{Outline0.4.2.141}{Neural-network Gaussian process \(NN-GP\), Gaussian hypothesis}{Outline0.4}% 18
+\BOOKMARK [3][]{Outline0.4.3.143}{Neural tangent kernel \(NTK\)}{Outline0.4}% 19
+\BOOKMARK [3][]{Outline0.4.4.145}{Edge of Chaos}{Outline0.4}% 20
+\BOOKMARK [3][]{Outline0.4.5.149}{Unit priors get heavier with depth}{Outline0.4}% 21
+\BOOKMARK [2][]{Outline0.5}{Proposed Future Directions}{}% 22
+\BOOKMARK [3][]{Outline0.5.1.154}{Posterior Sampling Algorithms}{Outline0.5}% 23
+\BOOKMARK [3][]{Outline0.5.2.157}{Hybrid Bayesian Approaches}{Outline0.5}% 24
+\BOOKMARK [3][]{Outline0.5.3.160}{Deep Kernel Processes and Machines}{Outline0.5}% 25
+\BOOKMARK [3][]{Outline0.5.4.161}{Semi-Supervised and Self-Supervised Learning}{Outline0.5}% 26
+\BOOKMARK [3][]{Outline0.5.5.162}{Mixed Precision and Tensor Computations}{Outline0.5}% 27
+\BOOKMARK [3][]{Outline0.5.6.163}{Compression Strategies}{Outline0.5}% 28
+\BOOKMARK [2][]{Outline0.6}{Softwares}{}% 29
+\BOOKMARK [2][]{Outline0.7}{References}{}% 30
+\BOOKMARK [2][]{Outline0.8}{References}{}% 31

@@ -1,0 +1,917 @@
+\begin{thebibliography}{}
+
+\bibitem[Abdar et~al., 2021a]{abdar2021review}
+Abdar, M., Pourpanah, F., Hussain, S., Rezazadegan, D., Liu, L., Ghavamzadeh,
+  M., Fieguth, P., Cao, X., Khosravi, A., and Acharya, U.~R. (2021a).
+\newblock A review of uncertainty quantification in deep learning: Techniques,
+  applications and challenges.
+\newblock {\em Information Fusion}.
+
+\bibitem[Abdar et~al., 2021b]{abdar2021uncertainty}
+Abdar, M., Samami, M., Mahmoodabad, S.~D., Doan, T., Mazoure, B.,
+  Hashemifesharaki, R., Liu, L., Khosravi, A., Acharya, U.~R., Makarenkov, V.,
+  et~al. (2021b).
+\newblock Uncertainty quantification in skin cancer classification using
+  three-way decision-based {B}ayesian deep learning.
+\newblock {\em Computers in Biology and Medicine}, 135:104418.
+
+\bibitem[Agrawal et~al., 2020]{agrawal2020}
+Agrawal, D., Papamarkou, T., and Hinkle, J. (2020).
+\newblock Wide neural networks with bottlenecks are deep {G}aussian processes.
+\newblock {\em Journal of Machine Learning Research}, 21(175):1--66.
+
+\bibitem[Alexos et~al., 2022]{alexos2022structured}
+Alexos, A., Boyd, A.~J., and Mandt, S. (2022).
+\newblock Structured stochastic gradient {MCMC}.
+\newblock In {\em International Conference on Machine Learning}.
+
+\bibitem[Andriushchenko, 2023]{andriushchenko2023adversarial}
+Andriushchenko, M. (2023).
+\newblock Adversarial attacks on {GPT-4} via simple random search.
+\newblock {\em Preprint}.
+
+\bibitem[Antoran et~al., 2023]{antoran2023}
+Antoran, J., Padhy, S., Barbano, R., Nalisnick, E., Janz, D., and
+  Hern{\'a}ndez-Lobato, J.~M. (2023).
+\newblock Sampling-based inference for large linear models, with application to
+  linearised {L}aplace.
+\newblock In {\em International Conference on Learning Representations}.
+
+\bibitem[Arbel et~al., 2022]{arbel2023primer}
+Arbel, J., Pitas, K., and Vladimirova, M. (2022).
+\newblock {A primer on Bayesian neural networks: review and debates}.
+\newblock {\em Preprint}.
+
+\bibitem[Ashukha et~al., 2020]{ashukha2020pitfalls}
+Ashukha, A., Lyzhov, A., Molchanov, D., and Vetrov, D. (2020).
+\newblock Pitfalls of in-domain uncertainty estimation and ensembling in deep
+  learning.
+\newblock {\em International Conference on Learning Representations}.
+
+\bibitem[Atzeni et~al., 2023]{atzeni2023infusing}
+Atzeni, M., Sachan, M., and Loukas, A. (2023).
+\newblock Infusing lattice symmetry priors in attention mechanisms for
+  sample-efficient abstract geometric reasoning.
+\newblock {\em arXiv preprint arXiv:2306.03175}.
+
+\bibitem[Bamler et~al., 2020]{bamler2020augmenting}
+Bamler, R., Salehi, F., and Mandt, S. (2020).
+\newblock Augmenting and tuning knowledge graph embeddings.
+\newblock In {\em Conference on Uncertainty in Artificial Intelligence}.
+
+\bibitem[Band et~al., 2021]{band2021benchmarking}
+Band, N., Rudner, T. G.~J., Feng, Q., Filos, A., Nado, Z., Dusenberry, M.~W.,
+  Jerfel, G., Tran, D., and Gal, Y. (2021).
+\newblock {B}enchmarking {B}ayesian {D}eep {L}earning {o}n {D}iabetic
+  {R}etinopathy {D}etection {T}asks.
+\newblock In {\em Advances in Neural Information Processing Systems}.
+
+\bibitem[Barron, 1994]{barron1994approximation}
+Barron, A.~R. (1994).
+\newblock Approximation and estimation bounds for artificial neural networks.
+\newblock {\em Machine Learning}, 14(1):115--133.
+
+\bibitem[Belkin et~al., 2019]{belkin2019reconciling}
+Belkin, M., Hsu, D., Ma, S., and Mandal, S. (2019).
+\newblock Reconciling modern machine-learning practice and the classical
+  bias--variance trade-off.
+\newblock {\em National Academy of Sciences}, 116(32):15849--15854.
+
+\bibitem[Bingham et~al., 2019]{bingham2019}
+Bingham, E., Chen, J.~P., Jankowiak, M., Obermeyer, F., Pradhan, N.,
+  Karaletsos, T., Singh, R., Szerlip, P., Horsfall, P., and Goodman, N.~D.
+  (2019).
+\newblock Pyro: Deep universal probabilistic programming.
+\newblock {\em Journal of Machine Learning Research}, 20(28):1--6.
+
+\bibitem[Bouchiat et~al., 2023]{bouchiat2023laplace}
+Bouchiat, K., Immer, A., Y{\`e}che, H., R{\"a}tsch, G., and Fortuin, V. (2023).
+\newblock Laplace-approximated neural additive models: {I}mproving
+  interpretability with {B}ayesian inference.
+\newblock {\em arXiv preprint arXiv:2305.16905}.
+
+\bibitem[Brooks et~al., 2011]{brooks2011handbook}
+Brooks, S., Gelman, A., Jones, G., and Meng, X.-L. (2011).
+\newblock {\em Handbook of {M}arkov chain {M}onte {C}arlo}.
+\newblock CRC Press.
+
+\bibitem[Casper et~al., 2023]{casper2023open}
+Casper, S., Davies, X., Shi, C., Gilbert, T.~K., Scheurer, J., Rando, J.,
+  Freedman, R., Korbak, T., Lindner, D., Freire, P., et~al. (2023).
+\newblock Open problems and fundamental limitations of reinforcement learning
+  from human feedback.
+\newblock {\em Transactions on Machine Learning Research}.
+
+\bibitem[Chatziafratis et~al., 2020a]{chatziafratis2020better}
+Chatziafratis, V., Nagarajan, S.~G., and Panageas, I. (2020a).
+\newblock Better depth-width trade-offs for neural networks through the lens of
+  dynamical systems.
+\newblock In {\em International Conference on Machine Learning}.
+
+\bibitem[Chatziafratis et~al., 2020b]{chatziafratis2020depth}
+Chatziafratis, V., Nagarajan, S.~G., Panageas, I., and Wang, X. (2020b).
+\newblock Depth-width trade-offs for {ReLU} networks via {S}harkovsky's
+  theorem.
+\newblock {\em International Conference on Learning Representations}.
+
+\bibitem[Chen et~al., 2014]{chen2014stochastic}
+Chen, T., Fox, E., and Guestrin, C. (2014).
+\newblock Stochastic gradient {H}amiltonian {M}onte {C}arlo.
+\newblock In {\em International Conference on Machine Learning}.
+
+\bibitem[Ciosek et~al., 2020]{ciosek2020conservative}
+Ciosek, K., Fortuin, V., Tomioka, R., Hofmann, K., and Turner, R. (2020).
+\newblock Conservative uncertainty estimation by fitting prior networks.
+\newblock In {\em International Conference on Learning Representations}.
+
+\bibitem[Cohen, 2022]{cohen2022bayesian}
+Cohen, S. (2022).
+\newblock {\em Bayesian analysis in natural language processing}.
+\newblock Springer Nature.
+
+\bibitem[Cranmer et~al., 2021]{cranmer2021bayesian}
+Cranmer, M., Tamayo, D., Rein, H., Battaglia, P., Hadden, S., Armitage, P.~J.,
+  Ho, S., and Spergel, D.~N. (2021).
+\newblock A {B}ayesian neural network predicts the dissolution of compact
+  planetary systems.
+\newblock {\em Proceedings of the National Academy of Sciences},
+  118(40):e2026053118.
+
+\bibitem[Cybenko, 1989]{cybenko1989approximation}
+Cybenko, G. (1989).
+\newblock Approximation by superpositions of a sigmoidal function.
+\newblock {\em Mathematics of Control, Signals and Systems}, 2(4):303--314.
+
+\bibitem[Damianou and Lawrence, 2013]{damianou2013}
+Damianou, A. and Lawrence, N.~D. (2013).
+\newblock Deep {G}aussian processes.
+\newblock In {\em International Conference on Artificial Intelligence and
+  Statistics}.
+
+\bibitem[D'Angelo and Fortuin, 2021]{dangelo2021repulsive}
+D'Angelo, F. and Fortuin, V. (2021).
+\newblock Repulsive deep ensembles are {B}ayesian.
+\newblock {\em Advances in Neural Information Processing Systems}.
+
+\bibitem[D'Angelo et~al., 2021]{dangelo2021stein}
+D'Angelo, F., Fortuin, V., and Wenzel, F. (2021).
+\newblock On {S}tein variational neural network ensembles.
+\newblock {\em arXiv preprint arXiv:2106.10760}.
+
+\bibitem[Daxberger et~al., 2021a]{daxberger2021b}
+Daxberger, E., Kristiadi, A., Immer, A., Eschenhagen, R., Bauer, M., and
+  Hennig, P. (2021a).
+\newblock Laplace redux - effortless {B}ayesian deep learning.
+\newblock In {\em Advances in Neural Information Processing Systems}.
+
+\bibitem[Daxberger et~al., 2021b]{daxberger2021a}
+Daxberger, E., Nalisnick, E., Allingham, J.~U., Antoran, J., and
+  Hern{\'a}ndez-Lobato, J.~M. (2021b).
+\newblock {B}ayesian deep learning via subnetwork inference.
+\newblock In {\em International Conference on Machine Learning}.
+
+\bibitem[de~G.~Matthews et~al., 2018]{matthews2018}
+de~G.~Matthews, A.~G., Rowland, M., Hron, J., Turner, R.~E., and Ghahramani, Z.
+  (2018).
+\newblock {G}aussian process behaviour in wide deep neural networks.
+\newblock {\em International Conference on Learning Representations}.
+
+\bibitem[Detommaso et~al., 2023]{detommaso2023fortuna}
+Detommaso, G., Gasparin, A., Donini, M., Seeger, M., Wilson, A.~G., and
+  Archambeau, C. (2023).
+\newblock Fortuna: A library for uncertainty quantification in deep learning.
+\newblock {\em arXiv preprint arXiv:2302.04019}.
+
+\bibitem[Dold et~al., 2024]{dold2024}
+Dold, D., R{\"u}gamer, D., Sick, B., and D{\"u}rr, O. (2024).
+\newblock Semi-structured subspace inference.
+\newblock In {\em International Conference on Artificial Intelligence and
+  Statistics}.
+
+\bibitem[Ferreira et~al., 2020]{ferreira2020galaxy}
+Ferreira, L., Conselice, C.~J., Duncan, K., Cheng, T.-Y., Griffiths, A., and
+  Whitney, A. (2020).
+\newblock Galaxy merger rates up to z $\sim$ 3 using a {B}ayesian deep learning
+  model: A major-merger classifier using illustris{TNG} simulation data.
+\newblock {\em The Astrophysical Journal}, 895(2):115.
+
+\bibitem[Finzi et~al., 2021]{finzi2021residual}
+Finzi, M., Benton, G., and Wilson, A.~G. (2021).
+\newblock Residual pathway priors for soft equivariance constraints.
+\newblock In {\em Advances in Neural Information Processing Systems}.
+
+\bibitem[Folgoc et~al., 2021]{folgoc2021mc}
+Folgoc, L.~L., Baltatzis, V., Desai, S., Devaraj, A., Ellis, S., Manzanera, O.
+  E.~M., Nair, A., Qiu, H., Schnabel, J., and Glocker, B. (2021).
+\newblock Is mc dropout bayesian?
+\newblock {\em arXiv preprint arXiv:2110.04286}.
+
+\bibitem[Fortuin, 2022]{fortuin2021priors}
+Fortuin, V. (2022).
+\newblock {Priors in Bayesian deep learning: A review}.
+\newblock {\em International Statistical Review}.
+
+\bibitem[Fortuin et~al., 2022]{fortuin2022bayesian}
+Fortuin, V., Garriga-Alonso, A., Ober, S.~W., Wenzel, F., R{\"a}tsch, G.,
+  Turner, R.~E., van~der Wilk, M., and Aitchison, L. (2022).
+\newblock {B}ayesian neural network priors revisited.
+\newblock In {\em International Conference on Learning Representations}.
+
+\bibitem[Fortuin et~al., 2021]{fortuin2021bnnpriors}
+Fortuin, V., Garriga-Alonso, A., van~der Wilk, M., and Aitchison, L. (2021).
+\newblock {BNNpriors}: A library for {B}ayesian neural network inference with
+  different prior distributions.
+\newblock {\em Software Impacts}, 9:100079.
+
+\bibitem[Funahashi, 1989]{funahashi1989approximate}
+Funahashi, K.-I. (1989).
+\newblock On the approximate realization of continuous mappings by neural
+  networks.
+\newblock {\em Neural Networks}, 2(3):183--192.
+
+\bibitem[Gal and Ghahramani, 2016]{gal2016dropout}
+Gal, Y. and Ghahramani, Z. (2016).
+\newblock Dropout as a {B}ayesian approximation: Representing model uncertainty
+  in deep learning.
+\newblock In {\em International Conference on Machine Learning}.
+
+\bibitem[Gal et~al., 2017]{galAL2017}
+Gal, Y., Islam, R., and Ghahramani, Z. (2017).
+\newblock Deep {B}ayesian active learning with image data.
+\newblock In {\em International Conference on Machine Learning}.
+
+\bibitem[Gelman et~al., 2020]{gelman2020bayesian}
+Gelman, A., Vehtari, A., Simpson, D., Margossian, C.~C., Carpenter, B., Yao,
+  Y., Kennedy, L., Gabry, J., B{\"u}rkner, P.-C., and Modr{\'a}k, M. (2020).
+\newblock Bayesian workflow.
+\newblock {\em arXiv preprint arXiv:2011.01808}.
+
+\bibitem[Ghosh et~al., 2018]{ghosh2018structured}
+Ghosh, S., Yao, J., and Doshi-Velez, F. (2018).
+\newblock Structured variational learning of bayesian neural networks with
+  horseshoe priors.
+\newblock In {\em International Conference on Machine Learning}.
+
+\bibitem[Goan and Fookes, 2020]{goan2020bayesian}
+Goan, E. and Fookes, C. (2020).
+\newblock Bayesian neural networks: An introduction and survey.
+\newblock In {\em Case Studies in Applied Bayesian Data Science}, pages 45--87.
+  Springer.
+
+\bibitem[Gruver et~al., 2021]{gruver2021effective}
+Gruver, N., Stanton, S., Kirichenko, P., Finzi, M., Maffettone, P., Myers, V.,
+  Delaney, E., Greenside, P., and Wilson, A.~G. (2021).
+\newblock Effective surrogate models for protein design with {B}ayesian
+  optimization.
+\newblock In {\em ICML Workshop on Computational Biology}.
+
+\bibitem[Gu and Dunson, 2023]{gu2023}
+Gu, Y. and Dunson, D.~B. (2023).
+\newblock {B}ayesian pyramids: identifiable multilayer discrete latent
+  structure models for discrete data.
+\newblock {\em Journal of the Royal Statistical Society Series B: Statistical
+  Methodology}, 85(2):399--426.
+
+\bibitem[He et~al., 2020]{he2020}
+He, B., Lakshminarayanan, B., and Teh, Y.~W. (2020).
+\newblock Bayesian deep ensembles via the neural tangent kernel.
+\newblock In {\em Advances in Neural Information Processing Systems}.
+
+\bibitem[He et~al., 2016]{he2016deep}
+He, K., Zhang, X., Ren, S., and Sun, J. (2016).
+\newblock Deep residual learning for image recognition.
+\newblock In {\em Computer Vision and Pattern Recognition}.
+
+\bibitem[Hein et~al., 2019]{hein2019relu}
+Hein, M., Andriushchenko, M., and Bitterwolf, J. (2019).
+\newblock Why {ReLU} networks yield high-confidence predictions far away from
+  the training data and how to mitigate the problem.
+\newblock In {\em Computer Vision and Pattern Recognition}.
+
+\bibitem[Hern{\'a}ndez and L{\'o}pez, 2020]{hernandez2020uncertainty}
+Hern{\'a}ndez, S. and L{\'o}pez, J.~L. (2020).
+\newblock Uncertainty quantification for plant disease detection using
+  {B}ayesian deep learning.
+\newblock {\em Applied Soft Computing}, 96:106597.
+
+\bibitem[Hochreiter and Schmidhuber, 1997]{hochreiter1997long}
+Hochreiter, S. and Schmidhuber, J. (1997).
+\newblock Long short-term memory.
+\newblock {\em Neural Computation}, 9(8):1735--1780.
+
+\bibitem[Hoeting et~al., 1998]{hoeting1998bayesian}
+Hoeting, J.~A., Madigan, D., Raftery, A.~E., and Volinsky, C.~T. (1998).
+\newblock {B}ayesian model averaging.
+\newblock In {\em AAAI Workshop on Integrating Multiple Learned Models}.
+
+\bibitem[Hoeting et~al., 1999]{hoeting1999bayesian}
+Hoeting, J.~A., Madigan, D., Raftery, A.~E., and Volinsky, C.~T. (1999).
+\newblock Bayesian model averaging: a tutorial (with comments by m. clyde,
+  david draper and ei george.
+\newblock {\em Statistical Science}, 14(4):382--417.
+
+\bibitem[Hornik et~al., 1989]{hornik1989multilayer}
+Hornik, K., Stinchcombe, M., and White, H. (1989).
+\newblock Multilayer feedforward networks are universal approximators.
+\newblock {\em Neural Networks}, 2(5):359--366.
+
+\bibitem[Hubin and Storvik, 2019]{hubin2019combining}
+Hubin, A. and Storvik, G. (2019).
+\newblock Combining model and parameter uncertainty in {B}ayesian neural
+  networks.
+\newblock {\em arXiv preprint arXiv:1903.07594}.
+
+\bibitem[Hubin et~al., 2021]{hubin2021flexible}
+Hubin, A., Storvik, G., and Frommlet, F. (2021).
+\newblock Flexible {B}ayesian nonlinear model configuration.
+\newblock {\em Journal of Artificial Intelligence Research}, 72:901--942.
+
+\bibitem[Immer et~al., 2021a]{immer2021scalable}
+Immer, A., Bauer, M., Fortuin, V., R{\"a}tsch, G., and Khan, M.~E. (2021a).
+\newblock Scalable marginal likelihood estimation for model selection in deep
+  learning.
+\newblock In {\em International Conference on Machine Learning}.
+
+\bibitem[Immer et~al., 2021b]{pmlr-v130-immer21a}
+Immer, A., Korzepa, M., and Bauer, M. (2021b).
+\newblock Improving predictions of {B}ayesian neural nets via local
+  linearization.
+\newblock In {\em International Conference on Artificial Intelligence and
+  Statistics}.
+
+\bibitem[Immer et~al., 2022]{immer2022invariance}
+Immer, A., van~der Ouderaa, T., R{\"a}tsch, G., Fortuin, V., and van~der Wilk,
+  M. (2022).
+\newblock Invariance learning in deep neural networks with differentiable
+  {L}aplace approximations.
+\newblock {\em Advances in Neural Information Processing Systems}.
+
+\bibitem[Immer et~al., 2023]{immer2023stochastic}
+Immer, A., Van Der~Ouderaa, T.~F., Van Der~Wilk, M., Ratsch, G., and
+  Sch{\"o}lkopf, B. (2023).
+\newblock Stochastic marginal likelihood gradients using neural tangent
+  kernels.
+\newblock In {\em International Conference on Machine Learning}.
+
+\bibitem[Izmailov et~al., 2020]{izmailov2020}
+Izmailov, P., Maddox, W.~J., Kirichenko, P., Garipov, T., Vetrov, D., and
+  Wilson, A.~G. (2020).
+\newblock Subspace inference for {B}ayesian deep learning.
+\newblock In {\em Conference on Uncertainty in Artificial Intelligence}.
+
+\bibitem[Izmailov et~al., 2021]{izmailov2021}
+Izmailov, P., Vikram, S., Hoffman, M.~D., and Wilson, A. G.~G. (2021).
+\newblock What are {B}ayesian neural network posteriors really like?
+\newblock In {\em International Conference on Machine Learning}.
+
+\bibitem[Jacot et~al., 2018]{jacot2018neural}
+Jacot, A., Gabriel, F., and Hongler, C. (2018).
+\newblock Neural tangent kernel: Convergence and generalization in neural
+  networks.
+\newblock {\em Advances in neural information processing systems}, 31.
+
+\bibitem[Ji et~al., 2023]{ji2023survey}
+Ji, Z., Lee, N., Frieske, R., Yu, T., Su, D., Xu, Y., Ishii, E., Bang, Y.~J.,
+  Madotto, A., and Fung, P. (2023).
+\newblock Survey of hallucination in natural language generation.
+\newblock {\em ACM Computing Surveys}, 55(12).
+
+\bibitem[Jospin et~al., 2020a]{jospin2020handson}
+Jospin, L.~V., Buntine, W., Boussaid, F., Laga, H., and Bennamoun, M. (2020a).
+\newblock Hands-on bayesian neural networks--a tutorial for deep learning
+  users.
+\newblock {\em arXiv preprint arXiv:2007.06823}.
+
+\bibitem[Jospin et~al., 2020b]{jospin2020hands}
+Jospin, L.~V., Buntine, W., Boussaid, F., Laga, H., and Bennamoun, M. (2020b).
+\newblock Hands-on bayesian neural networks--a tutorial for deep learning
+  users.
+\newblock {\em arXiv preprint arXiv:2007.06823}.
+
+\bibitem[Kadavath et~al., 2022]{kadavath2022language}
+Kadavath, S., Conerly, T., Askell, A., Henighan, T., Drain, D., Perez, E.,
+  Schiefer, N., Hatfield-Dodds, Z., DasSarma, N., Tran-Johnson, E., Johnston,
+  S., El-Showk, S., Jones, A., Elhage, N., Hume, T., Chen, A., Bai, Y., Bowman,
+  S., Fort, S., Ganguli, D., Hernandez, D., Jacobson, J., Kernion, J., Kravec,
+  S., Lovitt, L., Ndousse, K., Olsson, C., Ringer, S., Amodei, D., Brown, T.,
+  Clark, J., Joseph, N., Mann, B., McCandlish, S., Olah, C., and Kaplan, J.
+  (2022).
+\newblock Language models (mostly) know what they know.
+\newblock {\em arXiv preprint arXiv:2207.05221}.
+
+\bibitem[Khan et~al., 2019]{khan2019approximate}
+Khan, M.~E., Immer, A., Abedi, E., and Korzepa, M. (2019).
+\newblock Approximate inference turns deep networks into {G}aussian processes.
+\newblock In {\em Advances in Neural Information Processing Systems}.
+
+\bibitem[Kingma et~al., 2015]{kingma2015variational}
+Kingma, D.~P., Salimans, T., and Welling, M. (2015).
+\newblock Variational dropout and the local reparameterization trick.
+\newblock In {\em Advances in Neural Information Processing Systems}.
+
+\bibitem[Kirichenko et~al., 2023]{kirichenko2023last}
+Kirichenko, P., Izmailov, P., and Wilson, A.~G. (2023).
+\newblock Last layer re-training is sufficient for robustness to spurious
+  correlations.
+\newblock In {\em International Conference on Learning Representations}.
+
+\bibitem[Klarner et~al., 2023]{klarner2023qsavi}
+Klarner, L., Rudner, T. G.~J., Reutlinger, M., Schindler, T., Morris, G.~M.,
+  Deane, C., and Teh, Y.~W. (2023).
+\newblock {D}rug {D}iscovery {u}nder {C}ovariate {S}hift {w}ith
+  {D}omain-{I}nformed {P}rior {D}istributions {o}ver {F}unctions.
+\newblock In {\em International Conference on Machine Learning}.
+
+\bibitem[Kolb et~al., 2023]{kolb2023}
+Kolb, C., M{\"u}ller, C.~L., Bischl, B., and R{\"u}gamer, D. (2023).
+\newblock Smoothing the edges: A general framework for smooth optimization in
+  sparse regularization using {H}adamard overparametrization.
+\newblock {\em arXiv preprint arXiv:2307.03571}.
+
+\bibitem[Kristiadi et~al., 2020]{pmlr-v119-kristiadi20a}
+Kristiadi, A., Hein, M., and Hennig, P. (2020).
+\newblock Being {B}ayesian, even just a bit, fixes overconfidence in {ReLU}
+  networks.
+\newblock In {\em International Conference on Machine Learning}.
+
+\bibitem[Kristiadi et~al., 2021a]{kristiadi2021infinite}
+Kristiadi, A., Hein, M., and Hennig, P. (2021a).
+\newblock An infinite-feature extension for {B}ayesian {ReLU} nets that fixes
+  their asymptotic overconfidence.
+\newblock In {\em Advances in Neural Information Processing Systems}.
+
+\bibitem[Kristiadi et~al., 2021b]{pmlr-v161-kristiadi21a}
+Kristiadi, A., Hein, M., and Hennig, P. (2021b).
+\newblock Learnable uncertainty under {L}aplace approximations.
+\newblock In {\em Conference on Uncertainty in Artificial Intelligence}.
+
+\bibitem[Lawrence, 2001]{lawrence2001variational}
+Lawrence, N.~D. (2001).
+\newblock {\em Variational inference in probabilistic models}.
+\newblock PhD thesis, University of Cambridge.
+
+\bibitem[Lee et~al., 2018]{lee2017training}
+Lee, K., Lee, H., Lee, K., and Shin, J. (2018).
+\newblock Training confidence-calibrated classifiers for detecting
+  out-of-distribution samples.
+\newblock {\em International Conference on Learning Representations}.
+
+\bibitem[Leitherer et~al., 2021]{leitherer2021robust}
+Leitherer, A., Ziletti, A., and Ghiringhelli, L.~M. (2021).
+\newblock Robust recognition and exploratory analysis of crystal structures via
+  {B}ayesian deep learning.
+\newblock {\em Nature Communications}, 12(1):6234.
+
+\bibitem[Li et~al., 2024]{li2023training}
+Li, J., Miao, Z., Qiu, Q., and Zhang, R. (2024).
+\newblock Training {B}ayesian neural networks with sparse subspace variational
+  inference.
+\newblock In {\em International Conference on Learning Representations}.
+
+\bibitem[Li et~al., 2023]{li2023study}
+Li, Y.~L., Rudner, T.~G., and Wilson, A.~G. (2023).
+\newblock A study of {B}ayesian neural network surrogates for {B}ayesian
+  optimization.
+\newblock {\em arXiv preprint arXiv:2305.20028}.
+
+\bibitem[Lipman et~al., 2022]{lipman2022flow}
+Lipman, Y., Chen, R.~T., Ben-Hamu, H., Nickel, M., and Le, M. (2022).
+\newblock Flow matching for generative modeling.
+\newblock In {\em International Conference on Learning Representations}.
+
+\bibitem[Liu and Wang, 2016]{liu2016stein}
+Liu, Q. and Wang, D. (2016).
+\newblock Stein variational gradient descent: A general purpose {B}ayesian
+  inference algorithm.
+\newblock {\em Advances in Neural Information Processing Systems}.
+
+\bibitem[Luo et~al., 2022]{luo2022bayesian}
+Luo, X., Nadiga, B.~T., Park, J.~H., Ren, Y., Xu, W., and Yoo, S. (2022).
+\newblock A {B}ayesian deep learning approach to near-term climate prediction.
+\newblock {\em Journal of Advances in Modeling Earth Systems},
+  14(10):e2022MS003058.
+
+\bibitem[MacKay, 1992]{mackay1992bayesian}
+MacKay, D.~J. (1992).
+\newblock {B}ayesian interpolation.
+\newblock {\em Neural Computation}, 4(3):415--447.
+
+\bibitem[MacKay, 1998]{mackay1998choice}
+MacKay, D.~J. (1998).
+\newblock Choice of basis for {L}aplace approximation.
+\newblock {\em Machine Learning}, 33:77--86.
+
+\bibitem[Maddox et~al., 2019]{maddox2019simple}
+Maddox, W.~J., Izmailov, P., Garipov, T., Vetrov, D.~P., and Wilson, A.~G.
+  (2019).
+\newblock A simple baseline for {B}ayesian uncertainty in deep learning.
+\newblock {\em Advances in Neural Information Processing Systems}, 32.
+
+\bibitem[Mandt et~al., 2017]{mandt2017stochastic}
+Mandt, S., Hoffman, M.~D., and Blei, D.~M. (2017).
+\newblock Stochastic gradient descent as approximate {B}ayesian inference.
+\newblock {\em Journal of Machine Learning Research}, 18(134):1--35.
+
+\bibitem[Manogaran et~al., 2019]{manogaran2019wearable}
+Manogaran, G., Shakeel, P.~M., Fouad, H., Nam, Y., Baskar, S., Chilamkurti, N.,
+  and Sundarasekar, R. (2019).
+\newblock Wearable {IoT} smart-log patch: An edge computing-based {B}ayesian
+  deep learning network system for multi access physical monitoring system.
+\newblock {\em Sensors}, 19(13):3030.
+
+\bibitem[Margatina et~al., 2022]{margatina2022}
+Margatina, K., Barrault, L., and Aletras, N. (2022).
+\newblock On the importance of effectively adapting pretrained language models
+  for active learning.
+\newblock In {\em Proceedings of the 60th Annual Meeting of the Association for
+  Computational Linguistics}.
+
+\bibitem[Margatina et~al., 2023]{margatina-etal-2023-active}
+Margatina, K., Schick, T., Aletras, N., and Dwivedi-Yu, J. (2023).
+\newblock Active learning principles for in-context learning with large
+  language models.
+\newblock In {\em Findings of the Association for Computational Linguistics:
+  EMNLP 2023}.
+
+\bibitem[McAllister et~al., 2017]{mcallister2017concrete}
+McAllister, R., Gal, Y., Kendall, A., Van Der~Wilk, M., Shah, A., Cipolla, R.,
+  and Weller, A. (2017).
+\newblock Concrete problems for autonomous vehicle safety: Advantages of
+  {B}ayesian deep learning.
+\newblock In {\em Proceedings of the Twenty-Sixth International Joint
+  Conference on Artificial Intelligence}.
+
+\bibitem[Minderer et~al., 2021]{minderer2021revisiting}
+Minderer, M., Djolonga, J., Romijnders, R., Hubis, F., Zhai, X., Houlsby, N.,
+  Tran, D., and Lucic, M. (2021).
+\newblock Revisiting the calibration of modern neural networks.
+\newblock {\em Advances in Neural Information Processing Systems}.
+
+\bibitem[Mitros and Mac~Namee, 2019]{mitros2019validity}
+Mitros, J. and Mac~Namee, B. (2019).
+\newblock On the validity of {B}ayesian neural networks for uncertainty
+  estimation.
+\newblock {\em arXiv preprint arXiv:1912.01530}.
+
+\bibitem[Mohamed et~al., 2020]{mohamed2020montecarlo}
+Mohamed, S., Rosca, M., Figurnov, M., and Mnih, A. (2020).
+\newblock Monte carlo gradient estimation in machine learning.
+\newblock {\em J. Mach. Learn. Res.}, 21(132):1--62.
+
+\bibitem[Moor et~al., 2023]{moor2023foundation}
+Moor, M., Banerjee, O., Abad, Z. S.~H., Krumholz, H.~M., Leskovec, J., Topol,
+  E.~J., and Rajpurkar, P. (2023).
+\newblock Foundation models for generalist medical artificial intelligence.
+\newblock {\em Nature}, 616(7956):259--265.
+
+\bibitem[Mur-Labadia et~al., 2023]{mur2023bayesian}
+Mur-Labadia, L., Martinez-Cantin, R., and Guerrero, J.~J. (2023).
+\newblock {B}ayesian deep learning for affordance segmentation in images.
+\newblock {\em arXiv preprint arXiv:2303.00871}.
+
+\bibitem[Murphy, 2023]{murphy2023probabilisticMLadvanced}
+Murphy, K.~P. (2023).
+\newblock {\em Probabilistic Machine Learning: Advanced Topics}.
+\newblock MIT Press.
+
+\bibitem[Nado et~al., 2021]{nado2021uncertainty}
+Nado, Z., Band, N., Collier, M., Djolonga, J., Dusenberry, M.~W., Farquhar, S.,
+  Feng, Q., Filos, A., Havasi, M., and Jenatton, R. (2021).
+\newblock Uncertainty baselines: Benchmarks for uncertainty \& robustness in
+  deep learning.
+\newblock {\em arXiv preprint arXiv:2106.04015}.
+
+\bibitem[Neal, 1996a]{neal1996bayesian}
+Neal, R.~M. (1996a).
+\newblock {\em Bayesian learning for neural networks}.
+\newblock Springer Science \& Business Media.
+
+\bibitem[Neal, 1996b]{neal1996}
+Neal, R.~M. (1996b).
+\newblock Priors for infinite networks.
+\newblock {\em {B}ayesian learning for neural networks}, pages 29--53.
+
+\bibitem[Nemeth and Fearnhead, 2021]{nemeth2021stochastic}
+Nemeth, C. and Fearnhead, P. (2021).
+\newblock Stochastic gradient {M}arkov chain {M}onte {C}arlo.
+\newblock {\em Journal of the American Statistical Association},
+  116(533):433--450.
+
+\bibitem[Nguyen et~al., 2018]{nguyen2018variational}
+Nguyen, C.~V., Li, Y., Bui, T.~D., and Turner, R.~E. (2018).
+\newblock Variational continual learning.
+\newblock In {\em International Conference on Learning Representations}.
+
+\bibitem[Ovadia et~al., 2019]{ovadia2019can}
+Ovadia, Y., Fertig, E., Ren, J., Nado, Z., Sculley, D., Nowozin, S., Dillon,
+  J.~V., Lakshminarayanan, B., and Snoek, J. (2019).
+\newblock Can you trust your model's uncertainty? {E}valuating predictive
+  uncertainty under dataset shift.
+\newblock {\em Advances in Neural Information Processing Systems}.
+
+\bibitem[Peng et~al., 2019]{peng2019bayesian}
+Peng, W., Ye, Z.-S., and Chen, N. (2019).
+\newblock {B}ayesian deep-learning-based health prognostics toward prognostics
+  uncertainty.
+\newblock {\em IEEE Transactions on Industrial Electronics}, 67(3):2283--2293.
+
+\bibitem[Pielok et~al., 2022]{pielok2022approximate}
+Pielok, T., Bischl, B., and R{\"u}gamer, D. (2022).
+\newblock Approximate {B}ayesian inference with {S}tein functional variational
+  gradient descent.
+\newblock In {\em International Conference on Learning Representations}.
+
+\bibitem[Polson and Ro{\v{c}}kov{\'a}, 2018]{polson2018posterior}
+Polson, N.~G. and Ro{\v{c}}kov{\'a}, V. (2018).
+\newblock Posterior concentration for sparse deep learning.
+\newblock {\em Advances in Neural Information Processing Systems}.
+
+\bibitem[Poole et~al., 2016]{poole2016exponential}
+Poole, B., Lahiri, S., Raghu, M., Sohl-{D}ickstein, J., and Ganguli, S. (2016).
+\newblock Exponential expressivity in deep neural networks through transient
+  chaos.
+\newblock In {\em International Conference on Neural Information Processing
+  Systems}.
+
+\bibitem[Rainforth et~al., 2023]{Rainforth2023ModernBE}
+Rainforth, T., Foster, A., Ivanova, D.~R., and Smith, F.~B. (2023).
+\newblock Modern {B}ayesian experimental design.
+\newblock {\em arXiv preprint arXiv:2302.14545}.
+
+\bibitem[Ritter et~al., 2018]{ritter2018}
+Ritter, H., Botev, A., and Barber, D. (2018).
+\newblock A scalable {L}aplace approximation for neural networks.
+\newblock In {\em International Conference on Learning Representations}.
+
+\bibitem[Ritter and Karaletsos, 2022]{ritter2022}
+Ritter, H. and Karaletsos, T. (2022).
+\newblock Ty{X}e: Pyro-based {B}ayesian neural nets for {P}ytorch.
+\newblock In {\em Proceedings of Machine Learning and Systems}.
+
+\bibitem[Ritter et~al., 2021]{ritter2021}
+Ritter, H., Kukla, M., Zhang, C., and Li, Y. (2021).
+\newblock Sparse uncertainty representation in deep learning with inducing
+  weights.
+\newblock In {\em Advances in Neural Information Processing Systems}.
+
+\bibitem[Robbins and Monro, 1951]{robbins1951stochastic}
+Robbins, H. and Monro, S. (1951).
+\newblock A stochastic approximation method.
+\newblock {\em The Annals of Mathematical Statistics}, pages 400--407.
+
+\bibitem[Robbins, 1951]{Robbins1951ASA}
+Robbins, H.~E. (1951).
+\newblock A stochastic approximation method.
+\newblock {\em Annals of Mathematical Statistics}, 22:400--407.
+
+\bibitem[Rothfuss et~al., 2021]{rothfuss2021pacoh}
+Rothfuss, J., Fortuin, V., Josifoski, M., and Krause, A. (2021).
+\newblock {PACOH}: {B}ayes-optimal meta-learning with {PAC}-guarantees.
+\newblock In {\em International Conference on Machine Learning}.
+
+\bibitem[Rothfuss et~al., 2022]{rothfuss2022pac}
+Rothfuss, J., Josifoski, M., Fortuin, V., and Krause, A. (2022).
+\newblock {PAC}-{B}ayesian meta-learning: From theory to practice.
+\newblock {\em arXiv preprint arXiv:2211.07206}.
+
+\bibitem[Rudner et~al., 2022a]{rudner2022fsvi}
+Rudner, T. G.~J., Chen, Z., Teh, Y.~W., and Gal, Y. (2022a).
+\newblock {T}ractable {F}unction-{S}pace {V}ariational {I}nference in
+  {B}ayesian {N}eural {N}etworks.
+\newblock In {\em Advances in Neural Information Processing Systems}.
+
+\bibitem[Rudner et~al., 2023a]{rudner2023fseb}
+Rudner, T. G.~J., Kapoor, S., Qiu, S., and Wilson, A.~G. (2023a).
+\newblock {F}unction-{S}pace {R}egularization in {N}eural {N}etworks: {A}
+  {P}robabilistic {P}erspective.
+\newblock In {\em International Conference on Machine Learning}.
+
+\bibitem[Rudner et~al., 2023b]{rudner2023uap}
+Rudner, T. G.~J., Pan, X., Li, Y.~L., Shwartz-Ziv, R., and Wilson, A.~G.
+  (2023b).
+\newblock Uncertainty-aware priors for finetuning pretrained models.
+\newblock In {\em Preprint}.
+
+\bibitem[Rudner et~al., 2022b]{rudner2022sfsvi}
+Rudner, T. G.~J., Smith, F.~B., Feng, Q., Teh, Y.~W., and Gal, Y. (2022b).
+\newblock {C}ontinual {L}earning via {S}equential {F}unction-{S}pace
+  {V}ariational {I}nference.
+\newblock In {\em International Conference on Machine Learning}.
+
+\bibitem[Rudner et~al., 2024]{rudner2024gap}
+Rudner, T. G.~J., Zhang, Y.~S., Wilson, A.~G., and Kempe, J. (2024).
+\newblock Mind the {GAP}: Improving robustness to subpopulation shifts with
+  group-aware priors.
+\newblock In {\em International Conference on Artificial Intelligence and
+  Statistics}.
+
+\bibitem[Rumelhart et~al., 1986]{rumelhart1986learning}
+Rumelhart, D.~E., Hinton, G.~E., and Williams, R.~J. (1986).
+\newblock Learning representations by back-propagating errors.
+\newblock {\em Nature}, 323(6088):533--536.
+
+\bibitem[Schoenholz et~al., 2017]{schoenholz2016deep}
+Schoenholz, S.~S., Gilmer, J., Ganguli, S., and Sohl-{D}ickstein, J. (2017).
+\newblock Deep information propagation.
+\newblock In {\em International Conference on Learning Representations}.
+
+\bibitem[Schw{\"o}bel et~al., 2022]{schwobel2022last}
+Schw{\"o}bel, P., J{\o}rgensen, M., Ober, S.~W., and Van Der~Wilk, M. (2022).
+\newblock Last layer marginal likelihood for invariance learning.
+\newblock In {\em International Conference on Artificial Intelligence and
+  Statistics}.
+
+\bibitem[Sen et~al., 2024]{sen2024}
+Sen, D., Papamarkou, T., and Dunson, D. (2024).
+\newblock {B}ayesian neural networks and dimensionality reduction.
+\newblock In {\em Handbook of {B}ayesian, fiducial, and frequentist inference}.
+  Chapmann and Hall/CRC Press.
+
+\bibitem[Sharma et~al., 2023]{sharma2023incorporating}
+Sharma, M., Rainforth, T., Teh, Y.~W., and Fortuin, V. (2023).
+\newblock Incorporating unlabelled data into {B}ayesian neural networks.
+\newblock {\em arXiv preprint arXiv:2304.01762}.
+
+\bibitem[Shi et~al., 2021]{shi2021bayesian}
+Shi, L., Copot, C., and Vanlanduit, S. (2021).
+\newblock A {B}ayesian deep neural network for safe visual servoing in
+  human--robot interaction.
+\newblock {\em Frontiers in Robotics and AI}, 8:687031.
+
+\bibitem[Shwartz-Ziv et~al., 2022]{shwartz2022}
+Shwartz-Ziv, R., Goldblum, M., Souri, H., Kapoor, S., Zhu, C., LeCun, Y., and
+  Wilson, A.~G. (2022).
+\newblock Pre-train your loss: Easy {B}ayesian transfer learning with
+  informative priors.
+\newblock In {\em Advances in Neural Information Processing Systems}.
+
+\bibitem[Skaaret-Lund et~al., 2023]{skaaret2023sparsifying}
+Skaaret-Lund, L., Storvik, G., and Hubin, A. (2023).
+\newblock Sparsifying {B}ayesian neural networks with latent binary variables
+  and normalizing flows.
+\newblock {\em arXiv preprint arXiv:2305.03395}.
+
+\bibitem[Soboczenski et~al., 2018]{soboczenski2018bayesian}
+Soboczenski, F., Himes, M.~D., O'Beirne, M.~D., Zorzan, S., Baydin, A.~G.,
+  Cobb, A.~D., Gal, Y., Angerhausen, D., Mascaro, M., Arney, G.~N., et~al.
+  (2018).
+\newblock {B}ayesian deep learning for exoplanet atmospheric retrieval.
+\newblock {\em arXiv preprint arXiv:1811.03390}.
+
+\bibitem[Song et~al., 2020]{song2020score}
+Song, Y., Sohl-Dickstein, J., Kingma, D.~P., Kumar, A., Ermon, S., and Poole,
+  B. (2020).
+\newblock Score-based generative modeling through stochastic differential
+  equations.
+\newblock In {\em International Conference on Learning Representations}.
+
+\bibitem[Sun et~al., 2019]{sun2019survey}
+Sun, S., Cao, Z., Zhu, H., and Zhao, J. (2019).
+\newblock A survey of optimization methods from a machine learning perspective.
+\newblock {\em IEEE Transactions on Cybernetics}, 50(8):3668--3681.
+
+\bibitem[Tran et~al., 2022]{tran2022plex}
+Tran, D., Liu, J., Dusenberry, M.~W., Phan, D., Collier, M., Ren, J., Han, K.,
+  Wang, Z., Mariet, Z., Hu, H., Band, N., Rudner, T. G.~J., Singhal, K., Nado,
+  Z., van Amersfoort, J., Kirsch, A., Jenatton, R., Thain, N., Yuan, H.,
+  Buchanan, K., Murphy, K., Sculley, D., Gal, Y., Ghahramani, Z., Snoek, J.,
+  and Lakshminarayanan, B. (2022).
+\newblock {P}lex: {T}owards {R}eliability {U}sing {P}retrained {L}arge {M}odel
+  {E}xtensions.
+\newblock In {\em ICML 2022 Workshop on Pre-training: Perspectives, Pitfalls,
+  and Paths Forward}.
+
+\bibitem[van~der Ouderaa et~al., 2023]{van2023learning}
+van~der Ouderaa, T.~F., Immer, A., and van~der Wilk, M. (2023).
+\newblock Learning layer-wise equivariances automatically using gradients.
+\newblock In {\em Advances in Neural Information Processing Systems}.
+
+\bibitem[Vandal et~al., 2018]{vandal2018quantifying}
+Vandal, T., Kodra, E., Dy, J., Ganguly, S., Nemani, R., and Ganguly, A.~R.
+  (2018).
+\newblock Quantifying uncertainty in discrete-continuous and skewed data with
+  {B}ayesian deep learning.
+\newblock In {\em International Conference on Knowledge Discovery \& Data
+  Mining}.
+
+\bibitem[Villani, 2021]{villani2021topics}
+Villani, C. (2021).
+\newblock {\em Topics in optimal transportation}, volume~58.
+\newblock American Mathematical Soc.
+
+\bibitem[Vladimirova et~al., 2021]{vladimirova2021accurate}
+Vladimirova, M., Arbel, J., and Girard, S. (2021).
+\newblock {Bayesian neural network unit priors and generalized Weibull-tail
+  property}.
+\newblock {\em Asian Conference on Machine Learning}.
+
+\bibitem[Vladimirova et~al., 2019]{vladimirova2019bayesian}
+Vladimirova, M., Verbeek, J., Mesejo, P., and Arbel, J. (2019).
+\newblock {Understanding priors in Bayesian neural networks at the unit level}.
+\newblock In {\em International Conference on Machine Learning}.
+
+\bibitem[Wang et~al., 2023a]{wang2023m2ib}
+Wang, Y., Rudner, T. G.~J., and Wilson, A.~G. (2023a).
+\newblock Visual explanations of image-text representations via multi-modal
+  information bottleneck attribution.
+\newblock In {\em Advances in Neural Information Processing Systems}.
+
+\bibitem[Wang et~al., 2023b]{wang2023enhancing}
+Wang, Z., Chen, Y., Song, Q., and Zhang, R. (2023b).
+\newblock Enhancing low-precision sampling via stochastic gradient
+  {H}amiltonian {M}onte {C}arlo.
+\newblock {\em arXiv preprint arXiv:2310.16320}.
+
+\bibitem[Wasserman, 2000]{wasserman2000bayesian}
+Wasserman, L. (2000).
+\newblock Bayesian model selection and model averaging.
+\newblock {\em Journal of Mathematical Psychology}, 44(1):92--107.
+
+\bibitem[Way and Greene, 2018]{way2018bayesian}
+Way, G.~P. and Greene, C.~S. (2018).
+\newblock {B}ayesian deep learning for single-cell analysis.
+\newblock {\em Nature Methods}, 15(12):1009--1010.
+
+\bibitem[Welling and Teh, 2011]{welling2011bayesian}
+Welling, M. and Teh, Y.~W. (2011).
+\newblock {B}ayesian learning via stochastic gradient {L}angevin dynamics.
+\newblock In {\em International Conference on Machine Learning}.
+
+\bibitem[Wenzel et~al., 2020]{wenzel2020good}
+Wenzel, F., Roth, K., Veeling, B., Swiatkowski, J., Tran, L., Mandt, S., Snoek,
+  J., Salimans, T., Jenatton, R., and Nowozin, S. (2020).
+\newblock How good is the {B}ayes posterior in deep neural networks really?
+\newblock In {\em International Conference on Machine Learning}.
+
+\bibitem[Wiese et~al., 2023]{wiese2023}
+Wiese, J.~G., Wimmer, L., Papamarkou, T., Bischl, B., G{\"u}nnemann, S., and
+  R{\"u}gamer, D. (2023).
+\newblock Towards efficient {MCMC} sampling in {B}ayesian neural networks by
+  exploiting symmetry.
+\newblock In {\em Joint European Conference on Machine Learning and Knowledge
+  Discovery in Databases}.
+
+\bibitem[Wild et~al., 2023]{wild2023a}
+Wild, V.~D., Ghalebikesabi, S., Sejdinovic, D., and Knoblauch, J. (2023).
+\newblock A rigorous link between deep ensembles and (variational) {Bayesian}
+  methods.
+\newblock In {\em Conference on Neural Information Processing Systems}.
+
+\bibitem[Wilson et~al., 2016]{wilson2016deep}
+Wilson, A.~G., Hu, Z., Salakhutdinov, R., and Xing, E.~P. (2016).
+\newblock Deep kernel learning.
+\newblock In {\em International Conference on Artificial Intelligence and
+  Statistics}.
+
+\bibitem[Wilson and Izmailov, 2020]{wilson2020bayesian}
+Wilson, A.~G. and Izmailov, P. (2020).
+\newblock {B}ayesian deep learning and a probabilistic perspective of
+  generalization.
+\newblock {\em Advances in Neural Information Processing Systems}.
+
+\bibitem[Xie et~al., 2021]{xie2021}
+Xie, S.~M., Raghunathan, A., Liang, P., and Ma, T. (2021).
+\newblock An explanation of in-context learning as implicit {B}ayesian
+  inference.
+\newblock {\em arXiv preprint arXiv:2111.02080}.
+
+\bibitem[Yang et~al., 2024]{yang2023bayesian}
+Yang, A.~X., Robeyns, M., Wang, X., and Aitchison, L. (2024).
+\newblock {B}ayesian low-rank adaptation for large language models.
+\newblock {\em International Conference on Learning Representations}.
+
+\bibitem[Yang et~al., 2023]{yang2023sneakyprompt}
+Yang, Y., Hui, B., Yuan, H., Gong, N., and Cao, Y. (2023).
+\newblock {SneakyPrompt}: Evaluating robustness of text-to-image generative
+  models' safety filters.
+\newblock In {\em IEEE Symposium on Security and Privacy}.
+
+\bibitem[Yang et~al., 2019]{yang2019bayesian}
+Yang, Y., Li, W., Gulliver, T.~A., and Li, S. (2019).
+\newblock {B}ayesian deep learning-based probabilistic load forecasting in
+  smart grids.
+\newblock {\em IEEE Transactions on Industrial Informatics}, 16(7):4703--4713.
+
+\bibitem[Zhang et~al., 2023]{zhang2023towards}
+Zhang, J., Jennings, J., Zhang, C., and Ma, C. (2023).
+\newblock Towards causal foundation model: on duality between causal inference
+  and attention.
+\newblock {\em arXiv preprint arXiv:2310.00809}.
+
+\bibitem[Zhang et~al., 2019]{zhang2019cyclical}
+Zhang, R., Li, C., Zhang, J., Chen, C., and Wilson, A.~G. (2019).
+\newblock Cyclical stochastic gradient {MCMC} for {B}ayesian deep learning.
+\newblock In {\em International Conference on Learning Representations}.
+
+\bibitem[Zhang et~al., 2022]{zhang2022low}
+Zhang, R., Wilson, A.~G., and De~Sa, C. (2022).
+\newblock Low-precision stochastic gradient {L}angevin dynamics.
+\newblock In {\em International Conference on Machine Learning}.
+
+\bibitem[Zhou et~al., 2020]{zhou2020human}
+Zhou, Z., Yu, H., and Shi, H. (2020).
+\newblock Human activity recognition based on improved {B}ayesian convolution
+  network to analyze health care data using wearable iot device.
+\newblock {\em IEEE Access}, 8:86411--86418.
+
+\end{thebibliography}
