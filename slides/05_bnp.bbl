@@ -1,0 +1,1048 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 2.9 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{nty/global//global/global}
+    \entry{antoniak1974mixtures}{article}{}
+      \name{author}{1}{}{%
+        {{uniquename=0,uniquepart=base,hash=cc55b346f66c87e9eb411fa42d1301b4}{%
+           family={Antoniak},
+           familyi={A\bibinitperiod},
+           given={Charles\bibnamedelima E},
+           giveni={C\bibinitperiod\bibinitdelim E\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {JSTOR}%
+      }
+      \strng{namehash}{cc55b346f66c87e9eb411fa42d1301b4}
+      \strng{fullhash}{cc55b346f66c87e9eb411fa42d1301b4}
+      \strng{bibnamehash}{cc55b346f66c87e9eb411fa42d1301b4}
+      \strng{authorbibnamehash}{cc55b346f66c87e9eb411fa42d1301b4}
+      \strng{authornamehash}{cc55b346f66c87e9eb411fa42d1301b4}
+      \strng{authorfullhash}{cc55b346f66c87e9eb411fa42d1301b4}
+      \field{sortinit}{A}
+      \field{sortinithash}{d77c7cdd82ff690d4c3ef13216f92f0b}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{The Annals of Statistics}
+      \field{title}{{Mixtures of Dirichlet processes with applications to Bayesian nonparametric problems}}
+      \field{year}{1974}
+      \field{pages}{1152\bibrangedash 1174}
+      \range{pages}{23}
+    \endentry
+    \entry{arbel2021BNPdensity}{article}{}
+      \name{author}{5}{}{%
+        {{uniquename=0,uniquepart=base,hash=1be6f8b4e6bf90d68f48eb31810f0ec9}{%
+           family={Arbel},
+           familyi={A\bibinitperiod},
+           given={Julyan},
+           giveni={J\bibinitperiod},
+           givenun=0}}%
+        {{uniquename=0,uniquepart=base,hash=e8b319667d80dbda885004a7149ce776}{%
+           family={Kon\bibnamedelimb Kam\bibnamedelima King},
+           familyi={K\bibinitperiod\bibinitdelim K\bibinitperiod\bibinitdelim K\bibinitperiod},
+           given={Guillaume},
+           giveni={G\bibinitperiod},
+           givenun=0}}%
+        {{uniquename=0,uniquepart=base,hash=5a35da777c0f7bb0f78fc3d18e773ed0}{%
+           family={Lijoi},
+           familyi={L\bibinitperiod},
+           given={Antonio},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+        {{uniquename=0,uniquepart=base,hash=45988fef7c60cb228505a74240afe32c}{%
+           family={Nieto-Barajas},
+           familyi={N\bibinithyphendelim B\bibinitperiod},
+           given={Luis\bibnamedelima E.},
+           giveni={L\bibinitperiod\bibinitdelim E\bibinitperiod},
+           givenun=0}}%
+        {{uniquename=0,uniquepart=base,hash=697257828981d515255ba46d6ad71cf6}{%
+           family={Prünster},
+           familyi={P\bibinitperiod},
+           given={Igor},
+           giveni={I\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{a53cc929d7eee4b7d047146f4bd53d86}
+      \strng{fullhash}{9894cbe24ab2af2dd4d6a639bc9aaee6}
+      \strng{bibnamehash}{a53cc929d7eee4b7d047146f4bd53d86}
+      \strng{authorbibnamehash}{a53cc929d7eee4b7d047146f4bd53d86}
+      \strng{authornamehash}{a53cc929d7eee4b7d047146f4bd53d86}
+      \strng{authorfullhash}{9894cbe24ab2af2dd4d6a639bc9aaee6}
+      \field{sortinit}{A}
+      \field{sortinithash}{d77c7cdd82ff690d4c3ef13216f92f0b}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issue}{3}
+      \field{journaltitle}{Australian \& New Zealand Journal of Statistics}
+      \field{title}{{BNPdensity: Bayesian nonparametric mixture modeling in R}}
+      \field{volume}{63}
+      \field{year}{2021}
+      \field{pages}{542\bibrangedash 564}
+      \range{pages}{23}
+      \verb{doi}
+      \verb 10.1111/anzs.12342
+      \endverb
+      \verb{eprint}
+      \verb 2110.10019
+      \endverb
+    \endentry
+    \entry{blei2006variational}{article}{}
+      \true{moreauthor}
+      \true{morelabelname}
+      \name{author}{2}{}{%
+        {{uniquename=2,uniquepart=given,hash=0acd0349006f4ee348ffe16e1fe1fe21}{%
+           family={Blei},
+           familyi={B\bibinitperiod},
+           given={David\bibnamedelima M},
+           giveni={D\bibinitperiod\bibinitdelim M\bibinitperiod},
+           givenun=2}}%
+        {{uniquename=0,uniquepart=base,hash=996ffb9cb286a8b4b0fc16793c54cc31}{%
+           family={Jordan},
+           familyi={J\bibinitperiod},
+           given={Michael\bibnamedelima I},
+           giveni={M\bibinitperiod\bibinitdelim I\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{5a194ee225ba7b8cb7dd85dcf29ddcef}
+      \strng{fullhash}{5a194ee225ba7b8cb7dd85dcf29ddcef}
+      \strng{bibnamehash}{5a194ee225ba7b8cb7dd85dcf29ddcef}
+      \strng{authorbibnamehash}{5a194ee225ba7b8cb7dd85dcf29ddcef}
+      \strng{authornamehash}{5a194ee225ba7b8cb7dd85dcf29ddcef}
+      \strng{authorfullhash}{5a194ee225ba7b8cb7dd85dcf29ddcef}
+      \field{sortinit}{B}
+      \field{sortinithash}{276475738cc058478c1677046f857703}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Bayesian analysis}
+      \field{number}{1}
+      \field{title}{{Variational inference for Dirichlet process mixtures}}
+      \field{volume}{1}
+      \field{year}{2006}
+      \field{pages}{121\bibrangedash 144}
+      \range{pages}{24}
+    \endentry
+    \entry{blei2003latent}{article}{}
+      \name{author}{3}{}{%
+        {{uniquename=2,uniquepart=given,hash=0acd0349006f4ee348ffe16e1fe1fe21}{%
+           family={Blei},
+           familyi={B\bibinitperiod},
+           given={David\bibnamedelima M},
+           giveni={D\bibinitperiod\bibinitdelim M\bibinitperiod},
+           givenun=2}}%
+        {{uniquename=0,uniquepart=base,hash=799b172b8d02b7acdf21d0cc48934fca}{%
+           family={Ng},
+           familyi={N\bibinitperiod},
+           given={Andrew\bibnamedelima Y},
+           giveni={A\bibinitperiod\bibinitdelim Y\bibinitperiod},
+           givenun=0}}%
+        {{uniquename=0,uniquepart=base,hash=996ffb9cb286a8b4b0fc16793c54cc31}{%
+           family={Jordan},
+           familyi={J\bibinitperiod},
+           given={Michael\bibnamedelima I},
+           giveni={M\bibinitperiod\bibinitdelim I\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{0687e065d9fc55314f8de9d299fb55eb}
+      \strng{fullhash}{0687e065d9fc55314f8de9d299fb55eb}
+      \strng{bibnamehash}{8448a12fa47dedb47033065ca81987c7}
+      \strng{authorbibnamehash}{8448a12fa47dedb47033065ca81987c7}
+      \strng{authornamehash}{0687e065d9fc55314f8de9d299fb55eb}
+      \strng{authorfullhash}{0687e065d9fc55314f8de9d299fb55eb}
+      \field{sortinit}{B}
+      \field{sortinithash}{276475738cc058478c1677046f857703}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of machine Learning research}
+      \field{number}{Jan}
+      \field{title}{{Latent Dirichlet allocation}}
+      \field{volume}{3}
+      \field{year}{2003}
+      \field{pages}{993\bibrangedash 1022}
+      \range{pages}{30}
+    \endentry
+    \entry{brix1999generalized}{article}{}
+      \name{author}{1}{}{%
+        {{uniquename=0,uniquepart=base,hash=f4c92c3ea932833788d241772c5b762b}{%
+           family={Brix},
+           familyi={B\bibinitperiod},
+           given={Anders},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {JSTOR}%
+      }
+      \strng{namehash}{f4c92c3ea932833788d241772c5b762b}
+      \strng{fullhash}{f4c92c3ea932833788d241772c5b762b}
+      \strng{bibnamehash}{f4c92c3ea932833788d241772c5b762b}
+      \strng{authorbibnamehash}{f4c92c3ea932833788d241772c5b762b}
+      \strng{authornamehash}{f4c92c3ea932833788d241772c5b762b}
+      \strng{authorfullhash}{f4c92c3ea932833788d241772c5b762b}
+      \field{sortinit}{B}
+      \field{sortinithash}{276475738cc058478c1677046f857703}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Advances in Applied Probability}
+      \field{title}{Generalized gamma measures and shot-noise {Cox} processes}
+      \field{year}{1999}
+      \field{pages}{929\bibrangedash 953}
+      \range{pages}{25}
+    \endentry
+    \entry{clauset2009power}{article}{}
+      \name{author}{3}{}{%
+        {{uniquename=0,uniquepart=base,hash=42b12665bdf3534fb7bb76c73fc17ebe}{%
+           family={Clauset},
+           familyi={C\bibinitperiod},
+           given={Aaron},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+        {{uniquename=0,uniquepart=base,hash=fc627665c9ed1d50cf364565865172a7}{%
+           family={Shalizi},
+           familyi={S\bibinitperiod},
+           given={Cosma\bibnamedelima Rohilla},
+           giveni={C\bibinitperiod\bibinitdelim R\bibinitperiod},
+           givenun=0}}%
+        {{uniquename=0,uniquepart=base,hash=af84fa9f8d84f4aa9cd268c6d380f857}{%
+           family={Newman},
+           familyi={N\bibinitperiod},
+           given={Mark\bibnamedelima EJ},
+           giveni={M\bibinitperiod\bibinitdelim E\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {SIAM}%
+      }
+      \strng{namehash}{947d16dfc61e6798eeab3a31db2330de}
+      \strng{fullhash}{947d16dfc61e6798eeab3a31db2330de}
+      \strng{bibnamehash}{6081b8a1f6a50540e08844eddba3e8ff}
+      \strng{authorbibnamehash}{6081b8a1f6a50540e08844eddba3e8ff}
+      \strng{authornamehash}{947d16dfc61e6798eeab3a31db2330de}
+      \strng{authorfullhash}{947d16dfc61e6798eeab3a31db2330de}
+      \field{sortinit}{C}
+      \field{sortinithash}{963e9d84a3da2344e8833203de5aed05}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{SIAM review}
+      \field{number}{4}
+      \field{title}{Power-law distributions in empirical data}
+      \field{volume}{51}
+      \field{year}{2009}
+      \field{pages}{661\bibrangedash 703}
+      \range{pages}{43}
+    \endentry
+    \entry{dahl2006model}{article}{}
+      \name{author}{1}{}{%
+        {{uniquename=0,uniquepart=base,hash=11dbab5237b9da664914d9a8adbbf36a}{%
+           family={Dahl},
+           familyi={D\bibinitperiod},
+           given={David\bibnamedelima B},
+           giveni={D\bibinitperiod\bibinitdelim B\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {Citeseer}%
+      }
+      \strng{namehash}{11dbab5237b9da664914d9a8adbbf36a}
+      \strng{fullhash}{11dbab5237b9da664914d9a8adbbf36a}
+      \strng{bibnamehash}{11dbab5237b9da664914d9a8adbbf36a}
+      \strng{authorbibnamehash}{11dbab5237b9da664914d9a8adbbf36a}
+      \strng{authornamehash}{11dbab5237b9da664914d9a8adbbf36a}
+      \strng{authorfullhash}{11dbab5237b9da664914d9a8adbbf36a}
+      \field{sortinit}{D}
+      \field{sortinithash}{2ef1bd9a78cc71eb74d7231c635177b8}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Bayesian inference for gene expression and proteomics}
+      \field{title}{{Model-based clustering for expression data via a Dirichlet process mixture model}}
+      \field{year}{2006}
+      \field{pages}{201\bibrangedash 218}
+      \range{pages}{18}
+    \endentry
+    \entry{deblasi2015gibbs}{article}{}
+      \name{author}{6}{}{%
+        {{uniquename=0,uniquepart=base,hash=bc8020c03797f03a41252e9b0dcae4cb}{%
+           family={De\bibnamedelima Blasi},
+           familyi={D\bibinitperiod\bibinitdelim B\bibinitperiod},
+           given={Pierpaolo},
+           giveni={P\bibinitperiod},
+           givenun=0}}%
+        {{uniquename=0,uniquepart=base,hash=7f48d2775b64550b1790951324171888}{%
+           family={Favaro},
+           familyi={F\bibinitperiod},
+           given={Stefano},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+        {{uniquename=0,uniquepart=base,hash=5a35da777c0f7bb0f78fc3d18e773ed0}{%
+           family={Lijoi},
+           familyi={L\bibinitperiod},
+           given={Antonio},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+        {{uniquename=0,uniquepart=base,hash=a6c43795bab3f48b1057fabd9de39d29}{%
+           family={Mena},
+           familyi={M\bibinitperiod},
+           given={Rams{é}s\bibnamedelima H},
+           giveni={R\bibinitperiod\bibinitdelim H\bibinitperiod},
+           givenun=0}}%
+        {{uniquename=0,uniquepart=base,hash=5ba295d8769d55dbf430b05b9fd4f56b}{%
+           family={Pr{ü}nster},
+           familyi={P\bibinitperiod},
+           given={Igor},
+           giveni={I\bibinitperiod},
+           givenun=0}}%
+        {{uniquename=0,uniquepart=base,hash=04acdadf61ac6f83c7d8e8ce96106736}{%
+           family={Ruggiero},
+           familyi={R\bibinitperiod},
+           given={Matteo},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {IEEE}%
+      }
+      \strng{namehash}{43643aa60e8c61176b642c7a418b4ede}
+      \strng{fullhash}{14e51ede2279b0789e87e678c9ca8941}
+      \strng{bibnamehash}{43643aa60e8c61176b642c7a418b4ede}
+      \strng{authorbibnamehash}{43643aa60e8c61176b642c7a418b4ede}
+      \strng{authornamehash}{43643aa60e8c61176b642c7a418b4ede}
+      \strng{authorfullhash}{14e51ede2279b0789e87e678c9ca8941}
+      \field{sortinit}{D}
+      \field{sortinithash}{2ef1bd9a78cc71eb74d7231c635177b8}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{IEEE Transactions on Pattern Analysis and Machine Intelligence}
+      \field{number}{2}
+      \field{title}{{Are Gibbs-type priors the most natural generalization of the Dirichlet process?}}
+      \field{volume}{37}
+      \field{year}{2015}
+      \field{pages}{212\bibrangedash 229}
+      \range{pages}{18}
+    \endentry
+    \entry{ewens1972sampling}{article}{}
+      \name{author}{1}{}{%
+        {{uniquename=0,uniquepart=base,hash=449657ac8788c2127f797e129c2a032e}{%
+           family={Ewens},
+           familyi={E\bibinitperiod},
+           given={Warren\bibnamedelima J},
+           giveni={W\bibinitperiod\bibinitdelim J\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {Elsevier}%
+      }
+      \strng{namehash}{449657ac8788c2127f797e129c2a032e}
+      \strng{fullhash}{449657ac8788c2127f797e129c2a032e}
+      \strng{bibnamehash}{449657ac8788c2127f797e129c2a032e}
+      \strng{authorbibnamehash}{449657ac8788c2127f797e129c2a032e}
+      \strng{authornamehash}{449657ac8788c2127f797e129c2a032e}
+      \strng{authorfullhash}{449657ac8788c2127f797e129c2a032e}
+      \field{sortinit}{E}
+      \field{sortinithash}{f615fb9c6fba11c6f962fb3fd599810e}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Theoretical population biology}
+      \field{number}{1}
+      \field{title}{{The sampling theory of selectively neutral alleles}}
+      \field{volume}{3}
+      \field{year}{1972}
+      \field{pages}{87\bibrangedash 112}
+      \range{pages}{26}
+    \endentry
+    \entry{ferguson1973bayesian}{article}{}
+      \name{author}{1}{}{%
+        {{uniquename=0,uniquepart=base,hash=d54df5f6acbb0de07ed59cdb9ff84c9e}{%
+           family={Ferguson},
+           familyi={F\bibinitperiod},
+           given={T.S.},
+           giveni={T\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {JSTOR}%
+      }
+      \strng{namehash}{d54df5f6acbb0de07ed59cdb9ff84c9e}
+      \strng{fullhash}{d54df5f6acbb0de07ed59cdb9ff84c9e}
+      \strng{bibnamehash}{d54df5f6acbb0de07ed59cdb9ff84c9e}
+      \strng{authorbibnamehash}{d54df5f6acbb0de07ed59cdb9ff84c9e}
+      \strng{authornamehash}{d54df5f6acbb0de07ed59cdb9ff84c9e}
+      \strng{authorfullhash}{d54df5f6acbb0de07ed59cdb9ff84c9e}
+      \field{sortinit}{F}
+      \field{sortinithash}{669c706c6f1fbf3b5a83d26f1d9e9e72}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{0090-5364}
+      \field{journaltitle}{The Annals of Statistics}
+      \field{number}{2}
+      \field{title}{{A Bayesian analysis of some nonparametric problems}}
+      \field{volume}{1}
+      \field{year}{1973}
+      \field{pages}{209\bibrangedash 230}
+      \range{pages}{22}
+    \endentry
+    \entry{ghahramani2006infinite}{inproceedings}{}
+      \name{author}{2}{}{%
+        {{uniquename=0,uniquepart=base,hash=bf5cf30deddddad00a6341ad7a414445}{%
+           family={Ghahramani},
+           familyi={G\bibinitperiod},
+           given={Zoubin},
+           giveni={Z\bibinitperiod},
+           givenun=0}}%
+        {{uniquename=0,uniquepart=base,hash=2985f0b53f7b356988c46b34caee073f}{%
+           family={Griffiths},
+           familyi={G\bibinitperiod},
+           given={Thomas\bibnamedelima L},
+           giveni={T\bibinitperiod\bibinitdelim L\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{034725d1d05284ba82910a66afec9c59}
+      \strng{fullhash}{034725d1d05284ba82910a66afec9c59}
+      \strng{bibnamehash}{034725d1d05284ba82910a66afec9c59}
+      \strng{authorbibnamehash}{034725d1d05284ba82910a66afec9c59}
+      \strng{authornamehash}{034725d1d05284ba82910a66afec9c59}
+      \strng{authorfullhash}{034725d1d05284ba82910a66afec9c59}
+      \field{sortinit}{G}
+      \field{sortinithash}{5e8d2bf9d38de41b1528bd307546008f}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Advances in neural information processing systems}
+      \field{title}{{Infinite latent feature models and the Indian buffet process}}
+      \field{year}{2006}
+      \field{pages}{475\bibrangedash 482}
+      \range{pages}{8}
+    \endentry
+    \entry{ghosal2017fundamentals}{book}{}
+      \name{author}{2}{}{%
+        {{uniquename=0,uniquepart=base,hash=812108e097d99a555e5eb0e553806e2e}{%
+           family={Ghosal},
+           familyi={G\bibinitperiod},
+           given={Subhashis},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+        {{uniquename=0,uniquepart=base,hash=3de9c8ff2156501ef54ef4156bc9d5a1}{%
+           family={Van\bibnamedelimb der\bibnamedelima Vaart},
+           familyi={V\bibinitperiod\bibinitdelim d\bibinitperiod\bibinitdelim V\bibinitperiod},
+           given={Aad},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {Cambridge University Press}%
+      }
+      \strng{namehash}{005435e3783d2766e37c203081f272ec}
+      \strng{fullhash}{005435e3783d2766e37c203081f272ec}
+      \strng{bibnamehash}{005435e3783d2766e37c203081f272ec}
+      \strng{authorbibnamehash}{005435e3783d2766e37c203081f272ec}
+      \strng{authornamehash}{005435e3783d2766e37c203081f272ec}
+      \strng{authorfullhash}{005435e3783d2766e37c203081f272ec}
+      \field{sortinit}{G}
+      \field{sortinithash}{5e8d2bf9d38de41b1528bd307546008f}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Fundamentals of nonparametric Bayesian inference}
+      \field{volume}{44}
+      \field{year}{2017}
+    \endentry
+    \entry{Ghosh2003}{book}{}
+      \name{author}{2}{}{%
+        {{uniquename=0,uniquepart=base,hash=2d3648990f2093c4ad2bd4b70ba40265}{%
+           family={Ghosh},
+           familyi={G\bibinitperiod},
+           given={J.\bibnamedelimi K.},
+           giveni={J\bibinitperiod\bibinitdelim K\bibinitperiod},
+           givenun=0}}%
+        {{uniquename=0,uniquepart=base,hash=04d82fc7f0e47375a9b83829f658b6fe}{%
+           family={Ramamoorthi},
+           familyi={R\bibinitperiod},
+           given={R.\bibnamedelimi V.},
+           giveni={R\bibinitperiod\bibinitdelim V\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{location}{1}{%
+        {New York}%
+      }
+      \list{publisher}{1}{%
+        {Springer}%
+      }
+      \strng{namehash}{8463932a486418ff239ea155dc61156c}
+      \strng{fullhash}{8463932a486418ff239ea155dc61156c}
+      \strng{bibnamehash}{8463932a486418ff239ea155dc61156c}
+      \strng{authorbibnamehash}{8463932a486418ff239ea155dc61156c}
+      \strng{authornamehash}{8463932a486418ff239ea155dc61156c}
+      \strng{authorfullhash}{8463932a486418ff239ea155dc61156c}
+      \field{sortinit}{G}
+      \field{sortinithash}{5e8d2bf9d38de41b1528bd307546008f}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{{Bayesian Nonparametrics}}
+      \field{year}{2003}
+    \endentry
+    \entry{hjort2010bayesian}{book}{}
+      \name{author}{4}{}{%
+        {{uniquename=0,uniquepart=base,hash=07e8e9c5a9875086178ae710cb329074}{%
+           family={Hjort},
+           familyi={H\bibinitperiod},
+           given={Nils\bibnamedelima Lid},
+           giveni={N\bibinitperiod\bibinitdelim L\bibinitperiod},
+           givenun=0}}%
+        {{uniquename=0,uniquepart=base,hash=6fa02041fbcd9115cc22a1d8b35a35cb}{%
+           family={Holmes},
+           familyi={H\bibinitperiod},
+           given={Chris},
+           giveni={C\bibinitperiod},
+           givenun=0}}%
+        {{uniquename=0,uniquepart=base,hash=a8812aae7df91b19171430030e5594cb}{%
+           family={M{ü}ller},
+           familyi={M\bibinitperiod},
+           given={Peter},
+           giveni={P\bibinitperiod},
+           givenun=0}}%
+        {{uniquename=0,uniquepart=base,hash=3a0585bcb85e23dcd61c0f562cfa1c36}{%
+           family={Walker},
+           familyi={W\bibinitperiod},
+           given={Stephen\bibnamedelima G},
+           giveni={S\bibinitperiod\bibinitdelim G\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {Cambridge University Press}%
+      }
+      \strng{namehash}{e9157ee581d0db7a6802e1100e42c088}
+      \strng{fullhash}{56a7af7489881209d32182e3b1fc424f}
+      \strng{bibnamehash}{e9157ee581d0db7a6802e1100e42c088}
+      \strng{authorbibnamehash}{e9157ee581d0db7a6802e1100e42c088}
+      \strng{authornamehash}{e9157ee581d0db7a6802e1100e42c088}
+      \strng{authorfullhash}{56a7af7489881209d32182e3b1fc424f}
+      \field{sortinit}{H}
+      \field{sortinithash}{5f15a7bc777ad49ff15aa4d2831b1681}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{month}{4}
+      \field{title}{{Bayesian nonparametrics}}
+      \field{volume}{28}
+      \field{year}{2010}
+      \verb{urlraw}
+      \verb http://www.cambridge.org/us/academic/subjects/statistics-probability/statistical-theory-and-methods/bayesian-nonparametrics
+      \endverb
+      \verb{url}
+      \verb http://www.cambridge.org/us/academic/subjects/statistics-probability/statistical-theory-and-methods/bayesian-nonparametrics
+      \endverb
+    \endentry
+    \entry{ishwaran2001gibbs}{article}{}
+      \name{author}{2}{}{%
+        {{uniquename=0,uniquepart=base,hash=a0eebb657edc0ef4c27113233a0ea0b8}{%
+           family={Ishwaran},
+           familyi={I\bibinitperiod},
+           given={H.},
+           giveni={H\bibinitperiod},
+           givenun=0}}%
+        {{uniquename=0,uniquepart=base,hash=21191146e75bbc0a52c42259d7dca598}{%
+           family={James},
+           familyi={J\bibinitperiod},
+           given={L.F.},
+           giveni={L\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {ASA}%
+      }
+      \strng{namehash}{518be03a9b6434a7a86724c8b13cd241}
+      \strng{fullhash}{518be03a9b6434a7a86724c8b13cd241}
+      \strng{bibnamehash}{518be03a9b6434a7a86724c8b13cd241}
+      \strng{authorbibnamehash}{518be03a9b6434a7a86724c8b13cd241}
+      \strng{authornamehash}{518be03a9b6434a7a86724c8b13cd241}
+      \strng{authorfullhash}{518be03a9b6434a7a86724c8b13cd241}
+      \field{sortinit}{I}
+      \field{sortinithash}{320bc8fe8101b9376f9f21cd507de0e8}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{0162-1459}
+      \field{journaltitle}{Journal of the American Statistical Association}
+      \field{number}{453}
+      \field{title}{{Gibbs sampling methods for stick-breaking priors}}
+      \field{volume}{96}
+      \field{year}{2001}
+      \field{pages}{161\bibrangedash 173}
+      \range{pages}{13}
+    \endentry
+    \entry{mandt2017stochastic}{article}{}
+      \name{author}{3}{}{%
+        {{uniquename=0,uniquepart=base,hash=01767107e2c06a4879e3fff5cb6116b1}{%
+           family={Mandt},
+           familyi={M\bibinitperiod},
+           given={Stephan},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+        {{uniquename=0,uniquepart=base,hash=a922cd4d9e8a007dcbb79cbc3dcd9a96}{%
+           family={Hoffman},
+           familyi={H\bibinitperiod},
+           given={Matthew\bibnamedelima D.},
+           giveni={M\bibinitperiod\bibinitdelim D\bibinitperiod},
+           givenun=0}}%
+        {{uniquename=2,uniquepart=given,hash=7441e4d372e854fc6d24d0d5a16a1687}{%
+           family={Blei},
+           familyi={B\bibinitperiod},
+           given={David\bibnamedelima M.},
+           giveni={D\bibinitperiod\bibinitdelim M\bibinitperiod},
+           givenun=2}}%
+      }
+      \list{publisher}{1}{%
+        {JMLR.org}%
+      }
+      \strng{namehash}{316822cd9db07746d09ed129e854fe83}
+      \strng{fullhash}{316822cd9db07746d09ed129e854fe83}
+      \strng{bibnamehash}{a78649bda2e17571c50bc54c720ecfc2}
+      \strng{authorbibnamehash}{a78649bda2e17571c50bc54c720ecfc2}
+      \strng{authornamehash}{316822cd9db07746d09ed129e854fe83}
+      \strng{authorfullhash}{316822cd9db07746d09ed129e854fe83}
+      \field{sortinit}{M}
+      \field{sortinithash}{cfd219b90152c06204fab207bc6c7cab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{1532-4435}
+      \field{journaltitle}{J. Mach. Learn. Res.}
+      \field{month}{1}
+      \field{number}{1}
+      \field{title}{Stochastic Gradient Descent as Approximate Bayesian Inference}
+      \field{volume}{18}
+      \field{year}{2017}
+      \field{pages}{4873\bibrangedash 4907}
+      \range{pages}{35}
+      \keyw{stochastic gradient MCMC,variational inference,stochastic optimization,stochastic differential equations,approximate Bayesian inference}
+    \endentry
+    \entry{miller2013simple}{inproceedings}{}
+      \name{author}{2}{}{%
+        {{uniquename=0,uniquepart=base,hash=792d1ab71a831c46fdbc87dfe97064cf}{%
+           family={Miller},
+           familyi={M\bibinitperiod},
+           given={Jeffrey\bibnamedelima W},
+           giveni={J\bibinitperiod\bibinitdelim W\bibinitperiod},
+           givenun=0}}%
+        {{uniquename=0,uniquepart=base,hash=2af948e6249f6a333defe5167f396459}{%
+           family={Harrison},
+           familyi={H\bibinitperiod},
+           given={Matthew\bibnamedelima T},
+           giveni={M\bibinitperiod\bibinitdelim T\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{75ef36f9e68bdec32a61eb9ef5af4a93}
+      \strng{fullhash}{75ef36f9e68bdec32a61eb9ef5af4a93}
+      \strng{bibnamehash}{75ef36f9e68bdec32a61eb9ef5af4a93}
+      \strng{authorbibnamehash}{75ef36f9e68bdec32a61eb9ef5af4a93}
+      \strng{authornamehash}{75ef36f9e68bdec32a61eb9ef5af4a93}
+      \strng{authorfullhash}{75ef36f9e68bdec32a61eb9ef5af4a93}
+      \field{sortinit}{M}
+      \field{sortinithash}{cfd219b90152c06204fab207bc6c7cab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Advances in neural information processing systems}
+      \field{title}{{A simple example of Dirichlet process mixture inconsistency for the number of components}}
+      \field{year}{2013}
+      \field{pages}{199\bibrangedash 206}
+      \range{pages}{8}
+    \endentry
+    \entry{murphy2023probabilisticMLadvanced}{book}{}
+      \name{author}{1}{}{%
+        {{uniquename=0,uniquepart=base,hash=57a45a819d1ea44f0e40dfcdeeaa4140}{%
+           family={Murphy},
+           familyi={M\bibinitperiod},
+           given={Kevin\bibnamedelima P.},
+           giveni={K\bibinitperiod\bibinitdelim P\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {MIT Press}%
+      }
+      \strng{namehash}{57a45a819d1ea44f0e40dfcdeeaa4140}
+      \strng{fullhash}{57a45a819d1ea44f0e40dfcdeeaa4140}
+      \strng{bibnamehash}{57a45a819d1ea44f0e40dfcdeeaa4140}
+      \strng{authorbibnamehash}{57a45a819d1ea44f0e40dfcdeeaa4140}
+      \strng{authornamehash}{57a45a819d1ea44f0e40dfcdeeaa4140}
+      \strng{authorfullhash}{57a45a819d1ea44f0e40dfcdeeaa4140}
+      \field{sortinit}{M}
+      \field{sortinithash}{cfd219b90152c06204fab207bc6c7cab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Probabilistic Machine Learning: Advanced Topics}
+      \field{year}{2023}
+      \verb{urlraw}
+      \verb http://probml.github.io/book2
+      \endverb
+      \verb{url}
+      \verb http://probml.github.io/book2
+      \endverb
+    \endentry
+    \entry{neal2000markov}{article}{}
+      \name{author}{1}{}{%
+        {{uniquename=0,uniquepart=base,hash=f1c61e3c1e4c3e4e5ab01f29a7be7d65}{%
+           family={Neal},
+           familyi={N\bibinitperiod},
+           given={Radford\bibnamedelima M},
+           giveni={R\bibinitperiod\bibinitdelim M\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {Taylor \& Francis Group}%
+      }
+      \strng{namehash}{f1c61e3c1e4c3e4e5ab01f29a7be7d65}
+      \strng{fullhash}{f1c61e3c1e4c3e4e5ab01f29a7be7d65}
+      \strng{bibnamehash}{f1c61e3c1e4c3e4e5ab01f29a7be7d65}
+      \strng{authorbibnamehash}{f1c61e3c1e4c3e4e5ab01f29a7be7d65}
+      \strng{authornamehash}{f1c61e3c1e4c3e4e5ab01f29a7be7d65}
+      \strng{authorfullhash}{f1c61e3c1e4c3e4e5ab01f29a7be7d65}
+      \field{sortinit}{N}
+      \field{sortinithash}{f7242c3ed3dc50029fca1be76c497c7c}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of computational and graphical statistics}
+      \field{number}{2}
+      \field{title}{{Markov chain sampling methods for Dirichlet process mixture models}}
+      \field{volume}{9}
+      \field{year}{2000}
+      \field{pages}{249\bibrangedash 265}
+      \range{pages}{17}
+    \endentry
+    \entry{newman2005power}{article}{}
+      \name{author}{1}{}{%
+        {{uniquename=0,uniquepart=base,hash=af84fa9f8d84f4aa9cd268c6d380f857}{%
+           family={Newman},
+           familyi={N\bibinitperiod},
+           given={Mark\bibnamedelima EJ},
+           giveni={M\bibinitperiod\bibinitdelim E\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {Taylor \& Francis}%
+      }
+      \strng{namehash}{af84fa9f8d84f4aa9cd268c6d380f857}
+      \strng{fullhash}{af84fa9f8d84f4aa9cd268c6d380f857}
+      \strng{bibnamehash}{af84fa9f8d84f4aa9cd268c6d380f857}
+      \strng{authorbibnamehash}{af84fa9f8d84f4aa9cd268c6d380f857}
+      \strng{authornamehash}{af84fa9f8d84f4aa9cd268c6d380f857}
+      \strng{authorfullhash}{af84fa9f8d84f4aa9cd268c6d380f857}
+      \field{sortinit}{N}
+      \field{sortinithash}{f7242c3ed3dc50029fca1be76c497c7c}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Contemporary physics}
+      \field{number}{5}
+      \field{title}{{Power laws, Pareto distributions and Zipf's law}}
+      \field{volume}{46}
+      \field{year}{2005}
+      \field{pages}{323\bibrangedash 351}
+      \range{pages}{29}
+    \endentry
+    \entry{pitman2003poisson}{article}{}
+      \name{author}{1}{}{%
+        {{uniquename=0,uniquepart=base,hash=081ad72db47fd3469ec24c44f405d377}{%
+           family={Pitman},
+           familyi={P\bibinitperiod},
+           given={Jim},
+           giveni={J\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {JSTOR}%
+      }
+      \strng{namehash}{081ad72db47fd3469ec24c44f405d377}
+      \strng{fullhash}{081ad72db47fd3469ec24c44f405d377}
+      \strng{bibnamehash}{081ad72db47fd3469ec24c44f405d377}
+      \strng{authorbibnamehash}{081ad72db47fd3469ec24c44f405d377}
+      \strng{authornamehash}{081ad72db47fd3469ec24c44f405d377}
+      \strng{authorfullhash}{081ad72db47fd3469ec24c44f405d377}
+      \field{sortinit}{P}
+      \field{sortinithash}{8d51b3d5b78d75b54308d706b9bbe285}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Lecture Notes-Monograph Series}
+      \field{title}{Poisson-Kingman partitions}
+      \field{year}{2003}
+      \field{pages}{1\bibrangedash 34}
+      \range{pages}{34}
+    \endentry
+    \entry{pitman1997two}{article}{}
+      \name{author}{2}{}{%
+        {{uniquename=0,uniquepart=base,hash=081ad72db47fd3469ec24c44f405d377}{%
+           family={Pitman},
+           familyi={P\bibinitperiod},
+           given={Jim},
+           giveni={J\bibinitperiod},
+           givenun=0}}%
+        {{uniquename=0,uniquepart=base,hash=1e58f52d7501e0df28f20cd5871cbc80}{%
+           family={Yor},
+           familyi={Y\bibinitperiod},
+           given={Marc},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {Institute of Mathematical Statistics}%
+      }
+      \strng{namehash}{dbe38545a7ab0d049b1dab064a8499b8}
+      \strng{fullhash}{dbe38545a7ab0d049b1dab064a8499b8}
+      \strng{bibnamehash}{dbe38545a7ab0d049b1dab064a8499b8}
+      \strng{authorbibnamehash}{dbe38545a7ab0d049b1dab064a8499b8}
+      \strng{authornamehash}{dbe38545a7ab0d049b1dab064a8499b8}
+      \strng{authorfullhash}{dbe38545a7ab0d049b1dab064a8499b8}
+      \field{sortinit}{P}
+      \field{sortinithash}{8d51b3d5b78d75b54308d706b9bbe285}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{The Annals of Probability}
+      \field{number}{2}
+      \field{title}{{The two-parameter Poisson-Dirichlet distribution derived from a stable subordinator}}
+      \field{volume}{25}
+      \field{year}{1997}
+      \field{pages}{855\bibrangedash 900}
+      \range{pages}{46}
+    \endentry
+    \entry{rajkowski2019analysis}{article}{}
+      \name{author}{1}{}{%
+        {{uniquename=0,uniquepart=base,hash=f92e19af8c64f3bf4de5fa9ec5d86fae}{%
+           family={Rajkowski},
+           familyi={R\bibinitperiod},
+           given={{Ł}ukasz},
+           giveni={Ł\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {International Society for Bayesian Analysis}%
+      }
+      \strng{namehash}{f92e19af8c64f3bf4de5fa9ec5d86fae}
+      \strng{fullhash}{f92e19af8c64f3bf4de5fa9ec5d86fae}
+      \strng{bibnamehash}{f92e19af8c64f3bf4de5fa9ec5d86fae}
+      \strng{authorbibnamehash}{f92e19af8c64f3bf4de5fa9ec5d86fae}
+      \strng{authornamehash}{f92e19af8c64f3bf4de5fa9ec5d86fae}
+      \strng{authorfullhash}{f92e19af8c64f3bf4de5fa9ec5d86fae}
+      \field{sortinit}{R}
+      \field{sortinithash}{da6b42bd3ab22fee61abed031ee405f7}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Bayesian Analysis}
+      \field{number}{2}
+      \field{title}{Analysis of the maximal a posteriori partition in the Gaussian Dirichlet Process Mixture Model}
+      \field{volume}{14}
+      \field{year}{2019}
+      \field{pages}{477\bibrangedash 494}
+      \range{pages}{18}
+    \endentry
+    \entry{Rasmussen:2006aa}{book}{}
+      \name{author}{2}{}{%
+        {{uniquename=0,uniquepart=base,hash=d4a4e699c24e75fc39a3a354584c6dbf}{%
+           family={Rasmussen},
+           familyi={R\bibinitperiod},
+           given={Carl\bibnamedelima Edward},
+           giveni={C\bibinitperiod\bibinitdelim E\bibinitperiod},
+           givenun=0}}%
+        {{uniquename=0,uniquepart=base,hash=18d5a61e673f86e548c1ea8a7f124c00}{%
+           family={Williams},
+           familyi={W\bibinitperiod},
+           given={Christopher\bibnamedelimb K.\bibnamedelimi I.},
+           giveni={C\bibinitperiod\bibinitdelim K\bibinitperiod\bibinitdelim I\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {MIT Press}%
+      }
+      \strng{namehash}{580284ca6658c9a6ec11bab830a19345}
+      \strng{fullhash}{580284ca6658c9a6ec11bab830a19345}
+      \strng{bibnamehash}{580284ca6658c9a6ec11bab830a19345}
+      \strng{authorbibnamehash}{580284ca6658c9a6ec11bab830a19345}
+      \strng{authornamehash}{580284ca6658c9a6ec11bab830a19345}
+      \strng{authorfullhash}{580284ca6658c9a6ec11bab830a19345}
+      \field{sortinit}{R}
+      \field{sortinithash}{da6b42bd3ab22fee61abed031ee405f7}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{{Gaussian Processes for Machine Learning}}
+      \field{year}{2006}
+      \verb{doi}
+      \verb 10.1.1.86.3414
+      \endverb
+    \endentry
+    \entry{sethuraman1994constructive}{article}{}
+      \name{author}{1}{}{%
+        {{uniquename=0,uniquepart=base,hash=5610b62bb3ef391bd67399a3ee83e0b0}{%
+           family={Sethuraman},
+           familyi={S\bibinitperiod},
+           given={Jayaram},
+           giveni={J\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{5610b62bb3ef391bd67399a3ee83e0b0}
+      \strng{fullhash}{5610b62bb3ef391bd67399a3ee83e0b0}
+      \strng{bibnamehash}{5610b62bb3ef391bd67399a3ee83e0b0}
+      \strng{authorbibnamehash}{5610b62bb3ef391bd67399a3ee83e0b0}
+      \strng{authornamehash}{5610b62bb3ef391bd67399a3ee83e0b0}
+      \strng{authorfullhash}{5610b62bb3ef391bd67399a3ee83e0b0}
+      \field{sortinit}{S}
+      \field{sortinithash}{322b1d5276f2f6c1bccdcd15920dbee6}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Statistica Sinica}
+      \field{title}{{A constructive definition of Dirichlet priors}}
+      \field{volume}{4}
+      \field{year}{1994}
+      \field{pages}{639\bibrangedash 650}
+      \range{pages}{12}
+    \endentry
+    \entry{teh2006hierarchical}{article}{}
+      \name{author}{4}{}{%
+        {{uniquename=0,uniquepart=base,hash=cd4e6dd8d64a5df8d714ba14ab6cbd01}{%
+           family={Teh},
+           familyi={T\bibinitperiod},
+           given={Y.W.},
+           giveni={Y\bibinitperiod},
+           givenun=0}}%
+        {{uniquename=0,uniquepart=base,hash=090e3acf375e0fc11dcde8c3b36dc14d}{%
+           family={Jordan},
+           familyi={J\bibinitperiod},
+           given={M.I.},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+        {{uniquename=0,uniquepart=base,hash=697eccbde4944659675a723e0676e549}{%
+           family={Beal},
+           familyi={B\bibinitperiod},
+           given={M.J.},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+        {{uniquename=0,uniquepart=base,hash=86589a35b496ac3d58140f37b9abd0bd}{%
+           family={Blei},
+           familyi={B\bibinitperiod},
+           given={D.M.},
+           giveni={D\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {ASA}%
+      }
+      \strng{namehash}{8df0778e85f263070639af993b2766e7}
+      \strng{fullhash}{556316fcd6d3524861b7686e0e4f2c53}
+      \strng{bibnamehash}{8df0778e85f263070639af993b2766e7}
+      \strng{authorbibnamehash}{8df0778e85f263070639af993b2766e7}
+      \strng{authornamehash}{8df0778e85f263070639af993b2766e7}
+      \strng{authorfullhash}{556316fcd6d3524861b7686e0e4f2c53}
+      \field{sortinit}{T}
+      \field{sortinithash}{6f7aff9db9dcfeb7f95fd5bbd2f78df9}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{0162-1459}
+      \field{journaltitle}{Journal of the American Statistical Association}
+      \field{number}{476}
+      \field{title}{{Hierarchical Dirichlet processes}}
+      \field{volume}{101}
+      \field{year}{2006}
+      \field{pages}{1566\bibrangedash 1581}
+      \range{pages}{16}
+    \endentry
+    \entry{wade2018bayesian}{article}{}
+      \name{author}{2}{}{%
+        {{uniquename=0,uniquepart=base,hash=b5e717b46084647b6e240a13e56729c4}{%
+           family={Wade},
+           familyi={W\bibinitperiod},
+           given={Sara},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+        {{uniquename=0,uniquepart=base,hash=bf5cf30deddddad00a6341ad7a414445}{%
+           family={Ghahramani},
+           familyi={G\bibinitperiod},
+           given={Zoubin},
+           giveni={Z\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {International Society for Bayesian Analysis}%
+      }
+      \strng{namehash}{db4614d9d27aaea9a8de06b67e38f39e}
+      \strng{fullhash}{db4614d9d27aaea9a8de06b67e38f39e}
+      \strng{bibnamehash}{db4614d9d27aaea9a8de06b67e38f39e}
+      \strng{authorbibnamehash}{db4614d9d27aaea9a8de06b67e38f39e}
+      \strng{authornamehash}{db4614d9d27aaea9a8de06b67e38f39e}
+      \strng{authorfullhash}{db4614d9d27aaea9a8de06b67e38f39e}
+      \field{sortinit}{W}
+      \field{sortinithash}{ecb89ff85896a47dc313960773ac311d}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Bayesian Analysis}
+      \field{number}{2}
+      \field{title}{Bayesian cluster analysis: Point estimation and credible balls (with discussion)}
+      \field{volume}{13}
+      \field{year}{2018}
+      \field{pages}{559\bibrangedash 626}
+      \range{pages}{68}
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+
