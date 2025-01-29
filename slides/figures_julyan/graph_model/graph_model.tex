@@ -1,0 +1,128 @@
+% Kalman filter system model
+% by Burkart Lingner
+% An example using TikZ/PGF 2.00
+%
+% Features: Decorations, Fit, Layers, Matrices, Styles
+% Tags: Block diagrams, Diagrams
+% Technical area: Electrical engineering
+
+\documentclass[a4paper,12pt]{article}
+
+\usepackage{amsmath,amsfonts,amsthm,amssymb,latexsym}
+
+%\newcommand{\Y}{\mathbf{Y}}
+%\newcommand{\p}{\mathbf{p}}
+%\newcommand{\V}{\mathbf{V}}
+%\newcommand{\Z}{\mathbf{Z}}
+%\newcommand{\DGEM}{\textsf{Dep-GEM}}
+%\newcommand\Zp{\mathbf{\mathcal{Z}}}
+
+%\usepackage{/Users/julyanarbel/Dropbox/Julyan/Research/Projects/Mixtures/industry_chapter/book/chapters/industry/definitions_julyan.sty}
+
+\usepackage[english]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[ansinew]{inputenc}
+
+\usepackage{lmodern}  % font definition
+\usepackage{amsmath}	% math fonts
+\usepackage{amsthm}
+\usepackage{amsfonts}
+
+\usepackage{tikz}
+
+%%%<
+\usepackage{verbatim}
+\usepackage[active,tightpage]{preview}
+\PreviewEnvironment{tikzpicture}
+\setlength\PreviewBorder{5pt}%
+%%%>
+
+\usetikzlibrary{decorations.pathmorphing} % noisy shapes
+\usetikzlibrary{fit}					% fitting shapes to coordinates
+\usetikzlibrary{backgrounds}	% drawing the background after the foreground
+
+\begin{document}
+
+% \begin{figure}[htbp]
+\centering
+% The state vector is represented by a blue circle.
+% "minimum size" makes sure all circles have the same size
+% independently of their contents.
+\tikzstyle{param}=[circle,
+                                    thick,
+                                    minimum size=1cm,
+                                    draw=black]%,
+%                                    fill=blue!20]
+\tikzstyle{obs}=[circle,
+                                    thick,
+                                    minimum size=1cm,
+                                    draw=black!80,
+                                    fill=black!10]
+\tikzstyle{fixedparam}=[rectangle,
+                                    thick,
+                                    minimum size=.7cm,
+                                    draw=black!80,
+                                    fill=black!10,
+                                    rounded corners=2mm]
+\tikzstyle{dp}=[rectangle,
+                                    thick,
+                                    minimum size=.7cm,
+                                    draw=magenta!80,
+                                    fill=magenta!10,
+                                    rounded corners=2mm]
+                                    
+%                                                inner sep=0.2cm,
+%                                                rounded corners=5mm]
+
+% Everything is drawn on underlying gray rectangles with
+% rounded corners.
+\begin{tikzpicture}[>=latex,text height=1.5ex,text depth=0.25ex]
+    % "text height" and "text depth" are required to vertically
+    % align the labels with and without indices.
+  
+  % The various elements are conveniently placed using a matrix:
+  \matrix[row sep=0.7cm,column sep=-.4
+ cm] {
+%   \node(•)[fixedparam]{•};&  
+& & \node(crm)[fixedparam]{CRM};&&& & \node(ssm)[fixedparam]{SSM};&&&\\
+ & \node(sbp)[fixedparam]{SBP};&&  \node(nrmi)[fixedparam]{NRMI};&&  \node(sb)[fixedparam]{SB};&&  \node(gibbs)[fixedparam]{Gibbs};&&\\
+  \node(bp)[fixedparam]{BP};& & \node(nh)[fixedparam]{Non-homo.};&&  \node(homo)[fixedparam]{Homo.};&&  \node(sigmapos)[fixedparam]{$\sigma\geq 0$};&&  \node(sigmaneg)[fixedparam]{$\sigma<0$};&\\  
+&&&&  \node(ngg)[fixedparam]{NGG};&& \node(sigmazero)[fixedparam]{$\sigma = 0$}; && \node(py)[fixedparam]{PY};&\\  
+&&&  \node(nig)[fixedparam]{NIG};& &\node(sigmastable)[fixedparam]{$\sigma$-stable}; && \node(dp)[dp]{DP};&&\node(pt)[fixedparam]{PT};\\  
+    };
+            \path[->]
+            (crm) edge (sbp)
+            (crm) edge (nrmi)
+            (ssm) edge (sb)
+            (ssm) edge (gibbs)
+            (sbp) edge (bp)
+            (nrmi) edge (nh)
+            (nrmi) edge (homo)
+            (sb) edge (homo)
+            (sb) edge (sigmapos)
+            (gibbs) edge (sigmapos)
+            (gibbs) edge (sigmaneg)
+            (homo) edge (ngg)
+            (sigmapos) edge (ngg)
+            (sigmapos) edge (sigmazero)
+            (sigmapos) edge (py)
+            (sigmaneg) edge (py)
+            (ngg) edge (nig)
+            (ngg) edge (sigmastable)
+            (ngg) edge (dp)
+            (sigmazero) edge (dp)
+            (py) edge (dp)
+            (pt) edge (dp)
+            (sigmastable) edge (dp)
+%            (•) edge (•)
+%            (ablambda) edge (lambda)
+%            (absigma) edge (sigma)
+%            (abM) edge (M)
+%            (lambda) edge (Z)
+%            (sigma) edge (Z)
+%            (sigma) edge (Y)
+%            (M) edge (Y)
+%            (Z) edge (Y)
+        ;
+\end{tikzpicture}
+\end{document}
