@@ -1,0 +1,265 @@
+\input{gabriel_def}
+
+In generative modeling, our main goal is get an approximation of an unknown distribution
+$\pdata$. Most common examples are the distributions of $(256, 256, 3)$-images, or $10s$ audio ...
+
+The main constraint of such task is that of course we do not have any information of $\pdata$ other than a dataset of samples $\dataset=\{\state_1, \cdots, \state_\ndata\}$.
+
+
+Let $\statedim \in \nsetpos$ and $\mset{}$ the set of Borel measures on $\rset^{\statedim}$.
+We define $\pset{} \eqdef \{\mu: \mset{} | \mu(\rset^{\statedim}) = 1\}$, and $\pset{p} \eqdef \{\mu \in \pset{}| \PE{\mu}{\|\state\|_p^p} < \infty\}$.
+In (parameterized) generative modelling, we are equipped with a family of distributions $\vfam{\paramset} \eqdef \{\pgen | \param \in \paramset\}$. Typically, each $\pgen$ involves a neural network with parameters $\param$.
+
+\section{Maximum likelihood SEUs}
+We focus on maximum likelihood generative models. 
+\subsection{Maximizing observed likelihood}
+We consider the following decision problem
+\begin{itemize}
+    \item A set of states corresponding to the observed data: $\stateset \eqdef {\rset^{\statedim}}^{\tensprod \ndata + 1}$,
+    \item A set of decision functions: $\decfunset{\paramset} \eqdef \{\decfun: \stateset \rightarrow \paramset | \decfun(\chunk{\lstate}{1}{\ndata},\lstate) = \decfun(\chunk{\lstate}{1}{\ndata},\alt{\lstate})\}$,
+    \item A set of actions: $\actionset \eqdef \{a: \stateset \ni (s, \lstate) \rightarrow \pgen[\decfun(s)](\lstate) \in \rsetpos \}$,
+    \item The utility function $\utility{a(s)} = \log(a(s))$.
+\end{itemize}
+We then have the following SEU:
+\begin{equation}
+    \label{eq:obslik_seu}
+    \tmin{\decfun} \eqdef \argmin_{\decfun \in \decfunset{\paramset}} \PE{\pdata^{\tensprod n+1}}{-\log(\pgen[\decfun(\chunk{\state}{1}{\ndata})](\state_{\ndata+1}))} =\argmax_{\decfun \in \decfunset{\paramset}} \PE{\pdata^{\ndata}}{\kl{\pdata}{\pgen[\decfun(\chunk{\state}{1}{\ndata})]}}\eqsp.
+\end{equation}
+
+\subsection{Maximizing generated likelihood}
+We could change the decision problem in the following way:
+\begin{itemize}
+    \item A set of states corresponding to the observed data: $\stateset \eqdef {\rset^{\statedim}}^{\tensprod \ndata} \times \rset^{\gendim}$,
+    \item A set of decision functions: $\decfunset{\paramset} \eqdef \{\decfun: \stateset \rightarrow \paramset | \decfun(\chunk{\lstate}{1}{\ndata},\epsilon) = \decfun(\chunk{\lstate}{1}{\ndata},\alt{\epsilon})\}$,
+    \item A set of actions: $\actionset \eqdef \{a: \stateset \ni (s, \epsilon) \rightarrow \pgen[\decfun(s)](\epsilon) \in  \rset^{\statedim} \}$,
+    \item The utility function $\utility{a(s)} = \log \pdata(a(s))$.
+\end{itemize}
+We then have the following SEU:
+\begin{equation}
+    \label{eq:genlik_seu}
+    \tmin{\decfun} \eqdef \argmin_{\decfun \in \decfunset{\paramset}} \PE{\pdata^{\tensprod n} \times \gendist}{-\log \pdata(\pgen[\decfun(\chunk{\state}{1}{\ndata})](\epsilon))} = \argmax_{\decfun \in \decfunset{\paramset}} \PE{\pdata^{ \tensprod \ndata}}{\kl{\pgen[\decfun(\chunk{\state}{1}{\ndata})]}{\pdata}}\eqsp.
+\end{equation}
+
+\section{Model zoo}
+
+\subsection{A model that does it all: Normalizing Flows}
+
+In general, generative models (at least those in these notes) can be written as 
+\[
+    \pgen(A) = \PE{\epsilon \sim \gendist}{\indi{A}(\pgen(\epsilon))} \eqsp,
+\]
+where $\gendist$ is some standard distribution, such as a Gaussian or Uniform.
+
+In \cite{rezende2015variational}, the authors introduced Normalizing Flow which is based on the change of variable formula:
+If $\pgen{}$ is an invertible map for all $\param$, then
+\begin{equation}
+    \pgen(\lstate) = \gendist(\pgen^{-1}(\lstate))\left|\det \jac{\pgen}(\pgen^{-1}(\lstate))\right| \eqsp.
+\end{equation}
+A normalizing flow is defined by
+\begin{equation}
+    \label{eq:nflow_def}
+    \nflow{\param}: \lstate \in \rset^{\statedim} \rightarrow \nflowlayer{\param_k}\circ \cdots \circ \nflowlayer{\param_0}(\lstate) \in \rset^{\statedim} \eqsp,
+\end{equation}
+where each $\nflowlayer{\param_k}: \rset^{\statedim} \rightarrow \rset^{\statedim}$ is an invertible map with \textbf{easy} to compute Jacobian determinants. 
+
+\paragraph{An example of such flow: RealNVP}
+A typical example of such flow is the RealNVP \cite{dinh2017density}, defined as:
+\begin{equation}
+    \label{eq:rnvp_def}
+    \nflowlayer{\param}(\lstate[1:d], \lstate[d:\statedim]) = (\lstate[1:d], \lstate[d:\statedim] \cdot \exp(s(\lstate[1:d]; \param)) + t(\lstate[1:d]; \param)) \eqsp,
+\end{equation}
+where $s(\cdot; \param), t(\cdot; \param): \rset^d \rightarrow \rset^{\statedim - d}$ are typically neural networks.
+
+The Jacobian of such flow is
+\begin{equation}
+    \label{eq:rnvp_jac}
+    \jac{\nflowlayer{\param}}(\lstate) = \begin{bmatrix}
+        \idm{d} & 0 \\
+        \cdots & \operatorname{diag}(\exp(s(\lstate[1:d]; \param)))
+    \end{bmatrix}\eqsp,
+\end{equation}
+and thus $\det \jac{\nflowlayer{\param}}(\lstate) = \exp\left(\sum_{j=1}^{\statedim - d} s(\lstate[1:d]; \param)^t e_j\right)$.
+
+\subsubsection{Learning with normalizing flow}
+
+\paragraph{Type I learning:}
+As for normalizing flow we know exactly how to calculate $\pgen{}$, learning in type I can be done by simply
+\begin{equation}
+    \label{eq:nf:emp_obslik}
+    \emin{\param} \eqdef \argmax_{\param} \sum_{i=1}^{\ndata} \log \pgen{}(\state_i) \eqsp.
+\end{equation}
+
+Note that in this case, we simply require \textbf{samples from $\pdata$}. But of course, we do not know if this is the minimum of \eqref{eq:obslik_seu}.
+We would ideally like to have some guarantee such as that the event
+\begin{equation}
+    \lim_{\ndata \rightarrow \infty} \PE{\pdata}{\log \pgen[\emin{\param}](\state)} - \PE{\pdata}{\log \pgen[\tmin{\param}](\state)} = 0 \eqsp,
+\end{equation}
+happens with high $\pdata$-probability (here $\tmin{\param} \eqdef \argmax_\param \PE{\pdata}{\log \pgen(\state)}$).
+
+Note that if we introduce the empirical measure $\empmeas(A) \eqdef \ndata^{-1}\sum_{i=1}^{\ndata} \dirac{\state_i}(A)$, the event above can be written as
+\begin{align*}
+    &\PE{\pdata}{\log \pgen[\emin{\param}](\state)} \pm \PE{\empmeas}{\log \pgen[\emin{\param}](\state)} \pm \PE{\empmeas}{\log \pgen[\tmin{\param}](\state)} - \PE{\pdata}{\log \pgen[\tmin{\param}](\state)} \\
+    & = \PE{\pdata}{\log \pgen[\emin{\param}](\state) - \log \pgen[\tmin{\param}](\state)} - \PE{\empmeas}{\log \pgen[\emin{\param}](\state) - \log \pgen[\tmin{\param}](\state)}  \\
+    &+ \underbrace{\PE{\empmeas}{\log \pgen[\emin{\param}](\state) - \log \pgen[\tmin{\param}](\state)}}_{\leq 0} \\
+    & \leq \PE{\pdata}{\log \pgen[\emin{\param}](\state) - \log \pgen[\tmin{\param}](\state)} - \PE{\empmeas}{\log \pgen[\emin{\param}](\state) - \log \pgen[\tmin{\param}](\state)} \eqsp.
+\end{align*}
+
+Thus, if we can show that the event
+\begin{equation*}
+    \lim_{\ndata \rightarrow 0} \left|\PE{\pdata}{\log \pgen[\emin{\param}](\state) - \log \pgen[\tmin{\param}](\state)} - \PE{\empmeas}{\log \pgen[\emin{\param}](\state) - \log \pgen[\tmin{\param}](\state)}\right| = 0
+\end{equation*}
+happens with high $\pdata$-probability, we know that by solving \eqref{eq:nf:emp_obslik} we will converge (when the dataset grows) to the Bayes action.
+
+\paragraph{Concentration of measure: Correctness of SEU.}
+This type of inequality, is called the concentration of measure inequality. We want to see how much the "empirical" expectation approximates the true expectation as $\ndata$ grows.
+They are related to the Talagrand's concentration inequality, a deep rather recent result in Mathematics.
+
+In general, if we can "control the tails" of $\log \pgen(\state) - \log \pgen[\tmin{\param}](\state)$ uniformly on $\param$, then we can establish this kind of results. See for example \cite{adamczak2008taila}.
+
+\subsection{Exploiting duality: The latent route}
+
+There are two main limitations for Normalizing flow:
+\begin{itemize}
+    \item \textbf{Dimensionality}: Normalizing flows model $\statedim$ dimensional probabilities, i.e. $\pgen{}$ admits a density with respect to the ambient Lebesgue measure. The manifold hypothesis, generally admitted when handling high dimensional data, assumes that the data lives in a subspace (manifold) of the ambient space.
+    Therefore, one would like to have a generative model that would yield lower dimensional distributions ($\gendim < \statedim$). 
+    \item \textbf{Flexibility}: Normalizing flows are really restrictive! While there have been several advances in recent years with more and more flexible flows, most of the common neural network architectures are not available as flows.
+\end{itemize}
+
+\subsection{KL duality: The VAE case}
+In \cite{kingma2013autoencoding}, the authors introduce a latent model defined as
+\begin{equation}
+    \label{eq:vae_def}
+    \pgen{}(A) = \int \pcondd{z}{A} \ppriord{\rmd z} \eqsp.
+\end{equation}
+We will refer to the variables $z$ living in $\rset^{\gendim}$ as the latent variables. Their distribution is $\pprior$ and 
+given a latent variable $z$, $\pcondd{z}{\cdot}$ is a distribution over the space of the observed variables $\rset^{\statedim}$.
+The simplest example is:
+\begin{itemize}
+    \item $\pprior = \gauss(0, \idm_{\gendim})$,
+    \item $\pcondd{z}{x} = \gauss(x; \mu_{\paramcond}(z), \sigma^2_\paramcond(z) \idm_{\statedim})$,
+\end{itemize}
+where $\mu_{\paramcond}: \rset^{\gendim} \rightarrow \rset^{\statedim}$ and $\sigma^2_\paramcond: \rset^{\gendim} \rightarrow \rsetpos$ are \textbf{arbitrary} neural networks.
+Typically, $\gendim \approx 10$ while $\statedim \approx 10^4$ for image applications.
+
+While this model does not have the two main limitations of normalizing flow, it is not evident how one could learn such model.
+Indeed, any gradient-based algorithm for type I involves
+\begin{equation}
+    \label{eq:vae:ll_grad}
+    \nabla_{\paramcond} \log \pgen{}(\lstate) = \PE{\pprior}{\nabla \log \pcondd{Z}{\lstate}\frac{\pcondd{Z}{\lstate}}{\pgen{}(\lstate)}} = \PE{\ppostd{\lstate}{\cdot}}{\nabla \log \pcondd{Z}{\lstate}}  \eqsp,
+\end{equation}
+where $\ppostd{\lstate}{z} \eqdef \nofrac{\pcondd{z}{\lstate}\ppriord{z}}{\pgen{}(\lstate)}$ is the posterior distributions over the latents $z$ given an observation $x$.
+
+While not impossible to device tractable estimators of \eqref{eq:vae:ll_grad} (one could go with a Langevin sampler for example)
+it is generally associated with a considerable computation cost / estimator variance trade-off.
+
+In \cite{kingma2013autoencoding}, the authors propose maximizing a lower bound on the likelihood (ELBO).
+\begin{lemma}
+    Let $q \in \pset{}$ such that $q << \pgen{}$. Then
+    \begin{equation}
+        \label{eq:vae:elbo}
+        \log \pgen{}(\lstate) = \underbrace{\PE{q}{\pcondd{Z}{\lstate}} - \kl{q}{\pprior}}_{\eqdef \text{ELBO}} + \kl{q}{\ppostd{\lstate}{\cdot}} \eqsp.
+    \end{equation}
+\end{lemma}
+\begin{proof}
+    We will give two proofs. One using importance sampling, which while more intuitive fails to make the gap between elbo and log likelihood explicit.
+    Introduce $q$ as a proposal in importance sampling. Then, 
+    \begin{equation*}
+        \log \pgen{}(\lstate) = \log \PE{\pprior}{\pcondd{Z}{\lstate}} = \log \PE{q}{\pcondd{Z}{\lstate}\frac{\ppriord{Z}}{q(Z)}} \eqsp.
+    \end{equation*}
+    By Jensen's inequality:
+    \begin{equation*}
+        \log \pgen{}(\lstate) \geq\PE{q}{\log\left(\pcondd{Z}{\lstate}\frac{\ppriord{Z}}{q(Z)}\right)} = \PE{q}{\log(\pcondd{\lstate}{Z})} + \underbrace{\PE{q}{\log\left(\frac{\ppriord{Z}}{q(Z)}\right)}}_{-\kl{q}{\pprior}} \eqsp.
+    \end{equation*}
+    The second starts by the following identity:
+    \begin{equation*}
+        \pgen{}(\lstate) = \frac{\pcondd{\lstate}{z} \ppriord{z}}{\ppostd{\lstate}{z}} \eqsp, 
+    \end{equation*}
+    which holds for all $z$.
+    Therefore,
+    \begin{equation*}
+        \log \pgen{}(\lstate) = \log \pcondd{\lstate}{z} + \log \ppriord{z} - \log {\ppostd{\lstate}{z}} \eqsp. 
+    \end{equation*}
+    The proof is concluded by integrating w.r.t $q$ and adding and removing $\PE{q}{\log q}$.
+\end{proof}
+The lemma above can also be cast as duality formula
+\begin{theorem}[Donsker and Varadhan's duality formula \cite{donsker1983asymptotic}]
+    Let $(q, p) \in \pset{}$, such that $p << q$ and $q << p$. Then, 
+    \begin{equation}
+        \kl{q}{p} = \sup_{f \in \lpsp{\infty}{q}} \PE{q}{f} - \log \PE{p}{\exp(f)} \eqsp.
+    \end{equation}
+    Furthermore, equality hold if and only if $f = \log \frac{\rmd q}{\rmd p}$.
+\end{theorem}
+\begin{proof}
+    First we prove that for any $f \in \lpsp{\infty}{q}$, $\PE{q}{f(X)} - \log \PE{p}{\exp(f)} \leq \kl{q}{p}$.
+    By Jensen's inequality, we have
+    \begin{equation*}
+        \log \PE{p}{\exp f} = \log \PE{q}{\exp f \frac{\rmd p}{\rmd q}} \geq \PE{q}{f} + \PE{q}{\log\left(\frac{\rmd p}{\rmd q}\right)} \eqsp.
+    \end{equation*}
+    But as $p << q$ and $q << p$, we have that 
+    \begin{equation*}
+        \PE{q}{\log\left(\frac{\rmd p}{\rmd q}\right)} = - \PE{q}{\log\left(\frac{\rmd q}{\rmd p}\right)} = - \kl{q}{p} \eqsp. 
+    \end{equation*}
+    If $\frac{\rmd q}{\rmd p} \in \lpsp{\infty}{q}$, then it is evident that the sup is attained. 
+    
+    Otherwise, consider the bounded functions $f_k = \min(\log \frac{\rmd q}{\rmd p}, k)$. 
+    Then, this is a sequence of increasing measurable bounded function such that
+    $\sup_{k} f_k(x) = \log \frac{\rmd q}{\rmd p}(x)$. Thus,
+    \begin{equation*}
+        \sup_{k} \PE{q}{f_k(X)} = \PE{q}{\log \frac{\rmd q}{\rmd p}} = \kl{q}{p} \eqsp.
+    \end{equation*}    
+    For the other term, notice that by the previous obtained bound, we have that
+    \begin{equation*}
+        \sup_k \PE{p}{\exp f_k} = \PE{p}{\frac{\rmd q}{\rmd p}} = 1 \eqsp.
+    \end{equation*}
+    This establishes the result.
+\end{proof}
+
+In \cite{kingma2013autoencoding} the authors propose to introduce an amortized variational family
+$\pvid{\lstate}{\cdot}$ over the latent space that is at each time trained to maximize the ELBO.
+This family is called amortized since we are trying to learn the variational approximation as a function of $\lstate$,
+instead of having one distribution per data point. Therefore, our VAE objective is
+\begin{equation}
+    \label{eq:vae:objective}
+    \emin{\param} \eqdef \argmax_{\param} \sum_{i=1}^{\ndata}\PE{\pvid{\state_i}{\cdot}}{\log \pcondd{Z}{\state_i}} - \kl{\pvid{\state_i}{\cdot}}{\pprior} \eqsp,
+\end{equation}
+where now $\param = (\paramcond, \paramvi, \paramprior)$.
+
+For the VAE, we have introduced an idea that will prove fruitful in the future. We have introduced a duality formulation
+for the KL-divergence and used this duality formula to avoid having to calculate the likelihood of our model.
+
+We still have the same problem as for the normalizing flow, namely, can we show that
+\begin{equation*}
+    \lim_{\ndata \rightarrow \infty} \PE{\pdata}{\PE{\pvid[\emin{\paramvi}]{\state}{\cdot}}{\log \pcondd[\emin{\paramcond}]{Z}{\state}} - \kl{\pvid[\emin{\paramvi}]{\state}{\cdot}}{\pprior[\emin{\paramprior}]}} = \PE{\pdata}{\PE{\pvid[\emin{\paramvi}]{\state}{\cdot}}{\log \pcondd[\tmin{\paramcond}]{Z}{\state}} - \kl{\pvid[\tmin{\paramvi}]{\state}{\cdot}}{\pprior[\tmin{\paramprior}]}}  \eqsp?
+\end{equation*}
+
+To be continued
+
+\subsubsection{Vamp}
+
+To be written
+
+\subsubsection{Trouble in KL world}
+    While the most intuitive distance, the KL has several problems. To illustrate this, let's first note that if $p_0 = \gauss(\mu_0, \sigma_0^2)$
+    and $p_1 = \gauss(\mu_1, \sigma_1^2)$ then
+    \[
+        \kl{p_0}{p_1} = \frac{1}{2}\left[2\log\left(\frac{\sigma_1}{\sigma_0}\right) + \frac{\sigma_0^2 - \sigma_1^2}{\sigma_1^2} + \sigma_1^{-2}\|\mu_1 - \mu_0\|^2\right] \eqsp.
+    \]
+    \begin{itemize}
+        \item \textbf{It is not a symmetric:} Let $p_0 = \gauss(0, 1)$ and $p_1 = \gauss(0, \sigma^2)$. Then, $\kl{p_0}{p_1} = \log(\sigma) + \frac{1}{2}\left[\sigma^{-2} - 1\right]$ 
+        and $\kl{p_1}{p_0} = -\log(\sigma) + \frac{1}{2}[\sigma^2 - 1]$.
+        \item \textbf{Triangular inequality does not hold}
+    \end{itemize}
+
+\subsection{Jensen Shannon duality: The Generative adversarial network (GAN)}
+
+To be written
+
+\subsection{Monge Kantarovich duality: Wasserstein GANs}
+
+To be written
+
+\subsection{Denoising diffusion generative models}
+
+To be written
+
+

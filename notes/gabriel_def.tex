@@ -1,0 +1,88 @@
+\def\youngfun{\psi}
+\def\htcoeff{\beta}
+\def\paramcond{\theta}
+\def\paramprior{\alpha}
+\def\paramvi{\phi}
+\def\param{\vartheta}
+\def\paramset{\varTheta}
+\def\gauss{\mathcal{N}}
+\def\gendim{d_{\epsilon}}
+\newcommand{\borel}[1]{\mathcal{B}(#1)}
+\newcommand{\mset}[1]{\mathrm{M}_{#1}}
+\newcommand{\mxset}[2]{\mathrm{M}(#1, #2)}
+\newcommand{\pset}[1]{\mathcal{P}_{#1}}
+\newcommand{\alt}[1]{{#1}^{'}}
+\newcommand{\tmin}[1]{{#1}^{*}}
+\newcommand{\emin}[1]{\hat{#1}}
+\newcommand{\youngfunht}[1]{\youngfun_{#1}^{\operatorname{HT}}}
+\newcommand{\youngfunc}[1]{\youngfun_{#1}}
+\newcommand{\onorm}[2]{\left\|#1\right\|_{#2}}
+\newcommand{\kl}[2]{\operatorname{D}_{\operatorname{KL}}\left(#1||#2\right)}
+\newcommand{\dist}[2]{\operatorname{D}\left(#1||#2\right)}
+\newcommand{\dens}[2]{#1\left(#2\right)}
+\newcommand{\condd}[3]{\dens{#1}{#3 | #2}}
+\newcommand{\utility}[1]{\mathrm{U}(#1)}
+\newcommand{\decfunset}[1]{\mathrm{D}(#1)}
+\def\gendist{\lambda}
+\def\decfun{\delta}
+\def\distset{{\pset{}}_{\mathrm{D}}}
+\def\stateset{\mathcal{S}}
+\def\actionset{\mathcal{A}}
+\def\rewardset{\mathcal{Z}}
+\def\PP{\mathbb{P}}
+\def\rset{\mathbb{R}}
+\def\rsetpos{\rset_*}
+\def\nsetpos{\mathbb{N}_*}
+\def\statesp{\left(\Omega, \mathcal{F}, \PP\right)}
+\def\statedim{{d_x}}
+\def\dataset{\mathcal{D}}
+\def\pdata{p_{\dataset}}
+\def\ndata{n}
+\def\outcomeset{\mathcal{O}}
+\def\tensprod{\otimes}
+\newcommandx{\wpdist}[3][1=1]{\operatorname{W}_{#1}(#2, #3)}
+\newcommand{\dirac}[1]{\delta_{#1}}
+\newcommandx\pgen[1][1=\param]{p_{#1, \operatorname{G}}}
+\newcommandx{\pgend}[2][1=\param]{\dens{\pgen[#1]}{#2}}
+\newcommandx{\empmeas}[1][1=\chunk{\state}{1}{\ndata}]{\mu_{\operatorname{emp}}(#1)}
+\newcommand{\chunk}[3]{{#1}_{#2:#3}}
+\newcommand{\pdatad}[1]{\dens{\pdata}{#1}}
+\newcommandx{\pcond}[1][1=\paramcond]{p_{#1}}
+\newcommandx{\pcondd}[3][1=\paramcond]{\condd{\pcond[#1]}{#2}{#3}}
+\newcommandx{\pprior}[1][1=\paramprior]{\pi_{#1}}
+\newcommandx{\ppriord}[2][1=\paramprior]{\dens{\pprior[#1]}{#2}}
+\newcommandx{\pvi}[1][1=\paramvi]{q_{#1}}
+\newcommandx{\pvid}[3][1=\paramvi]{\condd{\pvi[#1]}{#2}{#3}}
+\newcommandx\pvae[1][1=\param]{p_{#1, \operatorname{full}}}
+\newcommandx{\pvaed}[2][1=\param]{\dens{\pvae[#1]}{#2}}
+\newcommandx\ppost[1][1=\param]{p_{#1, \operatorname{post}}}
+\newcommandx{\ppostd}[3][1=\param]{\condd{\ppost[#1]}{#2}{#3}}
+\newcommandx{\dloss}[1]{L(#1)}
+\newcommandx{\mloss}[3][3=\lstate]{m(#1, #2; #3)}
+\newcommandx{\dmloss}[3][3=\lstate]{g(#1, #2; #3)}
+\newcommandx{\empmloss}[3][3=\chunk{\state}{1}{\ndata}]{M_{n}(#1, #2; #3)}
+\newcommandx{\tmloss}[2]{M^{\star}(#1, #2)}
+\newcommandx{\lpnorm}[3][1=2,2=\pdata]{\left\|#3\right\|_{L^{#1}(#2)}}
+\newcommandx{\erisk}[2]{R(#1, #2)}
+\newcommand{\m}[1]{\mathrm{#1}}
+\newcommand{\lpsp}[2]{\operatorname{L}^{#1}(#2)}
+\def\suplogratio{\gamma_r}
+\def\supklpost{\gamma_{\operatorname{kl}}}
+\def\state{X}
+\def\constlogr{c_{r}}
+\def\constkl{c_{\operatorname{kl}}}
+\newcommand{\PE}[2]{\mathbb{E}_{#1}\left[#2\right]}
+\def\rmd{\mathrm{d}}
+\def\eqdef{:=}
+\def\eqsp{\;}
+\newcommand{\gammafun}[2]{\Gamma(#1; #2)}
+\newcommand{\nofrac}[2]{#1 \bigg/ #2}
+\newcommand{\indi}[1]{\mathrm{1}_{#1}}
+\newcommand{\vfam}[1]{\mathcal{F}(#1)}
+\newcommand{\cpl}[2]{\mathcal{C}(#1, #2)}
+\def\lstate{x}
+\def\bigO{\mathcal{O}}
+\newcommand{\jac}[1]{\mathrm{J}_{#1}}
+\newcommand{\nflow}[1]{T_{#1}}
+\newcommand{\nflowlayer}[1]{\mathcal{T}_{#1}}
+\def\idm{\mathrm{I}}
