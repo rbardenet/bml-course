@@ -1,0 +1,276 @@
+% TO DO: add citations in thesis work, better research plan
+
+\documentclass[10pt]{beamer}
+\usetheme[height=0mm]{Rochester}
+\usecolortheme{}
+\usefonttheme[onlylarge]{structurebold}
+\setbeamerfont*{frametitle}{size=\normalsize,series=\bfseries}
+\setbeamertemplate{navigation symbols}{}
+\setbeamercovered{dynamic}
+\setbeamertemplate{itemize item}[triangle]
+\setbeamertemplate{itemize subitem}[triangle]
+
+%  use Darmstadt if commenting the next line
+\usepackage[footheight=1em]{beamerthemeboxes}
+\usepackage[natbib=true,backend=biber,citestyle=authoryear]{biblatex}
+\bibliography{../notes/references_gen}
+
+\usepackage{amsmath,amssymb,amsthm,bbm}             % AMS Math
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{xcolor}
+\usepackage{xargs}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{hyperref}
+\usepackage{mathtools}
+\usepackage{mathrsfs}
+\input{../notes/gabriel_def}
+\usepackage{url}
+
+\definecolor{bleu}{rgb}{0.2,0.4,0.65}
+\setbeamercolor{palette primary}{bg=bleu,fg=white}
+\setbeamercolor{palette secondary}{bg=bleu,fg=white}
+\setbeamercolor{palette tertiary}{bg=bleu,fg=white}
+\setbeamercolor{palette quaternary}{bg=bleu,fg=white}
+\setbeamercolor{structure}{fg=bleu} % itemize, enumerate, etc
+\setbeamercolor{section in toc}{fg=bleu} % TOC sections
+\def\figdir{Figures}
+
+\setbeamertemplate{footline}[frame number]
+
+\AtBeginSection[] % Do nothing for \section*
+{
+\begin{frame}
+\frametitle{Outline}
+\tableofcontents[currentsection]
+\end{frame}
+}
+
+\newcommand{\backupbegin}{
+   \newcounter{framenumberappendix}
+   \setcounter{framenumberappendix}{\value{framenumber}}
+}
+\newcommand{\backupend}{
+   \addtocounter{framenumberappendix}{-\value{framenumber}}
+   \addtocounter{framenumber}{\value{framenumberappendix}}
+}
+\makeatletter
+
+
+\title[Bayesian ML: Generative Models]{BML lecture \#6: Generative models}
+\subtitle{\url{http://github.com/rbardenet/bml-course}}
+\author[Gabriel V Cardoso (Mines PSL)] % (optional, for multiple authors)
+{Gabriel V Cardoso\\ \url{gabriel.victorino_cardoso@minesparis.psl.eu}}
+\institute[] % (optional)
+{
+  Ecole des Mines, Univ. PSL, France\\
+\vspace{1cm}
+\includegraphics[width=0.5\textwidth]{figures_gabriel/logo.png}
+}
+\date{}
+
+\begin{document}
+\begin{frame}
+\maketitle
+\end{frame}
+
+\begin{frame}{Generative models and Bayesian ML: Outline}
+  \begin{itemize}
+    \item Part I (today): Learning generative models and decision theory.
+    \item Part II (next week): Using generative models to solve (Bayesian) inverse problems.
+  \end{itemize}
+\end{frame}
+\begin{frame}{Learning generative models: A "frequentist" approach?}
+  \begin{minipage}{0.6\textwidth}
+    "Frankly, I am not a Bayesian. I go under the following principle. If you don’t understand a problem from a Bayesian decision theory point of view, you don’t understand the problem and trying to solve it is like shooting at a target in the dark. Once you understand the problem, it is not necessary to attack it from a Bayesian point of view. Bayesian methods always had the difficulty that our approximations to our subjective beliefs could carry a lot more information than we thought or felt willing to assume."
+  \end{minipage}
+  \hspace{5pt}
+  \begin{minipage}{0.3\textwidth}
+    \begin{flushright}
+      \begin{figure}
+        \includegraphics[width=.9\textwidth]{figures_gabriel/chernoff_herman.jpg}
+        \caption{Herman Chernoff}
+      \end{figure}
+    \end{flushright}
+  \end{minipage}
+\end{frame}
+\begin{frame}{Generative modelling as a decision problem: V1}
+  \begin{itemize}
+    \item $\stateset = $:
+    \item $\rewardset = $:
+    \item $\actionset = $:
+    \item SEU:
+    \item Bayes action:
+  \end{itemize}
+\end{frame}
+\begin{frame}{Generative modelling as a decision problem: V2}
+  \begin{itemize}
+    \item $\stateset = $:
+    \item $\rewardset = $:
+    \item $\actionset = $:
+    \item SEU:
+    \item Bayes action:
+  \end{itemize}
+\end{frame}
+\begin{frame}{"Quasi-Bayes" or Asymptotically Bayes}
+
+\end{frame}
+\begin{frame}{Finding Bayes actions: Normalizing flow}
+  Let $Z \sim \lambda$ and $\state \sim \nflow{\param}(Z)$. Denote by $\pgen{}$ the law of $\state$.
+  \pause
+
+  If $\nflow{\param}$ is an invertible map for all $\param$, then
+  \begin{equation}
+      \pgen(\lstate) = \gendist(\pgen^{-1}(\lstate))\left|\det \jac{\pgen}(\pgen^{-1}(\lstate))\right| \eqsp.
+  \end{equation}
+  \pause
+
+  A normalizing flow is defined by
+  \begin{equation}
+      \label{eq:nflow_def}
+      \nflow{\param}: \lstate \in \xsp \rightarrow \nflowlayer{\param_k}\circ \cdots \circ \nflowlayer{\param_0}(\lstate) \in \xsp \eqsp,
+  \end{equation}
+  where each $\nflowlayer{\param_k}: \xsp \rightarrow \xsp$ is an invertible map with \textbf{easy} to compute Jacobian determinants.   
+\end{frame}
+\begin{frame}{Finding Bayes actions: Normalizing flow}
+
+  A typical example of such flow is the RealNVP \citep{dinh2017density}, defined as:
+  \begin{equation}
+      \label{eq:rnvp_def}
+      \nflowlayer{\param}(\lstate[1{:}d], \lstate[d{:}\statedim]) = (\lstate[1{:}d], \lstate[d{:}\statedim] \cdot e^{s(\lstate[1{:}d]; \param)} + t(\lstate[1{:}d]; \param)) \eqsp,
+  \end{equation}
+  where $s(\cdot; \param), t(\cdot; \param): \rset^d \rightarrow \rset^{\statedim - d}$ are typically neural networks.
+  
+  The Jacobian of such flow is
+  \begin{equation}
+      \label{eq:rnvp_jac}
+      \jac{\nflowlayer{\param}}(\lstate) = \begin{bmatrix}
+          \idm{d} & 0 \\
+          \cdots & \operatorname{diag}(e^{s(\lstate[1{:}d]; \param)})
+      \end{bmatrix}\eqsp,
+  \end{equation}
+  and thus $\det \jac{\nflowlayer{\param}}(\lstate) = e^{\sum_{j=1}^{\statedim - d} s(\lstate[1{:}d]; \param)[j]}$.
+\end{frame}
+\begin{frame}{Proving quasi-Bayes: A toy proof}
+  Suppose that
+  \begin{itemize}
+    \item $\xsp$ is compact,
+    \item $\nflow{\param}$ is continuous.
+  \end{itemize}
+
+  Can we prove that 
+  \begin{equation}
+    \lim_{\ndata \rightarrow \infty} \PE{\pdata}{\log \pgen[\decfun_n(\chunk{\state}{1}{n})](\state)}- \PE{\pdata}{\log \pgen[\tmin{\decfun}](\state)} = 0 \eqsp ?
+  \end{equation}
+\end{frame}
+\begin{frame}{Proving quasi-Bayes: A toy proof}
+  
+\end{frame}
+\begin{frame}{Proving quasi-Bayes: Going further}
+  \begin{flushright}
+    \includegraphics[width=0.3\textwidth]{figures_gabriel/talagrand.png}
+  \end{flushright}
+\end{frame}
+\begin{frame}{Generative modelling as a decision problem: The Wasserstein case}
+  \begin{itemize}
+    \item $\stateset = $:
+    \item $\rewardset = $:
+    \item $\actionset = $:
+    \item SEU:
+    \item Bayes action:
+  \end{itemize}
+\end{frame}
+\begin{frame}{Wasserstein / KL link}
+  \begin{flushright}
+    \includegraphics[width=0.3\textwidth]{figures_gabriel/villani.jpeg}
+  \end{flushright}
+\end{frame}
+\begin{frame}{Proving quasi-Bayes: The WGAN case \cite{biau2021theoretical}}
+  \begin{theorem}[{\cite{biau2021theoretical}[Theorem 21]}]
+    Assume the parameter space is compact\footnote{See Assumption 1 of \cite{biau2021theoretical} for a precise definition.} and define for $\mathcal{D} \subset \rset^{\xsp}$ 
+    \begin{equation}
+      d_{\mathcal{D}}(\mu, \nu) \eqdef \sup_{D \in \mathcal{D}} {\PE{\mu}{D} - \PE{\nu}{D}} \eqsp.
+    \end{equation}
+    For any $\epsilon > 0$ and $\eta \in (0, 1)$,  there exists $\mathcal{D}$ ($\mathcal{D}(\epsilon)$), such that for
+    \begin{itemize}
+      \item ${\pdata}$ \textbf{compact with diameter} $B$,
+        the event 
+        \begin{equation*}
+          d_{\mathcal{D}}(\pdata, \pgen[\decfun_n(\chunk{\state}{1}{n})]{}) - d(\pdata, \pgen[\tmin{\decfun}]{}) \leq 2\epsilon + \frac{c_1}{\sqrt{\ndata}} + B \sqrt{\frac{\log(1/\eta)}{2\ndata}}
+        \end{equation*}
+      \item ${\pdata}$ \textbf{$\gamma$ sub-Gaussian,} the event
+        \begin{equation*}
+          d_{\mathcal{D}}(\pdata, \pgen[\decfun_n(\chunk{\state}{1}{n})]{}) - d(\pdata, \pgen[\tmin{\decfun}]{}) \leq 2\epsilon + \frac{c_2}{\sqrt{\ndata}} + 8\gamma \sqrt{e \statedim}\sqrt{\frac{\log(1/\eta)}{2\ndata}}
+        \end{equation*}
+    \end{itemize}
+    happens with probability $1 - \eta$.
+  \end{theorem}
+\end{frame}
+\begin{frame}{Proving quasi-Bayes: The latent model}
+  \vspace{-95pt}
+  \begin{theorem}[\cite{donsker1983asymptotic}]
+    Let $(q, p) \in \pset{}$, such that $p << q$ and $q << p$. Then, 
+    \begin{equation}
+        \kl{q}{p} = \sup_{f \in \mathcal{G}_{q}} \PE{q}{f} - \log \PE{p}{\exp(f)} \eqsp,
+    \end{equation}
+    where $\mathcal{G}_q$ is the set of measurable $g$ such that $\PE{q}{\exp(g)} < \infty$.
+    Furthermore, equality hold if and only if $f = \log \frac{\rmd q}{\rmd p}$.
+  \end{theorem}
+\end{frame}
+\begin{frame}{Generative modelling as a decision problem: The VAE case}
+  \begin{itemize}
+    \item $\stateset = $:
+    \item $\rewardset = $:
+    \item $\actionset = $:
+    \item SEU:
+    \item Bayes action:
+  \end{itemize}
+\end{frame}
+\begin{frame}{Proving quasi-Bayes: the VAE case}
+  \begin{theorem}[{\cite{tang2021empirical}[Theorem 3]}]
+      Define $\decfun_n(\chunk{\lstate}{1}{n}) = (\emin{\paramcond}, \emin{\paramvi})$ and $\tmin{\decfun} = (\tmin{\paramcond}, \tmin{\paramvi})$. Suppose that the parameter space is compact and that 
+      for all $\lstate \in \xsp$,
+      \begin{equation*}
+        |\elbo{\lstate} - \elbo[\tilde{\paramcond}][\tilde{\paramvi}]{\lstate} | \leq b(\lstate) \|(\paramcond, \paramvi) - (\tilde{\paramcond}, \tilde{\paramvi}) \| \eqsp,
+      \end{equation*}
+      with $\PE{}{b^2(\state)} < \infty$. Then, under additional hypothesis\footnote{Control of the Orlicz norm of the r.v. $\elbo{\state}$ uniformly on the parameter. See \cite{tang2021empirical}[Assumption A].}, the event
+      \begin{align*}
+        \PE{\pdata}{\elbo[\emin{\paramcond}][\emin{\paramvi}]{\state}} \leq &\inf_{\eta}\left\{(1+\eta)\PE{\pdata}{\elbo[\tmin{\paramcond}][\tmin{\paramvi}]{\state}} \right. \\
+        &\left.+ c_2(1 + \eta^{-1})\frac{Dd_{\param}}{\ndata}\log(\ndata d_\param)\log^{\frac{1}{\alpha}}\ndata\right\} \eqsp,
+      \end{align*}
+      happens with probability $1 - c_0 \exp(-c_1 \left(d_\param \log \ndata\right)^{\min\{\alpha, 1\}})$. 
+  \end{theorem}
+\end{frame}
+\begin{frame}{$\stateset = \xsp^{n} \times \paramset$ anyone?}
+
+\end{frame}
+\begin{frame}{Statisticians produce knowledge vs Statistician produces solutions}
+  \begin{minipage}{0.6\textwidth}
+    \pause
+    "Unfortunately, our field has a vested interest in data models, come hell or high water. 
+     For instance, see Dempster’s (1998) paper on modeling.
+     His position on the 1990 Census adjustment controversy is particularly interesting.
+     He admits that he doesn’t know much about the data or the details, but argues that the problem can be solved by a strong dose of modeling.
+     That more modeling can make error ridden data accurate seems highly unlikelyto me.
+     Terrabytes of data are pouring into computers from many sources, both scientific, and commercial, and there is a need to analyze and understand the data.
+     $\cdots$ This is a fascinating enterprise, and I doubt if data models are applicable.
+     Yet I would enter this in my ledger as a statistical problem." \footcite{breiman2001statistical}.
+  \end{minipage}
+  \hspace{10pt}
+  \begin{minipage}{0.25\textwidth}
+    \begin{flushright}
+      \includegraphics[width=1\textwidth]{figures_gabriel/leo_breiman.png}
+    \end{flushright}  
+  \end{minipage}
+\end{frame}
+\section*{References}
+\setbeamertemplate{bibliography item}[text]%,
+\begin{frame}[allowframebreaks]
+\frametitle{References}
+\small
+\printbibliography
+\normalsize
+\end{frame}
+
+\end{document}
