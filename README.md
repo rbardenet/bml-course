@@ -11,6 +11,7 @@
 * Slides for Lecture 1 are [here](https://nextcloud.univ-lille.fr/index.php/s/ZdLe5CSHecQjsDz).
 * Slides for Lecture 2 are [here](https://nextcloud.univ-lille.fr/index.php/s/ac8CXePr3yGDbJi) and [here](https://nextcloud.univ-lille.fr/index.php/s/efgDkAEQqz8tBDM).
 * Slides for Lecture 3 are [here](https://nextcloud.univ-lille.fr/index.php/s/ciswzQtfM6R4gP6) and [here](https://nextcloud.univ-lille.fr/index.php/s/JM4kJgBisG6r3CN).  
+* Slides for Lecture 4 are in the slides folder.
 
 ## Objective of the course
 By the end of the course, the students should
