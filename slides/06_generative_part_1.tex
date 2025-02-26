@@ -83,6 +83,7 @@
 \end{frame}
 \begin{frame}{Learning generative models: A "frequentist" approach?}
   \begin{minipage}{0.6\textwidth}
+    \pause
     "Frankly, I am not a Bayesian. I go under the following principle. If you don’t understand a problem from a Bayesian decision theory point of view, you don’t understand the problem and trying to solve it is like shooting at a target in the dark. Once you understand the problem, it is not necessary to attack it from a Bayesian point of view. Bayesian methods always had the difficulty that our approximations to our subjective beliefs could carry a lot more information than we thought or felt willing to assume."
   \end{minipage}
   \hspace{5pt}
@@ -90,25 +91,28 @@
     \begin{flushright}
       \begin{figure}
         \includegraphics[width=.9\textwidth]{figures_gabriel/chernoff_herman.jpg}
-        \caption{Herman Chernoff}
       \end{figure}
     \end{flushright}
   \end{minipage}
 \end{frame}
 \begin{frame}{Generative modelling as a decision problem: V1}
   \begin{itemize}
+    \setlength\itemsep{1.5em}
     \item $\stateset = $:
     \item $\rewardset = $:
     \item $\actionset = $:
+    \item "Prior":
     \item SEU:
     \item Bayes action:
   \end{itemize}
 \end{frame}
 \begin{frame}{Generative modelling as a decision problem: V2}
   \begin{itemize}
+    \setlength\itemsep{1.5em}
     \item $\stateset = $:
     \item $\rewardset = $:
     \item $\actionset = $:
+    \item "Prior":
     \item SEU:
     \item Bayes action:
   \end{itemize}
@@ -122,7 +126,7 @@
 
   If $\nflow{\param}$ is an invertible map for all $\param$, then
   \begin{equation}
-      \pgen(\lstate) = \gendist(\pgen^{-1}(\lstate))\left|\det \jac{\pgen}(\pgen^{-1}(\lstate))\right| \eqsp.
+      \pgen(\lstate) = \gendist(\nflow{\param}^{-1}(\lstate))\left|\det \jac{\nflow{\param}}(\nflow{\param}^{-1}(\lstate))\right| \eqsp.
   \end{equation}
   \pause
 
@@ -153,13 +157,14 @@
   and thus $\det \jac{\nflowlayer{\param}}(\lstate) = e^{\sum_{j=1}^{\statedim - d} s(\lstate[1{:}d]; \param)[j]}$.
 \end{frame}
 \begin{frame}{Proving quasi-Bayes: A toy proof}
+  \vspace{-100pt}
   Suppose that
   \begin{itemize}
-    \item $\xsp$ is compact,
+    \item $\xsp$ is compact, $\paramset$ is compact and
     \item $\nflow{\param}$ is continuous.
   \end{itemize}
 
-  Can we prove that 
+  Can we prove that with high probability
   \begin{equation}
     \lim_{\ndata \rightarrow \infty} \PE{\pdata}{\log \pgen[\decfun_n(\chunk{\state}{1}{n})](\state)}- \PE{\pdata}{\log \pgen[\tmin{\decfun}](\state)} = 0 \eqsp ?
   \end{equation}
@@ -167,16 +172,82 @@
 \begin{frame}{Proving quasi-Bayes: A toy proof}
   
 \end{frame}
+\begin{frame}{Why we care: The Cournot's principle.}
+  \begin{minipage}{0.6\textwidth}
+    \pause
+    "$\cdots$ The physically impossible event is therefore the one that has infinitely small probability, and only this remark gives substance—
+objective and phenomenal value—to the theory of mathematical
+probability.
+
+\hspace{2pt}
+
+$\cdots$ L’événement physiquement impossible est donc celui dont la prob-
+abilité mathématique est infiniment petite; et cette seule remarque
+donne une consistance, une valeur objective et phénomènale à la
+théorie de la probabilité mathématique." \footnote{Taken from \fullcite{shaferthats} which is itself a citation of Cournot's original work.}
+  \end{minipage}
+  \hspace{5pt}
+  \begin{minipage}{0.3\textwidth}
+    \begin{flushright}
+      \begin{figure}
+        \includegraphics[width=.9\textwidth]{figures_gabriel/Antoine_Augustin_Cournot.jpg}
+      \end{figure}
+    \end{flushright}
+  \end{minipage}
+\end{frame}
+\begin{frame}{Duality and The latent model}
+  \vspace{-95pt}
+  \begin{theorem}[\cite{donsker1983asymptotic}]
+    Let $(q, p) \in \pset{}$, such that $p \abscont q$ and $q \abscont p$. Then, 
+    \begin{equation}
+        \kl{q}{p} = \sup_{f \in \mathcal{G}_{q}} \PE{q}{f} - \log \PE{p}{\exp(f)} \eqsp,
+    \end{equation}
+    where $\mathcal{G}_q$ is the set of measurable $g$ such that $\PE{q}{\exp(g)} < \infty$.
+    Furthermore, equality hold if and only if $f = \log \frac{\rmd q}{\rmd p}$.
+  \end{theorem}
+\end{frame}
+\begin{frame}{Duality and the latent model}
+
+\end{frame}
+\begin{frame}{Generative modelling as a decision problem: The VAE case}
+  \begin{itemize}
+    \setlength\itemsep{1.5em}
+    \item $\stateset = $:
+    \item $\rewardset = $:
+    \item $\actionset = $:
+    \item "Prior":
+    \item SEU:
+    \item Bayes action:
+  \end{itemize}
+\end{frame}
 \begin{frame}{Proving quasi-Bayes: Going further}
   \begin{flushright}
     \includegraphics[width=0.3\textwidth]{figures_gabriel/talagrand.png}
   \end{flushright}
 \end{frame}
+\begin{frame}{Proving quasi-Bayes: the VAE case}
+  \begin{theorem}[{\cite{tang2021empirical}[Theorem 3]}]
+      Define $\decfun_n(\chunk{\lstate}{1}{n}) = (\emin{\paramcond}, \emin{\paramvi})$ and $\tmin{\decfun} = (\tmin{\paramcond}, \tmin{\paramvi})$. Suppose that the parameter space is compact and that 
+      for all $\lstate \in \xsp$,
+      \begin{equation*}
+        |\elbo{\lstate} - \elbo[\tilde{\paramcond}][\tilde{\paramvi}]{\lstate} | \leq b(\lstate) \|(\paramcond, \paramvi) - (\tilde{\paramcond}, \tilde{\paramvi}) \| \eqsp,
+      \end{equation*}
+      with $\PE{}{b^2(\state)} < \infty$. Then, under additional hypothesis\footnote{Control of the Orlicz norm of the r.v. $\elbo{\state}$ uniformly on the parameter. See \cite{tang2021empirical}[Assumption A].}, the event
+      \begin{align*}
+        \PE{\pdata}{\elbo[\emin{\paramcond}][\emin{\paramvi}]{\state}} \leq &\inf_{\eta}\left\{(1+\eta)\PE{\pdata}{\elbo[\tmin{\paramcond}][\tmin{\paramvi}]{\state}} \right. \\
+        &\left.+ c_2(1 + \eta^{-1})\frac{Dd_{\param}}{\ndata}\log(\ndata d_\param)\log^{\frac{1}{\alpha}}\ndata\right\} \eqsp,
+      \end{align*}
+      happens with probability $1 - c_0 \exp(-c_1 \left(d_\param \log \ndata\right)^{\min\{\alpha, 1\}})$. 
+  \end{theorem}
+\end{frame}
+
 \begin{frame}{Generative modelling as a decision problem: The Wasserstein case}
   \begin{itemize}
+    \setlength\itemsep{1.5em}
     \item $\stateset = $:
     \item $\rewardset = $:
     \item $\actionset = $:
+    \item "Prior":
     \item SEU:
     \item Bayes action:
   \end{itemize}
@@ -197,49 +268,14 @@
       \item ${\pdata}$ \textbf{compact with diameter} $B$,
         the event 
         \begin{equation*}
-          d_{\mathcal{D}}(\pdata, \pgen[\decfun_n(\chunk{\state}{1}{n})]{}) - d(\pdata, \pgen[\tmin{\decfun}]{}) \leq 2\epsilon + \frac{c_1}{\sqrt{\ndata}} + B \sqrt{\frac{\log(1/\eta)}{2\ndata}}
+          d_{\mathcal{D}}(\pdata, \pgen[\decfun_n(\chunk{\state}{1}{n})]{}) - d_{\mathcal{D}}(\pdata, \pgen[\tmin{\decfun}]{}) \leq 2\epsilon + \frac{c_1}{\sqrt{\ndata}} + B \sqrt{\frac{\log(1/\eta)}{2\ndata}}
         \end{equation*}
       \item ${\pdata}$ \textbf{$\gamma$ sub-Gaussian,} the event
         \begin{equation*}
-          d_{\mathcal{D}}(\pdata, \pgen[\decfun_n(\chunk{\state}{1}{n})]{}) - d(\pdata, \pgen[\tmin{\decfun}]{}) \leq 2\epsilon + \frac{c_2}{\sqrt{\ndata}} + 8\gamma \sqrt{e \statedim}\sqrt{\frac{\log(1/\eta)}{2\ndata}}
+          d_{\mathcal{D}}(\pdata, \pgen[\decfun_n(\chunk{\state}{1}{n})]{}) - d_{\mathcal{D}}(\pdata, \pgen[\tmin{\decfun}]{}) \leq 2\epsilon + \frac{c_2}{\sqrt{\ndata}} + 8\gamma \sqrt{e \statedim}\sqrt{\frac{\log(1/\eta)}{2\ndata}}
         \end{equation*}
     \end{itemize}
     happens with probability $1 - \eta$.
-  \end{theorem}
-\end{frame}
-\begin{frame}{Proving quasi-Bayes: The latent model}
-  \vspace{-95pt}
-  \begin{theorem}[\cite{donsker1983asymptotic}]
-    Let $(q, p) \in \pset{}$, such that $p << q$ and $q << p$. Then, 
-    \begin{equation}
-        \kl{q}{p} = \sup_{f \in \mathcal{G}_{q}} \PE{q}{f} - \log \PE{p}{\exp(f)} \eqsp,
-    \end{equation}
-    where $\mathcal{G}_q$ is the set of measurable $g$ such that $\PE{q}{\exp(g)} < \infty$.
-    Furthermore, equality hold if and only if $f = \log \frac{\rmd q}{\rmd p}$.
-  \end{theorem}
-\end{frame}
-\begin{frame}{Generative modelling as a decision problem: The VAE case}
-  \begin{itemize}
-    \item $\stateset = $:
-    \item $\rewardset = $:
-    \item $\actionset = $:
-    \item SEU:
-    \item Bayes action:
-  \end{itemize}
-\end{frame}
-\begin{frame}{Proving quasi-Bayes: the VAE case}
-  \begin{theorem}[{\cite{tang2021empirical}[Theorem 3]}]
-      Define $\decfun_n(\chunk{\lstate}{1}{n}) = (\emin{\paramcond}, \emin{\paramvi})$ and $\tmin{\decfun} = (\tmin{\paramcond}, \tmin{\paramvi})$. Suppose that the parameter space is compact and that 
-      for all $\lstate \in \xsp$,
-      \begin{equation*}
-        |\elbo{\lstate} - \elbo[\tilde{\paramcond}][\tilde{\paramvi}]{\lstate} | \leq b(\lstate) \|(\paramcond, \paramvi) - (\tilde{\paramcond}, \tilde{\paramvi}) \| \eqsp,
-      \end{equation*}
-      with $\PE{}{b^2(\state)} < \infty$. Then, under additional hypothesis\footnote{Control of the Orlicz norm of the r.v. $\elbo{\state}$ uniformly on the parameter. See \cite{tang2021empirical}[Assumption A].}, the event
-      \begin{align*}
-        \PE{\pdata}{\elbo[\emin{\paramcond}][\emin{\paramvi}]{\state}} \leq &\inf_{\eta}\left\{(1+\eta)\PE{\pdata}{\elbo[\tmin{\paramcond}][\tmin{\paramvi}]{\state}} \right. \\
-        &\left.+ c_2(1 + \eta^{-1})\frac{Dd_{\param}}{\ndata}\log(\ndata d_\param)\log^{\frac{1}{\alpha}}\ndata\right\} \eqsp,
-      \end{align*}
-      happens with probability $1 - c_0 \exp(-c_1 \left(d_\param \log \ndata\right)^{\min\{\alpha, 1\}})$. 
   \end{theorem}
 \end{frame}
 \begin{frame}{$\stateset = \xsp^{n} \times \paramset$ anyone?}
@@ -252,10 +288,10 @@
      For instance, see Dempster’s (1998) paper on modeling.
      His position on the 1990 Census adjustment controversy is particularly interesting.
      He admits that he doesn’t know much about the data or the details, but argues that the problem can be solved by a strong dose of modeling.
-     That more modeling can make error ridden data accurate seems highly unlikelyto me.
+     That more modeling can make error ridden data accurate seems highly unlikely to me.
      Terrabytes of data are pouring into computers from many sources, both scientific, and commercial, and there is a need to analyze and understand the data.
      $\cdots$ This is a fascinating enterprise, and I doubt if data models are applicable.
-     Yet I would enter this in my ledger as a statistical problem." \footcite{breiman2001statistical}.
+     Yet I would enter this in my ledger as a statistical problem." \footfullcite{breiman2001statistical}.
   \end{minipage}
   \hspace{10pt}
   \begin{minipage}{0.25\textwidth}
@@ -263,6 +299,80 @@
       \includegraphics[width=1\textwidth]{figures_gabriel/leo_breiman.png}
     \end{flushright}  
   \end{minipage}
+\end{frame}
+\begin{frame}{Back to Savage}
+  "For an example, suppose your roommate is to decide between two bets: bet
+  (i) gives \$5 if Duke and not UNC wins this year's NCAA final, and \$0
+  otherwise; $\cdots$ you can ask your roommate whether he or she would prefer lottery (i) to (iii), where you win $0$ if Duke wins this year’s NCAA championship, and you win $5$ otherwise.
+   If your roommate is indifferent then it has to be that he or she considers Duke winning and not winning to be equally likely.
+  "\footfullcite[Chapter 5]{parmigiani1997decision}
+\end{frame}
+\begin{frame}{Working towards $\stateset = \xsp^{n} \times \paramset$}
+  \fullcite{papamarkou2024position}
+\end{frame}
+\begin{frame}{Extra: PAC-Bayes}
+  \begin{itemize}
+    \setlength\itemsep{1.5em}
+    \item $\stateset = $:
+    \item $\rewardset = $:
+    \item $\actionset = $:
+    \item "Prior":
+    \item SEU:
+    \item Bayes action:
+  \end{itemize}
+\end{frame}
+\begin{frame}{Extra: PAC-Bayes}
+  \begin{itemize}
+    \item \textbf{Compactness of the data:} $\xsp$ is a compact set
+    \item \textbf{Lipschitzness of the decoder:} $\mathcal{K}(\xsp; \pset{\pprior}) = \{\lstate \in \xsp \rightarrow \gauss(\mu_q(x), \Sigma_q(x)) \}$, and for $q \in \mathcal{K}(\xsp; \pset{\pprior})$, the functions $m_q(x), \Sigma_q(x)$ are both $K_{q}$-Lipschitz.
+    \item \textbf{Lipschitzness of the encoder:}The function $z \in \rset^{\latdim} \rightarrow \log \pgen(\lstate|z)$ is $K_{\param}$-Lipschitz for all $\lstate$.
+\end{itemize}
+\begin{theorem}[Reconstruction bound (Theorem 4.3 from \cite{mbacke2023statistical})]
+    \label{thm:gen:vae:rec_bound}
+    Let $\Delta = \sup_{(\lstate, \tilde{\lstate}) \in \xsp^2} \|\lstate - \tilde{\lstate}\|$. For any $\param \in \paramset$, $\delta > 0$, $\lambda > 0$, with probability at least as high as $1 - \delta$,
+    \begin{align}
+        &\PE{\pdata}{\PE{q(\cdot | \state)}{ - \log \pgen[\param](\state | Z)}} \leq \PE{\empmeas}{\PE{q(\cdot | \state)}{ - \log \pgen[\param](\state | Z)}} \\
+        &+ \lambda^{-1}\left[\PE{\empmeas}{\kl{q(\cdot|\state)}{\pprior}} + \lambda K_{q} K_{\param}\Delta + n^{-1}\log \left({1}/{\delta}\right) + \frac{\lambda^2 \Delta^2}{8} \right] \eqsp.
+    \end{align}
+\end{theorem}
+\end{frame}
+\begin{frame}{Generative prior in Bayesian statistics: Likelihood free}
+
+\end{frame}
+\begin{frame}{Inverse problems}
+
+\begin{equation*}
+    Y = A \state + \sigma_y Z \eqsp,
+\end{equation*}
+where $A \in \mxset{d_y}{\statedim}$, $Z \sim \gauss(0, \idm_{d_y})$ and $\sigma_y > 0$. 
+
+\begin{figure}[h!]
+    \includegraphics[width=\textwidth]{../notes/images_gabriel/example_inpainting_yazid.png}
+    \caption{Figure taken from \cite{moufad2024variational}. The "Observation" corresponds to $y$ that was obtained with the ground truth $\state$. The other columns correspond to solutions of a certain inverse problem.}
+\end{figure}
+\end{frame}
+\begin{frame}{Generative prior in Bayesian statistics: Inverse problems}
+    You are an environmental agent and you should decide to authorize or not the drilling in a certain region.
+    You have to determine if the drilling of the region affects the water resources of the region.
+    The only information you have is the drilling profiles for certain wells, as in \ref{fig:flummy_example}, which we denote by $y$.
+    Let denote by $A$ the event corresponding to the fact that there is an underground channel passing through $A$.
+  \begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.6\textwidth]{../notes/images_gabriel/example_flummy.png}
+    \label{fig:flummy_example}
+    \caption{Figure taken from \cite{bhavsar2023principled}.}
+  \end{figure}
+\end{frame}
+\begin{frame}{Bayesian inverse problems as a decision problem}
+  \begin{itemize}
+    \setlength\itemsep{1.5em}
+    \item $\stateset = $:
+    \item $\rewardset = $:
+    \item $\actionset = $:
+    \item "Prior":
+    \item SEU:
+    \item Bayes action:
+  \end{itemize}
 \end{frame}
 \section*{References}
 \setbeamertemplate{bibliography item}[text]%,
