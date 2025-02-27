@@ -13,6 +13,7 @@
 * Slides for Lecture 3 are [here](https://nextcloud.univ-lille.fr/index.php/s/ciswzQtfM6R4gP6) and [here](https://nextcloud.univ-lille.fr/index.php/s/JM4kJgBisG6r3CN).  
 * Slides for Lecture 4 are in the slides folder.
 * Slides for Lecture 5 are in the slides folder.
+* Slides for Lecture 6 and 7 are in the slide folder as well as the practical and solution.
 
 ## Objective of the course
 By the end of the course, the students should
