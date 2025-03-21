@@ -19,7 +19,7 @@ Note that we assume here that the same set of actions $\cA$ remains available in
 
 Most basic ML problems are of this kind; see Figure~\ref{f:decision_problems} for a few classical formalizations. 
 Note that most choices made in this table are arbitrary, and correspond to the simplest variant of each problem. For instance, in classification, one might penalize false negatives and false positives differently; see Exercises.
-Note also that, since \cite{Wal50} and as done in Section~\ref{s:linear_regression}, it is also customary to define loss functions instead of utilities, as $L(a,s) = -u(a(s))$. 
+Note also that, since \cite{Wal50} and as done in Section~\ref{ch:penalized_linear_regression}, it is also customary to define loss functions instead of utilities, as $L(a,s) = -u(a(s))$. 
 At this point of the document, both notations are as expressive, and we shall use them interchangeably.
 The distinction will come later in Chapter~\ref{ch:foundations}, when we discuss state-dependent utilities.
 
@@ -58,9 +58,9 @@ Usually, one states \eqref{e:conditional_expected_utility} in the particular cas
 \end{equation}
 Prescription \eqref{e:expected_utility} is called the \emph{subjective} expected utility principle (SEU),
 to insist on the fact that $p$ is an arbitrary choice from the decision maker.
-We choose to rather define a Bayesian as one following the conditional SEU \eqref{e:conditional_expected_utility}, because for subtle reasons to be discussed in Section~\ref{s:why}, abiding by \eqref{e:expected_utility} does not imply that we should use conditional expectations to select actions after we have observed an event. 
-At this stage, we also have not discussed how Bayesians choose $p$, and there are many ways to do so; see Section~\ref{s:choosing_the_joint}.
-Finally, to give an example of Bayesian decision, the ridge regression estimator is the Bayes action for a particular decision problem and joint distribution over states; see Section~\ref{s:linear_regression}.
+We choose to rather define a Bayesian as one following the conditional SEU \eqref{e:conditional_expected_utility}, because for subtle reasons to be discussed in Section~\ref{}, abiding by \eqref{e:expected_utility} does not imply that we should use conditional expectations to select actions after we have observed an event. 
+At this stage, we also have not discussed how Bayesians choose $p$, and there are many ways to do so; see Section~\ref{}.
+Finally, to give an example of Bayesian decision, the ridge regression estimator is the Bayes action for a particular decision problem and joint distribution over states; see Section~\ref{ch:penalized_linear_regression}.
 
 \subsection{Posterior subjective expected utility}
 In ML, it is customary to split the state variable into $(s_O,s_U)$, where $O, U\subset \{1,\dots,\text{dim} \cS\}$ are disjoint subsets that respectively index observed states (``data") and unknown states. 
@@ -109,7 +109,7 @@ To make sure we consistently define a joint distribution, we give a directed acy
 
 \begin{example}[Logistic regression]
     \label{ex:classification}
-    We take the set of states for classification from Table~\ref{t:}, and add a set of parameters $\Theta$ to describe the joint, so that $\cS = (\mathbb{X}\times\mathbb{Y})^n \times (\mathbb{X}\times\mathbb{Y}) \times \theta$.
+    We take the set of states for classification from Table~\ref{}, and add a set of parameters $\Theta$ to describe the joint, so that $\cS = (\mathbb{X}\times\mathbb{Y})^n \times (\mathbb{X}\times\mathbb{Y}) \times \theta$.
     Note that, formally, it is not necessary to include $\Theta$ in the state space if the value of your actions does not depend on $\theta$, but we prefer to add them to keep track of all variables to later integrate over.
     Consider the DAG of \cref{f:classification_dag}.
     To specify the factors, we for instance take $y_i\vert x_i, \theta \sim \mathrm{Ber}(\sigma(x_i^T\theta))$ and $y\vert x, \theta \sim \mathrm{Ber}(\sigma(x^T\theta))$. Take also $\theta\sim \cN(0,\sigma^2 I)$, and any prior on each of the $x_i$.
@@ -134,7 +134,7 @@ To make sure we consistently define a joint distribution, we give a directed acy
     % \edge theta yi;
   \end{tikzpicture}
   \caption{The DAG for LDA \citep{}.}
-  \label{f:classification_dag}
+  \label{f:lda_dag}
 \end{figure}
 
 \begin{example}[Latent Dirichlet allocation; \citep{}]

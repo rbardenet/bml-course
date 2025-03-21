@@ -1,0 +1,350 @@
+\input{gabriel_def}
+
+In generative modeling, our main goal is get an approximation of an unknown distribution
+$\pdata$. Most common examples are the distributions of $(256, 256, 3)$-images, or $10s$ audio ...
+
+The main constraint of such task is that of course we do not have any information of $\pdata$ other than a dataset of samples $\dataset=\{\state_1, \cdots, \state_\ndata\} \subset \xsp$ where
+$\xsp \subset \rset^\statedim$ is the space describing the data.
+
+
+Let $\mset{}$ the set of Borel measures on $\xsp$.
+We define $\pset{} \eqdef \{\mu \in \mset{} | \mu(\xsp) = 1\}$, and $\pset{p} \eqdef \{\mu \in \pset{}| \PE{\mu}{\|\state\|_p^p} < \infty\}$.
+In (parameterized) generative modelling, we are equipped with a family of distributions $\vfam{\paramset} \eqdef \{\pgen | \param \in \paramset\}$. Typically, each $\pgen$ involves a neural network with parameters $\param$.
+
+\section{Model zoo}
+
+\subsection{A model that does it all: Normalizing Flows}
+\label{sec:gen:nf}
+
+In general, generative models (at least those in these notes) can be written as 
+\[
+    \pgen(A) = \PE{\epsilon \sim \gendist}{\indi{A}(\pgen(\epsilon))} \eqsp,
+\]
+where $\gendist$ is some standard distribution, such as a Gaussian or Uniform.
+
+In \cite{rezende2015variational}, the authors introduced Normalizing Flow which is based on the change of variable formula:
+If $\pgen{}$ is an invertible map for all $\param$, then
+\begin{equation}
+    \pgen(\lstate) = \gendist(\pgen^{-1}(\lstate))\left|\det \jac{\pgen}(\pgen^{-1}(\lstate))\right| \eqsp.
+\end{equation}
+A normalizing flow is defined by
+\begin{equation}
+    \label{eq:nflow_def}
+    \nflow{\param}: \lstate \in \xsp \rightarrow \nflowlayer{\param_k}\circ \cdots \circ \nflowlayer{\param_0}(\lstate) \in \xsp \eqsp,
+\end{equation}
+where each $\nflowlayer{\param_k}: \xsp \rightarrow \xsp$ is an invertible map with \textbf{easy} to compute Jacobian determinants. 
+
+\paragraph{An example of such flow: RealNVP}
+A typical example of such flow is the RealNVP \cite{dinh2017density}, defined as:
+\begin{equation}
+    \label{eq:rnvp_def}
+    \nflowlayer{\param}(\lstate[1:d], \lstate[d:\statedim]) = (\lstate[1:d], \lstate[d:\statedim] \cdot \exp(s(\lstate[1:d]; \param)) + t(\lstate[1:d]; \param)) \eqsp,
+\end{equation}
+where $s(\cdot; \param), t(\cdot; \param): \rset^d \rightarrow \rset^{\statedim - d}$ are typically neural networks.
+
+The Jacobian of such flow is
+\begin{equation}
+    \label{eq:rnvp_jac}
+    \jac{\nflowlayer{\param}}(\lstate) = \begin{bmatrix}
+        \idm{d} & 0 \\
+        \cdots & \operatorname{diag}(\exp(s(\lstate[1:d]; \param)))
+    \end{bmatrix}\eqsp,
+\end{equation}
+and thus $\det \jac{\nflowlayer{\param}}(\lstate) = \exp\left(\sum_{j=1}^{\statedim - d} s(\lstate[1:d]; \param)^t e_j\right)$.
+
+\subsection{Exploiting duality: The latent route}
+
+There are two main limitations for Normalizing flow:
+\begin{itemize}
+    \item \textbf{Dimensionality}: Normalizing flows model $\statedim$ dimensional probabilities, i.e. $\pgen{}$ admits a density with respect to the ambient Lebesgue measure. The manifold hypothesis, generally admitted when handling high dimensional data, assumes that the data lives in a subspace (manifold) of the ambient space.
+    Therefore, one would like to have a generative model that would yield lower dimensional distributions ($\gendim < \statedim$). 
+    \item \textbf{Flexibility}: Normalizing flows are really restrictive! While there have been several advances in recent years with more and more flexible flows, most of the common neural network architectures are not available as flows.
+\end{itemize}
+
+\subsection{KL duality: The VAE case}
+\label{sec:gen:vae}
+In \cite{kingma2013autoencoding}, the authors introduce a latent model defined as
+\begin{equation}
+    \label{eq:vae_def}
+    \pgen{}(A) = \int \pcondd{z}{A} \ppriord{\rmd z} \eqsp.
+\end{equation}
+We will refer to the variables $z$ living in $\rset^{\gendim}$ as the latent variables. Their distribution is $\pprior$ and 
+given a latent variable $z$, $\pcondd{z}{\cdot}$ is a distribution over the space of the observed variables $\xsp$.
+The simplest example is:
+\begin{itemize}
+    \item $\pprior = \gauss(0, \idm_{\gendim})$,
+    \item $\pcondd{z}{x} = \gauss(x; \mu_{\paramcond}(z), \sigma^2_\paramcond(z) \idm_{\statedim})$,
+\end{itemize}
+where $\mu_{\paramcond}: \rset^{\gendim} \rightarrow \xsp$ and $\sigma^2_\paramcond: \rset^{\gendim} \rightarrow \rsetpos$ are \textbf{arbitrary} neural networks.
+Typically, $\gendim \approx 10$ while $\statedim \approx 10^4$ for image applications.
+
+While this model does not have the two main limitations of normalizing flow, it is not evident how one could learn such model.
+Indeed, any gradient-based algorithm for type I involves
+\begin{equation}
+    \label{eq:vae:ll_grad}
+    \nabla_{\paramcond} \log \pgen{}(\lstate) = \PE{\pprior}{\nabla \log \pcondd{Z}{\lstate}\frac{\pcondd{Z}{\lstate}}{\pgen{}(\lstate)}} = \PE{\ppostd{\lstate}{\cdot}}{\nabla \log \pcondd{Z}{\lstate}}  \eqsp,
+\end{equation}
+where $\ppostd{\lstate}{z} \eqdef \nofrac{\pcondd{z}{\lstate}\ppriord{z}}{\pgen{}(\lstate)}$ is the posterior distributions over the latents $z$ given an observation $x$.
+
+While not impossible to device tractable estimators of \eqref{eq:vae:ll_grad} (one could go with a Langevin sampler for example)
+it is generally associated with a considerable computation cost / estimator variance trade-off.
+
+In \cite{kingma2013autoencoding}, the authors propose maximizing a lower bound on the likelihood (ELBO).
+\begin{lemma}
+    Let $q \in \pset{}$ such that $q << \pgen{}$. Then
+    \begin{equation}
+        \label{eq:vae:elbo}
+        \log \pgen{}(\lstate) = \underbrace{\PE{q}{\log\pcondd{Z}{\lstate}} - \kl{q}{\pprior}}_{\eqdef \text{ELBO}} + \kl{q}{\ppostd{\lstate}{\cdot}} \eqsp.
+    \end{equation}
+\end{lemma}
+\begin{proof}
+    We will give two proofs. One using importance sampling, which while more intuitive fails to make the gap between elbo and log likelihood explicit.
+    Introduce $q$ as a proposal in importance sampling. Then, 
+    \begin{equation*}
+        \log \pgen{}(\lstate) = \log \PE{\pprior}{\pcondd{Z}{\lstate}} = \log \PE{q}{\pcondd{Z}{\lstate}\frac{\ppriord{Z}}{q(Z)}} \eqsp.
+    \end{equation*}
+    By Jensen's inequality:
+    \begin{equation*}
+        \log \pgen{}(\lstate) \geq\PE{q}{\log\left(\pcondd{Z}{\lstate}\frac{\ppriord{Z}}{q(Z)}\right)} = \PE{q}{\log(\pcondd{\lstate}{Z})} + \underbrace{\PE{q}{\log\left(\frac{\ppriord{Z}}{q(Z)}\right)}}_{-\kl{q}{\pprior}} \eqsp.
+    \end{equation*}
+    The second starts by the following identity:
+    \begin{equation*}
+        \pgen{}(\lstate) = \frac{\pcondd{\lstate}{z} \ppriord{z}}{\ppostd{\lstate}{z}} \eqsp, 
+    \end{equation*}
+    which holds for all $z$.
+    Therefore,
+    \begin{equation*}
+        \log \pgen{}(\lstate) = \log \pcondd{\lstate}{z} + \log \ppriord{z} - \log {\ppostd{\lstate}{z}} \eqsp. 
+    \end{equation*}
+    The proof is concluded by integrating w.r.t $q$ and adding and removing $\PE{q}{\log q}$.
+\end{proof}
+The lemma above can also be cast as duality formula
+\begin{theorem}[Donsker and Varadhan's duality formula \cite{donsker1983asymptotic}]
+    Let $(q, p) \in \pset{}$, such that $p << q$ and $q << p$. Then, 
+    \begin{equation}
+        \kl{q}{p} = \sup_{f \in \lpsp{\infty}{q}} \PE{q}{f} - \log \PE{p}{\exp(f)} \eqsp.
+    \end{equation}
+    Furthermore, equality hold if and only if $f = \log \frac{\rmd q}{\rmd p}$.
+\end{theorem}
+\begin{proof}
+    First we prove that for any $f \in \lpsp{\infty}{q}$, $\PE{q}{f(X)} - \log \PE{p}{\exp(f)} \leq \kl{q}{p}$.
+    By Jensen's inequality, we have
+    \begin{equation*}
+        \log \PE{p}{\exp f} = \log \PE{q}{\exp f \frac{\rmd p}{\rmd q}} \geq \PE{q}{f} + \PE{q}{\log\left(\frac{\rmd p}{\rmd q}\right)} \eqsp.
+    \end{equation*}
+    But as $p << q$ and $q << p$, we have that 
+    \begin{equation*}
+        \PE{q}{\log\left(\frac{\rmd p}{\rmd q}\right)} = - \PE{q}{\log\left(\frac{\rmd q}{\rmd p}\right)} = - \kl{q}{p} \eqsp. 
+    \end{equation*}
+    If $\frac{\rmd q}{\rmd p} \in \lpsp{\infty}{q}$, then it is evident that the sup is attained. 
+    
+    Otherwise, consider the bounded functions $f_k = \min(\log \frac{\rmd q}{\rmd p}, k)$. 
+    Then, this is a sequence of increasing measurable bounded function such that
+    $\sup_{k} f_k(x) = \log \frac{\rmd q}{\rmd p}(x)$. Thus,
+    \begin{equation*}
+        \sup_{k} \PE{q}{f_k(X)} = \PE{q}{\log \frac{\rmd q}{\rmd p}} = \kl{q}{p} \eqsp.
+    \end{equation*}    
+    For the other term, notice that by the previous obtained bound, we have that
+    \begin{equation*}
+        \sup_k \PE{p}{\exp f_k} = \PE{p}{\frac{\rmd q}{\rmd p}} = 1 \eqsp.
+    \end{equation*}
+    This establishes the result.
+\end{proof}
+
+In \cite{kingma2013autoencoding} the authors propose to introduce an amortized variational family
+$\pvid{\lstate}{\cdot}$ over the latent space that is at each time trained to maximize the ELBO.
+This family is called amortized since we are trying to learn the variational approximation as a function of $\lstate$,
+instead of having one distribution per data point. Therefore, our VAE objective is
+\begin{equation}
+    \label{eq:vae:objective}
+    \emin{\param} \eqdef \argmax_{\param} \ndata^{-1} \sum_{i=1}^{\ndata}\PE{\pvid{\state_i}{\cdot}}{\log \pcondd{Z}{\state_i}} - \kl{\pvid{\state_i}{\cdot}}{\pprior} \eqsp,
+\end{equation}
+where now $\param = (\paramcond, \paramvi, \paramprior)$.
+
+For the VAE, we have introduced an idea that will prove fruitful in the future. We have introduced a duality formulation
+for the KL-divergence and used this duality formula to avoid having to calculate the likelihood of our model.
+
+\subsubsection{Vamp}
+
+To be written
+
+
+\subsection{Jensen Shannon duality: The Generative adversarial network (GAN)}
+
+To be written
+
+\subsection{Monge Kantarovich duality: Wasserstein GANs}
+
+To be written
+
+\subsection{Denoising diffusion generative models}
+
+To be written
+
+
+
+
+\section{"Frequentist" SEUs: Maximizing the likelihood}
+
+We start by trying to find generative models that maximize some likelihood.
+ 
+\subsection{Maximizing observed likelihood}
+We consider the following decision problem
+\begin{itemize}
+    \item A set of states corresponding to the observed data: $\stateset \eqdef {\xsp}^{\tensprod \ndata + 1}$,
+    \item A set of decision functions: $\decfunset{\paramset} \eqdef \{\decfun: \stateset \rightarrow \paramset | \decfun(\chunk{\lstate}{1}{\ndata},\lstate) = \decfun(\chunk{\lstate}{1}{\ndata},\alt{\lstate})\}$,
+    \item A set of actions: $\actionset \eqdef \{a: \stateset \ni (s, \lstate) \rightarrow \pgen[\decfun(s)](\lstate) \in \rsetpos \}$,
+    \item The utility function $\utility{a(s)} = \log(a(s))$.
+\end{itemize}
+We then have the following SEU for the action $\decfun$:
+\begin{equation}
+    \label{eq:obslik_seu}
+    \PE{\pdata^{\tensprod n+1}}{-\log(\pgen[\decfun(\chunk{\state}{1}{\ndata})](\state_{\ndata+1}))} = \PE{\pdata^{\ndata}}{\kl{\pdata}{\pgen[\decfun(\chunk{\state}{1}{\ndata})]}}\eqsp.
+\end{equation}
+and the Bayes action is the action
+\begin{equation}
+    \label{eq:obslik_bayes}
+    \tmin{\decfun}: \stateset \ni (\chunk{\lstate}{1}{n}, \lstate) \rightarrow \argmin_{\param \in \paramset} \PE{}{-\log(\pgen[\param](\state))} = \argmin_{\param \in \paramset} {\kl{\pdata}{\pgen[\param]}}\eqsp.
+\end{equation}
+
+\subsection{Maximizing generated likelihood}
+We could change the decision problem in the following way:
+\begin{itemize}
+    \item A set of states corresponding to the observed data: $\stateset \eqdef {\xsp}^{\tensprod \ndata} \times \rset^{\gendim}$,
+    \item A set of decision functions: $\decfunset{\paramset} \eqdef \{\decfun: \stateset \rightarrow \paramset | \decfun(\chunk{\lstate}{1}{\ndata},\epsilon) = \decfun(\chunk{\lstate}{1}{\ndata},\alt{\epsilon})\}$,
+    \item A set of actions: $\actionset \eqdef \{a: \stateset \ni (s, \epsilon) \rightarrow \pgen[\decfun(s)](\epsilon) \in  \xsp \}$,
+    \item The utility function $\utility{a(s)} = \log \pdata(a(s))$.
+\end{itemize}
+We then have the following SEU:
+\begin{equation}
+    \label{eq:genlik_seu}
+    \tmin{\decfun} \eqdef \argmin_{\decfun \in \decfunset{\paramset}} \PE{\pdata^{\tensprod n} \times \gendist}{-\log \pdata(\pgen[\decfun(\chunk{\state}{1}{\ndata})](\epsilon))} = \argmin_{\decfun \in \decfunset{\paramset}} \PE{\pdata^{ \tensprod \ndata}}{\kl{\pgen[\decfun(\chunk{\state}{1}{\ndata})]}{\pdata}}\eqsp.
+\end{equation}
+
+\subsection{Finding "frequentists" Bayes action}
+
+As far as explained in these notes, this is not the standard way to learn a generative model. 
+A more realistic procedure (still idealized!) is defined by the following decision functions
+\begin{equation*}
+    \decfun_n: \stateset \ni (\chunk{\lstate}{1}{n}, \lstate) \rightarrow \argmax_{\param \in \paramset} \frac{1}{n} \sum_{i=1}^{n}\log \pgen[\param](\lstate_i)  \left(= \PE{\empmeas}{\log \pgen[\param](\state)}\right)\eqsp,
+\end{equation*}
+where we have introduced the empirical measure $\empmeas(A) \eqdef \ndata^{-1}\sum_{i=1}^{\ndata} \dirac{\state_i}(A)$.
+
+Are those decisions \textit{quasi-Bayes}?  Namely, how far are them from the Bayes action and do the gap narrows as $n \rightarrow \infty$?
+
+To establish a "proof" of this type of result while minimizing the technicality, we consider the case of the Normalizing flows, recalled in \cref{sec:gen:nf}.
+We suppose further both $\xsp$ and $\paramset$ are compact. We can then suppose that for all $\lstate$ and all $\param$, $\log \pgen[\param](\lstate)  \in [a, b]$ for some $a < b$.
+
+Establishing \textit{quasi-Bayes} would mean at least something like
+\begin{equation}
+    \lim_{\ndata \rightarrow \infty} \PE{\pdata}{\log \pgen[\decfun_n(\chunk{\state}{1}{n})](\state)}- \PE{\pdata}{\log \pgen[\tmin{\decfun}](\state)} = 0 \eqsp,
+\end{equation}
+with high $\pdata$-probability (here $\tmin{\decfun}$ is the true Bayes action).
+
+The event above can be written as
+\begin{align*}
+    &\PE{\pdata}{\log \pgen[\decfun_n(\chunk{\lstate}{1}{n})](\state)} \pm \PE{\empmeas}{\log \pgen[\decfun_n(\chunk{\lstate}{1}{n})](\state)} \pm \PE{\empmeas}{\log \pgen[\tmin{\decfun}](\state)} - \PE{\pdata}{\log \pgen[\tmin{\decfun}](\state)} \\
+    & = \PE{\pdata}{\log \pgen[\decfun_n(\chunk{\lstate}{1}{n})](\state) - \log \pgen[\tmin{\decfun}](\state)} - \PE{\empmeas}{\log \pgen[\decfun_n(\chunk{\lstate}{1}{n})](\state) - \log \pgen[\tmin{\decfun}](\state)}  \\
+    &+ \underbrace{\PE{\empmeas}{\log \pgen[\decfun_n(\chunk{\lstate}{1}{n})](\state) - \log \pgen[\tmin{\decfun}](\state)}}_{\leq 0} \\
+    & \leq \PE{\pdata}{\log \pgen[\decfun_n(\chunk{\lstate}{1}{n})](\state) - \log \pgen[\tmin{\decfun}](\state)} - \PE{\empmeas}{\log \pgen[\decfun_n(\chunk{\lstate}{1}{n})](\state) - \log \pgen[\tmin{\decfun}](\state)} \eqsp.
+\end{align*}
+
+Thus, if we can show that the event
+\begin{equation*}
+    \lim_{\ndata \rightarrow 0} \left|\PE{\pdata}{\log \pgen[\decfun_n(\chunk{\lstate}{1}{n})](\state) - \log \pgen[\tmin{\decfun}](\state)} - \PE{\empmeas}{\log \pgen[\decfun_n(\chunk{\lstate}{1}{n})](\state) - \log \pgen[\tmin{\decfun}](\state)}\right| = 0
+\end{equation*}
+happens with high $\pdata$-probability, we know that by solving \eqref{eq:nf:emp_obslik} we will converge (when the dataset grows) to the Bayes action.
+
+Hoeffding's inequality when applied to the variables $\{n^{-1}\left(\log\pgen[\decfun_n(\chunk{\lstate}{1}{n})](\state_i) - \log \pgen[\tmin{\decfun}](\state_i)\right)\}_{i=1}^{n}$ gives
+\begin{align*}
+    &\PP_{\pdata^{\tensprod n}}\left(\left|\PE{\pdata}{\log \pgen[\decfun_n(\chunk{\lstate}{1}{n})](\state) - \log \pgen[\tmin{\decfun}](\state)} - \PE{\empmeas}{\log \pgen[\decfun_n(\chunk{\lstate}{1}{n})](\state) - \log \pgen[\tmin{\decfun}](\state)}\right| \geq t\right) \\
+    & \qquad \leq 2 \exp\left(-\frac{2 n t^2}{(b-a)^2}\right) \eqsp.    
+\end{align*}
+
+Finally, for a given $\delta > 0$, set $t = \left(\frac{\log(2 / \delta)}{2 n}\right)^{1/2}(b - a)$ and we obtain that
+the event
+\begin{align*}
+    & \left|\PE{\pdata}{\log \pgen[\decfun_n(\chunk{\lstate}{1}{n})](\state) - \log \pgen[\tmin{\decfun}](\state)} - \PE{\empmeas}{\log \pgen[\decfun_n(\chunk{\lstate}{1}{n})](\state) - \log \pgen[\tmin{\decfun}](\state)}\right| \\
+    & \qquad <  \left(\frac{\log(2 / \delta)}{2 n}\right)^{1/2}(b - a) \eqsp.
+\end{align*}
+happens with probability at least $1 - \delta$.
+
+While this is a toy example, much work has been done to obtain this kind of bound in more general framework for different generative models. While the main argument is often the same, they inevitably pass by using a concentration of measure type inequality (instead of Hoeffding) which itself lead to controlling some topological property
+of the functional space, notably the Rademacher complexity or the Vapnik-Chervonenkis (VC) dimension. For an introduction of such tools, see for example \cite[Chapter 8]{vershynin2018highdimensional}.
+
+\paragraph{VAE:}
+
+In \cite{tang2021empirical}, it is established that 
+\begin{equation*}
+    \lim_{n \rightarrow \infty} \PE{\empmeas}{\PE{\pvid{\state}{\cdot}}{\log\pcondd{Z}{\state}} - \kl{\pvid{\state}{\cdot}}{\pprior}} = \PE{\pdata}{\PE{\pvid{\state}{\cdot}}{\log\pcondd{Z}{\state}} - \kl{\pvid{\state}{\cdot}}{\pprior}} \eqsp,
+\end{equation*}
+provided that we have some control of the local Rademacher entropy (see \cite[Theorem 14.1]{wainwright2019highdimensional}) and over the "tails" of the loss function. Furthermore, they show that these hypotheses hold for the classical deep Gaussian VAE.
+
+\paragraph{WGAN:}
+
+In \cite[Section 4]{biau2021theoretical} establishes the quasi-bayes of Wasserstein GANs under compact data assumptions.
+\section{PAC-Bayes SEUs:}
+
+We now introduce what PAC-Bayes type theorems can tell us about our learning problem. We follow \cite{mbacke2023statistical}.
+and focus on the case of the VAE (see \cref{sec:gen:vae}).
+We define a reference (or "prior", but we do not want to mix it with the SEU prior) distribution $\pprior$ over the latent space $\rset^{\latdim}$ and define $\pset{\pprior}$ the set of measures dominated by $\pprior$.
+Furthermore, we define the Kernels from $\xsp$ over $\pset{\pprior}$ as $\mathcal{K}(\xsp; \pset{\pprior})$. Thus, $q \in \mathcal{K}(\pprior)$ if $q(\lstate) \in \pset{\pprior}$ for all $\lstate \in \xsp$.
+
+We consider the following decision problem
+\begin{itemize}
+    \item A set of states corresponding to the observed data: $\stateset \eqdef {\xsp}^{\tensprod \ndata + 1} \tensprod \rset^{\latdim}$,
+    \item A set of decision functions: $\decfunset{\paramset} \eqdef \{\decfun: \stateset \rightarrow \paramset | \decfun(\chunk{\lstate}{1}{\ndata},\lstate) = \decfun(\chunk{\lstate}{1}{\ndata},\alt{\lstate})\}$,
+    \item A set of actions: $\actionset \eqdef \{a: \stateset \ni (s, \lstate, z) \rightarrow \pgen[\decfun(s)](\lstate | z) \in \rsetpos \}$,
+    \item The utility function $\utility{a(s)} = \log(a(s))$.
+\end{itemize}
+For the moment, let consider prior distribution by simply fixing a Kernel $q \in \mathcal{K}(\xsp; \pset{\pprior})$ and defining $\mathcal{P}(A_{1:n}, A, B) = \pdata^{\tensprod n}(A_{1:n}) \int \indi{A}(\lstate) \indi{B}(z)q(\rmd z; \lstate)\pdata(\rmd \lstate)$. 
+We then have the following SEU:
+\begin{equation}
+    \label{eq:pbayes_seu}
+    \tmin{\decfun} \eqdef \argmin_{\decfun \in \decfunset{\paramset}} \PE{\mathcal{P}}{-\log(\pgen[\decfun(\chunk{\state}{1}{\ndata})](\state_{\ndata+1}))} \eqsp.
+\end{equation}
+
+By Fubini, we can write it as 
+\begin{equation}
+    \label{eq:pbayes_seu:v2}
+    \PE{\mathcal{P}}{-\log(\pgen[\decfun(\chunk{\state}{1}{\ndata})](\state_{\ndata+1}))} = \PE{\pdata^{\tensprod n}}{\PE{\pdata}{\PE{q(\cdot | \state_{n+1})}{ - \log \pgen[\decfun(\chunk{\state}{1}{n})](\state_{n+1} | Z)}}}\eqsp.
+\end{equation}
+Again, we search for Bayes actions that satisfy
+\begin{equation*}
+    \tmin{\decfun}(\lstate_{1:n}) \in \argmin_{\param \in \paramset} \PE{\pdata}{\PE{q(\cdot | \state_{n+1})}{ - \log \pgen[\param](\state_{n+1} | Z)}} \eqsp.
+\end{equation*}
+
+By noting that this is exactly what is call "the generalization term" in PAC-Bayes, we would expect PAC-Bayes bounds to fit naturally this object (no need to artificial re-randomization).
+We illustrate the PAC-Bayes approach following the works of \cite{mbacke2023statistical} for the VAE. We begin by a set of hypothesis:
+\begin{itemize}
+    \item \textbf{Compactness of the data:} $\xsp$ is a compact set
+    \item \textbf{Lipschitzness of the decoder:} $\mathcal{K}(\xsp; \pset{\pprior}) = \{\lstate \in \xsp \rightarrow \gauss(\mu_q(x), \Sigma_q(x)) \}$, and for $q \in \mathcal{K}(\xsp; \pset{\pprior})$, the functions $m_q(x), \Sigma_q(x)$ are both $K_{q}$-Lipschitz.
+    \item \textbf{Lipschitzness of the encoder:}The function $z \in \rset^{\latdim} \rightarrow \log \pgen(\lstate|z)$ is $K_{\param}$-Lipschitz for all $\lstate$.
+\end{itemize}
+\begin{theorem}[Reconstruction bound (Theorem 4.3 from \cite{mbacke2023statistical})]
+    \label{thm:gen:vae:rec_bound}
+    Let $\Delta = \sup_{(\lstate, \alt{\lstate}) \in \xsp^2} \|\lstate - \alt{\lstate}\|$. For any $\param \in \paramset$, $\delta > 0$, $\lambda > 0$, with probability at least as high as $1 - \delta$,
+    \begin{align}
+        &\PE{\pdata}{\PE{q(\cdot | \state)}{ - \log \pgen[\param](\state | Z)}} \leq \PE{\empmeas}{\PE{q(\cdot | \state)}{ - \log \pgen[\param](\state | Z)}} \\
+        &\quad + \lambda^{-1}\left[\PE{\empmeas}{\kl{q(\cdot|\state)}{\pprior}} + \lambda K_{q} K_{\param}\Delta + n^{-1}\log \left({1}/{\delta}\right) + \frac{\lambda^2 \Delta^2}{8} \right] \eqsp.
+    \end{align}
+\end{theorem}
+
+\begin{remark}
+    It is important to note that it does not give directly the quasi-Bayes aspect of learning by minimizing $\PE{\empmeas}{\PE{q(\cdot | \state)}{ - \log \pgen[\param](\state | Z)}}$.
+    Remember we have to prove that
+    \[
+        \PE{\pdata}{\PE{q(\cdot | \state)}{ - \log \pgen[\tmin{\decfun}](\state | Z)}} = \lim_{n \rightarrow \infty} \PE{\empmeas}{\PE{q(\cdot | \state)}{ - \log \pgen[\decfun(\chunk{\state}{1}{n})](\state | Z)}}
+    \] with high probability.
+    This can though be easily recovered by noting that
+    \begin{align*}
+        &\PE{\pdata}{\PE{q(\cdot | \state)}{ - \log \pgen[\tmin{\decfun}](\state | Z)}} - \PE{\empmeas}{\PE{q(\cdot | \state)}{ - \log \pgen[\decfun(\chunk{\state}{1}{n})](\state | Z)}} \\
+        &= \PE{\pdata}{\PE{q(\cdot | \state)}{ - \log \pgen[\tmin{\decfun}](\state | Z)}} -  \PE{\pdata}{\PE{q(\cdot | \state)}{ - \log \pgen[\decfun(\chunk{\state}{1}{n})](\state | Z)}} (\eqdef I) \\
+        &+ \PE{\pdata}{\PE{q(\cdot | \state)}{ - \log \pgen[\decfun(\chunk{\state}{1}{n})](\state | Z)}} - \PE{\empmeas}{\PE{q(\cdot | \state)}{ - \log \pgen[\decfun(\chunk{\state}{1}{n})](\state | Z)}} (\eqdef II) \eqsp.
+    \end{align*}
+    By definition $I<0$ and $II$ is exactly the bound from \cref{thm:gen:vae:rec_bound}.
+\end{remark}
+
+In some ways, \cref{thm:gen:vae:rec_bound} is almost a meta learning theorem. It gives an upper bound of the rate of convergence between the empirical and the true data errors
+for any distribution (or kernel) $q$.  Therefore, it gives a way of choosing in some ways the "best" prior, by choosing the one that converges the faster to the Bayes action.
+
