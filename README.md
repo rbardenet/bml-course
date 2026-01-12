@@ -40,6 +40,7 @@ landscape.
 ## Organization of courses
 * 8x3 hours of lectures, the last session being a student seminar.
 * All classes and all material will be in English. Students may write their final report in either French or English.
+* The course takes place in Ecole des Mines, parc du Lexembourg in 2026.
 
 ## Validation
 * Students form groups. Each group reads and reports on a research paper from a list. We strongly encourage a dash of creativity: students should identify a weak point, shortcoming or limitation of the paper, and try to push in that direction. This can mean extending a proof, implementing another feature, investigating different experiments, etc.
