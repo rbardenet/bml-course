@@ -8,12 +8,6 @@
 ## Material
 * Incomplete and drafty lecture notes are available in the `notes` folder. Any comment welcome, live or as a raised issue.
 * Practicals and exercises will be made available in the corresponding folders. They are to be done on a voluntary basis. Solutions will be provided on demand.
-* Slides for Lecture 1 are [here](https://nextcloud.univ-lille.fr/index.php/s/ZdLe5CSHecQjsDz).
-* Slides for Lecture 2 are [here](https://nextcloud.univ-lille.fr/index.php/s/ac8CXePr3yGDbJi) and [here](https://nextcloud.univ-lille.fr/index.php/s/efgDkAEQqz8tBDM).
-* Slides for Lecture 3 are [here](https://nextcloud.univ-lille.fr/index.php/s/ciswzQtfM6R4gP6) and [here](https://nextcloud.univ-lille.fr/index.php/s/JM4kJgBisG6r3CN).  
-* Slides for Lecture 4 are in the slides folder.
-* Slides for Lecture 5 are in the slides folder.
-* Slides for Lecture 6 and 7 are in the slide folder as well as the practical and solution.
 
 ## Objective of the course
 By the end of the course, the students should
