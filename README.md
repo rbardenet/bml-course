@@ -1,15 +1,12 @@
 # Bayesian machine Learning
-Lecturers: Rémi Bardenet and Julyan Arbel
+
+### Lecturers
+* Rémi Bardenet (CNRS, Univ. Lille), [https://rbardenet.github.io](https://rbardenet.github.io)
+* Gabriel Victorino Cardoso (Mines Paris - PSL Univ.), [https://gabrielvc.github.io/](https://gabrielvc.github.io/)
+* Julyan Arbel (Inria, Univ. Grenoble-Alpes), [https://www.julyanarbel.com](https://www.julyanarbel.com)
 
 ### Evaluation
-The student seminar will take place on Friday, 13 March, 8:30-12:30, at Amphi Curie.
-
-There are 16 projets, so we will allow 15 minutes by project: 10 minutes for presentation and 5 minutes for questions. The schedule is given on this [Framacalc sheet](https://lite.framacalc.org/9eu9-mva-bml) for indication only, everyone is expected to attend all presentations. In your 10 minutes, you should
-* introduce the problem that the paper solves,
-* describe the solution and how the paper validates it (a proof, an experiment?),
-* explain how you've gone beyond the paper if you managed to do so.
-
-10 minutes is short, and we will cut you at 10 sharp, so prepare well, rehearse, avoid being too technical, and make sure each project member speaks. *Avoid slides and rather use the blackboard* if you need a support. If you really need slides, e.g. to show the results of an experiment, we only allow **two slides max per project**. We ask that you send us the slides in pdf, 24 hours before the exam. We will concatenate the slides beforehand and bring a computer, to keep up with our tight schedule.
+There will be both light continuous evaluation, and a final report+presentation on a research paper.
 
 ### Main references, in rough chronologic order of the lectures
 * Chapters 7 and 8 of [Parmigiani and Inoue 2009](https://www.webdepot.umontreal.ca/Usagers/perronf/MonDepotPublic/stt2100/Decision_theory.pdf)
