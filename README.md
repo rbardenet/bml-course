@@ -8,6 +8,7 @@
 ## Material
 * Incomplete and drafty lecture notes are available in the `notes` folder. Any comment welcome, live or as a raised issue.
 * Practicals and exercises will be made available in the corresponding folders. They are to be done on a voluntary basis. Solutions will be provided on demand.
+* Here are the annotated [slides](https://nextcloud.univ-lille.fr/index.php/s/WxgD3YH484stbYN) for Lecture 1.
 
 ## Objective of the course
 By the end of the course, the students should
