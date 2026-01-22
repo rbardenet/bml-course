@@ -503,8 +503,17 @@ g^\star (s_\text{obs}) \triangleq \argmin_{g} \un{\mathbb{E}_{s_{\text{u}}\vert 
 % Exercise: Gaussian-Gaussian model, smaller MSE as an example of having good frequentist properties
 \end{frame}
 
-\begin{frame}{Good prediction vs. accurate inference}
+\begin{frame}{Good prediction vs. accurate inference (Gr\"{u}nwald and van Ommen, 2017)}
 % Exercise: Gaussian-Gaussian model, smaller MSE as an example of having good frequentist properties
+\vspace{-1.5cm}
+\begin{theorem}[Barron, 1997]
+  Assume $(X_i,Y_i)\sim P^*$ i.i.d., and let $P$ be described by drawing $\theta$ from a prior, then $(X_i)$ from the first marginal of $P^*$, and, conditionally on $(X_i)$ and $\theta$, drawing each $Y_i$ independently from $P_\theta(\cdot\vert X_i)$.
+  Then under a mild condition on the prior, for all $n$, 
+  $$
+    \mathbb{E}_{P^*} \frac1n \sum_{i=1}^n \left[ \mathrm{KL}(P^*\vert\vert P(\cdot\vert X_{1:i-1}, Y_{1:i-1})) - \mathrm{KL}(P^*\vert\vert P_{\tilde\theta}) \right] = \mathcal{O}(\log n/n).
+  $$
+\end{theorem}
+  \vfill
 \end{frame}
 
 \begin{frame}{Dimensionality reduction as a decision problem}
