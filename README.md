@@ -9,7 +9,7 @@
 * Incomplete and drafty lecture notes are available in the `notes` folder. Any comment welcome, live or as a raised issue.
 * Practicals and exercises will be made available in the corresponding folders. They are to be done on a voluntary basis. Solutions will be provided on demand.
 * Here are the annotated [slides](https://nextcloud.univ-lille.fr/index.php/s/WxgD3YH484stbYN) for the Lecture 1.
-* Rhe annotated [slides](https://nextcloud.univ-lille.fr/index.php/s/WxgD3YH484stbYN) for Lecture 2 are [here](https://nextcloud.univ-lille.fr/index.php/s/cZe5nQ98ZqFGpJL) and [here](https://nextcloud.univ-lille.fr/index.php/s/KczSAqE4ciPXbCd).
+* Annotated slides for Lecture 2 are [here](https://nextcloud.univ-lille.fr/index.php/s/cZe5nQ98ZqFGpJL) and [here](https://nextcloud.univ-lille.fr/index.php/s/KczSAqE4ciPXbCd).
 
 
 ## Objective of the course
