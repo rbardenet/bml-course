@@ -321,13 +321,66 @@ $$
 \vfill
 \end{frame}
 
-\begin{frame}{A Gibbs sampler for LDA 1/2}
+\begin{frame}{A Gibbs sampler for LDA: the conditional of $\pi_i$}
+Fix a document index $i\in[N]$. By $d$-separation,
+$$ 
+    \pi_i \vert \pi_{\setminus i}, \mathbf{z}, \mathbf{y}, B = \pi_i \vert z_{i:} \, .
+$$
+Now we recognize a conjugate model (see exercises), so that 
+$$
+    \pi_i \vert z_{i:} \sim \mathrm{Dir}\left ((\alpha_k + \sum_{\ell=1}^{L_i} 1_{z_{i\ell}=k})_{k\in [K]} \right ).
+$$
+\end{frame}
+
+\begin{frame}{A Gibbs sampler for LDA: the conditional of $B$}
+By $d$-separation,
+$$
+    B \vert \mathbf{\pi}, \mathbf{z}, \mathbf{y} \sim B \vert \mathbf{z}, \mathbf{y}.
+$$
+\onslide<2>
+By Bayes' theorem,
+\begin{align*}
+    p(B \vert \mathbf{z}, \mathbf{y}) &\propto p(B, \mathbf{z}, \mathbf{y})\\
+    & = \un{p(\mathbf{y} \vert B, \mathbf{z})} p(\mathbf{z}\vert B) \unn{p(B)}.
+\end{align*}
+Note that $\mathbf{z}\perp B$ in the DAG, and
+\begin{align*}
+    p(B \vert \mathbf{z}, \mathbf{y})
+    &\propto \un{\prod_{i=1}^N \prod_{\ell=1}^{L_i} \prod_{k=1}^K B_{kv}^{1_{z_{i\ell}=k}1_{y_{i\ell}=v}}} \unn{\prod_{k=1}^K 1_{\Delta_V}(B_{k:}) \prod_{v=1}^V B_{kv}^{\gamma_v-1}}.\\
+    &= \prod_{k=1}^K\left[ 1_{\Delta_V}(B_{k:}) \prod_{i=1}^N \prod_{\ell=1}^{L_i} B_{kv}^{1_{z_{i\ell}=k}1_{y_{i\ell}=v}} \prod_{v=1}^V B_{kv}^{\gamma_v-1} \right].
+\end{align*}
+The conjugacy should now be obvious, as well as the conditional independence of the rows of $B$. 
+We see in particular that
+$$
+    B_{k:} \vert \mathbf{z}, \mathbf{y} \sim \mathrm{Dir}\left( (\gamma_v + \sum_{i=1}^N \sum_{\ell=1}^{L_i} 1_{z_{i\ell}=k}1_{y_{i\ell}=v})_{v\in [V]} \right).
+$$
+\end{frame}
+
+\begin{frame}{A Gibbs sampler for LDA: the conditional of $z$}
+Fix $i\in[N]$ and $\ell\in[L_i]$. 
+Then by the DAG structure,
+$$
+    z_{i\ell} \vert \mathbf{\pi}, \mathbf{z}_{\setminus i\ell}, \mathbf{y}, B \sim z_{i\ell} \vert \pi_i, y_{i\ell}, B.
+$$
+\onslide<2->
+Using Bayes' theorem, 
+\begin{align*}
+    p(z_{i\ell} = k \vert \pi_i, y_{i\ell}, B) 
+    &\propto p(z_{i\ell} = k, \pi_i, y_{i\ell}, B)\\
+    &= p(y_{i\ell}\vert z_{i\ell} = k, \pi_i, B) p(z_{i\ell} = k, B\vert\pi_i) p(\pi_i).
+\end{align*}
+\onslide<3->
+Upong noting that $y_{i\ell}\perp \pi_i\vert z_{i\ell} = k,  B$ and $z_{i\ell} = k \perp B\vert\pi_i$, and keeping only terms that contain $z_{i\ell}$, it comes 
+$$
+    p(z_{i\ell} = k \vert \pi_i, y_{i\ell}, B) \propto p(y_{i\ell}\vert z_{i\ell} = k, B) p(z_{i\ell} = k \vert\pi_i) \propto B_{k y_{i\ell}} \pi_{ik}.
+$$
+To sample from the conditional of $z_{i\ell}$, it is thus enough to draw a new index $k\in[K]$ with probability 
+$$
+    \frac{B_{k y_{i\ell}} \pi_{ik}}{\sum_{k=1}^K B_{k y_{i\ell}} \pi_{ik}}.
+$$
 
 \end{frame}
 
-\begin{frame}{A Gibbs sampler for LDA 2/2}
-
-\end{frame}
 
 \begin{frame}{Collapsed Gibbs sampling for LDA}
 

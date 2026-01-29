@@ -261,12 +261,22 @@ $$
 \begin{frame}{
   Optimizing PAC-Bayes bounds, following \cite{DzRo17}
 }
+\begin{theorem}[McAllester, Seeger, Maurer]
+  Let $\mathcal{D} = \{(x_i,y_i), i=1, \dots, m\}$, $\unn{\hat{e}(h) = \frac{1}{\vert \mathcal{D}\vert} \sum_{(x,y)\in\mathcal{D}}\ell(y,h(x))}$, $\un{\hat{e}(Q) = \mathbb \mathbb{E}_{h\sim Q} \unn{\hat{e}(h)}}$, and
+  $$
+  e(Q) = \mathbb{E}_{\mathcal{D}} \un{\hat{e}(Q)}.
+  $$
+  Let $\delta\in(0,1)$ and $P$ over $\mathcal{H}$. Then, with probability $1-\delta$ over $\mathcal{D}$, 
+  $$
+    e(Q) \leq \hat{e}(Q) + \sqrt{\frac12 \frac{\mathrm{KL}(Q,P) + \log m/\delta}{m-1}}.
+  $$
+\end{theorem}
 \blank
 \end{frame}
 
 \begin{frame}{Conclusion on VB and other alternatives to MCMC}
   \begin{itemize}
-    \item Hot research tpic.
+    \item Hot research topic.
     \item Lots of open questions on connecting VB and to the original SEU problem: is VB justified in itself or is it simply a computationally convenient backup option?
     \item Many partial answers, e.g. try to use VB in importance sampling, optimization-centric viewpoint.
     \item Meaningful candidates to replacing KL minimization: maximum mean discrepancy, PAC-Bayes bounds.
