@@ -36,12 +36,12 @@ landscape.
 | ---- | -------- | ----------------------- | 
 | 15/1 | Bayesics | Rémi Bardenet                    | 
 | 22/1 | MCMC     | Rémi Bardenet                    | 
-| 29/1 | VB       | Rémi Bardenet                    | 
-| 5/2  | BNP      | Julyan Arbel                  | 
+| 29/1 | Variational Bayes       | Rémi Bardenet                    | 
+| 5/2  | Bayesian nonparametrics      | Julyan Arbel                  | 
 | 12/2 | Foundations | Rémi  Bardenet                | 
-| 19/2 | GM1      | Gabriel Victorino Cardoso                | 
-| 26/2 | GM2      | Gabriel Victorino Cardoso                | 
-| 12/3 | Examen   | Rémi, Gabriel, Julyan   | 
+| 19/2 | Generative models 1      | Gabriel Victorino Cardoso                | 
+| 26/2 | Generative models 2      | Gabriel Victorino Cardoso                | 
+| 12/3 | Student's seminar   | Rémi, Gabriel, Julyan   | 
 
 ## Prerequisites
 * An undergraduate course in probability.
