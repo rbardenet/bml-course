@@ -10,7 +10,7 @@
 * Practicals and exercises will be made available in the corresponding folders. They are to be done on a voluntary basis. Solutions will be provided on demand.
 * Here are the annotated [slides](https://nextcloud.univ-lille.fr/index.php/s/WxgD3YH484stbYN) for the Lecture 1.
 * Annotated slides for Lecture 2 are [here](https://nextcloud.univ-lille.fr/index.php/s/cZe5nQ98ZqFGpJL) and [here](https://nextcloud.univ-lille.fr/index.php/s/KczSAqE4ciPXbCd).
-
+* Annotated slides for Lecture 3 are [here](https://nextcloud.univ-lille.fr/index.php/s/N3kFxiYDKytiiZK).
 
 ## Objective of the course
 By the end of the course, the students should
