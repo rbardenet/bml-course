@@ -28,7 +28,20 @@ landscape.
 * Bayesian supervised and unsupervised learning
 * Bayesian computation for ML: Advanced Monte Carlo and variational methods
 * Bayesian nonparametrics
-* Bayesian methods for deep learning
+* Generative models
+
+## Outline
+
+| Date | Lecture  | Prof                 | 
+| ---- | -------- | ----------------------- | 
+| 15/1 | Bayesics | Rémi Bardenet                    | 
+| 22/1 | MCMC     | Rémi Bardenet                    | 
+| 29/1 | VB       | Rémi Bardenet                    | 
+| 5/2  | BNP      | Julyan Arbel                  | 
+| 12/2 | Foundations | Rémi  Bardenet                | 
+| 19/2 | GM1      | Gabriel Victorino Cardoso                | 
+| 26/2 | GM2      | Gabriel Victorino Cardoso                | 
+| 12/3 | Examen   | Rémi, Gabriel, Julyan   | 
 
 ## Prerequisites
 * An undergraduate course in probability.
