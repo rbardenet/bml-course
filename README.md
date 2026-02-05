@@ -11,6 +11,7 @@
 * Here are the annotated [slides](https://nextcloud.univ-lille.fr/index.php/s/WxgD3YH484stbYN) for the Lecture 1.
 * Annotated slides for Lecture 2 are [here](https://nextcloud.univ-lille.fr/index.php/s/cZe5nQ98ZqFGpJL) and [here](https://nextcloud.univ-lille.fr/index.php/s/KczSAqE4ciPXbCd).
 * Annotated slides for Lecture 3 are [here](https://nextcloud.univ-lille.fr/index.php/s/N3kFxiYDKytiiZK).
+* Slides for Lecture 4 are in the ``slides`` folder. Mostly covered everything until Doob's theorem (slide 131).
 
 ## Objective of the course
 By the end of the course, the students should
