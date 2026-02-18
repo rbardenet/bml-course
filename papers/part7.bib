@@ -1,0 +1,60 @@
+@inproceedings{
+  title = {A {{Mixture-Based Framework}} for {{Guiding Diffusion Models}}},
+  booktitle = {Proceedings of the 42nd {{International Conference}} on {{Machine Learning}}},
+  author = {Janati, Yazid and Moufad, Badr and Qassime, Mehdi Abou El and Durmus, Alain Oliviero and Moulines, Eric and Olsson, Jimmy},
+  year = 2025,
+  month = oct,
+  pages = {26830--26876},
+  publisher = {PMLR},
+  issn = {2640-3498},
+  urldate = {2026-02-18},
+  abstract = {Denoising diffusion models have driven significant progress in the field of Bayesian inverse problems. Recent approaches use pre-trained diffusion models as priors to solve a wide range of such problems, only leveraging inference-time compute and thereby eliminating the need to retrain task-specific models on the same dataset. To approximate the posterior of a Bayesian inverse problem, a diffusion model samples from a sequence of intermediate posterior distributions, each with an intractable likelihood function. This work proposes a novel mixture approximation of these intermediate distributions. Since direct gradient-based sampling of these mixtures is infeasible due to intractable terms, we propose a practical method based on Gibbs sampling. We validate our approach through extensive experiments on image inverse problems, utilizing both pixel- and latent-space diffusion priors, as well as on source separation with an audio diffusion model. The code is available at https://www.github.com/badr-moufad/mgdm.},
+  langid = {english},
+  file = {/Users/gabrielvc/Zotero/storage/AI9WKI9C/Janati et al. - 2025 - A Mixture-Based Framework for Guiding Diffusion Models.pdf}
+}
+@inproceedings{
+  title = {Learned {{Reference-based Diffusion Sampler}} for Multi-Modal Distributions},
+  booktitle = {The {{Thirteenth International Conference}} on {{Learning Representations}}},
+  author = {Noble, Maxence and Grenioux, Louis and Gabri{\'e}, Marylou and Durmus, Alain Oliviero},
+  year = 2024,
+  month = oct,
+  urldate = {2026-02-18},
+  abstract = {Over the past few years, several approaches utilizing score-based diffusion have been proposed to sample from probability distributions, that is without having access to exact samples and relying solely on evaluations of unnormalized densities. The resulting samplers approximate the time-reversal of a noising diffusion process, bridging the target distribution to an easy-to-sample base distribution. In practice, the performance of these methods heavily depends on key hyperparameters that require ground truth samples to be accurately tuned. Our work aims to highlight and address this fundamental issue, focusing in particular on multi-modal distributions, which pose significant challenges for existing sampling methods. Building on existing approaches, we introduce *Learned Reference-based Diffusion Sampler* (LRDS), a methodology specifically designed to leverage prior knowledge on the location of the target modes in order to bypass the obstacle of hyperparameter tuning. LRDS proceeds in two steps by (i) learning a *reference* diffusion model on samples located in high-density space regions and tailored for multimodality, and (ii) using this reference model to foster the training of a diffusion-based sampler. We experimentally demonstrate that LRDS best exploits prior knowledge on the target distribution compared to competing algorithms on a variety of challenging distributions.},
+  langid = {english},
+  file = {/Users/gabrielvc/Zotero/storage/Q2BP8I8M/Noble et al. - 2024 - Learned Reference-based Diffusion Sampler for multi-modal distributions.pdf}
+}
+@inproceedings{
+  title = {Learning Normalized Image Densities via Dual Score Matching},
+  booktitle = {The {{Thirty-ninth Annual Conference}} on {{Neural Information Processing Systems}}},
+  author = {Guth, Florentin and Kadkhodaie, Zahra and Simoncelli, Eero P.},
+  year = 2025,
+  month = oct,
+  urldate = {2026-02-18},
+  abstract = {Learning probability models from data is at the heart of many machine learning endeavors, but is notoriously difficult due to the curse of dimensionality. We introduce a new framework for learning \textbackslash emph\textbraceleft normalized\textbraceright{} energy (log probability) models that is inspired by diffusion generative models, which rely on networks optimized to estimate the score. We modify a score network architecture to compute an energy while preserving its inductive biases. The gradient of this energy network with respect to its input image is the score of the learned density, which can be optimized using a denoising objective. Importantly, the gradient with respect to the noise level provides an additional score that can be optimized with a novel secondary objective, ensuring consistent and normalized energies across noise levels. We train an energy network with this \textbackslash emph\textbraceleft dual\textbraceright{} score matching objective on the ImageNet64 dataset, and obtain a cross-entropy (negative log likelihood) value comparable to the state of the art. We further validate our approach by showing that our energy model \textbackslash emph\textbraceleft strongly generalizes\textbraceright : log probabilities estimated with two networks trained on non-overlapping data subsets are nearly identical. Finally, we demonstrate that both image probability and dimensionality of local neighborhoods vary substantially depending on image content, in contrast with conventional assumptions such as concentration of measure or support on a low-dimensional manifold.},
+  langid = {english},
+  file = {/Users/gabrielvc/Zotero/storage/W59D3ZXK/Guth et al. - 2025 - Learning normalized image densities via dual score matching.pdf}
+}
+@article{bedin2024leveraging,
+  title = {Leveraging an {{ECG}} Beat Diffusion Model for Morphological Reconstruction from Indirect Signals},
+  author = {Bedin, Lisa and Cardoso, Gabriel and Duchateau, Josselin and Dubois, Remi and Moulines, Eric},
+  year = 2024,
+  month = dec,
+  journal = {Advances in Neural Information Processing Systems},
+  volume = {37},
+  pages = {84409--84446},
+  urldate = {2025-04-16},
+  langid = {english},
+  file = {/Users/gabrielvc/Zotero/storage/PTJUNR6U/Bedin et al. - 2024 - Leveraging an ECG Beat Diffusion Model for Morphological Reconstruction from Indirect Signals.pdf}
+}
+@article{
+  title = {Practical and {{Asymptotically Exact Conditional Sampling}} in {{Diffusion Models}}},
+  author = {Wu, Luhuan and Trippe, Brian and Naesseth, Christian and Blei, David and Cunningham, John P.},
+  year = 2023,
+  month = dec,
+  journal = {Advances in Neural Information Processing Systems},
+  volume = {36},
+  pages = {31372--31403},
+  urldate = {2026-02-18},
+  langid = {english},
+  file = {/Users/gabrielvc/Zotero/storage/FFG8LW7Z/Wu et al. - 2023 - Practical and Asymptotically Exact Conditional Sampling in Diffusion Models.pdf}
+}
