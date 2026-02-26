@@ -13,6 +13,7 @@
 * Annotated slides for Lecture 3 are [here](https://nextcloud.univ-lille.fr/index.php/s/N3kFxiYDKytiiZK).
 * Slides for Lecture 4 are in the ``slides`` folder. Mostly covered everything until Doob's theorem (slide 131).
 * Annotated slides for Lecture 5 are [here](https://nextcloud.univ-lille.fr/index.php/s/CF8TWgKe2KNWXfw) and [here](https://nextcloud.univ-lille.fr/index.php/s/WEdqSBdPfEW8BAX).
+* Sildes for lecture 6 are [here](https://univpsl-my.sharepoint.com/:b:/g/personal/gabriel_victorino_cardoso_minesparis_psl_eu/IQBsymv988MRRo1-s_lpVtcHATG9rSUbAsSQGSm2pb7sWyc?e=6iSxOi) and slides for lecture 7 are in the ``slides``folder.
 
 ## Objective of the course
 By the end of the course, the students should
